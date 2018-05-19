@@ -22,7 +22,7 @@ export class LoginService {
         headers.append('Content-Type', 'application/json');
         const body=JSON.stringify(login);
         return this.http.post('/loginController/loginUser', body, {headers: headers})
-            .map((data: Response) => data.json())
+            .map((data: Response) => data.text())
             .catch(this.handleError);
   }
     

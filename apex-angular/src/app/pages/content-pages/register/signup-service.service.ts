@@ -18,7 +18,7 @@ export class SignupServiceService {
         headers.append('Content-Type', 'application/json');
         const body=JSON.stringify(newPBUser);
         return this.http.post('/SignupController/signupUser', body, {headers: headers})
-            .map((data: Response) => data.json())
+            .map((data: Response) => data.text())
             .catch(this.handleError);
   }
     

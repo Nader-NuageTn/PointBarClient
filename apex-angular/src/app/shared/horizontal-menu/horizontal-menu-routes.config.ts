@@ -4,9 +4,11 @@ import { RouteInfo } from './horizontal-menu.metadata';
 export const ROUTES: RouteInfo[] = [
 
     {
+        path: '/pbusers', title: 'Pbusers', icon: 'ft-home', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []
+    },{
         path: '', title: 'Dashboard', icon: 'ft-home', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false, submenu: [
             { path: '/dashboard/dashboard1', title: 'Dashboard1', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
-            { path: '/dashboard/dashboard2', title: 'Dashboard2', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+            { path: '/dashboard/dashboard2', title: 'Dashboard2', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] }
         ]
     },
     {

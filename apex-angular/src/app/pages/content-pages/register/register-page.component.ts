@@ -22,7 +22,7 @@ export class RegisterPageComponent {
         console.log("test signup");
         console.log(newPBUser);
         this.signupService.signupUser(newPBUser).subscribe(data => {
-            data ="success";
+            console.log(data);
             if(data == "success") {
                 console.log("success");
                 this.signupService.typeSuccess();

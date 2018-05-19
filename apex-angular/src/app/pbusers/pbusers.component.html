@@ -1,0 +1,19 @@
+<!--Confirm Action Starts-->
+<section id="action">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">PB Users</h4>
+                </div>
+                <div class="card-body">
+                    <div class="card-block">
+                        <ng2-smart-table [settings]="alertsettings" [source]="alertSource" (deleteConfirm)="onDeleteConfirm($event)" (editConfirm)="onSaveConfirm($event)"
+                            (custom)="onCustom($event)"></ng2-smart-table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--Confirm Action Ends-->

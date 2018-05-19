@@ -1,0 +1,10 @@
+{
+	"/loginController": {
+		"target": "http://localhost:8080",
+		"secure": false
+	},
+	"/SignupController": {
+		"target": "http://localhost:8080",
+		"secure": false
+	}
+}

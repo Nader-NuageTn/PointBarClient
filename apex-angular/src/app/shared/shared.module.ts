@@ -15,6 +15,7 @@ import { NotificationSidebarComponent } from './notification-sidebar/notificatio
 import { ToggleFullscreenDirective } from "./directives/toggle-fullscreen.directive";
 
 
+
 @NgModule({
     exports: [
         CommonModule,

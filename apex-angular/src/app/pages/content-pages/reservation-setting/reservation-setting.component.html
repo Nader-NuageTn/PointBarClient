@@ -1,0 +1,242 @@
+<!--Theme customizer Starts-->
+<div
+	class="customizer border-left-blue-grey border-left-lighten-4 d-none d-sm-none d-md-block open">
+	<a class="customizer-close"> <i class="ft-x font-medium-3"></i>
+	</a> <a class="customizer-toggle bg-danger" id="customizer-toggle-icon">
+		<i class="ft-settings font-medium-4 fa fa-spin white align-middle"></i>
+	</a>
+	<div class="customizer-content p-3 ps-container ps-theme-dark"
+		data-ps-id="df6a5ce4-a175-9172-4402-dabd98fc9c0a">
+		<h4 class="text-uppercase mb-0 text-bold-400">Param&#232;tre de
+			r&#233;servation</h4>
+		<hr>
+
+		<ngb-accordion [closeOthers]="true" activeIds="1"> <ngb-panel
+			id="1"> <ng-template ngbPanelTitle> <span>R&#233;servations
+			Ferm&#233;s</span> </ng-template> <ng-template ngbPanelContent>
+
+		<h6 class="text-center text-bold-500 mb-3 text-uppercase"
+			*ngIf="newEvent == false">R&#233;servations Ferm&#233;s</h6>
+		<div class="cz-bg-image row" *ngIf="newEvent == false">
+			<div class="col-sm-12">
+				<table class="table table-responsive-md text-center">
+					<thead>
+						<tr>
+							<th>Date</th>
+							<th>R&#233;actif</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>06/13/2018</td>
+
+							<td><ui-switch [checked]="false" size="small"></ui-switch></td>
+						</tr>
+						<tr>
+							<td>06/18/2018</td>
+
+							<td><ui-switch [checked]="false" size="small"></ui-switch></td>
+						</tr>
+						<tr>
+							<td>07/01/2018</td>
+							<td><ui-switch [checked]="false" size="small"></ui-switch></td>
+						</tr>
+						<tr>
+							<td>06/13/2018</td>
+
+							<td><ui-switch [checked]="false" size="small"></ui-switch></td>
+						</tr>
+						<tr>
+							<td>06/18/2018</td>
+
+							<td><ui-switch [checked]="false" size="small"></ui-switch></td>
+						</tr>
+						<tr>
+							<td>07/01/2018</td>
+							<td><ui-switch [checked]="false" size="small"></ui-switch></td>
+						</tr>
+						<tr>
+							<td>06/13/2018</td>
+
+							<td><ui-switch [checked]="false" size="small"></ui-switch></td>
+						</tr>
+						<tr>
+							<td>06/18/2018</td>
+
+							<td><ui-switch [checked]="false" size="small"></ui-switch></td>
+						</tr>
+						<tr>
+							<td>07/01/2018</td>
+							<td><ui-switch [checked]="false" size="small"></ui-switch></td>
+						</tr>
+					</tbody>
+				</table>
+
+				<div class="form-group">
+					<label for="companyName">Fermer une r&#233;servation</label>
+					<div class="input-group">
+						<input class="form-control" placeholder="yyyy-mm-dd" name="dp"
+							[(ngModel)]="model" ngbDatepicker [dayTemplate]="customDay"
+							[minDate]="disabledModel" #d3="ngbDatepicker">
+						<div class="input-group-append">
+
+							<div class="input-group-btn">
+								<button type="button" class="btn btn-raised btn-warning"
+									aria-label="Copy">Fermer</button>
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+			</div>
+		</div>
+
+
+		</ng-template> </ngb-panel> <ngb-panel id="2"> <ng-template ngbPanelTitle>
+		<span>&#201;v&#232;nements sp&#232;ciaux</span> </ng-template> <ng-template
+			ngbPanelContent>
+
+
+		<h6 class="text-center text-bold-500 mb-3 text-uppercase"
+			*ngIf="newEvent == false">&#201;v&#232;nements sp&#232;ciaux</h6>
+		<div class="cz-bg-image row" *ngIf="newEvent == false">
+			<div class="col-sm-12">
+				<table class="table table-responsive-md text-center">
+					<thead>
+						<tr>
+							<th>&#201;v&#232;nement</th>
+							<th>Date</th>
+							<th>Actions</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+
+							<td>John</td>
+							<td>06/13/2018</td>
+
+							<td><a class="success p-0" data-original-title="" title="">
+									<i class="ft-edit-2 font-medium-3 mr-2"></i>
+							</a> <a class="danger p-0" data-original-title="" title=""> <i
+									class="ft-x font-medium-3 mr-2"></i>
+							</a></td>
+						</tr>
+						<tr>
+
+							<td>Peter</td>
+							<td>07/15/2018</td>
+
+							<td><a class="success p-0" data-original-title="" title="">
+									<i class="ft-edit-2 font-medium-3 mr-2"></i>
+							</a> <a class="danger p-0" data-original-title="" title=""> <i
+									class="ft-x font-medium-3 mr-2"></i>
+							</a></td>
+						</tr>
+						<tr>
+							<td>John</td>
+							<td>07/20/2018</td>
+							<td><a class="success p-0" data-original-title="" title="">
+									<i class="ft-edit-2 font-medium-3 mr-2"></i>
+							</a> <a class="danger p-0" data-original-title="" title=""> <i
+									class="ft-x font-medium-3 mr-2"></i>
+							</a></td>
+						</tr>
+					</tbody>
+				</table>
+
+				<button type="button"
+					class="btn btn-raised btn-raised btn-primary pull-right"
+					(click)="newEvent = true;">Nouvel &#233;v&#232;nement</button>
+
+
+			</div>
+		</div>
+
+		<!--Sidebar Options Starts-->
+		<h6 class="text-center text-bold-500 mb-3 text-uppercase"
+			*ngIf="newEvent == true">Nouvel &#233;v&#232;nement</h6>
+		<div class="cz-bg-image row" *ngIf="newEvent == true">
+			<form class="form">
+				<div class="form-body">
+
+					<div class="col-12">
+						<div class="form-group">
+							<label for="companyName">Date de l'&#233;v&#232;nement</label>
+							<div class="input-group">
+								<input class="form-control" placeholder="yyyy-mm-dd" name="dp"
+									[(ngModel)]="model" ngbDatepicker [dayTemplate]="customDay"
+									[minDate]="disabledModel" #d3="ngbDatepicker">
+								<div class="input-group-append">
+									<div class="input-group-text" (click)="d3.toggle()">
+										<i class="fa fa-calendar" style="cursor: pointer;"></i>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-12">
+						<div class="form-group">
+							<label for="companyName">Titre de l'&#233;v&#232;nement</label>
+							<div class="input-group">
+								<input class="form-control" placeholder="yyyy-mm-dd" name="dp"
+									[(ngModel)]="model" ngbDatepicker [dayTemplate]="customDay"
+									[minDate]="disabledModel" #d3="ngbDatepicker">
+								<div class="input-group-append">
+									<div class="input-group-text" (click)="d3.toggle()">
+										<i class="fa fa-calendar" style="cursor: pointer;"></i>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-12">
+						<div class="form-group">
+							<label for="projectinput5">Description de
+								l'&#232;v&#232;nement</label>
+							<textarea rows="3" cols="6" class="form-control" name="fname"></textarea>
+						</div>
+					</div>
+					<div class="col-12">
+
+						<div class="form-group">
+							<label for="file">Photo</label>
+							<!-- <label class="custom-file center-block d-block">
+		                                      <input type="file" id="file" class="custom-file-input">
+		                                      <span class="custom-file-control"></span>
+											</label> -->
+							<div class="custom-file center-block d-block">
+								<input type="file" class="custom-file-input"
+									id="inputGroupFile01"> <label class="custom-file-label"
+									for="inputGroupFile01">Envoyer..</label>
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+
+
+				<div class="form-actions">
+					<button type="button" (click)="newEvent = false;"
+						class="btn btn-raised btn-raised btn-warning mr-1">
+						<i class="ft-x"></i> Cancel
+					</button>
+					<button type="button" class="btn btn-raised btn-raised btn-primary">
+						<i class="fa fa-check-square-o"></i> Save
+					</button>
+				</div>
+			</form>
+		</div>
+
+
+
+		</ng-template> </ngb-panel> </ngb-accordion>
+
+
+
+
+	</div>
+</div>
+<!--Theme customizer Ends-->

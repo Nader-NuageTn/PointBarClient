@@ -23,6 +23,8 @@ import { AuthService } from './shared/auth/auth.service';
 import { AuthGuard } from './shared/auth/auth-guard.service';
 
 import * as $ from 'jquery';
+import { ReservationComponent } from './reservation/reservation.component';
+
 
 
 
@@ -35,7 +37,8 @@ export function createTranslateLoader(http: HttpClient) {
         AppComponent,
         FullLayoutComponent,
         // HorizontalLayoutComponent,
-        ContentLayoutComponent
+        ContentLayoutComponent,
+        ReservationComponent
     ],
     imports: [
         BrowserAnimationsModule,

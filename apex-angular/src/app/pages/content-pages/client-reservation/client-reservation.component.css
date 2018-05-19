@@ -1,0 +1,10 @@
+form .form-group {
+    margin-bottom: 0px;
+}
+label {
+    display: inline-block;
+    margin-bottom: .2rem;
+}
+form .form-actions {
+    text-align: center;
+}

@@ -37,69 +37,91 @@ export var data = [
   {
     id: 1,
     name: 'Leanne Graham',
-    username: 'Bret',
+    prenom: 'Bret',
     email: 'Sincere@april.biz',
+    numeroTel: '22 223 333',
+    notShownField: true,
   },
   {
     id: 2,
     name: 'Ervin Howell',
-    username: 'Antonette',
+    prenom: 'Antonette',
     email: 'Shanna@melissa.tv',
+    numeroTel: '22 223 333',
+    notShownField: true,
   },
   {
     id: 3,
     name: 'Clementine Bauch',
-    username: 'Samantha',
+    prenom: 'Samantha',
     email: 'Nathan@yesenia.net',
+    numeroTel: '22 223 333',
+    notShownField: false,
   },
   {
     id: 4,
     name: 'Patricia Lebsack',
-    username: 'Karianne',
+    prenom: 'Karianne',
     email: 'Julianne.OConner@kory.org',
+    numeroTel: '22 223 333',
+    notShownField: false,
   },
   {
     id: 5,
     name: 'Chelsey Dietrich',
-    username: 'Kamren',
+    prenom: 'Kamren',
     email: 'Lucio_Hettinger@annie.ca',
+    numeroTel: '22 223 333',
+    notShownField: false,
   },
   {
     id: 6,
     name: 'Mrs. Dennis Schulist',
-    username: 'Leopoldo_Corkery',
+    prenom: 'Leopoldo_Corkery',
     email: 'Karley_Dach@jasper.info',
+    numeroTel: '22 223 333',
+    notShownField: false,
   },
   {
     id: 7,
     name: 'Kurtis Weissnat',
-    username: 'Elwyn.Skiles',
+    prenom: 'Elwyn.Skiles',
     email: 'Telly.Hoeger@billy.biz',
+    numeroTel: '22 333 567',
+    notShownField: false,
   },
   {
     id: 8,
     name: 'Nicholas Runolfsdottir V',
-    username: 'Maxime_Nienow',
+    prenom: 'Maxime_Nienow',
     email: 'Sherwood@rosamond.me',
+    numeroTel: '22 566 778',
+    notShownField: true,
   },
   {
     id: 9,
     name: 'Glenna Reichert',
-    username: 'Delphine',
+    prenom: 'Delphine',
     email: 'Chaim_McDermott@dana.io',
+    numeroTel: '22 345 333',
+    notShownField: false,
   },
   {
     id: 10,
     name: 'Clementina DuBuque',
-    username: 'Moriah.Stanton',
+    prenom: 'Moriah.Stanton',
     email: 'Rey.Padberg@karina.biz',
+    numeroTel: '22 665 333',
+    notShownField: false,
   },
   {
     id: 11,
     name: 'Nicholas DuBuque',
-    username: 'Nicholas.Stanton',
+    prenom: 'Nicholas.Stanton',
     email: 'Rey.Padberg@rosamond.biz',
-  },
+    numeroTel: '22 223 333',
+    notShownField: true,
+  }
 ];
 
 export var filtersettings = {
@@ -237,6 +259,49 @@ export var alertsettings = {
     },
     numeroTel: {
       title: 'Numero du Telephone',
+    },
+  },
+  attr: {
+    class: "table table-responsive"
+  },
+};
+export var reservationsettings = {
+    
+  delete: {
+    confirmDelete: true,
+    deleteButtonContent: '<i class="ft-x danger font-medium-1 mr-1"></i>'
+  },
+  add: {
+    confirmCreate: false,
+    addButtonContent: "",
+  },
+  edit: {
+    confirmSave: false,
+    editButtonContent: ''
+  },
+  actions: {
+  custom: [
+    { name: 'Confirm', title: `<i class="ft-check success font-medium-1 mr-1"></i>` }
+  ]
+},
+  columns: {
+    id: {
+      title: 'ID',
+    },
+    name: {
+      title: 'Nom',
+    },
+    prenom: {
+      title: 'Prenom',
+    },
+    email: {
+      title: 'Email',
+    },
+    numeroTel: {
+      title: 'Numero du Telephone',
+    },
+    facebook: {
+      title: 'Facebook',
     },
   },
   attr: {

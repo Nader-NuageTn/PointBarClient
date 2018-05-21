@@ -1,11 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from "@angular/common";
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ContentPagesRoutingModule } from "./content-pages-routing.module";
-import { UiSwitchModule } from 'ngx-ui-switch';
-import { Ng2SmartTableModule } from 'ng2-smart-table';
 
 import { ComingSoonPageComponent } from "./coming-soon/coming-soon-page.component";
 import { ErrorPageComponent } from "./error/error-page.component";
@@ -14,22 +11,16 @@ import { LockScreenPageComponent } from "./lock-screen/lock-screen-page.componen
 import { LoginPageComponent } from "./login/login-page.component";
 import { MaintenancePageComponent } from "./maintenance/maintenance-page.component";
 import { RegisterPageComponent } from "./register/register-page.component";
-import { ClientReservationComponent } from './client-reservation/client-reservation.component';
 import { SignupServiceService } from "./register/signup-service.service";
 import { LoginService } from "./login/login.service";
 import { HttpModule } from '@angular/http';
-import { ReservationSettingComponent } from './reservation-setting/reservation-setting.component';
 
 @NgModule({
     imports: [
         CommonModule,
         ContentPagesRoutingModule,
-        FormsModule, 
-        ReactiveFormsModule,
-        HttpModule,
-        NgbModule,
-        UiSwitchModule,
-        Ng2SmartTableModule       
+        FormsModule,
+        HttpModule       
     ],
     declarations: [
         ComingSoonPageComponent,
@@ -38,9 +29,7 @@ import { ReservationSettingComponent } from './reservation-setting/reservation-s
         LockScreenPageComponent,
         LoginPageComponent,
         MaintenancePageComponent,
-        RegisterPageComponent,
-        ClientReservationComponent,
-        ReservationSettingComponent
+        RegisterPageComponent
     ],
     providers: [SignupServiceService, LoginService]
 })

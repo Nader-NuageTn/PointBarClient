@@ -23,13 +23,13 @@ export class RegisterPageComponent {
         console.log(newPBUser);
         this.signupService.signupUser(newPBUser).subscribe(data => {
             console.log(data);
-            if(data == "success") {
-                console.log("success");
-                this.signupService.typeSuccess();
-                this.router.navigate(['login'], { relativeTo: this.route.parent });
-            }else {
-                console.log("Fail");
-            }
+//            if(data == "success") {
+//                console.log("success");
+//                this.signupService.typeSuccess();
+//                this.router.navigate(['login'], { relativeTo: this.route.parent });
+//            }else {
+//                console.log("Fail");
+//            }
         });
         this.registerForm.reset();
         

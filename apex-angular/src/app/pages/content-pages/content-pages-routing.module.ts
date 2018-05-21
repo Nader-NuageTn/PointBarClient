@@ -8,75 +8,69 @@ import { LockScreenPageComponent } from "./lock-screen/lock-screen-page.componen
 import { LoginPageComponent } from "./login/login-page.component";
 import { MaintenancePageComponent } from "./maintenance/maintenance-page.component";
 import { RegisterPageComponent } from "./register/register-page.component";
-import { ClientReservationComponent } from "./client-reservation/client-reservation.component";
+
 
 const routes: Routes = [
-    {
-        path: '',
-        children: [
-            {
-                path: 'comingsoon',
-                component: ComingSoonPageComponent,
-                data: {
-                    title: 'Coming Soon page'
-                }
-            },
-            {
-                path: 'error',
-                component: ErrorPageComponent,
-                data: {
-                    title: 'Error Page'
-                }
-            },
-            {
-                path: 'forgotpassword',
-                component: ForgotPasswordPageComponent,
-                data: {
-                    title: 'Forgot Password Page'
-                }
-            },
-
-            {
-                path: 'lockscreen',
-                component: LockScreenPageComponent,
-                data: {
-                    title: 'Lock Screen page'
-                }
-            },
-            {
-                path: 'login',
-                component: LoginPageComponent,
-                data: {
-                    title: 'Login Page'
-                }
-            },
-            {
-                path: 'maintenance',
-                component: MaintenancePageComponent,
-                data: {
-                    title: 'Maintenance Page'
-                }
-            },
-            {
-                path: 'register',
-                component: RegisterPageComponent,
-                data: {
-                    title: 'Register Page'
-                }
-            }, {
-                path: 'reservation',
-                component: ClientReservationComponent,
-                data: {
-                    title: 'Reservation'
-                }
-            }
-
-        ]
-    }
+  {
+    path: '',
+    children: [
+      {
+        path: 'comingsoon',
+        component: ComingSoonPageComponent,
+        data: {
+          title: 'Coming Soon page'
+        }
+      },
+      {
+        path: 'error',
+        component: ErrorPageComponent,
+        data: {
+          title: 'Error Page'
+        }
+      },
+      {
+        path: 'forgotpassword',
+        component: ForgotPasswordPageComponent,
+        data: {
+          title: 'Forgot Password Page'
+        }
+      },   
+      
+      {
+        path: 'lockscreen',
+        component: LockScreenPageComponent,
+        data: {
+          title: 'Lock Screen page'
+        }
+      },   
+      {
+        path: 'login',
+        component: LoginPageComponent,
+        data: {
+          title: 'Login Page'
+        }
+      },
+      {
+        path: 'maintenance',
+        component: MaintenancePageComponent,
+        data: {
+          title: 'Maintenance Page'
+        }
+      },
+      {
+        path: 'register',
+        component: RegisterPageComponent,
+        data: {
+          title: 'Register Page'
+        }
+      }   
+      
+    ]
+  }
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes)],
-    exports: [RouterModule],
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
 })
 export class ContentPagesRoutingModule { }

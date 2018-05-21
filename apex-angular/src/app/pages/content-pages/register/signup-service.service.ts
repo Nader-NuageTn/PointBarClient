@@ -3,6 +3,7 @@ import {Http, Response, Headers} from '@angular/http';
 import 'rxjs/Rx';
 import {Observable} from "rxjs";
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+
 @Injectable()
 export class SignupServiceService {
 
@@ -13,11 +14,12 @@ export class SignupServiceService {
         this.toastr.success("Votre compte a \u00e9t\u00e9 cr\u00e9\u00e9 avec succ\u00e8s. L'activation peut prendre quelques minutes.");
     }
     
+ //Signup User   
   signupUser(newPBUser) {
         const headers = new Headers();
         headers.append('Content-Type', 'application/json');
         const body=JSON.stringify(newPBUser);
-        return this.http.post('/SignupController/signupUser', body, {headers: headers})
+        return this.http.post('/signupController/signupUser', body, {headers: headers})
             .map((data: Response) => data.text())
             .catch(this.handleError);
   }

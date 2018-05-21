@@ -25,6 +25,7 @@ export class PbusersComponent implements OnInit {
        }
 
   ngOnInit() {
+              delete this.alertsettings.columns.id;
   }
     
     settings = tableData.settings;

@@ -8,8 +8,12 @@ export const Full_ROUTES: Routes = [
     loadChildren: './dashboard/dashboard.module#DashboardModule'
   },
   {
-    path: 'pbusers',
+    path: 'users',
     loadChildren: './pbusers/pbusers.module#PbusersModule'
+  },
+  {
+    path: 'reservations',
+    loadChildren: './reservation/reservation.module#ReservationModule'
   },
   {
     path: 'calendar',

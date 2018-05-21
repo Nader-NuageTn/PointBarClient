@@ -19,6 +19,7 @@ import { SignupServiceService } from "./register/signup-service.service";
 import { LoginService } from "./login/login.service";
 import { HttpModule } from '@angular/http';
 import { ReservationSettingComponent } from './reservation-setting/reservation-setting.component';
+import { ClientReservationService } from './client-reservation/client-reservation.service';
 
 @NgModule({
     imports: [
@@ -42,6 +43,6 @@ import { ReservationSettingComponent } from './reservation-setting/reservation-s
         ClientReservationComponent,
         ReservationSettingComponent
     ],
-    providers: [SignupServiceService, LoginService]
+    providers: [SignupServiceService, LoginService, ClientReservationService]
 })
 export class ContentPagesModule { }

@@ -11,7 +11,7 @@
 					</div>
 					<div class="card-body">
 						<div class="px-3">
-							<form class="form">
+							<form class="form"  (ngSubmit)="onSubmit(reservation)" #f="ngForm">
 								<div class="form-body">
 									<h4 class="form-section">
 										<i class="ft-user"></i>Informations Personnel
@@ -19,30 +19,30 @@
 									<div class="row">
 										<div class="col-md-6">
 											<div class="form-group">
-												<label for="projectinput1">Nom</label> <input type="text"
-													id="projectinput1" class="form-control" name="fname">
+												<label for="projectinput1">Nom</label> <input type="text" [(ngModel)]="reservation.firstName" 
+													id="projectinput1" class="form-control" name="fname" required>
 											</div>
 										</div>
 										<div class="col-md-6">
 											<div class="form-group">
 												<label for="projectinput2">Pr&#233;nom</label> <input
-													type="text" id="projectinput2" class="form-control"
-													name="lname">
+													type="text" id="projectinput2" class="form-control" [(ngModel)]="reservation.lastName" 
+													name="lname" required>
 											</div>
 										</div>
 									</div>
 									<div class="row">
 										<div class="col-md-6">
 											<div class="form-group">
-												<label for="projectinput3">E-mail</label> <input type="text"
-													id="projectinput3" class="form-control" name="email">
+												<label for="projectinput3">E-mail</label> <input type="text" [(ngModel)]="reservation.email" 
+													id="projectinput3" class="form-control" name="email" required email>
 											</div>
 										</div>
 										<div class="col-md-6">
 											<div class="form-group">
 												<label for="projectinput4">Num&#233;ro de
-													t&#233;l&#233;phone </label> <input type="text" id="projectinput4"
-													class="form-control" name="phone">
+													t&#233;l&#233;phone </label> <input type="text" id="projectinput4" [(ngModel)]="reservation.phone" 
+													class="form-control" name="phone" required>
 											</div>
 										</div>
 									</div>
@@ -50,8 +50,8 @@
 										<div class="col-md-6">
 											<div class="form-group">
 												<label for="projectinput3">Facebook</label> <input
-													type="text" id="projectinput3" class="form-control"
-													name="email">
+													type="text" id="projectinput3" class="form-control" [(ngModel)]="reservation.facebook" 
+													name="facebook">
 											</div>
 										</div>
 										<div class="col-md-6">
@@ -83,9 +83,9 @@
 												<label for="companyName">Date de r&#233;servation</label>
 												<div class="input-group">
 													<input class="form-control" placeholder="yyyy-mm-dd"
-														name="dp" [(ngModel)]="model" ngbDatepicker
+														name="dp" [(ngModel)]="reservation.date" ngbDatepicker
 														[dayTemplate]="customDay" [minDate]="disabledModel"
-														#d3="ngbDatepicker">
+														#d3="ngbDatepicker" required>
 													<div class="input-group-append">
 														<div class="input-group-text" (click)="d3.toggle()">
 															<i class="fa fa-calendar" style="cursor: pointer;"></i>
@@ -98,10 +98,10 @@
 											<div class="form-group">
 												<label for="projectinput5">Tranche horaire </label>
 												<div class="input-group-append">
-													<ngb-timepicker [(ngModel)]="validationTime" name="dp"
+													<ngb-timepicker [(ngModel)]="reservation.timeFrom" name="dpFrom"
 														[spinners]="spinners" required></ngb-timepicker>
 													<span style="margin-top: 4%;">-</span>
-													<ngb-timepicker [(ngModel)]="validationTimeTo" name="dp"
+													<ngb-timepicker [(ngModel)]="reservation.timeTo" name="dpTo"
 														[spinners]="spinners" required></ngb-timepicker>
 												</div>
 
@@ -117,15 +117,15 @@
 											<div class="form-group">
 												<label for="companyName">Nombre de personne (homme)</label>
 												<div class="input-group">
-													<input type="text" class="form-control"
-														aria-label="Amount (to the nearest dollar)">
+													<input type="number" min="0" class="form-control" [(ngModel)]="reservation.qtyMen" name="nbHomme"
+														aria-label="Amount (to the nearest dollar)" required>
 													<div class="input-group-append">
 														<div class="input-group-btn">
-															<button type="button" class="btn btn-raised btn-warning"
+															<button type="button" class="btn btn-raised btn-warning"(click)="reservation.qtyMen = reservation.qtyMen+1;"
 																aria-label="Copy">
 																<i class="ft-user-plus"></i>
 															</button>
-															<button type="button" class="btn btn-raised btn-info"
+															<button type="button" class="btn btn-raised btn-info"(click)="reservation.qtyMen = reservation.qtyMen-1;"
 																aria-label="Paste">
 																<i class="ft-user-minus"></i>
 															</button>
@@ -139,15 +139,15 @@
 												<label for="projectinput5">Nombre de personne
 													(femme)</label>
 												<div class="input-group">
-													<input type="text" class="form-control"
-														aria-label="Amount (to the nearest dollar)">
+													<input type="number" min="0" class="form-control" [(ngModel)]="reservation.qtyWomen" name="nbFemme"
+														aria-label="Amount (to the nearest dollar)" required>
 													<div class="input-group-append">
 														<div class="input-group-btn">
-															<button type="button" class="btn btn-raised btn-warning"
+															<button type="button" class="btn btn-raised btn-warning" (click)="reservation.qtyWomen = reservation.qtyWomen +1;"
 																aria-label="Copy">
 																<i class="ft-user-plus"></i>
 															</button>
-															<button type="button" class="btn btn-raised btn-info"
+															<button type="button" class="btn btn-raised btn-info"(click)="reservation.qtyWomen = reservation.qtyWomen -1;"
 																aria-label="Paste">
 																<i class="ft-user-minus"></i>
 															</button>
@@ -167,7 +167,7 @@
 										class="btn btn-raised btn-raised btn-warning mr-1">
 										<i class="ft-x"></i> Cancel
 									</button>
-									<button type="button"
+									<button type="submit"
 										class="btn btn-raised btn-raised btn-primary">
 										<i class="fa fa-check-square-o"></i> Save
 									</button>

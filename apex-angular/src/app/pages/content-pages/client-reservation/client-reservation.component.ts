@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild  } from '@angular/core';
 import { NgForm, FormControl } from '@angular/forms';
 import { Router, ActivatedRoute } from "@angular/router";
 import { NgbDateStruct, NgbDatepickerI18n, NgbCalendar, NgbTimeStruct} from '@ng-bootstrap/ng-bootstrap';
+import { ClientReservationService } from './client-reservation.service';
+import { NewReservationModel } from './NewReservationModel.model';
 
 const now = new Date();
 const I18N_VALUES = {
@@ -34,7 +36,7 @@ export class ClientReservationComponent implements OnInit {
 
 
      // Variable declaration
-
+    reservation:NewReservationModel;
     d3: any;
     model: NgbDateStruct;
     popupModel;
@@ -44,7 +46,6 @@ export class ClientReservationComponent implements OnInit {
     disabledModel: NgbDateStruct = { year: now.getFullYear(), month: now.getMonth() + 1, day: now.getDate() };
     disabled = true;
     customModel: NgbDateStruct;
-   
     configModal;    // Global configuration of datepickers
 
     // Range datepicker start
@@ -75,12 +76,17 @@ export class ClientReservationComponent implements OnInit {
     }
 
     // Custom Day View Ends  
-    constructor() { }
+    constructor(private clientReservationService: ClientReservationService) { 
+    
+    
+    }
 
     ngOnInit() {
-
+        
+        this.reservation = new NewReservationModel("", "","", "", "",now, "", "", 0, 0);
     } 
-onSubmit() {
-
-} 
+    onSubmit() {
+        this.clientReservationService.addSuccess();
+        this.reservation = new NewReservationModel("", "","", "", "",now, "", "", 0, 0);
+    } 
 }

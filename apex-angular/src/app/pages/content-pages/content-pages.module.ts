@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from "@angular/common";
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { ContentPagesRoutingModule } from "./content-pages-routing.module";
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { Ng2SmartTableModule } from 'ng2-smart-table';
 
 import { ComingSoonPageComponent } from "./coming-soon/coming-soon-page.component";
 import { ErrorPageComponent } from "./error/error-page.component";
@@ -15,6 +17,7 @@ import { SignupServiceService } from "./register/signup-service.service";
 import { LoginService } from "./login/login.service";
 import { HttpModule } from '@angular/http';
 import { ReservationSettingComponent } from './reservation-setting/reservation-setting.component';
+import { ClientReservationComponent } from './client-reservation/client-reservation.component';
 import { ClientReservationService } from './client-reservation/client-reservation.service';
 
 @NgModule({
@@ -22,7 +25,9 @@ import { ClientReservationService } from './client-reservation/client-reservatio
         CommonModule,
         ContentPagesRoutingModule,
         FormsModule,
-        HttpModule       
+        HttpModule,
+        NgbModule,  
+        Ng2SmartTableModule     
     ],
     declarations: [
         ComingSoonPageComponent,
@@ -31,7 +36,9 @@ import { ClientReservationService } from './client-reservation/client-reservatio
         LockScreenPageComponent,
         LoginPageComponent,
         MaintenancePageComponent,
-        RegisterPageComponent
+        RegisterPageComponent,
+        ClientReservationComponent,
+        ReservationSettingComponent
     ],
     providers: [SignupServiceService, LoginService, ClientReservationService]
 })

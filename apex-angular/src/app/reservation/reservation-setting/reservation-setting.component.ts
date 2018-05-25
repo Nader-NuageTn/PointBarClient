@@ -85,10 +85,10 @@ var settings1 = {
 
 var data1 = [
   {
-    Date: '05-26-2018',
+    Date: '5-26-2018',
   },
   {
-    Date: '05-26-2018',
+    Date: '5-28-2018',
   }
 ]
 const now = new Date();

@@ -82,11 +82,27 @@ export class ClientReservationComponent implements OnInit {
     }
 
     ngOnInit() {
-        
         this.reservation = new NewReservationModel("", "","", "", "",now, "", "", 0, 0);
     } 
     onSubmit() {
-        this.clientReservationService.addSuccess();
-        this.reservation = new NewReservationModel("", "","", "", "",now, "", "", 0, 0);
+        this.clientReservationService.reservationSuccess();
+        if(this.reservation.firstName == null || this.reservation.lastName == null || this.reservation.email == null || this.reservation.phone == null 
+        || this.reservation.date == null || this.reservation.timeFrom == null || this.reservation.timeTo == null || this.reservation.qtyMen == null || this.reservation.qtyMen == null) {
+            this.clientReservationService.requiredFieldError();
+        }else if(this.reservation.qtyMen == 0 && this.reservation.qtyMen == 0) {
+            this.clientReservationService.requiredNumberOfPersonError();
+        }else{
+            this.clientReservationService.sendReservationRequest(this.reservation).subscribe(data => {
+                if(data == "success") {
+                    console.log("success");
+                    this.reservation = new NewReservationModel("", "","", "", "",now, "", "", 0, 0);
+                }else {
+                    console.log("Fail");
+                }
+            });
+
+        }
+        
+
     } 
 }

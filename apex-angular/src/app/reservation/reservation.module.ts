@@ -11,7 +11,7 @@ import { ReservationManagementComponent } from './reservation-management/reserva
 import { ConfirmReservationComponent } from './confirm-reservation/confirm-reservation.component';
 import { ReservationComponent } from './reservation.component';
 import { ReservationSettingComponent } from './reservation-setting/reservation-setting.component';
-import { ClientReservationService } from './client-reservation/client-reservation.service';
+
 
 
 @NgModule({
@@ -27,7 +27,6 @@ import { ClientReservationService } from './client-reservation/client-reservatio
         ReservationManagementComponent,
         ConfirmReservationComponent,
         ReservationComponent,
-        ReservationSettingComponent],
-     providers: [ClientReservationService]
+        ReservationSettingComponent]
 })
 export class ReservationModule { }

@@ -302,11 +302,11 @@ export var reservationsettings = {
     id: {
       title: 'ID',
     },
-    name: {
+    fullName: {
       title: 'Nom',
       editable: false,
     },
-    numeroTel: {
+    phone: {
       title: 'Telephone',
       editable: false,
     },
@@ -315,11 +315,11 @@ export var reservationsettings = {
       type: 'html',
       editable: false,
     },
-    nombreDepersonnes: {
+    qtyPersonne: {
       title: 'Nombre de Personnes',
       editable: false,
     },
-    trancheHoraire: {
+    timeFrom: {
       title: 'Tranche Horaire',
       //type: 'custom',
       type: 'html',

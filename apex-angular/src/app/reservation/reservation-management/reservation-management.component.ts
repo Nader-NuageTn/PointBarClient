@@ -3,6 +3,7 @@ import * as tableData from '../../shared/data/smart-data-table';
 import { LocalDataSource } from 'ng2-smart-table';
 import { ReservationManagementService } from './reservation-management.service';
 
+const now = new Date();
 @Component({
   selector: 'app-reservation-management',
   templateUrl: './reservation-management.component.html',
@@ -20,11 +21,15 @@ export class ReservationManagementComponent implements OnInit {
   constructor(private reservationManagementService: ReservationManagementService) { 
         this.source = new LocalDataSource(tableData.data); // create the source
         this.filterSource = new LocalDataSource(tableData.filerdata); // create the source
-        this.alertSource = new LocalDataSource(tableData.data); // create the source
-//        this.reservationManagementService.getAllReservation().subscribe(data => {
-//             console.log(data);
-//             this.alertSource =data;
-//            });  
+        //this.alertSource = new LocalDataSource(tableData.data); // create the source
+      let today = { year: now.getFullYear(), month: now.getMonth() + 1, day: now.getDate() };
+        this.reservationManagementService.getAllReservation(today).subscribe(data => {
+             console.log(data);
+            for(let x of data) {
+                x.timeFrom= x.timeFrom.hour+":"+x.timeFrom.minute+"-"+x.timeTo.hour+":"+x.timeTo.minute;
+                }
+             this.alertSource =data;
+            });  
       }
 
   ngOnInit() {
@@ -101,14 +106,14 @@ export class ReservationManagementComponent implements OnInit {
     
     //  Edit Tranche horaire
     onSaveConfirm(event) {
-        if(event.newData.trancheHoraire[0] != null && event.newData.trancheHoraire[1] != null && event.newData.trancheHoraire[2] && event.newData.trancheHoraire[3] != null) {
+        if(event.newData.timeFrom[0] != null && event.newData.timeFrom[1] != null && event.newData.timeFrom[2] && event.newData.timeFrom[3] != null) {
         if (window.confirm('Are you sure you want to save?')) {
-            this.trancheHorFrom['hour']=event.newData.trancheHoraire[0];
-            this.trancheHorFrom['minute']=event.newData.trancheHoraire[1];
-            this.trancheHorTo['hour']=event.newData.trancheHoraire[2];
-            this.trancheHorTo['minute']=event.newData.trancheHoraire[3];
+            this.trancheHorFrom['hour']=event.newData.timeFrom[0];
+            this.trancheHorFrom['minute']=event.newData.timeFrom[1];
+            this.trancheHorTo['hour']=event.newData.timeFrom[2];
+            this.trancheHorTo['minute']=event.newData.timeFrom[3];
             console.log(event.newData);
-            event.newData.trancheHoraire = event.newData.trancheHoraire[0]+":"+event.newData.trancheHoraire[1]+"-"+event.newData.trancheHoraire[2]+":"+event.newData.trancheHoraire[3];
+            event.newData.timeFrom = event.newData.timeFrom[0]+":"+event.newData.timeFrom[1]+"-"+event.newData.timeFrom[2]+":"+event.newData.timeFrom[3];
             this.reservationManagementService.editTrancheHoraire(event.newData.id,this.trancheHorFrom,this.trancheHorTo).subscribe(data => {
                console.log(data); 
                 if(data == "success") {

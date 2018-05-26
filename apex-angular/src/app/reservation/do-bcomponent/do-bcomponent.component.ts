@@ -12,13 +12,24 @@ export class DoBcomponentComponent  extends DefaultEditor implements OnInit {
   reservation:any = {};
   tab:any =[];
   tab2:any=[];
+  timeFrom = {};
+  timeTo = {};
   constructor() {
       super();
   }
     
   ngAfterViewInit() {
+      console.log(this.cell.newValue);
+      this.timeFrom['hour'] =this.cell.newValue.split("-")[0].split(":")[0];
+      this.timeFrom['minute'] =this.cell.newValue.split("-")[0].split(":")[1];
+      this.timeFrom['second'] ="0";
+      
+      this.timeTo['hour'] =this.cell.newValue.split("-")[1].split(":")[0];
+      this.timeTo['minute'] =this.cell.newValue.split("-")[1].split(":")[1];
+      this.timeTo['second'] ="0";
     if (this.cell.newValue !== '') {
-      this.reservation.timeFrom = this.cell.newValue;
+      this.reservation.timeFrom = this.timeFrom;
+      this.reservation.timeTo = this.timeTo;
     }
   }
 

@@ -28,7 +28,7 @@ export class ReservationManagementService {
   annulerReservation(idRes) {
         const headers = new Headers();
         headers.append('Content-Type', 'application/json');
-        return this.http.post('/reservationController/annulerReservation', idRes, {headers: headers})
+        return this.http.post('/ReservationManagementController/annulerReservation', idRes, {headers: headers})
             .map((data: Response) => data.text())
             .catch(this.handleError);
   }
@@ -37,15 +37,15 @@ export class ReservationManagementService {
    confirmerReservation(idRes) {
         const headers = new Headers();
         headers.append('Content-Type', 'application/json');
-        return this.http.post('/ReservationManagementController/confirmReservation', "52", {headers: headers})
+        return this.http.post('/ReservationManagementController/confirmReservation', idRes, {headers: headers})
             .map((data: Response) => data.text())
             .catch(this.handleError);
   }
   //Get Reservation List
-  getAllReservation() {
+  getAllReservation(today) {
         const headers = new Headers();
         headers.append('Content-Type', 'application/json');
-        return this.http.post('/reservationController/getReservationList', {headers: headers})
+        return this.http.post('/ReservationManagementController/getAllReservation', today, {headers: headers})
             .map((data: Response) => data.json())
             .catch(this.handleError);
   }
@@ -53,7 +53,7 @@ export class ReservationManagementService {
         const headers = new Headers();
         headers.append('Content-Type', 'application/json');
        const body=JSON.stringify([trancheHoraire1,trancheHoraire2]);
-        return this.http.post('/reservationController/editTrancheHoraire/'+id, body, {headers: headers})
+        return this.http.post('/ReservationManagementController/editTrancheHoraire/'+id, body, {headers: headers})
             .map((data: Response) => data.text())
             .catch(this.handleError);
       

@@ -16,7 +16,15 @@ export class LoginService {
     typeErrorSecond() {
         this.toastr.error("Le mot de passe entr\u00e9 est incorrect!");
     }
-    
+    typeErrorThird() {
+       this.toastr.error("Ce Compte n'existe pas!"); 
+    }
+    typeErrorNotActive() {
+        this.toastr.error("Votre Compte n'est pas active!"); 
+    }
+    typeErrordeleted() {
+        this.toastr.error("Votre Compte est deleted!");
+    }
   loginUser(login) {
         const headers = new Headers();
         headers.append('Content-Type', 'application/json');

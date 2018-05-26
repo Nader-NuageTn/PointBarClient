@@ -28,8 +28,16 @@ export class LoginPageComponent {
             this.loginService.loginUser(login).subscribe(data => {
                 if(data == "success") {
                     console.log("success");
-                }else {
-                    console.log("Fail");
+                    this.router.navigate(['reservations/ReservationManagement']);
+                }else if(data == "wait") {
+                    this.loginService.typeErrorNotActive();
+                }
+                else if(data == "deleted") {
+                this.loginService.typeErrordeleted();
+                }
+                else {
+                console.log("Fail");
+                this.loginService.typeErrorThird();
                 }
             });
             this.loginForm.reset();

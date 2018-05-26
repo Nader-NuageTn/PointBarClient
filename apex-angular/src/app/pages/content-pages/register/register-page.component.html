@@ -41,33 +41,36 @@
                                             </div>
                                             <input type="email" class="form-control" name="inputEmail" id="inputEmail" placeholder="Email" [(ngModel)]="newPBUser.email" required email >
                                         </div>
-                                        <div class="input-group mb-3">
+                                        <div class="form-group mb-3">
+                                        <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">
                                                     <i class="ft-lock"></i>
                                                 </span>
                                             </div>
-                                            <input type="password" class="form-control" name="inputPass" id="inputPass" placeholder="Mot de Passe" [(ngModel)]="newPBUser.motdepasse" #password="ngModel" required >
+                                            <input type="text" class="form-control" [(ngModel)]="newPBUser.motdepasse" #password="ngModel" placeholder="Mot de Passe" name="password" id="inputPass" required >
                                         </div>
-                                        <div class="input-group mb-3">
+                                        </div>
+                                        <div class="form-group mb-3">
+                                        <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">
                                                     <i class="ft-lock"></i>
                                                 </span>
                                             </div>
-                                            <input type="password" class="form-control" name="inputConfPass" id="inputConfPass" placeholder="Confirmation de Mot de Passe" [(ngModel)]="newPBUser.confirmMotPasse" validateEqual="password" #confirmPassword="ngModel" required >
-                                            <small [hidden]="confirmPassword.valid ||  
-											     (confirmPassword.pristine && !f.valid)">
-											     Password mismatch
-											</small>
+                                            <input type="text" class="form-control" name="equalTo" id="inputConfPass" placeholder="Confirmation de Mot de Passe" [(ngModel)]="newPBUser.confirmMotPasse" #equalTo="ngModel" [equalTo]="password" required >
                                         </div>
-                                        <div class="input-group mb-3">
+                                        <small class="form-text text-muted danger" *ngIf="equalTo.errors?.equalTo">Confirmation Incorrect!</small>
+                                        </div>
+                                        <div class="form-group mb-3">
+                                        <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">
                                                     <i class="ft-phone"></i>
                                                 </span>
                                             </div>
-                                            <input type="text" class="form-control" name="numTel" id="numTel" placeholder="Numero de Telephone" (keyup)="FormatPhone(newPBUser.numeroTelephone)" [(ngModel)]="newPBUser.numeroTelephone" required >
+                                            <input type="text" class="form-control" name="numTel" id="numTel" placeholder="Numero de Telephone" [(ngModel)]="newPBUser.numeroTelephone" required >
+                                        </div>
                                         </div>
                                         <div class="form-group text-center">
                                             <button type="Submit" class="btn btn-warning btn-raised" [disabled]="!f.valid" >Get Started</button>

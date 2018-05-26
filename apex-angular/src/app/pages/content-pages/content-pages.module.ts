@@ -19,6 +19,7 @@ import { HttpModule } from '@angular/http';
 import { ReservationSettingComponent } from './reservation-setting/reservation-setting.component';
 import { ClientReservationComponent } from './client-reservation/client-reservation.component';
 import { ClientReservationService } from './client-reservation/client-reservation.service';
+import { CustomFormsModule } from 'ng2-validation';
 
 @NgModule({
     imports: [
@@ -27,7 +28,8 @@ import { ClientReservationService } from './client-reservation/client-reservatio
         FormsModule,
         HttpModule,
         NgbModule,  
-        Ng2SmartTableModule     
+        Ng2SmartTableModule,
+        CustomFormsModule     
     ],
     declarations: [
         ComingSoonPageComponent,

@@ -1,5 +1,5 @@
-import { Component, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormControl, FormGroup, Validators, NgForm } from '@angular/forms';
 import { SignupServiceService } from './signup-service.service';
 import { Router, ActivatedRoute } from "@angular/router";
 
@@ -10,7 +10,29 @@ import { Router, ActivatedRoute } from "@angular/router";
 })
 
 export class RegisterPageComponent {
+    @ViewChild('vform') validationForm: FormGroup;
+    regularForm: FormGroup;
     @ViewChild('f') registerForm: NgForm;
+    
+    ngOnInit() {
+        this.regularForm = new FormGroup({
+            'inputEmail': new FormControl(null, [Validators.required, Validators.email]),
+            'password': new FormControl(null, [Validators.required, Validators.minLength(4), Validators.maxLength(24)]),
+            'textArea': new FormControl(null, [Validators.required]),
+            'radioOption': new FormControl('Option one is this'),
+            'mobileNumber': new FormControl(null, [Validators.pattern("[0-9]{0-10}")])
+        }, {updateOn: 'blur'});
+    }
+    
+    onReactiveFormSubmit() {
+        this.regularForm.reset();
+    }
+    onTemplateFormSubmit() {
+        this.registerForm.reset();
+    }
+    onCustomFormSubmit() {
+        this.validationForm.reset();
+    }
     
     constructor(private router: Router, private route: ActivatedRoute, private signupService: SignupServiceService) {
         
@@ -23,13 +45,15 @@ export class RegisterPageComponent {
         console.log(newPBUser);
         this.signupService.signupUser(newPBUser).subscribe(data => {
             console.log(data);
-//            if(data == "success") {
-//                console.log("success");
-//                this.signupService.typeSuccess();
-//                this.router.navigate(['login'], { relativeTo: this.route.parent });
-//            }else {
-//                console.log("Fail");
-//            }
+            if(data == "success") {
+                console.log("success");
+                this.signupService.typeSuccess();
+                this.router.navigate(['login'], { relativeTo: this.route.parent });
+            }else {
+                console.log("Fail");
+                this.signupService.typeErrorThird();
+                
+            }
         });
         this.registerForm.reset();
         

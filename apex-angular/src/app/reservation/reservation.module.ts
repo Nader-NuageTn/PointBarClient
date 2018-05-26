@@ -11,6 +11,7 @@ import { ReservationManagementComponent } from './reservation-management/reserva
 import { ConfirmReservationComponent } from './confirm-reservation/confirm-reservation.component';
 import { ReservationComponent } from './reservation.component';
 import { ReservationSettingComponent } from './reservation-setting/reservation-setting.component';
+import { ReservationManagementService } from './reservation-management/reservation-management.service';
 
 
 
@@ -27,6 +28,7 @@ import { ReservationSettingComponent } from './reservation-setting/reservation-s
         ReservationManagementComponent,
         ConfirmReservationComponent,
         ReservationComponent,
-        ReservationSettingComponent]
+        ReservationSettingComponent],
+    providers: [ ReservationManagementService ]
 })
 export class ReservationModule { }

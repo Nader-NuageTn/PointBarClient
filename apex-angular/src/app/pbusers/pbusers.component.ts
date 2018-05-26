@@ -21,7 +21,15 @@ export class PbusersComponent implements OnInit {
   constructor(private pbusersService: PbusersService) {
         this.source = new LocalDataSource(tableData.data); // create the source
         this.filterSource = new LocalDataSource(tableData.filerdata); // create the source
-        this.alertSource = this.pbusersService.getpbUsers(); // create the source
+      
+         this.pbusersService.getpbUsers().subscribe(data => {
+             console.log(data);
+             for(let user of data) {
+                 user.role= user.role.description;
+              }
+             
+             this.alertSource =data;
+            }); // create the source
        }
 
   ngOnInit() {
@@ -62,8 +70,9 @@ export class PbusersComponent implements OnInit {
     //  For confirm action On Delete
     onDeleteConfirm(event) {
         if (window.confirm('Are you sure you want to delete?')) {
-            event.confirm.resolve();
-            this.pbusersService.deleteUser(event.newData.id).subscribe(data => {
+            event.confirm.resolve(event.data);
+            console.log(event.data);
+            this.pbusersService.deleteUser(event.data.id).subscribe(data => {
                console.log(data); 
                 if(data == "success") {
                     this.pbusersService.deleteSuccess();
@@ -94,7 +103,7 @@ export class PbusersComponent implements OnInit {
     
     onCustom(event) {
         console.log(event.data.id);
-        this.pbusersService.activateUser(event.newData.id).subscribe(data => {
+        this.pbusersService.activateUser(event.data.id).subscribe(data => {
                console.log(data);
                if(data == "success") {
                     this.pbusersService.activateSuccess();

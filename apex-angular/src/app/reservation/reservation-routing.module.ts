@@ -13,7 +13,7 @@ const routes: Routes = [
         children: [
             {
                 path: 'ReservationManagement',
-                component: ReservationComponent,
+                component: ReservationManagementComponent,
                 data: {
                   title: 'Gestion des Reservations'
                 }

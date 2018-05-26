@@ -14,6 +14,10 @@ export class SignupServiceService {
         this.toastr.success("Votre compte a \u00e9t\u00e9 cr\u00e9\u00e9 avec succ\u00e8s. L'activation peut prendre quelques minutes.");
     }
     
+    typeErrorThird() {
+        this.toastr.error("Cet Utilisateur existe deja!");
+        }
+    
  //Signup User   
   signupUser(newPBUser) {
         const headers = new Headers();

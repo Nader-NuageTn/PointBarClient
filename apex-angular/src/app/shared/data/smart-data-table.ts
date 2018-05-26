@@ -37,9 +37,8 @@ export var data = [
   {
     id: 1,
     name: 'Leanne Graham',
-    prenom: 'Bret',
-    email: 'Sincere@april.biz',
     numeroTel: '22 223 333',
+    facebook:'<a href="http://localhost:4200/users" target="_blank">Page Facebook</a>',
     notShownField: true,
   },
   {
@@ -248,7 +247,7 @@ export var alertsettings = {
     id: {
       title: 'ID',
     },
-    name: {
+    nom: {
       title: 'Nom',
     },
     prenom: {
@@ -257,8 +256,22 @@ export var alertsettings = {
     email: {
       title: 'Email',
     },
-    numeroTel: {
+    numeroTelephone: {
       title: 'Numero du Telephone',
+    },
+    role: {
+      title: 'Role',
+      type: 'html',
+      editor: {
+        type: 'list',
+        config: {
+          list: [
+            {value: 'Administrateur', title: 'Administrateur'},
+            {value: 'Gerant', title: 'Gerant'},
+            {value: 'Securite', title: 'Securite'},
+          ],
+        },
+      }
     },
   },
   attr: {
@@ -275,9 +288,8 @@ export var reservationsettings = {
     confirmCreate: false,
     addButtonContent: "",
   },
-  edit: {
-    confirmSave: false,
-    editButtonContent: ''
+  edit:{
+    editButtonContent: '<i class="ft-edit-2 info font-medium-1 mr-1"></i>'
   },
   actions: {
   custom: [
@@ -290,19 +302,24 @@ export var reservationsettings = {
     },
     name: {
       title: 'Nom',
-    },
-    prenom: {
-      title: 'Prenom',
-    },
-    email: {
-      title: 'Email',
+      editable: false,
     },
     numeroTel: {
       title: 'Numero du Telephone',
+      editable: false,
     },
     facebook: {
       title: 'Facebook',
+      type: 'html',
+      editable: false,
     },
+    nombreDepersonnes: {
+      title: 'Nombre de Personnes',
+      editable: false,
+    },
+    trancheHoraire: {
+      title: 'Tranche Horaire',
+    }
   },
   attr: {
     class: "table table-responsive"

@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ContentPagesRoutingModule } from "./content-pages-routing.module";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
+import { CustomFormsModule } from 'ng2-validation';
 
 import { ComingSoonPageComponent } from "./coming-soon/coming-soon-page.component";
 import { ErrorPageComponent } from "./error/error-page.component";
@@ -20,6 +21,7 @@ import { ReservationSettingComponent } from './reservation-setting/reservation-s
 import { ClientReservationComponent, NgbdModalContent  } from './client-reservation/client-reservation.component';
 import { ClientReservationService } from './client-reservation/client-reservation.service';
 import { ReservationSettingService } from './reservation-setting/reservation-setting.service';
+
 @NgModule({
     imports: [
         CommonModule,
@@ -27,7 +29,8 @@ import { ReservationSettingService } from './reservation-setting/reservation-set
         FormsModule,
         HttpModule,
         NgbModule,  
-        Ng2SmartTableModule     
+        Ng2SmartTableModule,
+        CustomFormsModule     
     ],
     declarations: [
         ComingSoonPageComponent,

@@ -1,3 +1,4 @@
+import { ReservationDateModel } from './ReservationDateModel.model';
 
 export class NewReservationModel{
 
@@ -6,13 +7,13 @@ export class NewReservationModel{
     public email:String;;
     public phone:String;;
     public  facebook:String;
-    public  date:Date;
+    public  date:ReservationDateModel;
     public  timeFrom:String;
     public  timeTo:String;
     public  qtyMen:Number;
     public  qtyWomen:Number;
     
-    constructor(firstName:String, lastName:String, email:String, phone:String,facebook:String, date:Date, timeFrom:String, timeTo:String, qtyMen:Number, qtyWomen:Number) {
+    constructor(firstName:String, lastName:String, email:String, phone:String,facebook:String, date:ReservationDateModel, timeFrom:String, timeTo:String, qtyMen:Number, qtyWomen:Number) {
    
         this.firstName = firstName;
         this.lastName = lastName;

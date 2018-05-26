@@ -11,7 +11,7 @@
 					</div>
 					<div class="card-body">
 						<div class="px-3">
-							<form class="form"  (ngSubmit)="onSubmit(reservation)" #f="ngForm">
+							<form class="form" (ngSubmit)="onSubmit(reservation)" #f="ngForm">
 								<div class="form-body">
 									<h4 class="form-section">
 										<i class="ft-user"></i>Informations Personnel
@@ -19,30 +19,33 @@
 									<div class="row">
 										<div class="col-md-6">
 											<div class="form-group">
-												<label for="projectinput1">Nom</label> <input type="text" [(ngModel)]="reservation.firstName" 
-													id="projectinput1" class="form-control" name="fname" required>
+												<label for="projectinput1">Nom</label> <input type="text"
+													[(ngModel)]="reservation.firstName" id="projectinput1"
+													class="form-control" name="fname" required>
 											</div>
 										</div>
 										<div class="col-md-6">
 											<div class="form-group">
 												<label for="projectinput2">Pr&#233;nom</label> <input
-													type="text" id="projectinput2" class="form-control" [(ngModel)]="reservation.lastName" 
-													name="lname" required>
+													type="text" id="projectinput2" class="form-control"
+													[(ngModel)]="reservation.lastName" name="lname" required>
 											</div>
 										</div>
 									</div>
 									<div class="row">
 										<div class="col-md-6">
 											<div class="form-group">
-												<label for="projectinput3">E-mail</label> <input type="text" [(ngModel)]="reservation.email" 
-													id="projectinput3" class="form-control" name="email" required email>
+												<label for="projectinput3">E-mail</label> <input type="text"
+													[(ngModel)]="reservation.email" id="projectinput3"
+													class="form-control" name="email" required email>
 											</div>
 										</div>
 										<div class="col-md-6">
 											<div class="form-group">
 												<label for="projectinput4">Num&#233;ro de
-													t&#233;l&#233;phone </label> <input type="text" id="projectinput4" [(ngModel)]="reservation.phone" 
-													class="form-control" name="phone" required>
+													t&#233;l&#233;phone </label> <input type="text" id="projectinput4"
+													[(ngModel)]="reservation.phone" class="form-control"
+													name="phone" required>
 											</div>
 										</div>
 									</div>
@@ -50,8 +53,8 @@
 										<div class="col-md-6">
 											<div class="form-group">
 												<label for="projectinput3">Facebook</label> <input
-													type="text" id="projectinput3" class="form-control" [(ngModel)]="reservation.facebook" 
-													name="facebook">
+													type="text" id="projectinput3" class="form-control"
+													[(ngModel)]="reservation.facebook" name="facebook">
 											</div>
 										</div>
 										<div class="col-md-6">
@@ -98,11 +101,11 @@
 											<div class="form-group">
 												<label for="projectinput5">Tranche horaire </label>
 												<div class="input-group-append">
-													<ngb-timepicker [(ngModel)]="reservation.timeFrom" name="dpFrom"
-														[spinners]="spinners" required></ngb-timepicker>
+													<ngb-timepicker [(ngModel)]="reservation.timeFrom"
+														name="dpFrom" [spinners]="spinners" required></ngb-timepicker>
 													<span style="margin-top: 4%;">-</span>
-													<ngb-timepicker [(ngModel)]="reservation.timeTo" name="dpTo"
-														[spinners]="spinners" required></ngb-timepicker>
+													<ngb-timepicker [(ngModel)]="reservation.timeTo"
+														name="dpTo" [spinners]="spinners" required></ngb-timepicker>
 												</div>
 
 											</div>
@@ -117,15 +120,18 @@
 											<div class="form-group">
 												<label for="companyName">Nombre de personne (homme)</label>
 												<div class="input-group">
-													<input type="number" min="0" class="form-control" [(ngModel)]="reservation.qtyMen" name="nbHomme"
+													<input type="number" min="0" class="form-control"
+														[(ngModel)]="reservation.qtyMen" name="nbHomme"
 														aria-label="Amount (to the nearest dollar)" required>
 													<div class="input-group-append">
 														<div class="input-group-btn">
-															<button type="button" class="btn btn-raised btn-warning"(click)="reservation.qtyMen = reservation.qtyMen+1;"
+															<button type="button" class="btn btn-raised btn-warning"
+																(click)="reservation.qtyMen = reservation.qtyMen+1;"
 																aria-label="Copy">
 																<i class="ft-user-plus"></i>
 															</button>
-															<button type="button" class="btn btn-raised btn-info"(click)="reservation.qtyMen = reservation.qtyMen-1;"
+															<button type="button" class="btn btn-raised btn-info"
+																(click)="reservation.qtyMen = reservation.qtyMen-1;"
 																aria-label="Paste">
 																<i class="ft-user-minus"></i>
 															</button>
@@ -139,15 +145,18 @@
 												<label for="projectinput5">Nombre de personne
 													(femme)</label>
 												<div class="input-group">
-													<input type="number" min="0" class="form-control" [(ngModel)]="reservation.qtyWomen" name="nbFemme"
+													<input type="number" min="0" class="form-control"
+														[(ngModel)]="reservation.qtyWomen" name="nbFemme"
 														aria-label="Amount (to the nearest dollar)" required>
 													<div class="input-group-append">
 														<div class="input-group-btn">
-															<button type="button" class="btn btn-raised btn-warning" (click)="reservation.qtyWomen = reservation.qtyWomen +1;"
+															<button type="button" class="btn btn-raised btn-warning"
+																(click)="reservation.qtyWomen = reservation.qtyWomen +1;"
 																aria-label="Copy">
 																<i class="ft-user-plus"></i>
 															</button>
-															<button type="button" class="btn btn-raised btn-info"(click)="reservation.qtyWomen = reservation.qtyWomen -1;"
+															<button type="button" class="btn btn-raised btn-info"
+																(click)="reservation.qtyWomen = reservation.qtyWomen -1;"
 																aria-label="Paste">
 																<i class="ft-user-minus"></i>
 															</button>
@@ -171,6 +180,31 @@
 										class="btn btn-raised btn-raised btn-primary">
 										<i class="fa fa-check-square-o"></i> Save
 									</button>
+									<div class="col-md-12 cancelReservation">
+										<a (click)="open(content)">Anuuler ma r&#233;servation</a>
+									</div>
+									<ng-template #content let-c="close" let-d="dismiss">
+									<div class="modal-header">
+										<h4 class="modal-title">Anuuler ma r&#233;servation</h4>
+										<button type="button" class="close" aria-label="Close"
+											(click)="d('Cross click')">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="modal-body">
+										<div class="form-group">
+											<label for="digits">ID R&#233;servation</label> <input type="text"
+												class="form-control" [(ngModel)]="reservationID" name="digits" #digits="ngModel"
+												digits /> <small
+												class="form-text text-muted danger"
+												*ngIf="digits.errors?.digits">ID invalide</small>
+										</div>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary btn-raised" [disabled]="!reservationID"
+											(click)="c(reservationID)">Close</button>
+									</div>
+									</ng-template>
 								</div>
 							</form>
 						</div>

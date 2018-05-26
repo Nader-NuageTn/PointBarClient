@@ -17,9 +17,9 @@ import { SignupServiceService } from "./register/signup-service.service";
 import { LoginService } from "./login/login.service";
 import { HttpModule } from '@angular/http';
 import { ReservationSettingComponent } from './reservation-setting/reservation-setting.component';
-import { ClientReservationComponent } from './client-reservation/client-reservation.component';
+import { ClientReservationComponent, NgbdModalContent  } from './client-reservation/client-reservation.component';
 import { ClientReservationService } from './client-reservation/client-reservation.service';
-
+import { ReservationSettingService } from './reservation-setting/reservation-setting.service';
 @NgModule({
     imports: [
         CommonModule,
@@ -38,8 +38,10 @@ import { ClientReservationService } from './client-reservation/client-reservatio
         MaintenancePageComponent,
         RegisterPageComponent,
         ClientReservationComponent,
-        ReservationSettingComponent
+        ReservationSettingComponent,
+        NgbdModalContent,
     ],
-    providers: [SignupServiceService, LoginService, ClientReservationService]
+    providers: [SignupServiceService, LoginService, ClientReservationService,ReservationSettingService],
+    entryComponents: [NgbdModalContent]
 })
 export class ContentPagesModule { }

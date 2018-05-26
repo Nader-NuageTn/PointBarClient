@@ -3,10 +3,10 @@ import {Http, Response, Headers} from '@angular/http';
 import 'rxjs/Rx';
 import {Observable} from "rxjs";
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
-import { NewReservationModel } from './NewReservationModel.model';
+
 
 @Injectable()
-export class ClientReservationService {
+export class ReservationSettingService {
 
     constructor(private http: Http, public toastr: ToastsManager) { }
 
@@ -14,9 +14,6 @@ export class ClientReservationService {
         this.toastr.error("Vous devez ajouter tous les champs requises");
     }
 
-    requiredNumberOfPersonError() {
-        this.toastr.error("Vous devez ajouter au moins une personne");
-    }
 
     requiredDateError() {
         this.toastr.error("Vous devez ajouter la date");
@@ -34,12 +31,6 @@ export class ClientReservationService {
         this.toastr.success("Votre demande a \u00e9t\u00e9 envoy\u00e9e avec succ\u00e9s.");
     }
 
-    cancelSuccess() {
-        this.toastr.success("Votre r\u00e9tservation a \u00e9t\u00e9 annul\u00e9e avec succ\u00e9s");
-    }
-    cancelFail() {
-        this.toastr.error("ID Incorrecte");
-    }
     dateClosed() {
         this.toastr.warning("Cette date est d\u00e9j\u00e0 ferm\u00e9e!");
     }
@@ -48,21 +39,8 @@ export class ClientReservationService {
         this.toastr.success("La date a \u00e9t\u00e9 activ\u00e9e avec succ\u00e9s.");
     }
 
-    sendReservationRequest(reservation: NewReservationModel) {
-        const headers = new Headers();
-        headers.append('Content-Type', 'application/json');
-        return this.http.post('/reservationController/sendReservationRequest', reservation, { headers: headers })
-            .map((data: Response) => data.text())
-            .catch(this.handleError);
-    }
 
-    cancelReservation(idReservation) {
-        const headers = new Headers();
-        headers.append('Content-Type', 'application/json');
-        return this.http.post('/reservationController/cancelReservation', idReservation, { headers: headers })
-            .map((data: Response) => data.text())
-            .catch(this.handleError);
-    }
+
 
     closeReservationDate(reservationDate) {
         const headers = new Headers();
@@ -85,7 +63,13 @@ export class ClientReservationService {
             .map((data: Response) => data.json())
             .catch(this.handleError);
     }
-
+    getAllEvents(today) {
+        const headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        return this.http.post('/reservationController/getAllEvents', today, { headers: headers })
+            .map((data: Response) => data.json())
+            .catch(this.handleError);
+    }
     private handleError(error: any) { return Observable.throw(error); }
 
 }

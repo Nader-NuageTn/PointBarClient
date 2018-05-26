@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewChild  } from '@angular/core';
+import { Component, OnInit, ViewChild ,  Input } from '@angular/core';
 import { NgForm, FormControl } from '@angular/forms';
 import { Router, ActivatedRoute } from "@angular/router";
-import { NgbDateStruct, NgbDatepickerI18n, NgbCalendar, NgbTimeStruct} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbActiveModal, NgbDateStruct, NgbDatepickerI18n, NgbCalendar, NgbTimeStruct} from '@ng-bootstrap/ng-bootstrap';
 import { ClientReservationService } from './client-reservation.service';
 import { NewReservationModel } from './NewReservationModel.model';
 
@@ -26,6 +26,29 @@ const after = (one: NgbDateStruct, two: NgbDateStruct) =>
         ? false : one.day > two.day : one.month > two.month : one.year > two.year;
 // Range datepicker Ends
 
+
+@Component({
+    selector: 'ngbd-modal-content',
+    template: `
+    <div class="modal-header">
+      <h4 class="modal-title">D\u00e9sol\u00e9</h4>
+      <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p>Les nombres des places sont complets pendant tout la date {{date}}!</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary btn-raised" (click)="activeModal.close('Close click')">Ok</button>
+    </div>
+  `
+})
+
+export class NgbdModalContent {
+    @Input() name;
+    constructor(public activeModal: NgbActiveModal) { }
+}
 
 @Component({
     selector: 'client-reservation',
@@ -61,8 +84,8 @@ export class ClientReservationComponent implements OnInit {
     validationTimeTo: NgbTimeStruct = { hour: 13, minute: 30, second: 30 };
     spinners = false;
 
-
-
+    closeResult: string;
+    reservationID: number;
     // Using for Meridian
     toggleMeridian() {
         this.meridian = !this.meridian;
@@ -76,33 +99,59 @@ export class ClientReservationComponent implements OnInit {
     }
 
     // Custom Day View Ends  
-    constructor(private clientReservationService: ClientReservationService) { 
+    constructor(private clientReservationService: ClientReservationService,private modalService: NgbModal) { 
     
     
     }
 
     ngOnInit() {
-        this.reservation = new NewReservationModel("", "","", "", "",now, "", "", 0, 0);
+        console.log(now);
+        
+        
+        this.reservation = new NewReservationModel("", "","", "", "",null, "", "", 0, 0);
     } 
     onSubmit() {
-        this.clientReservationService.reservationSuccess();
+       console.log(this.reservation.timeFrom);
         if(this.reservation.firstName == null || this.reservation.lastName == null || this.reservation.email == null || this.reservation.phone == null 
-        || this.reservation.date == null || this.reservation.timeFrom == null || this.reservation.timeTo == null || this.reservation.qtyMen == null || this.reservation.qtyMen == null) {
+        || this.reservation.date == null || this.reservation.timeFrom == null || this.reservation.timeTo == null || this.reservation.qtyMen == null || this.reservation.qtyMen == null
+        || this.reservation.firstName == "" || this.reservation.lastName == "" || this.reservation.email == "" || this.reservation.phone == "" || this.reservation.timeFrom == "" || this.reservation.timeTo == "") {
             this.clientReservationService.requiredFieldError();
         }else if(this.reservation.qtyMen == 0 && this.reservation.qtyMen == 0) {
             this.clientReservationService.requiredNumberOfPersonError();
         }else{
             this.clientReservationService.sendReservationRequest(this.reservation).subscribe(data => {
                 if(data == "success") {
-                    console.log("success");
-                    this.reservation = new NewReservationModel("", "","", "", "",now, "", "", 0, 0);
+                    this.clientReservationService.reservationSuccess();
+                    this.reservation = new NewReservationModel(null, null,null, null, null,null, null, null, 0, 0);
+                }else if(data == "closed") {
+                    const modalRef = this.modalService.open(NgbdModalContent);
+                    modalRef.componentInstance.date = this.reservation.date.month+"-"+this.reservation.date.day+"-"+this.reservation.date.year;
+
                 }else {
-                    console.log("Fail");
+                    this.clientReservationService.reservationFail();
                 }
             });
 
         }
-        
 
     } 
+
+    open(content) {
+        this.modalService.open(content).result.then((result) => {
+
+             this.clientReservationService.cancelReservation(result).subscribe(data => {
+                if(data == "success") {
+                    this.clientReservationService.cancelSuccess();
+                }else if(data == "no exist") {
+                    this.clientReservationService.cancelFail();
+                }else {
+                    this.clientReservationService.reservationFail();
+                }
+            });
+
+        }, (reason) => {});
+
+    }
+
+
 }

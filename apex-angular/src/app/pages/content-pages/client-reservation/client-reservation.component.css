@@ -8,3 +8,9 @@ label {
 form .form-actions {
     text-align: center;
 }
+.cancelReservation{
+	text-align: left;
+    color: #157e73;
+    padding: 0px;
+    text-decoration: underline;
+}

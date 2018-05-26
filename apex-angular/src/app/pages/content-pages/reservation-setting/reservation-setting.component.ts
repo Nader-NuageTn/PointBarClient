@@ -1,14 +1,30 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbDateStruct, NgbDatepickerI18n, NgbCalendar, NgbTimeStruct, NgbPanelChangeEvent } from '@ng-bootstrap/ng-bootstrap';
 import { LocalDataSource } from 'ng2-smart-table';
+import { ReservationSettingService } from './reservation-setting.service';
+
+
 var settings = {
+    noDataMessage: 'No Events',
+    pager: {
+      display: true,
+      perPage: 5,
+    },
   columns: {
-    id: {
+    idevent: {
+      title: 'id',
+      filter: true,
+    },
+    title: {
+      title: 'Title',
+      filter: true,
+    },
+    date: {
       title: 'Date',
       filter: true,
     },
-    name: {
-      title: 'Title',
+    description: {
+      title: 'Description',
       filter: true,
     }
   },
@@ -20,7 +36,7 @@ var settings = {
    addButtonContent: "",
   },
   edit:{
-    editButtonContent: '<i class="ft-edit-2 info font-medium-1 mr-2"></i>'
+    editButtonContent: ''
   },
   delete:{
     deleteButtonContent: '<i class="ft-x danger font-medium-1 mr-2"></i>'
@@ -29,31 +45,25 @@ var settings = {
     confirmSave: true,
     viewButtonContent: '<i class="ft-check-2 info font-medium-1 mr-2"></i>'
   },
-
+  actions: {
+  custom: [
+    { name: 'Edit', title: `<i class="ft-edit-2 info font-medium-1 mr-2"></i>` }
+  ],
+}
 }
 
-
-var data = [
-  {
-    id: '07-05-2018',
-    name: 'Event 4',
-  },
-  {
-    id: '06-25-2018',
-    name: 'Event 3',
-  },
-  {
-    id: '06-10-2018',
-    name: 'Event 2',
-  },
-  {
-    id: '05-29-2018',
-    name: 'Event 1',
-  }
-]
 var settings1 = {
+    
+  noDataMessage: 'No Closed Dates',
+    pager: {
+      display: true,
+      perPage: 5,
+    },
   columns: {
-    Date: {
+    id: {
+      title: 'id',
+      filter: false,
+    },date: {
       title: 'Date',
       filter: true,
     }
@@ -83,14 +93,7 @@ var settings1 = {
 }
 };
 
-var data1 = [
-  {
-    Date: '5-26-2018',
-  },
-  {
-    Date: '5-28-2018',
-  }
-]
+
 const now = new Date();
 const I18N_VALUES = {
     fr: {
@@ -113,10 +116,24 @@ export class ReservationSettingComponent implements OnInit {
    
     source: LocalDataSource;
     settings = settings;
+    closedDates = [];
+    allEvents = [];
+    
     ngOnInit() {
+        var today = { year: now.getFullYear(), month: now.getMonth() + 1, day: now.getDate() };
+        this.reservationSettingService.getAllCloseReservationDate(today).subscribe(data => {
+            this.closedDates= data;
+            this.source1 = new LocalDataSource( this.closedDates);
+        });
+        this.reservationSettingService.getAllEvents(today).subscribe(data => {
+            this.allEvents= data;
+            this.source = new LocalDataSource( this.allEvents);
+        });
         // Customizer JS File
         $.getScript('./assets/js/customizer.js');
     }
+    
+    
     d3: any;
 
     date: { year: number, month: number };
@@ -129,9 +146,13 @@ export class ReservationSettingComponent implements OnInit {
     fromDate: NgbDateStruct;
     toDate: NgbDateStruct;
 
-    constructor() {
-        this.source = new LocalDataSource(data); // create the source
-       this.source1 = new LocalDataSource(data1); // create the source
+    constructor(private reservationSettingService: ReservationSettingService) {
+       this.source = new LocalDataSource(this.allEvents); // create the source
+       this.source1 = new LocalDataSource(this.closedDates); // create the source
+       delete this.settings.columns.idevent;
+        delete this.settings.columns.description;
+       delete this.settings1.columns.id;
+        
     }
     
     // Prevent panel toggle code
@@ -145,19 +166,42 @@ export class ReservationSettingComponent implements OnInit {
     };
     
     colseReservation(closedDate){
-        console.dir(closedDate);
-        var Dday ={Date: closedDate.month+'-'+closedDate.day+'-'+closedDate.year}
-        data1.push(Dday);
-         this.source1 = new LocalDataSource(data1);
+         if(closedDate == null) {
+            this.reservationSettingService.requiredDateError();
+        }else{
+            this.reservationSettingService.closeReservationDate(closedDate).subscribe(data => {
+                if(data == "success") {
+                    this.reservationSettingService.closeDateSuccess();
+                     var Dday ={date: closedDate.month+'-'+closedDate.day+'-'+closedDate.year}
+                     this.closedDates.push(Dday);
+                     this.source1 = new LocalDataSource(this.closedDates);
+                }else if(data == "exist") {
+                    this.reservationSettingService.dateClosed();
+                }else {
+                    this.reservationSettingService.reservationFail();
+                }
+            });
+
+        }
     }
     
     onCustom(event) {
-        console.log(event.data.Date);
-        const index: number = data1.indexOf({Date: event.data.Date});
+        console.log(event.data);
+        console.log( this.closedDates);
+        const index: number =  this.closedDates.indexOf(event.data);
         console.log(index);
         if (index !== -1) {
-            data1.splice(index, 1);
-            this.source1 = new LocalDataSource(data1);
+            this.reservationSettingService.activateReservationDate(event.data.id).subscribe(data => {
+                if(data == "success") {
+                    this.reservationSettingService.dateActivated();
+                    this.closedDates.splice(index, 1);
+                    this.source1 = new LocalDataSource( this.closedDates);
+                }else {
+                    this.reservationSettingService.reservationFail();
+                }
+            });
+            
+            
         }  
         
         

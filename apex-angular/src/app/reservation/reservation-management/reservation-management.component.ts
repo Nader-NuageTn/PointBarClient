@@ -100,7 +100,6 @@ export class ReservationManagementComponent implements OnInit {
     }
     
     //  Edit Tranche horaire
-    //  For confirm action On Save
     onSaveConfirm(event) {
         if(event.newData.trancheHoraire[0] != null && event.newData.trancheHoraire[1] != null && event.newData.trancheHoraire[2] && event.newData.trancheHoraire[3] != null) {
         if (window.confirm('Are you sure you want to save?')) {

@@ -9,12 +9,19 @@ export class ReservationManagementService {
 
   constructor(private http:Http, public toastr: ToastsManager) { }
     
+  typeSuccess() {
+      this.toastr.success("La tranche Horaire est modifi\u00e9te avec succ\u00e9ts.");
+   }
+    
   deleteSuccess() {
-        this.toastr.success("La reservation est supprim\u00e9t avec succ\u00e9ts.");
+        this.toastr.success("La reservation est supprim\u00e9te avec succ\u00e9ts.");
     }
     
   activateSuccess() {
         this.toastr.success("La reservation est confirm\u00e9te avec succ\u00e9ts.");
+    }
+    TrancheHorNotif() {
+        this.toastr.warning('Remplir la tranche horaire est obligatoire!');
     }
     
   //Annuler Reservation
@@ -42,8 +49,14 @@ export class ReservationManagementService {
             .map((data: Response) => data.json())
             .catch(this.handleError);
   }
-  editTrancheHoraire() {
-        
+  editTrancheHoraire(id, trancheHoraire1, trancheHoraire2) {
+        const headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+       const body=JSON.stringify([trancheHoraire1,trancheHoraire2]);
+        return this.http.post('/reservationController/editTrancheHoraire/'+id, body, {headers: headers})
+            .map((data: Response) => data.text())
+            .catch(this.handleError);
+      
   }
     
   private handleError (error: any) {return Observable.throw(error); }

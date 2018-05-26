@@ -12,6 +12,7 @@ import { ConfirmReservationComponent } from './confirm-reservation/confirm-reser
 import { ReservationComponent } from './reservation.component';
 import { ReservationSettingComponent } from './reservation-setting/reservation-setting.component';
 import { ReservationManagementService } from './reservation-management/reservation-management.service';
+import { DoBcomponentComponent } from './do-bcomponent/do-bcomponent.component';
 
 
 
@@ -28,7 +29,9 @@ import { ReservationManagementService } from './reservation-management/reservati
         ReservationManagementComponent,
         ConfirmReservationComponent,
         ReservationComponent,
-        ReservationSettingComponent],
+        ReservationSettingComponent,
+        DoBcomponentComponent],
+    entryComponents: [DoBcomponentComponent],
     providers: [ ReservationManagementService ]
 })
 export class ReservationModule { }

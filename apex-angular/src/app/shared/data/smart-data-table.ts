@@ -1,3 +1,4 @@
+import { DoBcomponentComponent } from "../../reservation/do-bcomponent/do-bcomponent.component";
 // Smart DataTable
 export var settings = {
   columns: {
@@ -257,7 +258,7 @@ export var alertsettings = {
       title: 'Email',
     },
     numeroTelephone: {
-      title: 'Numero du Telephone',
+      title: 'Telephone',
     },
     role: {
       title: 'Role',
@@ -288,7 +289,8 @@ export var reservationsettings = {
     confirmCreate: false,
     addButtonContent: "",
   },
-  edit:{
+  edit: {
+    confirmSave: true,
     editButtonContent: '<i class="ft-edit-2 info font-medium-1 mr-1"></i>'
   },
   actions: {
@@ -305,7 +307,7 @@ export var reservationsettings = {
       editable: false,
     },
     numeroTel: {
-      title: 'Numero du Telephone',
+      title: 'Telephone',
       editable: false,
     },
     facebook: {
@@ -319,7 +321,19 @@ export var reservationsettings = {
     },
     trancheHoraire: {
       title: 'Tranche Horaire',
-    }
+      //type: 'custom',
+      type: 'html',
+        editor: {
+          type: 'custom',
+          component: DoBcomponentComponent,
+        },
+//       renderComponent: DoBcomponentComponent,
+//        onComponentInitFunction(instance) {
+//          instance.save.subscribe(row => {
+//            alert(`${row.name} saved!`)
+//          });
+//        }
+   }
   },
   attr: {
     class: "table table-responsive"

@@ -13,6 +13,9 @@ export class ReservationManagementComponent implements OnInit {
   source: LocalDataSource;
   filterSource: LocalDataSource;
   alertSource: any;
+    
+  trancheHorFrom:any = {};
+  trancheHorTo:any = {};
 
   constructor(private reservationManagementService: ReservationManagementService) { 
         this.source = new LocalDataSource(tableData.data); // create the source
@@ -80,9 +83,8 @@ export class ReservationManagementComponent implements OnInit {
         console.log(this.source);
         
         if (window.confirm('Are you sure you want to Confirm this reservation?')) {
-            let indexReservation = this.alertSource.data.indexOf(event.data);
-        console.log(indexReservation);
-        this.source =new LocalDataSource(this.alertSource.data.splice(indexReservation, 1));
+          const index = event.source.data.indexOf(event.data);
+          event.source.data.splice(index, 1);
         this.reservationManagementService.confirmerReservation(event.data.id).subscribe(data => {
                console.log(data);
                if(data == "success") {
@@ -98,20 +100,27 @@ export class ReservationManagementComponent implements OnInit {
     }
     
     //  Edit Tranche horaire
+    //  For confirm action On Save
     onSaveConfirm(event) {
+        if(event.newData.trancheHoraire[0] != null && event.newData.trancheHoraire[1] != null && event.newData.trancheHoraire[2] && event.newData.trancheHoraire[3] != null) {
         if (window.confirm('Are you sure you want to save?')) {
-            event.newData['name'] += ' + added in code';
-            event.confirm.resolve(event.newData);
+            this.trancheHorFrom['hour']=event.newData.trancheHoraire[0];
+            this.trancheHorFrom['minute']=event.newData.trancheHoraire[1];
+            this.trancheHorTo['hour']=event.newData.trancheHoraire[2];
+            this.trancheHorTo['minute']=event.newData.trancheHoraire[3];
             console.log(event.newData);
-            this.reservationManagementService.editTrancheHoraire(event.newData.trancheHoraire).subscribe(data => {
+            event.newData.trancheHoraire = event.newData.trancheHoraire[0]+":"+event.newData.trancheHoraire[1]+"-"+event.newData.trancheHoraire[2]+":"+event.newData.trancheHoraire[3];
+            this.reservationManagementService.editTrancheHoraire(event.newData.id,this.trancheHorFrom,this.trancheHorTo).subscribe(data => {
                console.log(data); 
                 if(data == "success") {
                     this.reservationManagementService.typeSuccess();
                 }
             });
+            event.confirm.resolve(event.newData);
+            }
         } else {
             event.confirm.reject();
+            this.reservationManagementService.TrancheHorNotif();
         }
     }
-
 }

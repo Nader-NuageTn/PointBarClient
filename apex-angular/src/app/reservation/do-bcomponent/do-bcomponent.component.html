@@ -1,0 +1,7 @@
+<div class="input-group-append">
+	<ngb-timepicker [(ngModel)]="reservation.timeFrom" name="dpFrom"
+		[spinners]="spinners" required (change)="updateValue()"></ngb-timepicker>
+	<span style="margin-top: 4%;">-</span>
+	<ngb-timepicker [(ngModel)]="reservation.timeTo" name="dpTo"
+		[spinners]="spinners" required (change)="updateValue2()"></ngb-timepicker>
+</div>

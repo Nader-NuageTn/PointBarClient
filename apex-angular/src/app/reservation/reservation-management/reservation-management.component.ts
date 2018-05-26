@@ -98,20 +98,20 @@ export class ReservationManagementComponent implements OnInit {
     }
     
     //  Edit Tranche horaire
-    onSaveConfirm(event) {
-        if (window.confirm('Are you sure you want to save?')) {
-            event.newData['name'] += ' + added in code';
-            event.confirm.resolve(event.newData);
-            console.log(event.newData);
-            this.reservationManagementService.editTrancheHoraire(event.newData.trancheHoraire).subscribe(data => {
-               console.log(data); 
-                if(data == "success") {
-                    this.reservationManagementService.typeSuccess();
-                }
-            });
-        } else {
-            event.confirm.reject();
-        }
-    }
+//    onSaveConfirm(event) {
+//        if (window.confirm('Are you sure you want to save?')) {
+//            event.newData['name'] += ' + added in code';
+//            event.confirm.resolve(event.newData);
+//            console.log(event.newData);
+//            this.reservationManagementService.editTrancheHoraire(event.newData.trancheHoraire).subscribe(data => {
+//               console.log(data); 
+//                if(data == "success") {
+//                    this.reservationManagementService.typeSuccess();
+//                }
+//            });
+//        } else {
+//            event.confirm.reject();
+//        }
+//    }
 
 }

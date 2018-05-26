@@ -18,5 +18,9 @@
 	"/usersController": {
 		"target": "http://localhost:8080",
 		"secure": false
+	},
+	"/ReservationManagementController": {
+		"target": "http://localhost:8080",
+		"secure": false
 	}
 }

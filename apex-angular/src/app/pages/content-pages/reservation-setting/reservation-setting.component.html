@@ -71,7 +71,7 @@
 						<div class="card">
 							<div class="card-body">
 								<div class="card-block" style="padding: 0px;">
-									<ng2-smart-table [settings]="settings" [source]="source"></ng2-smart-table>
+									<ng2-smart-table [settings]="settings" [source]="source" ></ng2-smart-table>
 								</div>
 							</div>
 						</div>
@@ -98,7 +98,7 @@
 							<label for="companyName">Date de l'&#233;v&#232;nement</label>
 							<div class="input-group">
 								<input class="form-control" placeholder="yyyy-mm-dd" name="dp"
-									[(ngModel)]="model" ngbDatepicker [dayTemplate]="customDay"
+									 [(ngModel)]="event.date" ngbDatepicker [dayTemplate]="customDay"
 									[minDate]="disabledModel" #d3="ngbDatepicker">
 								<div class="input-group-append">
 									<div class="input-group-text" (click)="d3.toggle()">
@@ -112,7 +112,7 @@
 						<div class="form-group">
 							<label for="companyName">Titre de l'&#233;v&#232;nement</label>
 							<div class="input">
-								<input class="form-control" type="text">
+								<input class="form-control" type="text" name="titre" [(ngModel)]="event.title">
 							</div>
 						</div>
 					</div>
@@ -120,7 +120,7 @@
 						<div class="form-group">
 							<label for="projectinput5">Description de
 								l'&#232;v&#232;nement</label>
-							<textarea rows="3" cols="6" class="form-control" name="fname"></textarea>
+							<textarea rows="3" cols="6" class="form-control" name="fname" [(ngModel)]="event.description"></textarea>
 						</div>
 					</div>
 					<div class="col-12">
@@ -148,7 +148,7 @@
 						class="btn btn-raised btn-raised btn-warning mr-1">
 						<i class="ft-x"></i> Cancel
 					</button>
-					<button type="button" class="btn btn-raised btn-raised btn-primary">
+					<button type="button" class="btn btn-raised btn-raised btn-primary" (click)="createNewEvent();"  [disabled]="!event.date || !event.title">
 						<i class="fa fa-check-square-o"></i> Save
 					</button>
 				</div>

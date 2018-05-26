@@ -21,7 +21,7 @@ export class ReservationManagementService {
   annulerReservation(idRes) {
         const headers = new Headers();
         headers.append('Content-Type', 'application/json');
-        return this.http.post('/reservationController/annulerReservation', idRes, {headers: headers})
+        return this.http.post('/eservationManagementController/cancelReservation', idRes, {headers: headers})
             .map((data: Response) => data.text())
             .catch(this.handleError);
   }
@@ -30,7 +30,7 @@ export class ReservationManagementService {
    confirmerReservation(idRes) {
         const headers = new Headers();
         headers.append('Content-Type', 'application/json');
-        return this.http.post('/ReservationManagementController/confirmReservation', "52", {headers: headers})
+        return this.http.post('/ReservationManagementController/confirmReservation', idRes, {headers: headers})
             .map((data: Response) => data.text())
             .catch(this.handleError);
   }

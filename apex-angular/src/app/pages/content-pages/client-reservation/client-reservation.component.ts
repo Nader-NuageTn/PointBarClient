@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild ,  Input } from '@angular/core';
-import { NgForm, FormControl } from '@angular/forms';
+import { FormGroup, NgForm, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from "@angular/router";
 import { NgbModal, NgbActiveModal, NgbDateStruct, NgbDatepickerI18n, NgbCalendar, NgbTimeStruct} from '@ng-bootstrap/ng-bootstrap';
 import { ClientReservationService } from './client-reservation.service';
@@ -57,7 +57,10 @@ export class NgbdModalContent {
 })
 export class ClientReservationComponent implements OnInit {
 
-
+    @ViewChild('vform') validationForm: FormGroup;
+    regularForm: FormGroup;
+    @ViewChild('f') registerForm: NgForm;
+    
      // Variable declaration
     reservation:NewReservationModel;
     d3: any;
@@ -106,9 +109,15 @@ export class ClientReservationComponent implements OnInit {
 
     ngOnInit() {
         console.log(now);
+        this.reservation = new NewReservationModel("", "","", "", "",this.disabledModel, "", "", 0, 0);
         
-        
-        this.reservation = new NewReservationModel("", "","", "", "",null, "", "", 0, 0);
+          this.regularForm = new FormGroup({
+            'email': new FormControl(null, [Validators.required, Validators.email]),
+            'phone': new FormControl(null, [Validators.required, Validators.minLength(4), Validators.maxLength(24)]),
+            'textArea': new FormControl(null, [Validators.required]),
+            'facebook': new FormControl(null, [Validators.required]),
+            'dp': new FormControl(null, [Validators.pattern("[0-9]{0-10}")])
+        }, {updateOn: 'blur'});
     } 
     onSubmit() {
        console.log(this.reservation.timeFrom);
@@ -122,7 +131,7 @@ export class ClientReservationComponent implements OnInit {
             this.clientReservationService.sendReservationRequest(this.reservation).subscribe(data => {
                 if(data == "success") {
                     this.clientReservationService.reservationSuccess();
-                    this.reservation = new NewReservationModel(null, null,null, null, null,null, null, null, 0, 0);
+                    this.reservation = new NewReservationModel("", "","", "", "",this.disabledModel, "", "", 0, 0);
                 }else if(data == "closed") {
                     const modalRef = this.modalService.open(NgbdModalContent);
                     modalRef.componentInstance.date = this.reservation.date.month+"-"+this.reservation.date.day+"-"+this.reservation.date.year;

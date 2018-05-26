@@ -1,0 +1,49 @@
+<!--Under Maintenance Starts-->
+<section id="maintenance">
+    <div class="container-fluid gradient-ibiza-sunset">
+        <div class="row full-height-vh">
+            <div class="col-12 d-flex align-items-center justify-content-center">
+                <div class="card border-grey border-lighten-3 px-1 py-1 box-shadow-3">
+                    <div class="card-block">
+                        <span class="card-title text-center">
+                        <img alt="avtar" class="img-fluid mx-auto d-block pt-2 mb-1" src="assets/img/logos/logo-color-big.png" width="100">
+                    </span>
+                    </div>
+                    <div class="card-block text-center" *ngIf="reservationCorrect == true">
+                        <h3>{{reservationDetails.clientsEntity.firstName}} {{reservationDetails.clientsEntity.lastName}}</h3>
+                        <p>Date: {{reservationDetails.date}}
+                        <br>Tranche Horaire: {{reservationDetails.timeFrom}}-{{reservationDetails.timeTo}} 
+                        <br>Nombre de personnes (Homme): {{reservationDetails.qtyMen}}
+                        <br>Nombre de personnes (Famme): {{reservationDetails.qtyWomen}}</p>
+                        
+                        
+                    </div>
+                    <div class="card-block text-center" *ngIf="reservationInvalide == true">
+                        <h3>R&#233;servation Invalide</h3>
+              
+                    </div>
+                    <div class="card-block text-center" *ngIf="reservationAnnulerByClient == true">
+                       <h3>Cette r&#233;servation a &#233;t&#233; anuul&#233; par le Client</h3>
+              
+                    </div>
+                    <div class="card-block text-center" *ngIf="reservationAnnulerByAdmin == true">
+                       <h3>Cette r&#233;servation a été anuulé par le manager</h3>
+              
+                    </div>
+                    <div class="card-block text-center" *ngIf="reservationAnnulerByAdmin == true">
+                       <h3>R&#233;servation en Attente</h3>
+              
+                    </div>
+                    <hr>
+                    <p class="card-text text-center pt-2 pb-2" *ngIf="reservationCorrect == true">
+                    	<button type="button" class="btn btn-raised btn-raised btn-warning mr-1">
+										Confirm
+									</button>
+          
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--Under Maintenance Starts-->

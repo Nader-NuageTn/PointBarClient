@@ -9,7 +9,7 @@ import { LoginPageComponent } from "./login/login-page.component";
 import { MaintenancePageComponent } from "./maintenance/maintenance-page.component";
 import { RegisterPageComponent } from "./register/register-page.component";
 import { ClientReservationComponent } from "./client-reservation/client-reservation.component";
-
+import { ConfirmReservationComponent } from "./confirm-reservation/confirm-reservation.component";
 
 const routes: Routes = [
     {
@@ -69,6 +69,13 @@ const routes: Routes = [
                 component: ClientReservationComponent,
                 data: {
                     title: 'Reservation'
+                }
+
+            }, {
+                path: 'confirmation',
+                component: ConfirmReservationComponent,
+                data: {
+                    title: 'confirmation'
                 }
 
             }

@@ -13,6 +13,7 @@ import { ReservationComponent } from './reservation.component';
 import { ReservationSettingComponent } from './reservation-setting/reservation-setting.component';
 import { ReservationManagementService } from './reservation-management/reservation-management.service';
 import { ReservationSettingService } from './reservation-setting/reservation-setting.service';
+import { DoBcomponentComponent } from './do-bcomponent/do-bcomponent.component';
 
 
 @NgModule({
@@ -28,7 +29,11 @@ import { ReservationSettingService } from './reservation-setting/reservation-set
         ReservationManagementComponent,
         ConfirmReservationComponent,
         ReservationComponent,
-        ReservationSettingComponent],
-    providers: [ ReservationManagementService,ReservationSettingService  ]
+        ReservationSettingComponent,
+        DoBcomponentComponent],
+    
+    entryComponents: [DoBcomponentComponent],
+    providers: [ ReservationManagementService,ReservationSettingService ]
+
 })
 export class ReservationModule { }

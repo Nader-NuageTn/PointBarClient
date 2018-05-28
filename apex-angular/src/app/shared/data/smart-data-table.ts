@@ -298,6 +298,11 @@ export var reservationsettings = {
     { name: 'Confirm', title: `<i class="ft-check success font-medium-1 mr-1"></i>` }
   ]
 },
+   noDataMessage: 'Pas de Reservation En Attente',
+    pager: {
+      display: true,
+      perPage: 10,
+    },
   columns: {
     id: {
       title: 'ID',
@@ -306,17 +311,26 @@ export var reservationsettings = {
       title: 'Nom',
       editable: false,
     },
+    status: {
+      title: 'Statut',
+      type: 'html',
+      editable: false,
+    },
     phone: {
       title: 'Telephone',
       editable: false,
     },
     facebook: {
-      title: 'Facebook',
+      title: 'Profile Facebook',
       type: 'html',
       editable: false,
     },
     qtyPersonne: {
       title: 'Nombre de Personnes',
+      editable: false,
+    },
+    date: {
+      title: 'Date',
       editable: false,
     },
     timeFrom: {

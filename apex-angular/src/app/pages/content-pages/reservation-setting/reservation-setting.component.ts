@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgbDateStruct, NgbDatepickerI18n, NgbCalendar, NgbTimeStruct, NgbPanelChangeEvent } from '@ng-bootstrap/ng-bootstrap';
 import { LocalDataSource } from 'ng2-smart-table';
 import { ReservationSettingService } from './reservation-setting.service';
+import { NewEvenModel } from './newEventModel.model';
 
 
 var settings = {
@@ -118,9 +119,12 @@ export class ReservationSettingComponent implements OnInit {
     settings = settings;
     closedDates = [];
     allEvents = [];
-    
+    event:NewEvenModel;
     ngOnInit() {
+    
         var today = { year: now.getFullYear(), month: now.getMonth() + 1, day: now.getDate() };
+        this.event = new NewEvenModel("",this.disabledModel, "");
+        
         this.reservationSettingService.getAllCloseReservationDate(today).subscribe(data => {
             this.closedDates= data;
             this.source1 = new LocalDataSource( this.closedDates);
@@ -204,6 +208,18 @@ export class ReservationSettingComponent implements OnInit {
             
         }  
         
-        
+    }
+
+    createNewEvent() {
+        this.reservationSettingService.createNewEvent(this.event).subscribe(data => {
+                if(data != null) {
+                     this.allEvents.push(data);
+                     this.source = new LocalDataSource(this.allEvents);
+                     this.newEvent = false;
+               
+                }else {
+                    this.reservationSettingService.reservationFail();
+                }
+            });      
     }
 }

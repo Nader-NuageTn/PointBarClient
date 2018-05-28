@@ -21,7 +21,8 @@ import { ReservationSettingComponent } from './reservation-setting/reservation-s
 import { ClientReservationComponent, NgbdModalContent  } from './client-reservation/client-reservation.component';
 import { ClientReservationService } from './client-reservation/client-reservation.service';
 import { ReservationSettingService } from './reservation-setting/reservation-setting.service';
-
+import { ConfirmReservationComponent } from './confirm-reservation/confirm-reservation.component';
+import { ConfirmReservationService } from './confirm-reservation/confirm-reservation.service';
 @NgModule({
     imports: [
         CommonModule,
@@ -43,8 +44,9 @@ import { ReservationSettingService } from './reservation-setting/reservation-set
         ClientReservationComponent,
         ReservationSettingComponent,
         NgbdModalContent,
+        ConfirmReservationComponent,
     ],
-    providers: [SignupServiceService, LoginService, ClientReservationService,ReservationSettingService],
+    providers: [SignupServiceService, LoginService, ClientReservationService,ReservationSettingService,ConfirmReservationService],
     entryComponents: [NgbdModalContent]
 })
 export class ContentPagesModule { }

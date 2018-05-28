@@ -34,30 +34,7 @@
                             <p class="d-none">fullscreen</p>
                         </a>
                     </li>
-                    <li class="nav-item" ngbDropdown placement="bottom-right">
-                        <a class="nav-link position-relative" id="dropdownLang" ngbDropdownToggle>
-                            <i class="ft-flag font-medium-3 white"></i>
-                            <p class="d-none">Language</p>
-                        </a>
-                        <div ngbDropdownMenu aria-labelledby="dropdownLang" class="dropdownLang">                           
-                            <a class="dropdown-item py-1 lang" href="javascript:;" (click)="ChangeLanguage('en')">
-                                <img src="./assets/img/flags/us.png" alt="English" class="langimg">
-                                <span>English</span>
-                            </a>
-                            <a class="dropdown-item py-1 lang" href="javascript:;" (click)="ChangeLanguage('es')">
-                                <img src="./assets/img/flags/es.png" alt="Spanish" class="langimg">
-                                <span>Spanish</span>
-                            </a> 
-                            <a class="dropdown-item py-1 lang" href="javascript:;" (click)="ChangeLanguage('pt')">
-                                <img src="./assets/img/flags/br.png" alt="Portuguese" class="langimg">
-                                <span>Portuguese</span>
-                            </a> 
-                            <a class="dropdown-item py-1 lang" href="javascript:;" (click)="ChangeLanguage('de')">
-                                <img src="./assets/img/flags/de.png" alt="German" class="langimg">
-                                <span>German</span>
-                            </a>                            
-                        </div>
-                    </li>
+
                     <li class="nav-item" ngbDropdown placement="bottom-right">
                         <a class="nav-link position-relative" id="dropdownBasic2" ngbDropdownToggle>
                             <i class="ft-bell font-medium-3 white"></i>
@@ -104,31 +81,31 @@
                             <p class="d-none">User Settings</p>
                         </a>
                         <div ngbDropdownMenu aria-labelledby="dropdownBasic3">                           
-                            <a class="dropdown-item py-1" routerLink="/pages/profile">
-                                <i class="ft-edit mr-2"></i>
-                                <span>My Profile</span>
-                            </a>
-                            <a class="dropdown-item py-1" routerLink="/inbox">
-                                <i class="ft-mail mr-2"></i>
-                                <span>My Inbox</span>
-                            </a>
-                            <a class="dropdown-item py-1" href="javascript:;">
-                                <i class="ft-settings mr-2"></i>
-                                <span>Settings</span>
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="javascript:;">
+<!--                             <a class="dropdown-item py-1" routerLink="/pages/profile"> -->
+<!--                                 <i class="ft-edit mr-2"></i> -->
+<!--                                 <span>My Profile</span> -->
+<!--                             </a> -->
+<!--                             <a class="dropdown-item py-1" routerLink="/inbox"> -->
+<!--                                 <i class="ft-mail mr-2"></i> -->
+<!--                                 <span>My Inbox</span> -->
+<!--                             </a> -->
+<!--                             <a class="dropdown-item py-1" href="javascript:;"> -->
+<!--                                 <i class="ft-settings mr-2"></i> -->
+<!--                                 <span>Settings</span> -->
+<!--                             </a> -->
+<!--                             <div class="dropdown-divider"></div> -->
+                            <a class="dropdown-item" href="/pages/login">
                                 <i class="ft-power mr-2"></i>
                                 <span>Logout</span>
                             </a>
                         </div>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link position-relative notification-sidebar-toggle">
-                            <i class="ft-align-left font-medium-3 white"></i>
-                            <p class="d-none">Notifications Sidebar</p>
-                        </a>
-                    </li>
+<!--                     <li class="nav-item"> -->
+<!--                         <a class="nav-link position-relative notification-sidebar-toggle"> -->
+<!--                             <i class="ft-align-left font-medium-3 white"></i> -->
+<!--                             <p class="d-none">Notifications Sidebar</p> -->
+<!--                         </a> -->
+<!--                     </li> -->
                 </ul>
             </div>
         </div>

@@ -23,7 +23,7 @@ export class ReservationManagementComponent implements OnInit {
         this.filterSource = new LocalDataSource(tableData.filerdata); // create the source
         //this.alertSource = new LocalDataSource(tableData.data); // create the source
       let today = { year: now.getFullYear(), month: now.getMonth() + 1, day: now.getDate() };
-        this.reservationManagementService.getAllReservation(today).subscribe(data => {
+        this.reservationManagementService.getAllWaitingReservation(today).subscribe(data => {
              console.log(data);
             for(let x of data) {
                 x.timeFrom= x.timeFrom.hour+":"+x.timeFrom.minute+"-"+x.timeTo.hour+":"+x.timeTo.minute;
@@ -34,6 +34,7 @@ export class ReservationManagementComponent implements OnInit {
 
   ngOnInit() {
       delete this.reservationsettings.columns.id;
+      //delete this.reservationsettings.columns.status;
   }
     settings = tableData.settings;
     filtersettings = tableData.filtersettings;
@@ -72,7 +73,7 @@ export class ReservationManagementComponent implements OnInit {
         console.log(event);
         if (window.confirm('Are you sure you want to Cancel this reservation?')) {
             event.confirm.resolve();
-            this.reservationManagementService.annulerReservation(event.data.id).subscribe(data => {
+            this.reservationManagementService.annulerReservation(event.data.id+"").subscribe(data => {
                console.log(data); 
                 if(data == "success") {
                     this.reservationManagementService.deleteSuccess();
@@ -130,5 +131,19 @@ export class ReservationManagementComponent implements OnInit {
             event.confirm.reject();
             this.reservationManagementService.TrancheHorNotif();
         }
+    }
+    
+    
+    getAllReservations(){
+        let today = { year: now.getFullYear(), month: now.getMonth() + 1, day: now.getDate() };
+        this.reservationManagementService.getAllReservation(today).subscribe(data => {
+             console.log(data);
+            for(let x of data) {
+                x.timeFrom= x.timeFrom.hour+":"+x.timeFrom.minute+"-"+x.timeTo.hour+":"+x.timeTo.minute;
+                }
+             this.reservationsettings = tableData.reservationsettings;
+             this.alertSource =data;
+             
+        });  
     }
 }

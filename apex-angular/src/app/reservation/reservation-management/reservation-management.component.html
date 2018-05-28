@@ -1,19 +1,26 @@
 <!--Confirm Action Starts-->
 <section id="action">
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="card">
-                <div class="card-header">
-                    <h4 class="card-title">Reservations</h4>
-                </div>
-                <div class="card-body">
-                    <div class="card-block">
-                        <ng2-smart-table [settings]="reservationsettings" [source]="alertSource" (deleteConfirm)="onDeleteConfirm($event)" (editConfirm)="onSaveConfirm($event)"
-                            (custom)="onCustom($event)"></ng2-smart-table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="card">
+				<div class="card-header">
+					<h4 class="card-title">R&#233;servations</h4>
+				</div>
+				<div class="card-body">
+
+					<div class="card-block">
+						<div>
+							<a (click)="getAllReservations()"
+								class="btn btn-raised gradient-purple-bliss white big-shadow">Afficher
+								Toutes les R&#233;servations</a>
+						</div>
+						<ng2-smart-table [settings]="reservationsettings"
+							[source]="alertSource" (deleteConfirm)="onDeleteConfirm($event)"
+							(editConfirm)="onSaveConfirm($event)" (custom)="onCustom($event)"></ng2-smart-table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </section>
 <!--Confirm Action Ends-->

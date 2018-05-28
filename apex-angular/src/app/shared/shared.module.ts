@@ -13,6 +13,7 @@ import { SidebarComponent } from "./sidebar/sidebar.component";
 import { CustomizerComponent } from './customizer/customizer.component';
 import { NotificationSidebarComponent } from './notification-sidebar/notification-sidebar.component';
 import { ToggleFullscreenDirective } from "./directives/toggle-fullscreen.directive";
+import { HttpModule } from '@angular/http';
 
 
 
@@ -34,7 +35,8 @@ import { ToggleFullscreenDirective } from "./directives/toggle-fullscreen.direct
         RouterModule,
         CommonModule,
         NgbModule,
-        TranslateModule
+        TranslateModule,
+        HttpModule
         
     ],
     declarations: [

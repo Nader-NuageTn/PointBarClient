@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router, ActivatedRoute } from "@angular/router";
 import { LoginService } from "./login.service";
+import { AuthService } from '../../../shared/auth/auth.service';
 
 @Component({
     selector: 'app-login-page',
@@ -15,34 +16,12 @@ export class LoginPageComponent {
     
     login:any = {};
     constructor(private router: Router,
-        private route: ActivatedRoute, private loginService: LoginService) { }
+        private route: ActivatedRoute, private loginService: LoginService, private authService: AuthService) { }
 
     // On submit button click    
     onSubmit(login) {
-        console.log(login);
-        if (login != null && ((login.username == null && login.password == null) || (login.username == "" && login.password == ""))) {
-            this.loginService.typeError();
-        }else if(login.username == null || login.password == null || login.username == "" || login.password == "") {
-        this.loginService.typeErrorSecond();
-        }else {
-            this.loginService.loginUser(login).subscribe(data => {
-                if(data == "success") {
-                    console.log("success");
-                    this.router.navigate(['reservations/ReservationManagement']);
-                }else if(data == "wait") {
-                    this.loginService.typeErrorNotActive();
-                }
-                else if(data == "deleted") {
-                this.loginService.typeErrordeleted();
-                }
-                else {
-                console.log("Fail");
-                this.loginService.typeErrorThird();
-                }
-            });
-            this.loginForm.reset();
-        }
         
+        this.authService.signinUser(login);
     }
     // On Forgot password link click
     onForgotPassword() {

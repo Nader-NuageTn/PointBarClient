@@ -14,7 +14,7 @@ export class ReservationManagementService {
    }
     
   deleteSuccess() {
-        this.toastr.success("La reservation est supprim\u00e9te avec succ\u00e9ts.");
+        this.toastr.success("La reservation est annul\u00e9te avec succ\u00e9ts.");
     }
     
   activateSuccess() {
@@ -28,7 +28,7 @@ export class ReservationManagementService {
   annulerReservation(idRes) {
         const headers = new Headers();
         headers.append('Content-Type', 'application/json');
-        return this.http.post('/eservationManagementController/cancelReservation', idRes, {headers: headers})
+        return this.http.post('/ReservationManagementController/cancelReservation', idRes, {headers: headers})
 
             .map((data: Response) => data.text())
             .catch(this.handleError);
@@ -40,6 +40,14 @@ export class ReservationManagementService {
         headers.append('Content-Type', 'application/json');
         return this.http.post('/ReservationManagementController/confirmReservation', idRes, {headers: headers})
             .map((data: Response) => data.text())
+            .catch(this.handleError);
+  }
+  //Get Waiting Reservation List
+  getAllWaitingReservation(today) {
+        const headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        return this.http.post('/ReservationManagementController/getAllWaitingReservation', today, {headers: headers})
+            .map((data: Response) => data.json())
             .catch(this.handleError);
   }
   //Get Reservation List

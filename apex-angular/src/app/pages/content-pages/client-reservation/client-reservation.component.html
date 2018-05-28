@@ -54,7 +54,7 @@
 											<div class="form-group">
 												<label for="projectinput3">Facebook url</label> <input
 													type="text" id="projectinput3" class="form-control"
-													[(ngModel)]="reservation.facebook" name="facebook">
+													[(ngModel)]="reservation.facebook" name="facebook" url>
 											</div>
 										</div>
 										<div class="col-md-6">
@@ -74,7 +74,7 @@
 									</div>
 
 									<h4 class="form-section">
-										<i class="ft-file-text"></i>Informations requises
+										<i class="ft-file-text"></i>Info R&#233;servation
 									</h4>
 
 
@@ -118,7 +118,7 @@
 										<div class="col-md-6">
 
 											<div class="form-group">
-												<label for="companyName">Nombre de personne (homme)</label>
+												<label for="companyName" style="color: #009DA0;">Nombre de personne (homme)</label>
 												<div class="input-group">
 													<input type="number" min="0" class="form-control"
 														[(ngModel)]="reservation.qtyMen" name="nbHomme"
@@ -142,7 +142,7 @@
 										</div>
 										<div class="col-md-6">
 											<div class="form-group">
-												<label for="projectinput5">Nombre de personne
+												<label for="projectinput5" style="color: #FF586B;">Nombre de personne
 													(femme)</label>
 												<div class="input-group">
 													<input type="number" min="0" class="form-control"

@@ -14,6 +14,7 @@ export class DoBcomponentComponent  extends DefaultEditor implements OnInit {
   tab2:any=[];
   timeFrom = {};
   timeTo = {};
+  spinners = false;
   constructor() {
       super();
   }

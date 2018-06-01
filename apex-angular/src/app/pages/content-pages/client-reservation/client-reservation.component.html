@@ -11,7 +11,7 @@
 					</div>
 					<div class="card-body">
 						<div class="px-3">
-							<form class="form" (ngSubmit)="onSubmit(reservation)" #f="ngForm">
+							<form class="form" (ngSubmit)="onSubmit()" #f="ngForm">
 								<div class="form-body">
 									<h4 class="form-section">
 										<i class="ft-user"></i>Informations Personnel
@@ -126,12 +126,12 @@
 													<div class="input-group-append">
 														<div class="input-group-btn">
 															<button type="button" class="btn btn-raised btn-warning"
-																(click)="reservation.qtyMen = reservation.qtyMen+1;"
+																(click)="reservationQtyMenPlus()"
 																aria-label="Copy">
 																<i class="ft-user-plus"></i>
 															</button>
 															<button type="button" class="btn btn-raised btn-info"
-																(click)="reservation.qtyMen = reservation.qtyMen-1;"
+																(click)="reservationQtyMenMinus()"
 																aria-label="Paste">
 																<i class="ft-user-minus"></i>
 															</button>
@@ -151,12 +151,12 @@
 													<div class="input-group-append">
 														<div class="input-group-btn">
 															<button type="button" class="btn btn-raised btn-warning"
-																(click)="reservation.qtyWomen = reservation.qtyWomen +1;"
+																(click)="reservationQtyWomenPlus()"
 																aria-label="Copy">
 																<i class="ft-user-plus"></i>
 															</button>
 															<button type="button" class="btn btn-raised btn-info"
-																(click)="reservation.qtyWomen = reservation.qtyWomen -1;"
+																(click)="reservationQtyWomenMinus()"
 																aria-label="Paste">
 																<i class="ft-user-minus"></i>
 															</button>
@@ -181,7 +181,7 @@
 										<i class="fa fa-check-square-o"></i> Save
 									</button>
 									<div class="col-md-12 cancelReservation">
-										<a (click)="open(content)">Anuuler ma r&#233;servation</a>
+										<a (click)="open(content)">Annuler ma r&#233;servation</a>
 									</div>
 									<ng-template #content let-c="close" let-d="dismiss">
 									<div class="modal-header">

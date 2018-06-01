@@ -47,6 +47,7 @@ const after = (one: NgbDateStruct, two: NgbDateStruct) =>
 
 export class NgbdModalContent {
     @Input() name;
+    date;
     constructor(public activeModal: NgbActiveModal) { }
 }
 
@@ -73,7 +74,7 @@ export class ClientReservationComponent implements OnInit {
     disabled = true;
     customModel: NgbDateStruct;
     configModal;    // Global configuration of datepickers
-
+    customDay;
     // Range datepicker start
     hoveredDate: NgbDateStruct;
     
@@ -161,6 +162,17 @@ export class ClientReservationComponent implements OnInit {
         }, (reason) => {});
 
     }
-
+    reservationQtyMenPlus(){
+        this.reservation.qtyMen = this.reservation.qtyMen +1;
+    }
+    reservationQtyMenMinus(){
+        this.reservation.qtyMen = this.reservation.qtyMen -1;
+    }
+     reservationQtyWomenPlus(){
+        this.reservation.qtyWomen = this.reservation.qtyWomen +1;
+    }
+    reservationQtyWomenMinus(){
+        this.reservation.qtyWomen = this.reservation.qtyWomen -1;
+    }
 
 }

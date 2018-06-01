@@ -10,10 +10,10 @@ export class NewReservationModel{
     public  date:ReservationDateModel;
     public  timeFrom:String;
     public  timeTo:String;
-    public  qtyMen:Number;
-    public  qtyWomen:Number;
+    public  qtyMen:number;
+    public  qtyWomen:number;
     
-    constructor(firstName:String, lastName:String, email:String, phone:String,facebook:String, date:ReservationDateModel, timeFrom:String, timeTo:String, qtyMen:Number, qtyWomen:Number) {
+    constructor(firstName:String, lastName:String, email:String, phone:String,facebook:String, date:ReservationDateModel, timeFrom:String, timeTo:String, qtyMen:number, qtyWomen:number) {
    
         this.firstName = firstName;
         this.lastName = lastName;

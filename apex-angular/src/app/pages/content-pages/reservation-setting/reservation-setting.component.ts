@@ -222,4 +222,8 @@ export class ReservationSettingComponent implements OnInit {
                 }
             });      
     }
+    
+    onEdit() {
+        this.newEvent = true;
+    }
 }

@@ -298,7 +298,7 @@ export var reservationsettings = {
     { name: 'Confirm', title: `<i class="ft-check success font-medium-1 mr-1"></i>` }
   ]
 },
-   noDataMessage: 'Pas de Reservation En Attente',
+   noDataMessage: 'Pas de R\u00e9servation en Attente',
     pager: {
       display: true,
       perPage: 10,
@@ -308,7 +308,7 @@ export var reservationsettings = {
       title: 'ID',
     },
     fullName: {
-      title: 'Nom',
+      title: 'Client',
       editable: false,
     },
     status: {
@@ -321,12 +321,16 @@ export var reservationsettings = {
       editable: false,
     },
     facebook: {
-      title: 'Profile Facebook',
+      title: 'Facebook',
       type: 'html',
       editable: false,
     },
     qtyPersonne: {
-      title: 'Nombre de Personnes',
+      title: 'Client Reserv',
+      editable: false,
+    },
+    qtyPersonneArrive: {
+      title: 'Client Arriv\u00e9',
       editable: false,
     },
     date: {

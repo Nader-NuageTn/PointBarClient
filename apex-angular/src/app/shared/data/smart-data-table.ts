@@ -274,6 +274,16 @@ export var alertsettings = {
         },
       }
     },
+    isConfirmed: {
+        title: 'Active',
+        valuePrepareFunction: (value) => { 
+                 if(value == true) {
+                 return '<i class="ft-toggle-left success font-medium-1 mr-1"></i>'  
+                } else {
+                return '<i class="ft-toggle-right success font-medium-1 mr-1"></i>'  
+             }
+           }
+    }
   },
   attr: {
     class: "table table-responsive"

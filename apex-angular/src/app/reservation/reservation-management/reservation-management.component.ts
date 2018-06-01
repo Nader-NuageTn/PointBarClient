@@ -33,7 +33,6 @@ export class ReservationManagementComponent implements OnInit {
       }
 
   ngOnInit() {
-      delete this.reservationsettings.columns.id;
       //delete this.reservationsettings.columns.status;
   }
     settings = tableData.settings;

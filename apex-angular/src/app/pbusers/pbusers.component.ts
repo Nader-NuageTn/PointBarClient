@@ -102,7 +102,7 @@ export class PbusersComponent implements OnInit {
 
     
     onCustom(event) {
-        console.log(event.data.id);
+        console.log(event);
         this.pbusersService.activateUser(event.data.id).subscribe(data => {
                console.log(data);
                if(data == "success") {

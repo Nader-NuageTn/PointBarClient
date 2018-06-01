@@ -37,18 +37,34 @@ export class DoBcomponentComponent  extends DefaultEditor implements OnInit {
   }
     
   updateValue(){
+      console.log(this.reservation.timeFrom);
       if(this.reservation.timeFrom != null) {
       this.tab[0]=this.reservation.timeFrom.hour;
       this.tab[1]=this.reservation.timeFrom.minute;
+          this.tab2[0]=this.timeTo['hour'];
+          this.tab2[1]=this.timeTo['minute'];
+          this.cell.newValue=this.tab.concat(this.tab2);
       }
+      console.log(this.tab);
   }
   updateValue2() {
       if(this.reservation.timeTo != null) {
-          this.tab2[0]=this.reservation.timeTo.hour;
-          this.tab2[1]=this.reservation.timeTo.minute;
+          if(this.tab != null) {
+              this.tab2[0]=this.reservation.timeTo.hour;
+              this.tab2[1]=this.reservation.timeTo.minute;
+              console.log(this.reservation.timeTo);
+              this.cell.newValue=this.tab.concat(this.tab2);
+          } else {
+              this.tab[0]=this.timeFrom['hour'];
+              this.tab[1]=this.timeFrom['minute'];
+              this.tab2[0]=this.reservation.timeTo.hour;
+              this.tab2[1]=this.reservation.timeTo.minute;
+              this.cell.newValue=this.tab.concat(this.tab2);
           }
-      console.log(this.reservation.timeTo);
-      this.cell.newValue=this.tab.concat(this.tab2);
+          
+          
+          }
+      
  }
 
 }

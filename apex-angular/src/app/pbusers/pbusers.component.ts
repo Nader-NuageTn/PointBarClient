@@ -103,12 +103,17 @@ export class PbusersComponent implements OnInit {
     
     onCustom(event) {
         console.log(event);
-        this.pbusersService.activateUser(event.data.id).subscribe(data => {
+        if(event.data.isConfirmed == false) {
+            this.pbusersService.activateUser(event.data.id).subscribe(data => {
                console.log(data);
-               if(data == "success") {
+               if(data == "succes") {
                     this.pbusersService.activateSuccess();
                 }
             });
+            }else {
+            this.pbusersService.activateWarning();
+            }
+        
         
     }
 

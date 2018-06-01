@@ -14,6 +14,7 @@ import { CustomizerComponent } from './customizer/customizer.component';
 import { NotificationSidebarComponent } from './notification-sidebar/notification-sidebar.component';
 import { ToggleFullscreenDirective } from "./directives/toggle-fullscreen.directive";
 import { HttpModule } from '@angular/http';
+import { CookieService } from 'ngx-cookie-service';
 
 
 
@@ -48,6 +49,9 @@ import { HttpModule } from '@angular/http';
         CustomizerComponent,
         NotificationSidebarComponent,
         ToggleFullscreenDirective
-    ]
+    ],
+    providers: [
+    CookieService
+  ]
 })
 export class SharedModule { }

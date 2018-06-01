@@ -107,7 +107,9 @@ export class ReservationManagementComponent implements OnInit {
             event.confirm.reject();
         }
     }
-    
+    isArray(a) {
+    return (!!a) && (a.constructor === Array);
+};
     //  Edit Tranche horaire
     onSaveConfirm(event) {
         if(event.newData.timeFrom[0] != null && event.newData.timeFrom[1] != null && event.newData.timeFrom[2] && event.newData.timeFrom[3] != null) {
@@ -116,8 +118,14 @@ export class ReservationManagementComponent implements OnInit {
             this.trancheHorFrom['minute']=event.newData.timeFrom[1];
             this.trancheHorTo['hour']=event.newData.timeFrom[2];
             this.trancheHorTo['minute']=event.newData.timeFrom[3];
+            console.log(event.newData.timeFrom);
             console.log(event.newData);
-            event.newData.timeFrom = event.newData.timeFrom[0]+":"+event.newData.timeFrom[1]+"-"+event.newData.timeFrom[2]+":"+event.newData.timeFrom[3];
+            if(this.isArray(event.newData.timeFrom)) {
+                event.newData.timeFrom = event.newData.timeFrom[0]+":"+event.newData.timeFrom[1]+"-"+event.newData.timeFrom[2]+":"+event.newData.timeFrom[3];
+            }else {
+                event.newData.timeFrom = event.newData.timeFrom.split("-")[0].split(":")[0]+":"+event.newData.timeFrom.split("-")[0].split(":")[1]+"-"+event.newData.timeFrom.split("-")[1].split(":")[0]+":"+event.newData.timeFrom.split("-")[1].split(":")[1];
+            }
+            
             this.reservationManagementService.editTrancheHoraire(event.newData.id,this.trancheHorFrom,this.trancheHorTo).subscribe(data => {
                console.log(data); 
                 if(data == "success") {

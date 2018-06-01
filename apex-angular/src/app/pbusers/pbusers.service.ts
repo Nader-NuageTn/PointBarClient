@@ -11,16 +11,19 @@ export class PbusersService {
     
   // Success Type
     typeSuccess() {
-        this.toastr.success("L'utilisateur est modifi\u00e9t avec succ\u00e9ts.");
+        this.toastr.success("L'utilisateur est modifi\u00e9 avec succ\u00e9ts.");
     }
     
     deleteSuccess() {
-        this.toastr.success("L'utilisateur est supprim\u00e9t avec succ\u00e9ts.");
+        this.toastr.success("L'utilisateur est supprim\u00e9 avec succ\u00e9ts.");
     }
     
     activateSuccess() {
-        this.toastr.success("L'utilisateur est activ\u00e9t avec succ\u00e9ts.");
+        this.toastr.success("L'utilisateur est activ\u00e9 avec succ\u00e9ts.");
     }
+    activateWarning() {
+        this.toastr.warning("L'utilisateur est d\u00e9ja active.");
+     }
     
   editUser(user) {
         const headers = new Headers();

@@ -223,7 +223,7 @@ export var filerdata = [
     passed: 'Yes',
   },
 ];
-
+var isActive =`<i class="ft-toggle-left success font-medium-1 mr-1"></i>`;
 export var alertsettings = {
     
   delete: {
@@ -240,7 +240,7 @@ export var alertsettings = {
   },
   actions: {
   custom: [
-    { name: 'Activate', title: `<i class="ft-toggle-left success font-medium-1 mr-1"></i>` }
+    { name: 'Activate', title: isActive }
   ],
 
 },
@@ -275,12 +275,16 @@ export var alertsettings = {
       }
     },
     isConfirmed: {
-        title: 'Active',
+        title: 'Statut',
+        type:'html',
         valuePrepareFunction: (value) => { 
+        console.log(value);
                  if(value == true) {
-                 return '<i class="ft-toggle-left success font-medium-1 mr-1"></i>'  
+                     console.log('ouiiiii');
+                     return `<span class="badge badge-success">Actif</span>`;
                 } else {
-                return '<i class="ft-toggle-right success font-medium-1 mr-1"></i>'  
+                     console.log('nonnnnn');
+                     return `<span class="badge badge-danger">D&eacute;sactiv&eacute;</span>`;
              }
            }
     }
@@ -316,6 +320,7 @@ export var reservationsettings = {
   columns: {
     id: {
       title: 'ID',
+      editable: false,
     },
     fullName: {
       title: 'Nom',

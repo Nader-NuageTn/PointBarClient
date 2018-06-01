@@ -4,13 +4,14 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import {Http, Response, Headers} from '@angular/http';
 import 'rxjs/Rx';
 import {Observable} from "rxjs";
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable()
 export class AuthService {
   token: string;
     isAdmin: boolean =false;
 
-  constructor(private router: Router, public toastr: ToastsManager, private http:Http) {}
+  constructor(private router: Router, public toastr: ToastsManager, private http:Http, private cookieService: CookieService) {}
     
   // Error Type
     typeError() {
@@ -54,19 +55,26 @@ export class AuthService {
                 if(data == "Administrator" || data == "Gerant" || data == "Securite") {
                     console.log("success");
                     this.token = "true";
+                    this.cookieService.set('isAuthentified', 'true');
                     this.router.navigate(['reservations/ReservationManagement']); 
                     if(data == "Administrator") {
-                        this.isAdmin=true;
+                        this.cookieService.set('isAdmin', 'true');
+                        }
+                    else if(data == "Securite") {
+                        this.cookieService.set('isSecurity', 'true');
                         }
                 }else if(data == "wait") {
                     this.typeErrorNotActive();
+                    this.cookieService.set('isAuthentified', 'false');
                 }
                 else if(data == "deleted") {
                 this.typeErrordeleted();
+                    this.cookieService.set('isAuthentified', 'false');
                 }
                 else {
                 console.log("Fail");
                 this.typeErrorThird();
+                    this.cookieService.set('isAuthentified', 'false');
                 }
             });
             //this.loginForm.reset();
@@ -74,16 +82,33 @@ export class AuthService {
   }
 
   logout() {   
-    this.token = null;
+    this.cookieService.set('isAuthentified', 'false');
+    this.cookieService.set('isAdmin', 'false');
+      this.cookieService.set('isSecurity', 'false');
+      this.router.navigate(['pages/login']);
+      console.log('succcess');
   }
 
   getToken() {    
-    return this.token;
+    return this.cookieService.get('isAuthentified');
   }
+    
+ getIsAdmin() {    
+    return this.cookieService.get('isAdmin');
+  }
+    
+ getIsSecurity() {  
+ if(this.cookieService.get('isSecurity') == 'true') {
+          return true;
+          }else {
+          return false;
+          }  
+  }
+
 
   isAuthenticated() {
     // here you can check if user is authenticated or not through his token 
-      if(this.token == "true") {
+      if(this.cookieService.get('isAuthentified') == 'true') {
           return true;
           }else {
           return false;

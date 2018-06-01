@@ -101,12 +101,14 @@ export class ClientReservationComponent implements OnInit {
         const d = new Date(date.year, date.month - 1, date.day);
         return d.getDay() === 0 || d.getDay() === 6;
     }
-
+    isAuthantified:string;
+    isAdmin:string
     // Custom Day View Ends  
     constructor(private clientReservationService: ClientReservationService,private modalService: NgbModal, private auth: AuthService) { 
-    console.log(this.auth.getToken());
-        console.log(this.auth.isAdmin);
-    
+        console.log(this.auth.getToken());
+        console.log(this.auth.getIsAdmin());
+        this.isAuthantified = this.auth.getToken();
+        this.isAdmin = this.auth.getIsAdmin();
     
     }
 

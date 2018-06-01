@@ -8,6 +8,7 @@ import {Observable} from "rxjs";
 @Injectable()
 export class AuthService {
   token: string;
+    isAdmin: boolean =false;
 
   constructor(private router: Router, public toastr: ToastsManager, private http:Http) {}
     
@@ -50,10 +51,13 @@ export class AuthService {
         this.typeErrorSecond();
         }else {
             this.loginUser(login).subscribe(data => {
-                if(data == "success") {
+                if(data == "Administrator" || data == "Gerant" || data == "Securite") {
                     console.log("success");
                     this.token = "true";
-                    this.router.navigate(['reservations/ReservationManagement']);
+                    this.router.navigate(['reservations/ReservationManagement']); 
+                    if(data == "Administrator") {
+                        this.isAdmin=true;
+                        }
                 }else if(data == "wait") {
                     this.typeErrorNotActive();
                 }

@@ -214,4 +214,4 @@
 		</div>
 	</div>
 </section>
-<reservation-setting></reservation-setting>
+<reservation-setting *ngIf="auth.token=='true' && auth.isAdmin"></reservation-setting>

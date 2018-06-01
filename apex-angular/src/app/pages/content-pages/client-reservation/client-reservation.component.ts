@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { NgbModal, NgbActiveModal, NgbDateStruct, NgbDatepickerI18n, NgbCalendar, NgbTimeStruct} from '@ng-bootstrap/ng-bootstrap';
 import { ClientReservationService } from './client-reservation.service';
 import { NewReservationModel } from './NewReservationModel.model';
+import { AuthService } from '../../../shared/auth/auth.service';
 
 const now = new Date();
 const I18N_VALUES = {
@@ -102,7 +103,9 @@ export class ClientReservationComponent implements OnInit {
     }
 
     // Custom Day View Ends  
-    constructor(private clientReservationService: ClientReservationService,private modalService: NgbModal) { 
+    constructor(private clientReservationService: ClientReservationService,private modalService: NgbModal, private auth: AuthService) { 
+    console.log(this.auth.getToken());
+        console.log(this.auth.isAdmin);
     
     
     }

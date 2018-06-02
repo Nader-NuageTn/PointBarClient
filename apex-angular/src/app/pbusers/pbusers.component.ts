@@ -50,7 +50,12 @@ deletedUsers:boolean =false;
     
     settings = tableData.settings;
     filtersettings = tableData.filtersettings;
-    alertsettings:any;
+    alertsettings = {
+    add: {
+        confirmCreate: false,
+        addButtonContent: "",
+    }
+    }
 
 
     // And the listener code which asks the DataSource to filter the data:

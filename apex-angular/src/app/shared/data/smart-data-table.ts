@@ -240,7 +240,7 @@ export var alertsettings = {
   },
   actions: {
   custom: [
-    { name: 'Activate', title: isActive, confirmSave: true }
+    { name: 'Activate', title: isActive}
   ],
 
 },

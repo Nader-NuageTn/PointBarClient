@@ -44,12 +44,13 @@ deletedUsers:boolean =false;
               }
              
              this.alertSource =data;
+          this.alertsettings = tableData.alertsettings;
             }); // create the source
   }
     
     settings = tableData.settings;
     filtersettings = tableData.filtersettings;
-    alertsettings = tableData.alertsettings;
+    alertsettings:any;
 
 
     // And the listener code which asks the DataSource to filter the data:

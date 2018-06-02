@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Http, Response, Headers} from '@angular/http';
+import {Http, Response, Headers, ResponseContentType, RequestOptions} from '@angular/http';
 import 'rxjs/Rx';
 import {Observable} from "rxjs";
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
@@ -84,6 +84,29 @@ export class ClientReservationService {
         return this.http.post('/reservationController/getAllCloseReservationDate', today, { headers: headers })
             .map((data: Response) => data.json())
             .catch(this.handleError);
+    }
+
+    getNextEvent(today) {
+        const headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        return this.http.post('/reservationController/getNextEvent', today, { headers: headers })
+            .map((data: Response) => data.json())
+            .catch(this.handleError);
+    }
+
+    getEventPicture(url: string) {
+        const headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        let options = new RequestOptions({ headers: headers, responseType: ResponseContentType.Blob });
+        return this.http.post('/reservationController/getPicture', url, options)
+            .map((res: Response) => res)
+            .catch(this.handleError);
+    }
+    //For Uploading Profile Picture
+    postData(formData: FormData) {
+        return this.http.post('/reservationController/uploadProfilePicture', formData)
+            .catch((e) => this.handleError(e))
+            .map(response => response.json());
     }
 
     private handleError(error: any) { return Observable.throw(error); }

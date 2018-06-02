@@ -1,11 +1,11 @@
-import { Component, OnInit, ViewChild ,  Input } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { FormGroup, NgForm, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from "@angular/router";
 import { NgbModal, NgbActiveModal, NgbDateStruct, NgbDatepickerI18n, NgbCalendar, NgbTimeStruct} from '@ng-bootstrap/ng-bootstrap';
 import { ClientReservationService } from './client-reservation.service';
 import { NewReservationModel } from './NewReservationModel.model';
 import { AuthService } from '../../../shared/auth/auth.service';
-
+declare var $: any;
 const now = new Date();
 const I18N_VALUES = {
     fr: {
@@ -62,9 +62,9 @@ export class ClientReservationComponent implements OnInit {
     @ViewChild('vform') validationForm: FormGroup;
     regularForm: FormGroup;
     @ViewChild('f') registerForm: NgForm;
-    
-     // Variable declaration
-    reservation:NewReservationModel;
+
+    // Variable declaration
+    reservation: NewReservationModel;
     d3: any;
     model: NgbDateStruct;
     popupModel;
@@ -78,10 +78,10 @@ export class ClientReservationComponent implements OnInit {
     customDay;
     // Range datepicker start
     hoveredDate: NgbDateStruct;
-    
+
     fromDate: NgbDateStruct;
     toDate: NgbDateStruct;
- 
+
     meridian = true;
     time: NgbTimeStruct = { hour: 13, minute: 30, second: 30 };
     meridianTime: NgbTimeStruct = { hour: 13, minute: 30, second: 30 };
@@ -97,6 +97,20 @@ export class ClientReservationComponent implements OnInit {
     }
 
 
+    minwidth: string;
+    maxheight: string;
+
+    mobHeight: any;
+    mobWidth: any;
+
+
+    displayEvent: boolean = true;
+    smallScreen: boolean = true;
+
+    eventTitle: string;
+    eventDate: string;
+    eventDescription: string;
+    eventImage: boolean;
     // Custom Day View Starts
     isWeekend(date: NgbDateStruct) {
         const d = new Date(date.year, date.month - 1, date.day);
@@ -105,79 +119,295 @@ export class ClientReservationComponent implements OnInit {
     isAuthantified:string;
     isAdmin:string
     // Custom Day View Ends  
-    constructor(private clientReservationService: ClientReservationService,private modalService: NgbModal, private auth: AuthService) { 
-        console.log(this.auth.getToken());
-        console.log(this.auth.getIsAdmin());
+
+    constructor(private clientReservationService: ClientReservationService, private modalService: NgbModal, private auth: AuthService) {
+
+        this.mobWidth = (window.innerWidth) + "px";
         this.isAuthantified = this.auth.getToken();
         this.isAdmin = this.auth.getIsAdmin();
-    
+        
+        if ((window.innerWidth) >= 1500) {
+            this.displayEvent = true;
+            this.minwidth = "800px";
+            this.maxheight = "400px";
+        } else if ((window.innerWidth) >= 1200) {
+            this.displayEvent = true;
+            this.minwidth = (window.innerWidth) - 800 + "px";
+            this.maxheight = (window.innerWidth) - 1000 + "px";
+        } else if ((window.innerWidth) >= 1100) {
+            this.displayEvent = true;
+            this.minwidth = (window.innerWidth) - 700 + "px";
+            this.maxheight = (window.innerWidth) - 700 + "px";
+        } else this.displayEvent = false;
+
+
     }
 
+    onResize(event) {
+
+        this.mobWidth = (window.innerWidth) + "px";
+
+        if ((window.innerWidth) >= 1500) {
+            if (this.displayEvent == false) {
+                var today = { year: now.getFullYear(), month: now.getMonth() + 1, day: now.getDate() };
+
+                this.clientReservationService.getNextEvent(today).subscribe(data => {
+                    console.dir(data);
+                    if (data != null && data.hasPhoto == true) {
+                        this.clientReservationService.getEventPicture(data.pathPhoto).subscribe(data1 => {
+                            console.log(data1);
+                            var blob = new Blob([data1.blob()], { type: data1._body.type });
+                            let url = URL.createObjectURL(blob);
+
+                            let reader = new FileReader();
+                            reader.addEventListener("load", () => {
+                                let iframeContent = reader.result;
+                                let _iFrame;
+                                if (data1._body.type == "application/pdf") {
+                                    _iFrame = document.createElement('embed');
+                                } else {
+                                    _iFrame = document.createElement('img');
+                                }
+                                //_iFrame.src = window.URL.createObjectURL(xhr.response);
+                                _iFrame.src = url;
+                                $('#eventGrid').append(_iFrame);
+                            });
+                            reader.readAsDataURL(blob)
+
+                        });
+
+                    }
+
+                    this.eventTitle = data.title;
+                    this.eventDate = data.date;
+                    this.eventDescription = data.description;
+                    this.eventImage = data.hasPhoto;
+                    this.displayEvent = true;
+                });
+            }
+            this.displayEvent = true;
+            this.minwidth = "800px";
+            this.maxheight = "400px";
+        } else if ((window.innerWidth) >= 1200) {
+            if (this.displayEvent == false) {
+                var today = { year: now.getFullYear(), month: now.getMonth() + 1, day: now.getDate() };
+
+                this.clientReservationService.getNextEvent(today).subscribe(data => {
+                    console.dir(data);
+                    if (data != null && data.hasPhoto == true) {
+                        this.clientReservationService.getEventPicture(data.pathPhoto).subscribe(data1 => {
+                            console.log(data1);
+                            var blob = new Blob([data1.blob()], { type: data1._body.type });
+                            let url = URL.createObjectURL(blob);
+
+                            let reader = new FileReader();
+                            reader.addEventListener("load", () => {
+                                let iframeContent = reader.result;
+                                let _iFrame;
+                                if (data1._body.type == "application/pdf") {
+                                    _iFrame = document.createElement('embed');
+                                } else {
+                                    _iFrame = document.createElement('img');
+                                }
+                                //_iFrame.src = window.URL.createObjectURL(xhr.response);
+                                _iFrame.src = url;
+                                $('#eventGrid').append(_iFrame);
+                            });
+                            reader.readAsDataURL(blob)
+
+                        });
+
+                    }
+
+                    this.eventTitle = data.title;
+                    this.eventDate = data.date;
+                    this.eventDescription = data.description;
+                    this.eventImage = data.hasPhoto;
+                    this.displayEvent = true;
+                });
+            }
+            this.displayEvent = true;
+            this.minwidth = (window.innerWidth) - 800 + "px";
+            this.maxheight = (window.innerWidth) - 1000 + "px";
+        } else if ((window.innerWidth) >= 1100) {
+            if (this.displayEvent == false) {
+                var today = { year: now.getFullYear(), month: now.getMonth() + 1, day: now.getDate() };
+
+                this.clientReservationService.getNextEvent(today).subscribe(data => {
+                    console.dir(data);
+                    if (data != null && data.hasPhoto == true) {
+                        this.clientReservationService.getEventPicture(data.pathPhoto).subscribe(data1 => {
+                            console.log(data1);
+                            var blob = new Blob([data1.blob()], { type: data1._body.type });
+                            let url = URL.createObjectURL(blob);
+
+                            let reader = new FileReader();
+                            reader.addEventListener("load", () => {
+                                let iframeContent = reader.result;
+                                let _iFrame;
+                                if (data1._body.type == "application/pdf") {
+                                    _iFrame = document.createElement('embed');
+                                } else {
+                                    _iFrame = document.createElement('img');
+                                }
+                                //_iFrame.src = window.URL.createObjectURL(xhr.response);
+                                _iFrame.src = url;
+                                $('#eventGrid').append(_iFrame);
+                            });
+                            reader.readAsDataURL(blob)
+
+                        });
+
+
+                    }
+                    this.eventTitle = data.title;
+                    this.eventDate = data.date;
+                    this.eventDescription = data.description;
+                    this.eventImage = data.hasPhoto;
+                    this.displayEvent = true;
+                });
+            }
+            this.displayEvent = true;
+            this.minwidth = (window.innerWidth) - 700 + "px";
+            this.maxheight = (window.innerWidth) - 700 + "px";
+        } else this.displayEvent = false;
+
+    }
     ngOnInit() {
         console.log(now);
-        this.reservation = new NewReservationModel("", "","", "", "",this.disabledModel, "", "", 0, 0);
-        
-          this.regularForm = new FormGroup({
+        this.reservation = new NewReservationModel("", "", "", "", "", this.disabledModel, "", "", 0, 0);
+
+        this.regularForm = new FormGroup({
             'email': new FormControl(null, [Validators.required, Validators.email]),
             'phone': new FormControl(null, [Validators.required, Validators.minLength(4), Validators.maxLength(24)]),
             'textArea': new FormControl(null, [Validators.required]),
             'facebook': new FormControl(null, [Validators.required]),
             'dp': new FormControl(null, [Validators.pattern("[0-9]{0-10}")])
-        }, {updateOn: 'blur'});
-    } 
-    onSubmit() {
-       console.log(this.reservation.timeFrom);
-        if(this.reservation.firstName == null || this.reservation.lastName == null || this.reservation.email == null || this.reservation.phone == null 
-        || this.reservation.date == null || this.reservation.timeFrom == null || this.reservation.timeTo == null || this.reservation.qtyMen == null || this.reservation.qtyMen == null
-        || this.reservation.firstName == "" || this.reservation.lastName == "" || this.reservation.email == "" || this.reservation.phone == "" || this.reservation.timeFrom == "" || this.reservation.timeTo == "") {
-            this.clientReservationService.requiredFieldError();
-        }else if(this.reservation.qtyMen == 0 && this.reservation.qtyMen == 0) {
-            this.clientReservationService.requiredNumberOfPersonError();
-        }else{
-            this.clientReservationService.sendReservationRequest(this.reservation).subscribe(data => {
-                if(data == "success") {
-                    this.clientReservationService.reservationSuccess();
-                    this.reservation = new NewReservationModel("", "","", "", "",this.disabledModel, "", "", 0, 0);
-                }else if(data == "closed") {
-                    const modalRef = this.modalService.open(NgbdModalContent);
-                    modalRef.componentInstance.date = this.reservation.date.month+"-"+this.reservation.date.day+"-"+this.reservation.date.year;
+        }, { updateOn: 'blur' });
 
-                }else {
+        var today = { year: now.getFullYear(), month: now.getMonth() + 1, day: now.getDate() };
+
+        this.clientReservationService.getNextEvent(today).subscribe(data => {
+            console.dir(data);
+            if (data != null && data.hasPhoto == true) {
+                this.clientReservationService.getEventPicture(data.pathPhoto).subscribe(data1 => {
+                    console.log(data1);
+                    var blob = new Blob([data1.blob()], { type: data1._body.type });
+                    let url = URL.createObjectURL(blob);
+
+                    let reader = new FileReader();
+                    reader.addEventListener("load", () => {
+                        let iframeContent = reader.result;
+                        let _iFrame;
+                        if (data1._body.type == "application/pdf") {
+                            _iFrame = document.createElement('embed');
+                        } else {
+                            _iFrame = document.createElement('img');
+                        }
+                        //_iFrame.src = window.URL.createObjectURL(xhr.response);
+                        _iFrame.src = url;
+                        $('#eventGrid').append(_iFrame);
+                    });
+                    reader.readAsDataURL(blob)
+
+                });
+
+            }
+            this.eventTitle = data.title;
+            this.eventDate = data.date;
+            this.eventDescription = data.description;
+            this.eventImage = data.hasPhoto;
+            console.log(this.eventImage);
+            this.displayEvent = true;
+        });
+
+    }
+    onSubmit() {
+        console.log(this.reservation.timeFrom);
+        if (this.reservation.firstName == null || this.reservation.lastName == null || this.reservation.email == null || this.reservation.phone == null
+            || this.reservation.date == null || this.reservation.timeFrom == null || this.reservation.timeTo == null || this.reservation.qtyMen == null || this.reservation.qtyMen == null
+            || this.reservation.firstName == "" || this.reservation.lastName == "" || this.reservation.email == "" || this.reservation.phone == "" || this.reservation.timeFrom == "" || this.reservation.timeTo == "") {
+            this.clientReservationService.requiredFieldError();
+        } else if (this.reservation.qtyMen == 0 && this.reservation.qtyMen == 0) {
+            this.clientReservationService.requiredNumberOfPersonError();
+        } else {
+            this.clientReservationService.sendReservationRequest(this.reservation).subscribe(data => {
+
+                if (data == "fail") {
                     this.clientReservationService.reservationFail();
+
+                } else if (data == "closed") {
+                    const modalRef = this.modalService.open(NgbdModalContent);
+                    modalRef.componentInstance.date = this.reservation.date.month + "-" + this.reservation.date.day + "-" + this.reservation.date.year;
+
+                } else {
+
+                    if (this.fileUp2 != null) {
+                        const reader = new FileReader();
+                        reader.onloadend = () => {
+                            const formData = new FormData();
+                            const imgBlob = new Blob([reader.result], { type: this.fileUp2.type });
+                            formData.append('file', imgBlob, this.fileUp2.name);
+                            formData.append('useriD', data);
+                            formData.append('fileName',this.fileUp2.name);
+                            this.clientReservationService.postData(formData).subscribe(data => {
+                                setTimeout(() => {
+                                    this.clientReservationService.reservationSuccess();
+                                    this.reservation = new NewReservationModel("", "", "", "", "", this.disabledModel, "", "", 0, 0);
+                                }, 1000);
+                            });
+                        };
+                        reader.readAsArrayBuffer(this.fileUp2);
+                    } else {
+                        this.clientReservationService.reservationSuccess();
+                        this.reservation = new NewReservationModel("", "", "", "", "", this.disabledModel, "", "", 0, 0);
+                    }
+
+
                 }
             });
 
         }
 
-    } 
+    }
 
     open(content) {
         this.modalService.open(content).result.then((result) => {
 
-             this.clientReservationService.cancelReservation(result).subscribe(data => {
-                if(data == "success") {
+            this.clientReservationService.cancelReservation(result).subscribe(data => {
+                if (data == "success") {
                     this.clientReservationService.cancelSuccess();
-                }else if(data == "no exist") {
+                } else if (data == "no exist") {
                     this.clientReservationService.cancelFail();
-                }else {
+                } else {
                     this.clientReservationService.reservationFail();
                 }
             });
 
-        }, (reason) => {});
+        }, (reason) => { });
 
     }
-    reservationQtyMenPlus(){
-        this.reservation.qtyMen = this.reservation.qtyMen +1;
+    fileUp2: any;
+    onFileChange(event) {
+        let reader = new FileReader();
+        if (event.target.files && event.target.files.length > 0) {
+            let file = event.target.files[0];
+            reader.readAsDataURL(file);
+            this.fileUp2 = file;
+        }
     }
-    reservationQtyMenMinus(){
-        this.reservation.qtyMen = this.reservation.qtyMen -1;
+
+    reservationQtyMenPlus() {
+        this.reservation.qtyMen = this.reservation.qtyMen + 1;
     }
-     reservationQtyWomenPlus(){
-        this.reservation.qtyWomen = this.reservation.qtyWomen +1;
+    reservationQtyMenMinus() {
+        this.reservation.qtyMen = this.reservation.qtyMen - 1;
     }
-    reservationQtyWomenMinus(){
-        this.reservation.qtyWomen = this.reservation.qtyWomen -1;
+    reservationQtyWomenPlus() {
+        this.reservation.qtyWomen = this.reservation.qtyWomen + 1;
+    }
+    reservationQtyWomenMinus() {
+        this.reservation.qtyWomen = this.reservation.qtyWomen - 1;
     }
 
 }

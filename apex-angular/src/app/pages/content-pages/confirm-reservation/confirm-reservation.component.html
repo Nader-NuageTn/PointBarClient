@@ -5,11 +5,8 @@
 			<div class="col-12 d-flex align-items-center justify-content-center">
 				<div
 					class="card border-grey border-lighten-3 px-1 py-1 box-shadow-3">
-					<div class="card-block">
-						<span class="card-title text-center"> <img alt="avtar"
-							class="img-fluid mx-auto d-block pt-2 mb-1"
-							src="assets/img/logos/logo-color-big.png" width="100">
-						</span>
+					<div class="card-img overlap" style="text-align:  center;" id="userProfile" *ngIf="reservationCorrect == true">
+						<img alt="element 06" class="mb-1" src="assets/img/portrait/avatars/avatar-08.png" width="190" *ngIf="reservationDetails.clientsEntity && reservationDetails.clientsEntity.hasPhoto == false">
 					</div>
 					<div class="card-block text-center"
 						*ngIf="reservationCorrect == true">
@@ -32,13 +29,11 @@
 									<div class="input-group-append">
 										<div class="input-group-btn">
 											<button type="button" class="btn btn-raised btn-warning"
-												(click)="nbPersonne = nbPersonne +1;"
-												aria-label="Copy">
+												(click)="nbPersonne = nbPersonne +1;" aria-label="Copy">
 												<i class="ft-user-plus"></i>
 											</button>
 											<button type="button" class="btn btn-raised btn-info"
-												(click)="nbPersonne = nbPersonne -1;"
-												aria-label="Paste">
+												(click)="nbPersonne = nbPersonne -1;" aria-label="Paste">
 												<i class="ft-user-minus"></i>
 											</button>
 										</div>
@@ -52,8 +47,7 @@
 						<h3>R&#233;servation Confirm&#233;e</h3>
 
 					</div>
-					<div class="card-block text-center"
-						*ngIf="reservationUsed == true">
+					<div class="card-block text-center" *ngIf="reservationUsed == true">
 						<h3>Client Arriv&#233;</h3>
 
 					</div>
@@ -83,7 +77,8 @@
 					<hr>
 					<p class="card-text text-center pt-2 pb-2"
 						*ngIf="reservationCorrect == true">
-						<button type="button"   [disabled]="!nbPersonne || nbPersonne ==0" (click)="confirm()"
+						<button type="button" [disabled]="!nbPersonne || nbPersonne ==0"
+							(click)="confirm()"
 							class="btn btn-raised btn-raised btn-warning mr-1">
 							Confirm</button>
 

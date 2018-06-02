@@ -64,7 +64,7 @@
 
 
 
-		<div class="cz-bg-image row" *ngIf="newEvent == false">
+		<div class="cz-bg-image row" *ngIf="newEvent == false && editEvent == false">
 			<section id="simple">
 				<div class="row">
 					<div class="col-sm-12" style="padding: 0px;">
@@ -88,8 +88,8 @@
 
 		<!--Sidebar Options Starts-->
 		<h6 class="text-center text-bold-500 mb-3 text-uppercase"
-			*ngIf="newEvent == true">Nouvel &#233;v&#232;nement</h6>
-		<div class="cz-bg-image row" *ngIf="newEvent == true">
+			*ngIf="newEvent == true || editEvent == true">Nouvel &#233;v&#232;nement</h6>
+		<div class="cz-bg-image row" *ngIf="newEvent == true || editEvent == true">
 			<form class="form">
 				<div class="form-body">
 
@@ -132,7 +132,7 @@
 		                                      <span class="custom-file-control"></span>
 											</label> -->
 							<div class="custom-file center-block d-block">
-								<input type="file" class="custom-file-input"
+								<input type="file" class="custom-file-input" accept="image/*" (change)="onFileChange($event)" 
 									id="inputGroupFile01"> <label class="custom-file-label"
 									for="inputGroupFile01">Envoyer..</label>
 							</div>
@@ -144,11 +144,14 @@
 
 
 				<div class="form-actions">
-					<button type="button" (click)="newEvent = false;"
+					<button type="button" (click)=" onCancelEdit(event)"
 						class="btn btn-raised btn-raised btn-warning mr-1">
 						<i class="ft-x"></i> Cancel
 					</button>
-					<button type="button" class="btn btn-raised btn-raised btn-primary" (click)="createNewEvent();"  [disabled]="!event.date || !event.title">
+					<button type="button" class="btn btn-raised btn-raised btn-primary" (click)="createNewEvent();"  [disabled]="!event.date || !event.title"  *ngIf="newEvent == true">
+						<i class="fa fa-check-square-o"></i> Save
+					</button>
+					<button type="button" class="btn btn-raised btn-raised btn-primary" (click)="editThisEvent();"  [disabled]="!event.date || !event.title"  *ngIf="editEvent == true">
 						<i class="fa fa-check-square-o"></i> Save
 					</button>
 				</div>

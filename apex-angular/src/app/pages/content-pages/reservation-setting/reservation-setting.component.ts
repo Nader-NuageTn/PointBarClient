@@ -40,6 +40,7 @@ var settings = {
         editButtonContent: ''
     },
     delete: {
+        confirmDelete: true,
         deleteButtonContent: '<i class="ft-x danger font-medium-1 mr-2"></i>'
     },
     view: {
@@ -192,8 +193,7 @@ export class ReservationSettingComponent implements OnInit {
     }
 
     onCustom(event) {
-        console.log(event.data);
-        console.log(this.closedDates);
+     
         const index: number = this.closedDates.indexOf(event.data);
         console.log(index);
         if (index !== -1) {
@@ -306,6 +306,24 @@ export class ReservationSettingComponent implements OnInit {
             let file = event.target.files[0];
             reader.readAsDataURL(file);
             this.fileUp2 = file;
+        }
+    }
+    
+    onDelete(event) {
+         const index: number = this.allEvents.indexOf(event.data);
+        console.log(index);
+        if (index !== -1) {
+            this.reservationSettingService.deleteEvent(event.data.idevent).subscribe(data => {
+                if (data == "succes") {
+                    //this.reservationSettingService.eventCanceled();
+                    this.allEvents.splice(index, 1);
+                    this.source = new LocalDataSource(this.allEvents);
+                } else {
+                    this.reservationSettingService.reservationFail();
+                }
+            });
+
+
         }
     }
 }

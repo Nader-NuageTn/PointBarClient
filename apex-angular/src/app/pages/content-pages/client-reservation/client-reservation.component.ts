@@ -104,7 +104,8 @@ export class ClientReservationComponent implements OnInit {
     mobWidth: any;
 
 
-    displayEvent: boolean = true;
+    displayEvent: boolean = false;
+    eventExist: boolean = false;
     smallScreen: boolean = true;
 
     eventTitle: string;
@@ -116,8 +117,8 @@ export class ClientReservationComponent implements OnInit {
         const d = new Date(date.year, date.month - 1, date.day);
         return d.getDay() === 0 || d.getDay() === 6;
     }
-    isAuthantified:string;
-    isAdmin:string
+    isAuthantified: string;
+    isAdmin: string
     // Custom Day View Ends  
 
     constructor(private clientReservationService: ClientReservationService, private modalService: NgbModal, private auth: AuthService) {
@@ -125,7 +126,7 @@ export class ClientReservationComponent implements OnInit {
         this.mobWidth = (window.innerWidth) + "px";
         this.isAuthantified = this.auth.getToken();
         this.isAdmin = this.auth.getIsAdmin();
-        
+       
         if ((window.innerWidth) >= 1500) {
             this.displayEvent = true;
             this.minwidth = "800px";
@@ -178,11 +179,15 @@ export class ClientReservationComponent implements OnInit {
 
                     }
 
-                    this.eventTitle = data.title;
-                    this.eventDate = data.date;
-                    this.eventDescription = data.description;
-                    this.eventImage = data.hasPhoto;
-                    this.displayEvent = true;
+                    if (data != null) {
+                        this.eventTitle = data.title;
+                        this.eventDate = data.date;
+                        this.eventDescription = data.description;
+                        this.eventImage = data.hasPhoto;
+                        console.log(this.eventImage);
+                        this.eventExist = true;
+                       
+                    }
                 });
             }
             this.displayEvent = true;
@@ -218,12 +223,14 @@ export class ClientReservationComponent implements OnInit {
                         });
 
                     }
-
-                    this.eventTitle = data.title;
-                    this.eventDate = data.date;
-                    this.eventDescription = data.description;
-                    this.eventImage = data.hasPhoto;
-                    this.displayEvent = true;
+                    if (data != null) {
+                        this.eventTitle = data.title;
+                        this.eventDate = data.date;
+                        this.eventDescription = data.description;
+                        this.eventImage = data.hasPhoto;
+                        console.log(this.eventImage);
+                        this.eventExist = true;
+                    }
                 });
             }
             this.displayEvent = true;
@@ -260,11 +267,14 @@ export class ClientReservationComponent implements OnInit {
 
 
                     }
-                    this.eventTitle = data.title;
-                    this.eventDate = data.date;
-                    this.eventDescription = data.description;
-                    this.eventImage = data.hasPhoto;
-                    this.displayEvent = true;
+                    if (data != null) {
+                        this.eventTitle = data.title;
+                        this.eventDate = data.date;
+                        this.eventDescription = data.description;
+                        this.eventImage = data.hasPhoto;
+                        console.log(this.eventImage);
+                        this.eventExist = true;
+                    }
                 });
             }
             this.displayEvent = true;
@@ -313,12 +323,15 @@ export class ClientReservationComponent implements OnInit {
                 });
 
             }
-            this.eventTitle = data.title;
-            this.eventDate = data.date;
-            this.eventDescription = data.description;
-            this.eventImage = data.hasPhoto;
-            console.log(this.eventImage);
-            this.displayEvent = true;
+            if (data != null) {
+                this.eventTitle = data.title;
+                this.eventDate = data.date;
+                this.eventDescription = data.description;
+                this.eventImage = data.hasPhoto;
+                console.log(this.eventImage);
+                this.eventExist = true;
+            }
+
         });
 
     }
@@ -349,7 +362,7 @@ export class ClientReservationComponent implements OnInit {
                             const imgBlob = new Blob([reader.result], { type: this.fileUp2.type });
                             formData.append('file', imgBlob, this.fileUp2.name);
                             formData.append('useriD', data);
-                            formData.append('fileName',this.fileUp2.name);
+                            formData.append('fileName', this.fileUp2.name);
                             this.clientReservationService.postData(formData).subscribe(data => {
                                 setTimeout(() => {
                                     this.clientReservationService.reservationSuccess();

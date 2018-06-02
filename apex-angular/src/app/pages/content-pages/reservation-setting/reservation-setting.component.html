@@ -1,6 +1,6 @@
 <!--Theme customizer Starts-->
 <div
-	class="customizer border-left-blue-grey border-left-lighten-4 d-none d-sm-none d-md-block ">
+	class="customizer border-left-blue-grey border-left-lighten-4 d-none d-sm-none d-md-block">
 	<a class="customizer-close"> <i class="ft-x font-medium-3"></i>
 	</a> <a class="customizer-toggle bg-danger" id="customizer-toggle-icon">
 		<i class="ft-settings font-medium-4 fa fa-spin white align-middle"></i>
@@ -71,7 +71,7 @@
 						<div class="card">
 							<div class="card-body">
 								<div class="card-block" style="padding: 0px;">
-									<ng2-smart-table [settings]="settings" [source]="source" (custom)="onEdit($event)"></ng2-smart-table>
+									<ng2-smart-table [settings]="settings" [source]="source" (custom)="onEdit($event)"  (deleteConfirm)="onDelete($event)"></ng2-smart-table>
 								</div>
 							</div>
 						</div>

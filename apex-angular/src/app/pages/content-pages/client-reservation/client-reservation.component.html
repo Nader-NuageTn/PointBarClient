@@ -4,7 +4,7 @@
 			<div class="col-12 align-items-center justify-content-center"
 				style="display: flex; margin: auto;">
 
-				<div class="grid-hover" *ngIf="displayEvent">
+				<div class="grid-hover" *ngIf="displayEvent == true && eventExist == true">
 
 					<div class="row">
 						<div class="col-md-6 col-12">
@@ -203,7 +203,7 @@
 									</div>
 									<ng-template #content let-c="close" let-d="dismiss">
 									<div class="modal-header">
-										<h4 class="modal-title">Anuuler ma r&#233;servation</h4>
+										<h4 class="modal-title">Annuler ma r&#233;servation</h4>
 										<button type="button" class="close" aria-label="Close"
 											(click)="d('Cross click')">
 											<span aria-hidden="true">&times;</span>
@@ -220,7 +220,7 @@
 									</div>
 									<div class="modal-footer">
 										<button type="button" class="btn btn-secondary btn-raised"
-											[disabled]="!reservationID" (click)="c(reservationID)">Close</button>
+											[disabled]="!reservationID" (click)="c(reservationID)">Annuler</button>
 									</div>
 									</ng-template>
 								</div>

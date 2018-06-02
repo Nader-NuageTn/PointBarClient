@@ -14,3 +14,6 @@ form .form-actions {
     padding: 0px;
     text-decoration: underline;
 }
+small, .small {
+    font-size: 60%;
+}

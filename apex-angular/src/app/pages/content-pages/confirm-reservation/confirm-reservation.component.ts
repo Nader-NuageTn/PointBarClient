@@ -3,7 +3,7 @@ import { ConfirmReservationService } from './confirm-reservation.service';
 @Component({
   selector: 'app-confirm-reservation',
   templateUrl: './confirm-reservation.component.html',
-  styleUrls: ['./confirm-reservation.component.scss']
+  styleUrls: ['./confirm-reservation.component.css']
 })
 export class ConfirmReservationComponent implements OnInit {
 
@@ -29,6 +29,34 @@ export class ConfirmReservationComponent implements OnInit {
                 this.confirmReservationService.getReservation(url.split("=")[1]).subscribe(data => {
                     if(data != null) {
                          console.dir(data)
+                        
+                         if (data != null && data.clientsEntity.hasPhoto == true) {
+                        this.confirmReservationService.getProfilePicture(data.clientsEntity.photoPath).subscribe(data1 => {
+                            console.log(data1);
+                            var blob = new Blob([data1.blob()], { type: data1._body.type });
+                            let url = URL.createObjectURL(blob);
+
+                            let reader = new FileReader();
+                            reader.addEventListener("load", () => {
+                                let iframeContent = reader.result;
+                                let _iFrame;
+                                if (data1._body.type == "application/pdf") {
+                                    _iFrame = document.createElement('embed');
+                                } else {
+                                    _iFrame = document.createElement('img');
+                                }
+                                
+                                _iFrame.src = url;
+                                 _iFrame.setAttribute('style', 'max-width:190px;max-height:190px');
+                                $('#userProfile').append(_iFrame);
+                            });
+                            reader.readAsDataURL(blob)
+
+                        });
+
+                    }
+                        
+                        
                         this.reservationID = data.id;
                         data.timeFrom = data.timeFrom.replace("-", ":");
                         data.timeTo = data.timeTo.replace("-", ":");

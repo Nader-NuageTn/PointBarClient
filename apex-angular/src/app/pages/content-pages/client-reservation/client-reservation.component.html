@@ -1,7 +1,27 @@
-<section id="client-reservation">
+<section id="client-reservation" (window:resize)="onResize($event)">
 	<div class="container-fluid gradient-crystal-clear">
 		<div class="row full-height-vh">
-			<div class="col-12 d-flex align-items-center justify-content-center">
+			<div class="col-12 align-items-center justify-content-center"
+				style="display: flex; margin: auto;">
+
+				<div class="grid-hover" *ngIf="displayEvent">
+
+					<div class="row">
+						<div class="col-md-6 col-12">
+							<figure class="effect-sarah" id="eventGrid"
+								[ngStyle]="{'min-width':minwidth  ? minwidth : '530px', 'max-height':maxheight  ? maxheight : '360px' }">
+								<img src="assets/img/gallery/13.jpg" alt="img13"  *ngIf="eventImage == false"/>
+								<figcaption style="z-index: 999;">
+									<h2>
+										<span>{{eventTitle}}</span><small>{{eventDate}}</small>
+									</h2>
+									<p>{{eventDescription}}</p>
+								</figcaption>
+							</figure>
+						</div>
+					</div>
+				</div>
+
 
 				<div class="card width-600">
 					<div class="card-header">
@@ -66,6 +86,7 @@
 											</label> -->
 												<div class="custom-file center-block d-block">
 													<input type="file" class="custom-file-input"
+														accept="image/*" (change)="onFileChange($event)"
 														id="inputGroupFile01"> <label
 														class="custom-file-label" for="inputGroupFile01">Envoyer..</label>
 												</div>
@@ -118,7 +139,8 @@
 										<div class="col-md-6">
 
 											<div class="form-group">
-												<label for="companyName" style="color: #009DA0;">Nombre de personne (homme)</label>
+												<label for="companyName" style="color: #009DA0;">Nombre
+													de personne (homme)</label>
 												<div class="input-group">
 													<input type="number" min="0" class="form-control"
 														[(ngModel)]="reservation.qtyMen" name="nbHomme"
@@ -126,13 +148,11 @@
 													<div class="input-group-append">
 														<div class="input-group-btn">
 															<button type="button" class="btn btn-raised btn-warning"
-																(click)="reservationQtyMenPlus()"
-																aria-label="Copy">
+																(click)="reservationQtyMenPlus()" aria-label="Copy">
 																<i class="ft-user-plus"></i>
 															</button>
 															<button type="button" class="btn btn-raised btn-info"
-																(click)="reservationQtyMenMinus()"
-																aria-label="Paste">
+																(click)="reservationQtyMenMinus()" aria-label="Paste">
 																<i class="ft-user-minus"></i>
 															</button>
 														</div>
@@ -142,8 +162,8 @@
 										</div>
 										<div class="col-md-6">
 											<div class="form-group">
-												<label for="projectinput5" style="color: #FF586B;">Nombre de personne
-													(femme)</label>
+												<label for="projectinput5" style="color: #FF586B;">Nombre
+													de personne (femme)</label>
 												<div class="input-group">
 													<input type="number" min="0" class="form-control"
 														[(ngModel)]="reservation.qtyWomen" name="nbFemme"
@@ -151,13 +171,11 @@
 													<div class="input-group-append">
 														<div class="input-group-btn">
 															<button type="button" class="btn btn-raised btn-warning"
-																(click)="reservationQtyWomenPlus()"
-																aria-label="Copy">
+																(click)="reservationQtyWomenPlus()" aria-label="Copy">
 																<i class="ft-user-plus"></i>
 															</button>
 															<button type="button" class="btn btn-raised btn-info"
-																(click)="reservationQtyWomenMinus()"
-																aria-label="Paste">
+																(click)="reservationQtyWomenMinus()" aria-label="Paste">
 																<i class="ft-user-minus"></i>
 															</button>
 														</div>
@@ -193,16 +211,16 @@
 									</div>
 									<div class="modal-body">
 										<div class="form-group">
-											<label for="digits">ID R&#233;servation</label> <input type="text"
-												class="form-control" [(ngModel)]="reservationID" name="digits" #digits="ngModel"
-												digits /> <small
+											<label for="digits">ID R&#233;servation</label> <input
+												type="text" class="form-control" [(ngModel)]="reservationID"
+												name="digits" #digits="ngModel" digits /> <small
 												class="form-text text-muted danger"
 												*ngIf="digits.errors?.digits">ID invalide</small>
 										</div>
 									</div>
 									<div class="modal-footer">
-										<button type="button" class="btn btn-secondary btn-raised" [disabled]="!reservationID"
-											(click)="c(reservationID)">Close</button>
+										<button type="button" class="btn btn-secondary btn-raised"
+											[disabled]="!reservationID" (click)="c(reservationID)">Close</button>
 									</div>
 									</ng-template>
 								</div>
@@ -214,4 +232,4 @@
 		</div>
 	</div>
 </section>
-<reservation-setting *ngIf="auth.token=='true' && auth.isAdmin"></reservation-setting>
+<reservation-setting></reservation-setting>

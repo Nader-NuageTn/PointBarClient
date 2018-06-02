@@ -38,7 +38,8 @@ export class ReservationSettingService {
     dateActivated() {
         this.toastr.success("La date a \u00e9t\u00e9 activ\u00e9e avec succ\u00e9s.");
     }
-
+    
+    
 
 
 
@@ -78,6 +79,20 @@ export class ReservationSettingService {
         return this.http.post('/SpecialEventController/createNewEvent', event, { headers: headers })
             .map((data: Response) => data.json())
             .catch(this.handleError);
+    }
+    editEvent(event) {
+        const headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        return this.http.post('/SpecialEventController/editEvent', event, { headers: headers })
+            .map((data: Response) => data.json())
+            .catch(this.handleError);
+    }
+    
+        //For Uploading Event Picture
+    postData(formData: FormData) {
+        return this.http.post('/SpecialEventController/uploadEventPicture', formData)
+          .catch((e) => this.handleError(e))
+          .map(response => response.json());
     }
     private handleError(error: any) { return Observable.throw(error); }
 

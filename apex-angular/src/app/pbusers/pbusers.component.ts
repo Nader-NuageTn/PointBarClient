@@ -3,6 +3,7 @@ import * as tableData from '../shared/data/smart-data-table';
 import { LocalDataSource } from 'ng2-smart-table';
 
 import { PbusersService } from "./pbusers.service";
+import { Router, ActivatedRoute } from "@angular/router";
 
 declare var $: any;
 @Component({
@@ -17,8 +18,10 @@ export class PbusersComponent implements OnInit {
     filterSource: LocalDataSource;
     alertSource: any;
     
-
-  constructor(private pbusersService: PbusersService) {
+deletedUsers:boolean =false;
+    
+  constructor(private pbusersService: PbusersService,private router: Router,
+        private route: ActivatedRoute) {
         this.source = new LocalDataSource(tableData.data); // create the source
         this.filterSource = new LocalDataSource(tableData.filerdata); // create the source
       
@@ -33,7 +36,15 @@ export class PbusersComponent implements OnInit {
        }
 
   ngOnInit() {
-              delete this.alertsettings.columns.id;
+      this.deletedUsers = false;
+      this.pbusersService.getpbUsers().subscribe(data => {
+             console.log(data);
+             for(let user of data) {
+                 user.role= user.role.description;
+              }
+             
+             this.alertSource =data;
+            }); // create the source
   }
     
     settings = tableData.settings;
@@ -66,9 +77,11 @@ export class PbusersComponent implements OnInit {
         // (meaning all columns should contain search query or at least one)
         // 'AND' by default, so changing to 'OR' by setting false here
     }
-
+    
     //  For confirm action On Delete
     onDeleteConfirm(event) {
+        console.log(event);
+        if(event.data.isDeleted == false) {
         if (window.confirm('Are you sure you want to delete?')) {
             event.confirm.resolve(event.data);
             console.log(event.data);
@@ -81,6 +94,20 @@ export class PbusersComponent implements OnInit {
         } else {
             event.confirm.reject();
         }
+      }else {
+           if (window.confirm('Are you sure you want to Activate the user?')) {
+               event.confirm.resolve(event.data);
+            this.pbusersService.activateDeletedUser(event.data.id).subscribe(data => {
+               console.log(data);
+               if(data == "succes") {
+                    this.pbusersService.activateSuccess();
+                }
+            });
+           }else {
+            event.confirm.reject();
+        }
+            
+      }
     }
 
     //  For confirm action On Save
@@ -99,22 +126,52 @@ export class PbusersComponent implements OnInit {
             event.confirm.reject();
         }
     }
-
     
     onCustom(event) {
         console.log(event);
-        if(event.data.isConfirmed == false) {
+            if(event.data.isConfirmed == false) {
             this.pbusersService.activateUser(event.data.id).subscribe(data => {
                console.log(data);
                if(data == "succes") {
                     this.pbusersService.activateSuccess();
+                   this.pbusersService.getpbUsers().subscribe(data => {
+             console.log(data);
+            for(let user of data) {
+                 user.role= user.role.description;
+              }
+            this.deletedUsers=false;
+             this.alertsettings = tableData.alertsettings;
+             this.alertSource =data;
+        });
                 }
             });
             }else {
             this.pbusersService.activateWarning();
             }
         
-        
+    }
+    getDeletedUsers() {
+        this.pbusersService.getdeletedUsers().subscribe(data => {
+             console.log(data);
+            for(let user of data) {
+                 user.role= user.role.description;
+              }
+            this.deletedUsers=true;
+             this.alertsettings = tableData.deletedUsersettings;
+             this.alertSource =data;
+        }); 
+    }
+    
+    getActivedUsers() {
+        this.pbusersService.getpbUsers().subscribe(data => {
+             console.log(data);
+            for(let user of data) {
+                 user.role= user.role.description;
+              }
+            this.deletedUsers=false;
+             this.alertsettings = tableData.alertsettings;
+             this.alertSource =data;
+        }); 
     }
 
 }

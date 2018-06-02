@@ -50,12 +50,13 @@ export class DoBcomponentComponent  extends DefaultEditor implements OnInit {
   }
   updateValue2() {
       if(this.reservation.timeTo != null) {
-          if(this.tab != null) {
+          if(this.tab.length != 0) {
               this.tab2[0]=this.reservation.timeTo.hour;
               this.tab2[1]=this.reservation.timeTo.minute;
               console.log(this.reservation.timeTo);
               this.cell.newValue=this.tab.concat(this.tab2);
           } else {
+              console.log("ouiiii");
               this.tab[0]=this.timeFrom['hour'];
               this.tab[1]=this.timeFrom['minute'];
               this.tab2[0]=this.reservation.timeTo.hour;

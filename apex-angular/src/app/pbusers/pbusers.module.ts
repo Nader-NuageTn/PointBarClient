@@ -14,7 +14,7 @@ import { PbusersService } from "./pbusers.service";
         PbusersRoutingModule
     ],
     declarations: [
-        PbusersComponent
+        PbusersComponent,
     ],
     providers: [PbusersService]
 })

@@ -7,9 +7,7 @@ const routes: Routes = [
   {
     path: '',
      component: PbusersComponent,
-    data: {
-      title: 'Pbusers'
-    },
+    
     
   }
 ];

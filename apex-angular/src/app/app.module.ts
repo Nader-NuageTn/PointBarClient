@@ -35,7 +35,7 @@ export function createTranslateLoader(http: HttpClient) {
         AppComponent,
         FullLayoutComponent,
         HorizontalLayoutComponent,
-        ContentLayoutComponent
+        ContentLayoutComponent,
     ],
     imports: [
         BrowserAnimationsModule,

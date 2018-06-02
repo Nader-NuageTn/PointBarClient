@@ -240,14 +240,11 @@ export var alertsettings = {
   },
   actions: {
   custom: [
-    { name: 'Activate', title: isActive }
+    { name: 'Activate', title: isActive, confirmSave: true }
   ],
 
 },
   columns: {
-    id: {
-      title: 'ID',
-    },
     nom: {
       title: 'Nom',
     },
@@ -277,6 +274,7 @@ export var alertsettings = {
     isConfirmed: {
         title: 'Statut',
         type:'html',
+        editable: false,
         valuePrepareFunction: (value) => { 
         console.log(value);
                  if(value == true) {
@@ -288,6 +286,53 @@ export var alertsettings = {
              }
            }
     }
+  },
+  attr: {
+    class: "table table-responsive"
+  },
+};
+
+export var deletedUsersettings = {
+    
+  delete: {
+    confirmDelete: true,
+    deleteButtonContent: '<i class="ft-toggle-left success font-medium-1 mr-1"></i>'
+  },
+  add: {
+    confirmCreate: false,
+    addButtonContent: "",
+  },
+  edit: {
+    confirmSave: false,
+    editButtonContent: ''
+  },
+  columns: {
+    nom: {
+      title: 'Nom',
+    },
+    prenom: {
+      title: 'Prenom',
+    },
+    email: {
+      title: 'Email',
+    },
+    numeroTelephone: {
+      title: 'Telephone',
+    },
+    role: {
+      title: 'Role',
+      type: 'html',
+      editor: {
+        type: 'list',
+        config: {
+          list: [
+            {value: 'Administrateur', title: 'Administrateur'},
+            {value: 'Gerant', title: 'Gerant'},
+            {value: 'Securite', title: 'Securite'},
+          ],
+        },
+      }
+    },
   },
   attr: {
     class: "table table-responsive"

@@ -11,16 +11,19 @@ export class PbusersService {
     
   // Success Type
     typeSuccess() {
-        this.toastr.success("L'utilisateur est modifi\u00e9t avec succ\u00e9ts.");
+        this.toastr.success("L'utilisateur est modifi\u00e9 avec succ\u00e9s.");
     }
     
     deleteSuccess() {
-        this.toastr.success("L'utilisateur est supprim\u00e9t avec succ\u00e9ts.");
+        this.toastr.success("L'utilisateur est supprim\u00e9 avec succ\u00e9s.");
     }
     
     activateSuccess() {
-        this.toastr.success("L'utilisateur est activ\u00e9t avec succ\u00e9ts.");
+        this.toastr.success("L'utilisateur est activ\u00e9 avec succ\u00e9s.");
     }
+    activateWarning() {
+        this.toastr.warning("L'utilisateur est d\u00e9ja active.");
+     }
     
   editUser(user) {
         const headers = new Headers();
@@ -47,6 +50,21 @@ export class PbusersService {
             .catch(this.handleError);
   }
     
+  activateDeletedUser(id) {
+        const headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        return this.http.post('/usersController/activateDeletedUser', id, {headers: headers})
+            .map((data: Response) => data.text())
+            .catch(this.handleError);
+  }
+    getdeletedUsers() {
+        const headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        return this.http.post('/usersController/getDeletedList', {headers: headers})
+            .map((data: Response) => data.json())
+            .catch(this.handleError);
+  }
+    
   getpbUsers() {
         const headers = new Headers();
         headers.append('Content-Type', 'application/json');
@@ -54,6 +72,7 @@ export class PbusersService {
             .map((data: Response) => data.json())
             .catch(this.handleError);
   }
+    
   private handleError (error: any) {return Observable.throw(error); }
 
 }

@@ -21,7 +21,7 @@ import { CustomOption } from "./shared/toastr/custom-option";
 
 import { AuthService } from './shared/auth/auth.service';
 import { AuthGuard } from './shared/auth/auth-guard.service';
-
+import { SecuriteGuardService } from './shared/auth/securite-guard.service';
 import * as $ from 'jquery';
 
 
@@ -35,7 +35,7 @@ export function createTranslateLoader(http: HttpClient) {
         AppComponent,
         FullLayoutComponent,
         HorizontalLayoutComponent,
-        ContentLayoutComponent
+        ContentLayoutComponent,
     ],
     imports: [
         BrowserAnimationsModule,
@@ -60,7 +60,8 @@ export function createTranslateLoader(http: HttpClient) {
         //Toastr and auth providers
         { provide: ToastOptions, useClass: CustomOption },
         AuthService,
-        AuthGuard
+        AuthGuard,
+        SecuriteGuardService
     ],
     bootstrap: [AppComponent]
 })

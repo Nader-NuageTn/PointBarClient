@@ -10,15 +10,15 @@ export class ReservationManagementService {
   constructor(private http:Http, public toastr: ToastsManager) { }
     
   typeSuccess() {
-      this.toastr.success("La tranche Horaire est modifi\u00e9te avec succ\u00e9ts.");
+      this.toastr.success("La tranche Horaire est modifi\u00e9e avec succ\u00e9s.");
    }
     
   deleteSuccess() {
-        this.toastr.success("La reservation est annul\u00e9te avec succ\u00e9ts.");
+        this.toastr.success("La reservation est annul\u00e9e avec succ\u00e9s.");
     }
     
   activateSuccess() {
-        this.toastr.success("La reservation est confirm\u00e9te avec succ\u00e9ts.");
+        this.toastr.success("La reservation est confirm\u00e9e avec succ\u00e9s.");
     }
     TrancheHorNotif() {
         this.toastr.warning('Remplir la tranche horaire est obligatoire!');
@@ -58,11 +58,10 @@ export class ReservationManagementService {
             .map((data: Response) => data.json())
             .catch(this.handleError);
   }
-  editTrancheHoraire(id, trancheHoraire1, trancheHoraire2) {
+  editTrancheHoraire(id, trancheHoraire) {
         const headers = new Headers();
         headers.append('Content-Type', 'application/json');
-       const body=JSON.stringify([trancheHoraire1,trancheHoraire2]);
-        return this.http.post('/ReservationManagementController/editTrancheHoraire/'+id, body, {headers: headers})
+        return this.http.post('/ReservationManagementController/editReservationTime/'+id, trancheHoraire, {headers: headers})
             .map((data: Response) => data.text())
             .catch(this.handleError);
       

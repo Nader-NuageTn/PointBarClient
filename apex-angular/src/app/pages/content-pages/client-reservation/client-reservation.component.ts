@@ -116,12 +116,16 @@ export class ClientReservationComponent implements OnInit {
         const d = new Date(date.year, date.month - 1, date.day);
         return d.getDay() === 0 || d.getDay() === 6;
     }
-
+    isAuthantified:string;
+    isAdmin:string
     // Custom Day View Ends  
+
     constructor(private clientReservationService: ClientReservationService, private modalService: NgbModal, private auth: AuthService) {
 
         this.mobWidth = (window.innerWidth) + "px";
-
+        this.isAuthantified = this.auth.getToken();
+        this.isAdmin = this.auth.getIsAdmin();
+        
         if ((window.innerWidth) >= 1500) {
             this.displayEvent = true;
             this.minwidth = "800px";
@@ -135,6 +139,7 @@ export class ClientReservationComponent implements OnInit {
             this.minwidth = (window.innerWidth) - 700 + "px";
             this.maxheight = (window.innerWidth) - 700 + "px";
         } else this.displayEvent = false;
+
 
     }
 

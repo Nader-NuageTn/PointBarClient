@@ -4,10 +4,20 @@
         <div class="col-sm-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Utilisateurs</h4>
+                    <h4 *ngIf="!deletedUsers" class="card-title">Utilisateurs</h4>
+                    <h4 *ngIf="deletedUsers" class="card-title">Utilisateurs Supprim&#233;s</h4>
                 </div>
                 <div class="card-body">
                     <div class="card-block">
+                    <div>
+							<a *ngIf="!deletedUsers" (click)="getDeletedUsers()"
+								class="btn btn-raised gradient-purple-bliss white big-shadow">Afficher
+								les utilisateurs supprim&#233;s</a>
+								
+					        <a *ngIf="deletedUsers" (click)="getActivedUsers()"
+								class="btn btn-raised gradient-purple-bliss white big-shadow">Afficher
+								les utilisateurs actifs</a>			
+						</div>
                         <ng2-smart-table [settings]="alertsettings" [source]="alertSource" (deleteConfirm)="onDeleteConfirm($event)" (editConfirm)="onSaveConfirm($event)"
                             (custom)="onCustom($event)"></ng2-smart-table>
                     </div>

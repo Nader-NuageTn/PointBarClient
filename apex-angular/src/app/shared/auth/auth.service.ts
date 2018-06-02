@@ -59,6 +59,7 @@ export class AuthService {
                     this.router.navigate(['reservations/ReservationManagement']); 
                     if(data == "Administrator") {
                         this.cookieService.set('isAdmin', 'true');
+                        this.cookieService.set('isSecurity', 'true');
                         }
                     else if(data == "Securite") {
                         this.cookieService.set('isSecurity', 'true');

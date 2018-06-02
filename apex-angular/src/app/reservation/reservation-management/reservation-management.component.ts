@@ -17,19 +17,14 @@ export class ReservationManagementComponent implements OnInit {
     
   trancheHorFrom:any = {};
   trancheHorTo:any = {};
+    
+  allReservations:boolean = false;
 
   constructor(private reservationManagementService: ReservationManagementService) { 
         this.source = new LocalDataSource(tableData.data); // create the source
         this.filterSource = new LocalDataSource(tableData.filerdata); // create the source
         //this.alertSource = new LocalDataSource(tableData.data); // create the source
-      let today = { year: now.getFullYear(), month: now.getMonth() + 1, day: now.getDate() };
-        this.reservationManagementService.getAllWaitingReservation(today).subscribe(data => {
-             console.log(data);
-            for(let x of data) {
-                x.timeFrom= x.timeFrom.hour+":"+x.timeFrom.minute+"-"+x.timeTo.hour+":"+x.timeTo.minute;
-                }
-             this.alertSource =data;
-            });  
+      this.getReservationsEnAttente(); 
       }
 
   ngOnInit() {
@@ -72,7 +67,7 @@ export class ReservationManagementComponent implements OnInit {
         console.log(event);
         if (window.confirm('Are you sure you want to Cancel this reservation?')) {
             event.confirm.resolve();
-            this.reservationManagementService.annulerReservation(event.data.id+"").subscribe(data => {
+            this.reservationManagementService.annulerReservation(event.data.id).subscribe(data => {
                console.log(data); 
                 if(data == "success") {
                     this.reservationManagementService.deleteSuccess();
@@ -97,8 +92,8 @@ export class ReservationManagementComponent implements OnInit {
         this.reservationManagementService.confirmerReservation(event.data.id).subscribe(data => {
                console.log(data);
                if(data == "success") {
-                   
-                    this.reservationManagementService.activateSuccess();
+                   this.getReservationsEnAttente(); 
+                   this.reservationManagementService.activateSuccess();
                     
                 }
             });
@@ -112,6 +107,7 @@ export class ReservationManagementComponent implements OnInit {
 };
     //  Edit Tranche horaire
     onSaveConfirm(event) {
+        console.log(event.newData.timeFrom);
         if(event.newData.timeFrom[0] != null && event.newData.timeFrom[1] != null && event.newData.timeFrom[2] && event.newData.timeFrom[3] != null) {
         if (window.confirm('Are you sure you want to save?')) {
             this.trancheHorFrom['hour']=event.newData.timeFrom[0];
@@ -126,7 +122,7 @@ export class ReservationManagementComponent implements OnInit {
                 event.newData.timeFrom = event.newData.timeFrom.split("-")[0].split(":")[0]+":"+event.newData.timeFrom.split("-")[0].split(":")[1]+"-"+event.newData.timeFrom.split("-")[1].split(":")[0]+":"+event.newData.timeFrom.split("-")[1].split(":")[1];
             }
             
-            this.reservationManagementService.editTrancheHoraire(event.newData.id,this.trancheHorFrom,this.trancheHorTo).subscribe(data => {
+            this.reservationManagementService.editTrancheHoraire(event.newData.id,event.newData.timeFrom).subscribe(data => {
                console.log(data); 
                 if(data == "success") {
                     this.reservationManagementService.typeSuccess();
@@ -139,9 +135,20 @@ export class ReservationManagementComponent implements OnInit {
             this.reservationManagementService.TrancheHorNotif();
         }
     }
-    
+    getReservationsEnAttente(){
+        this.allReservations = false;
+        let today = { year: now.getFullYear(), month: now.getMonth() + 1, day: now.getDate() };
+        this.reservationManagementService.getAllWaitingReservation(today).subscribe(data => {
+             console.log(data);
+            for(let x of data) {
+                x.timeFrom= x.timeFrom.hour+":"+x.timeFrom.minute+"-"+x.timeTo.hour+":"+x.timeTo.minute;
+                }
+             this.alertSource =data;
+            }); 
+    }
     
     getAllReservations(){
+        this.allReservations = true;
         let today = { year: now.getFullYear(), month: now.getMonth() + 1, day: now.getDate() };
         this.reservationManagementService.getAllReservation(today).subscribe(data => {
              console.log(data);

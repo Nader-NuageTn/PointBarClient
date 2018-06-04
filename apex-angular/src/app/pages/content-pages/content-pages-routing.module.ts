@@ -10,6 +10,7 @@ import { MaintenancePageComponent } from "./maintenance/maintenance-page.compone
 import { RegisterPageComponent } from "./register/register-page.component";
 import { ClientReservationComponent } from "./client-reservation/client-reservation.component";
 import { ConfirmReservationComponent } from "./confirm-reservation/confirm-reservation.component";
+import { LoginSecuriteComponent } from "./login-securite/login-securite.component";
 import { SecuriteGuardService } from '../../shared/auth/securite-guard.service';
 
 const routes: Routes = [
@@ -77,6 +78,15 @@ const routes: Routes = [
                 component: ConfirmReservationComponent,
                 data: {
                     title: 'confirmation'
+                },
+                canActivate: [SecuriteGuardService]
+
+            },
+            {
+                path: 'loginSuccess/:fullName',
+                component: LoginSecuriteComponent,
+                data: {
+                    title: 'Login Success'
                 },
                 canActivate: [SecuriteGuardService]
 

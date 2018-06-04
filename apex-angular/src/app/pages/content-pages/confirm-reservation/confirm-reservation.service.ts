@@ -7,10 +7,13 @@ import {Observable} from "rxjs";
 
 @Injectable()
 export class ConfirmReservationService {
+        isScan: boolean = false;
 
     constructor(private http: Http) { }
 
-
+    getIsScan() {
+        return this.isScan;
+        }
 
     confirmReservation(reservationID, nbPersonne) {
         const headers = new Headers();
@@ -24,7 +27,12 @@ export class ConfirmReservationService {
         const headers = new Headers();
         headers.append('Content-Type', 'application/json');
         return this.http.post('/reservationController/getReservation', reservationID, { headers: headers })
-            .map((data: Response) => data.json())
+            .map((data: Response) => {
+                if(data != null) {
+                    this.isScan = true;
+                 }
+                data.json();
+            })
             .catch(this.handleError);
     }
 

@@ -22,6 +22,8 @@ import { CustomOption } from "./shared/toastr/custom-option";
 import { AuthService } from './shared/auth/auth.service';
 import { AuthGuard } from './shared/auth/auth-guard.service';
 import { SecuriteGuardService } from './shared/auth/securite-guard.service';
+import { AdminGuardService } from './shared/auth/admin-guard.service';
+import { ConfirmReservationService } from './pages/content-pages/confirm-reservation/confirm-reservation.service';
 import * as $ from 'jquery';
 
 
@@ -61,7 +63,9 @@ export function createTranslateLoader(http: HttpClient) {
         { provide: ToastOptions, useClass: CustomOption },
         AuthService,
         AuthGuard,
-        SecuriteGuardService
+        SecuriteGuardService,
+        ConfirmReservationService,
+        AdminGuardService
     ],
     bootstrap: [AppComponent]
 })

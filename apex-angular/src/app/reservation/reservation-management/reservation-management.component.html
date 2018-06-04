@@ -11,12 +11,13 @@
 					<div class="card-block">
 						<div>
 							<a *ngIf="!allReservations" (click)="getAllReservations()"
-								class="btn btn-raised gradient-purple-bliss white big-shadow">Afficher
+								class="btn btn-raised gradient-purple-bliss white big-shadow">
 								Toutes les R&#233;servations</a>
 								
 						    <a *ngIf="allReservations" (click)="getReservationsEnAttente()"
 								class="btn btn-raised gradient-purple-bliss white big-shadow">Afficher
 								les R&#233;servations en Attente</a>
+
 						</div>
 						<ng2-smart-table [settings]="reservationsettings"
 							[source]="alertSource" (deleteConfirm)="onDeleteConfirm($event)"

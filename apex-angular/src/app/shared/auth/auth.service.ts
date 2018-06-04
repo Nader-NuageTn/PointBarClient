@@ -5,13 +5,14 @@ import {Http, Response, Headers} from '@angular/http';
 import 'rxjs/Rx';
 import {Observable} from "rxjs";
 import { CookieService } from 'ngx-cookie-service';
+import { ConfirmReservationService } from '../../pages/content-pages/confirm-reservation/confirm-reservation.service';
 
 @Injectable()
 export class AuthService {
   token: string;
     isAdmin: boolean =false;
 
-  constructor(private router: Router, public toastr: ToastsManager, private http:Http, private cookieService: CookieService) {}
+  constructor(private router: Router, public toastr: ToastsManager, private http:Http, private cookieService: CookieService, private confirmReservationService: ConfirmReservationService) {}
     
   // Error Type
     typeError() {
@@ -36,7 +37,15 @@ export class AuthService {
             return this.http.post('/loginController/loginUser', body, {headers: headers})
                 .map((data: Response) => data.text())
                 .catch(this.handleError);
-      }
+     }
+    getFullName(login) {
+            const headers = new Headers();
+            headers.append('Content-Type', 'application/json');
+            const body=JSON.stringify(login);
+            return this.http.post('/loginController/getFullName', body, {headers: headers})
+                .map((data: Response) => data.text())
+                .catch(this.handleError);
+     }
     private handleError (error: any) {return Observable.throw(error); }
   signupUser(email: string, password: string) {
     //your code for signing up the new user
@@ -52,17 +61,33 @@ export class AuthService {
         this.typeErrorSecond();
         }else {
             this.loginUser(login).subscribe(data => {
+                console.log(data);
                 if(data == "Administrator" || data == "Gerant" || data == "Securite") {
                     console.log("success");
                     this.token = "true";
                     this.cookieService.set('isAuthentified', 'true');
-                    this.router.navigate(['reservations/ReservationManagement']); 
                     if(data == "Administrator") {
                         this.cookieService.set('isAdmin', 'true');
                         this.cookieService.set('isSecurity', 'true');
+                        this.router.navigate(['reservations/ReservationManagement']); 
                         }
                     else if(data == "Securite") {
                         this.cookieService.set('isSecurity', 'true');
+                        console.log(this.confirmReservationService.getIsScan());
+                            if(this.confirmReservationService.getIsScan()) {
+                                this.router.navigate(['pages/confirmation']); 
+                                
+                            }else {
+                                this.getFullName(login).subscribe(data => 
+                                {
+                                    console.log(data);
+                                    this.router.navigate(['pages/loginSuccess', data]); 
+                                });
+                                
+                            }
+                        }
+                    else if(data == "Gerant") {
+                        this.router.navigate(['reservations/ReservationManagement']); 
                         }
                 }else if(data == "wait") {
                     this.typeErrorNotActive();
@@ -95,7 +120,11 @@ export class AuthService {
   }
     
  getIsAdmin() {    
-    return this.cookieService.get('isAdmin');
+     if(this.cookieService.get('isAdmin') == 'true') {
+          return true;
+          }else {
+          return false;
+          }  
   }
     
  getIsSecurity() {  

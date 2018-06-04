@@ -269,6 +269,7 @@ export class ReservationSettingComponent implements OnInit {
                         });
                     };
                     reader.readAsArrayBuffer(this.fileUp2);
+                    this.fileUp2 = null;
                 } else {
 
                     this.reservationSettingService.getAllEvents(today).subscribe(data => {

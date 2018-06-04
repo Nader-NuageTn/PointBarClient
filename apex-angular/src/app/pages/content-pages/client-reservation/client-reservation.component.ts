@@ -118,7 +118,7 @@ export class ClientReservationComponent implements OnInit {
         return d.getDay() === 0 || d.getDay() === 6;
     }
     isAuthantified: string;
-    isAdmin: string
+    isAdmin: boolean;
     // Custom Day View Ends  
 
     constructor(private clientReservationService: ClientReservationService, private modalService: NgbModal, private auth: AuthService) {

@@ -8,8 +8,8 @@ export const ROUTES: RouteInfo[] = [
     },
     {
         path: '', title: 'Reservations', icon: 'ft-calendar', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false, submenu: [
-            { path: '/reservations/ReservationManagement', title: 'Gestion Reservations', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
-            { path: '/reservations/ReservationSetteing', title: 'Gestion Evenements', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+            { path: '/reservations/ReservationManagement', title: 'Reservations en Attentes', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+            { path: '/reservations/ReservationSetteing', title: 'Evenements', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
         ]
     },
 //    {

@@ -73,6 +73,7 @@ export class AuthService {
                         }
                     else if(data == "Securite") {
                         this.cookieService.set('isSecurity', 'true');
+                        this.cookieService.set('isAdmin', 'false');
                         console.log(this.confirmReservationService.getIsScan());
                             if(this.confirmReservationService.getIsScan()) {
                                 this.router.navigate(['pages/confirmation']); 
@@ -88,19 +89,27 @@ export class AuthService {
                         }
                     else if(data == "Gerant") {
                         this.router.navigate(['reservations/ReservationManagement']); 
+                        this.cookieService.set('isSecurity', 'false');
+                        this.cookieService.set('isAdmin', 'false');
                         }
                 }else if(data == "wait") {
                     this.typeErrorNotActive();
                     this.cookieService.set('isAuthentified', 'false');
+                    this.cookieService.set('isSecurity', 'false');
+                    this.cookieService.set('isAdmin', 'false');
                 }
                 else if(data == "deleted") {
                 this.typeErrordeleted();
                     this.cookieService.set('isAuthentified', 'false');
+                    this.cookieService.set('isSecurity', 'false');
+                    this.cookieService.set('isAdmin', 'false');
                 }
                 else {
                 console.log("Fail");
                 this.typeErrorThird();
                     this.cookieService.set('isAuthentified', 'false');
+                    this.cookieService.set('isSecurity', 'false');
+                    this.cookieService.set('isAdmin', 'false');
                 }
             });
             //this.loginForm.reset();

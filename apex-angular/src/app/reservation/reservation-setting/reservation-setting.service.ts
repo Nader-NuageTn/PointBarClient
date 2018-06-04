@@ -87,6 +87,13 @@ export class ReservationSettingService {
             .map((data: Response) => data.json())
             .catch(this.handleError);
     }
+     deleteEvent(eventID) {
+        const headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        return this.http.post('/SpecialEventController/deleteEvent', eventID+"", { headers: headers })
+            .map((data: Response) => data.text())
+            .catch(this.handleError);
+    }
     
         //For Uploading Event Picture
     postData(formData: FormData) {

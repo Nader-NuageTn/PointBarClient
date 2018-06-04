@@ -17,8 +17,8 @@ import { RegisterPageComponent } from "./register/register-page.component";
 import { SignupServiceService } from "./register/signup-service.service";
 import { LoginService } from "./login/login.service";
 import { HttpModule } from '@angular/http';
-import { ReservationSettingComponent } from './reservation-setting/reservation-setting.component';
-import { ClientReservationComponent, NgbdModalContent  } from './client-reservation/client-reservation.component';
+import { ReservationSettingComponent, NgbdModalContentSetting } from './reservation-setting/reservation-setting.component';
+import { ClientReservationComponent, NgbdModalContent,NgbdModalContentTimeInvalide  } from './client-reservation/client-reservation.component';
 import { ClientReservationService } from './client-reservation/client-reservation.service';
 import { ReservationSettingService } from './reservation-setting/reservation-setting.service';
 import { ConfirmReservationComponent } from './confirm-reservation/confirm-reservation.component';
@@ -44,9 +44,11 @@ import { ConfirmReservationService } from './confirm-reservation/confirm-reserva
         ClientReservationComponent,
         ReservationSettingComponent,
         NgbdModalContent,
+        NgbdModalContentSetting,
+        NgbdModalContentTimeInvalide,
         ConfirmReservationComponent,
     ],
     providers: [SignupServiceService, LoginService, ClientReservationService,ReservationSettingService,ConfirmReservationService],
-    entryComponents: [NgbdModalContent]
+    entryComponents: [NgbdModalContent,NgbdModalContentSetting,NgbdModalContentTimeInvalide]
 })
 export class ContentPagesModule { }

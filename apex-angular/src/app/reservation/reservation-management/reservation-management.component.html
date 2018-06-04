@@ -16,9 +16,9 @@
 								
 						    <a *ngIf="allReservations" (click)="getReservationsEnAttente()"
 								class="btn btn-raised gradient-purple-bliss white big-shadow">
-								les R&#233;servations en attente</a>
+								Les R&#233;servations en attente</a>
 						</div>
-						<ng2-smart-table [settings]="reservationsettings"
+						<ng2-smart-table [settings]="reservationsettings" style=" text-align:  center;"
 							[source]="alertSource" (deleteConfirm)="onDeleteConfirm($event)"
 							(editConfirm)="onSaveConfirm($event)" (custom)="onCustom($event)"></ng2-smart-table>
 					</div>

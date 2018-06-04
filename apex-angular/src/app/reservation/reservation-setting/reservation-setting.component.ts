@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgbDateStruct, NgbDatepickerI18n, NgbCalendar, NgbTimeStruct, NgbPanelChangeEvent } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbActiveModal, NgbDateStruct, NgbDatepickerI18n, NgbCalendar, NgbTimeStruct, NgbPanelChangeEvent } from '@ng-bootstrap/ng-bootstrap';
 import { LocalDataSource } from 'ng2-smart-table';
 import { ReservationSettingService } from './reservation-setting.service';
 import { NewEvenModel } from './newEventModel.model';
@@ -40,6 +40,7 @@ var settings = {
         editButtonContent: ''
     },
     delete: {
+        confirmDelete: true,
         deleteButtonContent: '<i class="ft-x danger font-medium-1 mr-2"></i>'
     },
     view: {
@@ -102,6 +103,34 @@ const I18N_VALUES = {
         months: ['Janv.', 'Févr.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.'],
     },
 };
+
+
+@Component({
+    selector: 'ngbd-modal-content',
+    template: `
+    <div class="modal-header">
+      <h4 class="modal-title">Erreur</h4>
+      <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p>La taille de l'image ne doit pas d\u00e9passer 10 Mo!</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary btn-raised" (click)="activeModal.close('Close click')">Ok</button>
+    </div>
+  `
+})
+
+export class NgbdModalContentSetting {
+
+    constructor(public activeModal: NgbActiveModal) { }
+}
+
+
+
+
 @Component({
     selector: 'reservation-setting',
     templateUrl: './reservation-setting.component.html',
@@ -151,7 +180,10 @@ export class ReservationSettingComponent implements OnInit {
     fromDate: NgbDateStruct;
     toDate: NgbDateStruct;
 
-    constructor(private reservationSettingService: ReservationSettingService) {
+    fileUp2: any;
+    FileName: string = "Envoyer..";
+
+    constructor(private reservationSettingService: ReservationSettingService, private modalService: NgbModal) {
         this.source = new LocalDataSource(this.allEvents); // create the source
         this.source1 = new LocalDataSource(this.closedDates); // create the source
         delete this.settings.columns.idevent;
@@ -175,14 +207,14 @@ export class ReservationSettingComponent implements OnInit {
             this.reservationSettingService.requiredDateError();
         } else {
             this.reservationSettingService.closeReservationDate(closedDate).subscribe(data => {
-                 if (data == "exist") {
+                if (data == "exist") {
                     this.reservationSettingService.dateClosed();
-                } else if (data == "fail")  {
+                } else if (data == "fail") {
                     this.reservationSettingService.reservationFail();
-                    
-                }else{
+
+                } else {
                     this.reservationSettingService.closeDateSuccess();
-                    var Dday = { id:data, date: closedDate.month + '-' + closedDate.day + '-' + closedDate.year }
+                    var Dday = { id: data, date: closedDate.month + '-' + closedDate.day + '-' + closedDate.year }
                     this.closedDates.push(Dday);
                     this.source1 = new LocalDataSource(this.closedDates);
                 }
@@ -192,8 +224,7 @@ export class ReservationSettingComponent implements OnInit {
     }
 
     onCustom(event) {
-        console.log(event.data);
-        console.log(this.closedDates);
+
         const index: number = this.closedDates.indexOf(event.data);
         console.log(index);
         if (index !== -1) {
@@ -229,6 +260,9 @@ export class ReservationSettingComponent implements OnInit {
                                 this.allEvents.push(data);
                                 this.source = new LocalDataSource(this.allEvents);
                                 this.newEvent = false;
+                                this.fileUp2 = null;
+                                this.FileName = "Envoyer..";
+                                this.event = new NewEvenModel("", this.disabledModel, "");
                             }, 1000);
                         });
                     };
@@ -257,18 +291,22 @@ export class ReservationSettingComponent implements OnInit {
                         const imgBlob = new Blob([reader.result], { type: this.fileUp2.type });
                         formData.append('file', imgBlob, this.fileUp2.name);
                         formData.append('eventiD', data.idevent);
-                        formData.append('fileName', "Event-Pic");
+                        formData.append('fileName', this.fileUp2.name);
                         this.reservationSettingService.postData(formData).subscribe(data1 => {
                             setTimeout(() => {
                                 this.reservationSettingService.getAllEvents(today).subscribe(data => {
                                     this.allEvents = data;
                                     this.source = new LocalDataSource(this.allEvents);
                                     this.editEvent = false;
+                                    this.fileUp2 = null;
+                                    this.FileName = "Envoyer..";
+                                    this.event = new NewEvenModel("", this.disabledModel, "");
                                 });
                             }, 1000);
                         });
                     };
                     reader.readAsArrayBuffer(this.fileUp2);
+
                 } else {
 
                     this.reservationSettingService.getAllEvents(today).subscribe(data => {
@@ -286,10 +324,10 @@ export class ReservationSettingComponent implements OnInit {
         });
     }
     onCancelEdit(event) {
-        if(this.editEvent == true){
-            event.date = this.event.date.month+"-"+this.event.date.day+"-"+ this.event.date.year;
+        if (this.editEvent == true) {
+            event.date = this.event.date.month + "-" + this.event.date.day + "-" + this.event.date.year;
         }
-        this.newEvent = false; 
+        this.newEvent = false;
         this.editEvent = false;
     }
     onEdit(event) {
@@ -299,13 +337,41 @@ export class ReservationSettingComponent implements OnInit {
         this.editEvent = true;
     }
 
-    fileUp2: any;
+
     onFileChange(event) {
         let reader = new FileReader();
         if (event.target.files && event.target.files.length > 0) {
             let file = event.target.files[0];
-            reader.readAsDataURL(file);
-            this.fileUp2 = file;
+
+            if (file && file.size > 10000000) {
+                const modalRef = this.modalService.open(NgbdModalContentSetting);
+            } else {
+
+                reader.readAsDataURL(file);
+                console.dir(file);
+                this.fileUp2 = file;
+                this.FileName = file.name;
+            }
+
+
+        }
+    }
+
+    onDelete(event) {
+        const index: number = this.allEvents.indexOf(event.data);
+        console.log(index);
+        if (index !== -1) {
+            this.reservationSettingService.deleteEvent(event.data.idevent).subscribe(data => {
+                if (data == "succes") {
+                    //this.reservationSettingService.eventCanceled();
+                    this.allEvents.splice(index, 1);
+                    this.source = new LocalDataSource(this.allEvents);
+                } else {
+                    this.reservationSettingService.reservationFail();
+                }
+            });
+
+
         }
     }
 }

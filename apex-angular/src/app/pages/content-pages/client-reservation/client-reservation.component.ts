@@ -27,6 +27,29 @@ const after = (one: NgbDateStruct, two: NgbDateStruct) =>
         ? false : one.day > two.day : one.month > two.month : one.year > two.year;
 // Range datepicker Ends
 
+@Component({
+    selector: 'ngbd-modal-content',
+    template: `
+    <div class="modal-header">
+      <h4 class="modal-title">Erreur!</h4>
+      <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p>{{reason}}!</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary btn-raised" (click)="activeModal.close('Close click')">Ok</button>
+    </div>
+  `
+})
+
+export class NgbdModalContentTimeInvalide {
+    @Input() name;
+    reason:string;
+    constructor(public activeModal: NgbActiveModal) { }
+}
 
 @Component({
     selector: 'ngbd-modal-content',
@@ -126,7 +149,7 @@ export class ClientReservationComponent implements OnInit {
         this.mobWidth = (window.innerWidth) + "px";
         this.isAuthantified = this.auth.getToken();
         this.isAdmin = this.auth.getIsAdmin();
-       
+
         if ((window.innerWidth) >= 1500) {
             this.displayEvent = true;
             this.minwidth = "800px";
@@ -186,7 +209,7 @@ export class ClientReservationComponent implements OnInit {
                         this.eventImage = data.hasPhoto;
                         console.log(this.eventImage);
                         this.eventExist = true;
-                       
+
                     }
                 });
             }
@@ -336,13 +359,29 @@ export class ClientReservationComponent implements OnInit {
 
     }
     onSubmit() {
-        console.log(this.reservation.timeFrom);
+
+        
         if (this.reservation.firstName == null || this.reservation.lastName == null || this.reservation.email == null || this.reservation.phone == null
             || this.reservation.date == null || this.reservation.timeFrom == null || this.reservation.timeTo == null || this.reservation.qtyMen == null || this.reservation.qtyMen == null
             || this.reservation.firstName == "" || this.reservation.lastName == "" || this.reservation.email == "" || this.reservation.phone == "" || this.reservation.timeFrom == "" || this.reservation.timeTo == "") {
             this.clientReservationService.requiredFieldError();
+
+        } else if (this.reservation.timeFrom.hour > this.reservation.timeTo.hour || (this.reservation.timeFrom.hour == this.reservation.timeTo.hour && this.reservation.timeFrom.minute >= this.reservation.timeTo.minute)) {
+            const modalRef = this.modalService.open(NgbdModalContentTimeInvalide);
+            modalRef.componentInstance.reason = "Tranche horaire invalide";
+
+        } else if (this.reservation.date == this.disabledModel && this.reservation.timeFrom.hour < now.getHours() + 2) {
+            const modalRef = this.modalService.open(NgbdModalContentTimeInvalide);
+            modalRef.componentInstance.reason = "Votre r\u00e9servation doit \u00eatre au minimum 2 heure \u00e0 l'avance";
+
+        } else if (this.reservation.date == this.disabledModel && this.reservation.timeFrom.hour == now.getHours() + 2 && this.reservation.timeFrom.minute <= now.getMinutes()) {
+            const modalRef = this.modalService.open(NgbdModalContentTimeInvalide);
+            modalRef.componentInstance.reason = "Votre r\u00e9servation doit \u00eatre au minimum 2 heure \u00e0 l'avance";
+
         } else if (this.reservation.qtyMen == 0 && this.reservation.qtyMen == 0) {
             this.clientReservationService.requiredNumberOfPersonError();
+
+
         } else {
             this.clientReservationService.sendReservationRequest(this.reservation).subscribe(data => {
 

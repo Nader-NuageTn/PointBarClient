@@ -3,6 +3,7 @@ import { ROUTES } from './sidebar-routes.config';
 import { RouteInfo } from "./sidebar.metadata";
 import { Router, ActivatedRoute } from "@angular/router";
 import { TranslateService } from '@ngx-translate/core';
+import { AuthService } from '../auth/auth.service';
 
 declare var $: any;
 
@@ -13,9 +14,12 @@ declare var $: any;
 
 export class SidebarComponent implements OnInit {
     public menuItems: any[];
+    
+    isAdmin = false;
 
     constructor(private router: Router,
-        private route: ActivatedRoute, public translate: TranslateService) {
+        private route: ActivatedRoute, public translate: TranslateService, private authService: AuthService) {
+        this.isAdmin = this.authService.getIsAdmin();
         
     }
 

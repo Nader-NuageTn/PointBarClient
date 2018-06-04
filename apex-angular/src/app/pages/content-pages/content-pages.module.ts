@@ -22,7 +22,8 @@ import { ClientReservationComponent, NgbdModalContent,NgbdModalContentTimeInvali
 import { ClientReservationService } from './client-reservation/client-reservation.service';
 import { ReservationSettingService } from './reservation-setting/reservation-setting.service';
 import { ConfirmReservationComponent } from './confirm-reservation/confirm-reservation.component';
-import { ConfirmReservationService } from './confirm-reservation/confirm-reservation.service';
+
+import { LoginSecuriteComponent } from './login-securite/login-securite.component';
 @NgModule({
     imports: [
         CommonModule,
@@ -47,8 +48,9 @@ import { ConfirmReservationService } from './confirm-reservation/confirm-reserva
         NgbdModalContentSetting,
         NgbdModalContentTimeInvalide,
         ConfirmReservationComponent,
+        LoginSecuriteComponent,
     ],
-    providers: [SignupServiceService, LoginService, ClientReservationService,ReservationSettingService,ConfirmReservationService],
+    providers: [SignupServiceService, LoginService, ClientReservationService,ReservationSettingService],
     entryComponents: [NgbdModalContent,NgbdModalContentSetting,NgbdModalContentTimeInvalide]
 })
 export class ContentPagesModule { }

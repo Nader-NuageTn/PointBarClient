@@ -1,4 +1,5 @@
 import { RouteInfo } from './sidebar.metadata';
+import { SecuriteGuardService } from '../../shared/auth/securite-guard.service';
 
 //Sidebar menu Routes and data
 export const ROUTES: RouteInfo[] = [

@@ -23,7 +23,7 @@ export class LoginService {
         this.toastr.error("Votre Compte n'est pas active!"); 
     }
     typeErrordeleted() {
-        this.toastr.error("Votre Compte est deleted!");
+        this.toastr.error("Votre Compte est supprim\u00e9!");
     }
   loginUser(login) {
         const headers = new Headers();

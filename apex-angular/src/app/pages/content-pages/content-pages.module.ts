@@ -18,7 +18,7 @@ import { SignupServiceService } from "./register/signup-service.service";
 import { LoginService } from "./login/login.service";
 import { HttpModule } from '@angular/http';
 import { ReservationSettingComponent, NgbdModalContentSetting } from './reservation-setting/reservation-setting.component';
-import { ClientReservationComponent, NgbdModalContent,NgbdModalContentTimeInvalide  } from './client-reservation/client-reservation.component';
+import { ClientReservationComponent, NgbdModalContent,NgbdModalContentTimeInvalide,NgbdModalContentImageSetting  } from './client-reservation/client-reservation.component';
 import { ClientReservationService } from './client-reservation/client-reservation.service';
 import { ReservationSettingService } from './reservation-setting/reservation-setting.service';
 import { ConfirmReservationComponent } from './confirm-reservation/confirm-reservation.component';
@@ -47,10 +47,11 @@ import { LoginSecuriteComponent } from './login-securite/login-securite.componen
         NgbdModalContent,
         NgbdModalContentSetting,
         NgbdModalContentTimeInvalide,
+        NgbdModalContentImageSetting ,
         ConfirmReservationComponent,
         LoginSecuriteComponent,
     ],
     providers: [SignupServiceService, LoginService, ClientReservationService,ReservationSettingService],
-    entryComponents: [NgbdModalContent,NgbdModalContentSetting,NgbdModalContentTimeInvalide]
+    entryComponents: [NgbdModalContent,NgbdModalContentSetting,NgbdModalContentTimeInvalide,NgbdModalContentImageSetting ]
 })
 export class ContentPagesModule { }

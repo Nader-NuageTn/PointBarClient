@@ -129,8 +129,6 @@ export class NgbdModalContentSetting {
 }
 
 
-
-
 @Component({
     selector: 'reservation-setting',
     templateUrl: './reservation-setting.component.html',
@@ -342,13 +340,10 @@ export class ReservationSettingComponent implements OnInit {
         let reader = new FileReader();
         if (event.target.files && event.target.files.length > 0) {
             let file = event.target.files[0];
-
             if (file && file.size > 10000000) {
                 const modalRef = this.modalService.open(NgbdModalContentSetting);
             } else {
-
                 reader.readAsDataURL(file);
-                console.dir(file);
                 this.fileUp2 = file;
                 this.FileName = file.name;
             }

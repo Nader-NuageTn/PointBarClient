@@ -7,13 +7,9 @@ import {Observable} from "rxjs";
 
 @Injectable()
 export class ConfirmReservationService {
-        isScan: boolean = false;
 
     constructor(private http: Http) { }
 
-    getIsScan() {
-        return this.isScan;
-        }
 
     confirmReservation(reservationID, nbPersonne) {
         const headers = new Headers();
@@ -39,7 +35,7 @@ export class ConfirmReservationService {
             .map((res: Response) => res)
             .catch(this.handleError);
     } 
-
+    
     private handleError(error: any) { return Observable.throw(error); }
 
 }

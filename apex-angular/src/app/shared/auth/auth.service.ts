@@ -65,17 +65,18 @@ export class AuthService {
                 if(data == "Administrator" || data == "Gerant" || data == "Securite") {
                     console.log("success");
                     this.token = "true";
-                    this.cookieService.set('isAuthentified', 'true');
+                    localStorage.setItem('loged', 'true');
                     if(data == "Administrator") {
-                        this.cookieService.set('isAdmin', 'true');
-                        this.cookieService.set('isSecurity', 'true');
+                        localStorage.setItem('isAdmin', 'true');
+                        localStorage.setItem('isSecurity', 'true');
                         this.router.navigate(['reservations/ReservationManagement']); 
                         }
                     else if(data == "Securite") {
-                        this.cookieService.set('isSecurity', 'true');
-                        console.log(this.confirmReservationService.getIsScan());
-                            if(this.confirmReservationService.getIsScan()) {
-                                this.router.navigate(['pages/confirmation']); 
+                        localStorage.setItem('isAdmin', 'false');
+                        localStorage.setItem('isSecurity', 'true');
+                        console.log(localStorage.getItem('isScan'));
+                            if(localStorage.getItem('isScan') == 'true') {
+                                this.router.navigate(['pages/confirmation', localStorage.getItem('idRes')]); 
                                 
                             }else {
                                 this.getFullName(login).subscribe(data => 
@@ -88,19 +89,27 @@ export class AuthService {
                         }
                     else if(data == "Gerant") {
                         this.router.navigate(['reservations/ReservationManagement']); 
+                        localStorage.setItem('isAdmin', 'false');
+                        localStorage.setItem('isSecurity', 'false');
                         }
                 }else if(data == "wait") {
                     this.typeErrorNotActive();
-                    this.cookieService.set('isAuthentified', 'false');
+                    localStorage.setItem('loged', 'false');
+                    localStorage.setItem('isAdmin', 'false');
+                    localStorage.setItem('isSecurity', 'false');
                 }
                 else if(data == "deleted") {
                 this.typeErrordeleted();
-                    this.cookieService.set('isAuthentified', 'false');
+                    localStorage.setItem('loged', 'false');
+                    localStorage.setItem('isAdmin', 'false');
+                    localStorage.setItem('isSecurity', 'false');
                 }
                 else {
                 console.log("Fail");
                 this.typeErrorThird();
-                    this.cookieService.set('isAuthentified', 'false');
+                    localStorage.setItem('loged', 'false');
+                    localStorage.setItem('isAdmin', 'false');
+                    localStorage.setItem('isSecurity', 'false');
                 }
             });
             //this.loginForm.reset();
@@ -108,19 +117,20 @@ export class AuthService {
   }
 
   logout() {   
-    this.cookieService.set('isAuthentified', 'false');
-    this.cookieService.set('isAdmin', 'false');
-      this.cookieService.set('isSecurity', 'false');
+    localStorage.setItem('loged', 'false');
+    localStorage.setItem('isAdmin', 'false');
+    localStorage.setItem('isSecurity', 'false');
+    localStorage.setItem('isScan', 'false');
       this.router.navigate(['pages/login']);
       console.log('succcess');
   }
 
   getToken() {    
-    return this.cookieService.get('isAuthentified');
+    return localStorage.getItem('loged');
   }
     
  getIsAdmin() {    
-     if(this.cookieService.get('isAdmin') == 'true') {
+     if(localStorage.getItem('isAdmin') == 'true') {
           return true;
           }else {
           return false;
@@ -128,7 +138,7 @@ export class AuthService {
   }
     
  getIsSecurity() {  
- if(this.cookieService.get('isSecurity') == 'true') {
+ if(localStorage.getItem('isSecurity') == 'true') {
           return true;
           }else {
           return false;
@@ -138,7 +148,7 @@ export class AuthService {
 
   isAuthenticated() {
     // here you can check if user is authenticated or not through his token 
-      if(this.cookieService.get('isAuthentified') == 'true') {
+      if(localStorage.getItem('loged') == 'true') {
           return true;
           }else {
           return false;

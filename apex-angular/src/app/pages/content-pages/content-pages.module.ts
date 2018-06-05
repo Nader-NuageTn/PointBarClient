@@ -24,6 +24,7 @@ import { ReservationSettingService } from './reservation-setting/reservation-set
 import { ConfirmReservationComponent } from './confirm-reservation/confirm-reservation.component';
 
 import { LoginSecuriteComponent } from './login-securite/login-securite.component';
+import { CancelReservationComponent } from './cancel-reservation/cancel-reservation.component';
 @NgModule({
     imports: [
         CommonModule,
@@ -50,6 +51,7 @@ import { LoginSecuriteComponent } from './login-securite/login-securite.componen
         NgbdModalContentImageSetting ,
         ConfirmReservationComponent,
         LoginSecuriteComponent,
+        CancelReservationComponent,
     ],
     providers: [SignupServiceService, LoginService, ClientReservationService,ReservationSettingService],
     entryComponents: [NgbdModalContent,NgbdModalContentSetting,NgbdModalContentTimeInvalide,NgbdModalContentImageSetting ]

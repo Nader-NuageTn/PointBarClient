@@ -74,7 +74,7 @@ const routes: Routes = [
                 }
 
             }, {
-                path: 'confirmation',
+                path: 'confirmation/:id',
                 component: ConfirmReservationComponent,
                 data: {
                     title: 'confirmation'

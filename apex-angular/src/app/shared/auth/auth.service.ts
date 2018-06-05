@@ -74,9 +74,9 @@ export class AuthService {
                     else if(data == "Securite") {
                         localStorage.setItem('isAdmin', 'false');
                         localStorage.setItem('isSecurity', 'true');
-                        console.log(this.confirmReservationService.getIsScan());
-                            if(this.confirmReservationService.getIsScan()) {
-                                this.router.navigate(['pages/confirmation']); 
+                        console.log(localStorage.getItem('isScan'));
+                            if(localStorage.getItem('isScan') == 'true') {
+                                this.router.navigate(['pages/confirmation', localStorage.getItem('idRes')]); 
                                 
                             }else {
                                 this.getFullName(login).subscribe(data => 
@@ -120,6 +120,7 @@ export class AuthService {
     localStorage.setItem('loged', 'false');
     localStorage.setItem('isAdmin', 'false');
     localStorage.setItem('isSecurity', 'false');
+    localStorage.setItem('isScan', 'false');
       this.router.navigate(['pages/login']);
       console.log('succcess');
   }

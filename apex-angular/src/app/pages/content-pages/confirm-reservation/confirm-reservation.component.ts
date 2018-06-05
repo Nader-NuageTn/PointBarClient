@@ -19,17 +19,20 @@ export class ConfirmReservationComponent implements OnInit {
   nbPersonne:number=0;
   reservationID:number;
     
+  isScan: boolean = false;
+    
   constructor(private confirmReservationService: ConfirmReservationService) { }
 
   ngOnInit() {
         var url = window.location.href;
        
-        if(url.includes("=")) {
-             console.log(url.split("=")[1]);
-                this.confirmReservationService.getReservation(url.split("=")[1]).subscribe(data => {
+        if(url.includes("/")) {
+             console.log(url.split("/").pop());
+                this.confirmReservationService.getReservation(url.split("/").pop()).subscribe(data => {
                     if(data != null) {
                          console.dir(data)
-                        
+                        localStorage.setItem('isScan', 'true');
+                        localStorage.setItem('idRes', url.split("/").pop());
                          if (data != null && data.clientsEntity.hasPhoto == true) {
                         this.confirmReservationService.getProfilePicture(data.clientsEntity.photoPath).subscribe(data1 => {
                             console.log(data1);

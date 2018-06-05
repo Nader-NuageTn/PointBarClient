@@ -25,6 +25,9 @@ import { ConfirmReservationComponent } from './confirm-reservation/confirm-reser
 
 import { LoginSecuriteComponent } from './login-securite/login-securite.component';
 import { CancelReservationComponent } from './cancel-reservation/cancel-reservation.component';
+import { CancelReservationService } from './cancel-reservation/cancel-reservation.service';
+
+
 @NgModule({
     imports: [
         CommonModule,
@@ -53,7 +56,7 @@ import { CancelReservationComponent } from './cancel-reservation/cancel-reservat
         LoginSecuriteComponent,
         CancelReservationComponent,
     ],
-    providers: [SignupServiceService, LoginService, ClientReservationService,ReservationSettingService],
+    providers: [SignupServiceService, LoginService, ClientReservationService,ReservationSettingService,CancelReservationService],
     entryComponents: [NgbdModalContent,NgbdModalContentSetting,NgbdModalContentTimeInvalide,NgbdModalContentImageSetting ]
 })
 export class ContentPagesModule { }

@@ -148,6 +148,7 @@ export class ReservationSettingComponent implements OnInit {
     closedDates = [];
     allEvents = [];
     event: NewEvenModel;
+    ReservationParams: string;
     ngOnInit() {
 
         var today = { year: now.getFullYear(), month: now.getMonth() + 1, day: now.getDate() };
@@ -160,6 +161,10 @@ export class ReservationSettingComponent implements OnInit {
         this.reservationSettingService.getAllEvents(today).subscribe(data => {
             this.allEvents = data;
             this.source = new LocalDataSource(this.allEvents);
+        });
+        
+        this.reservationSettingService.getReservationParams().subscribe(data => {
+            this.ReservationParams = data;
         });
         // Customizer JS File
         $.getScript('./assets/js/customizer.js');
@@ -369,4 +374,15 @@ export class ReservationSettingComponent implements OnInit {
 
         }
     }
+    
+    updateReservationParams() {
+        this.reservationSettingService.updateReservationParams( this.ReservationParams).subscribe(data => {
+                if (data == "success") {
+                    this.reservationSettingService.updateReservationParamsDone();
+                } else {
+                    this.reservationSettingService.reservationFail();
+                }
+            });
+    }
+
 }

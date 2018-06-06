@@ -11,13 +11,63 @@
 			r&#233;servation</h4>
 		<hr>
 
-		<ngb-accordion [closeOthers]="true" activeIds="1"> <ngb-panel
-			id="1"> <ng-template ngbPanelTitle> <span>R&#233;servations
-			Ferm&#233;s</span> </ng-template> <ng-template ngbPanelContent>
+		<ngb-accordion [closeOthers]="true" activeIds="1"> 
+		
+		<ngb-panel
+			id="1"> <ng-template ngbPanelTitle> <span>Conditions des R&#233;servations</span> </ng-template> <ng-template ngbPanelContent>
 
 
 
 		<div class="cz-bg-image row" *ngIf="newEvent == false">
+
+			
+
+			<div class="form-group">
+				<label for="companyName">R&#233;servation &agrave; l&rsquo;avance</label>
+				<div class="input-group">
+					<select class="form-control"  name="ReservationParams"
+						[(ngModel)]="ReservationParams" 
+						 required>
+						 <option value="0.5">0.5</option>
+						 <option value="1">1</option>
+						 <option value="2">2</option>
+						 <option value="3">3</option>
+						 <option value="4">4</option>
+						 <option value="5">5</option>
+						 <option value="6">6</option>
+						 <option value="7">7</option>
+						 <option value="8">8</option>
+						 <option value="9">9</option>
+						 <option value="10">10</option>
+						 </select>
+					<div class="input-group-append">
+						<div class="input-group-text">
+							Heure(s)
+						</div>
+					</div>
+					<div class="input-group-append">
+
+						<div class="input-group-btn">
+							<button type="button" class="btn btn-raised btn-warning"
+								(click)="updateReservationParams()" aria-label="Copy">Sauvegarder</button>
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+
+		</ng-template> </ngb-panel>
+		
+		<ngb-panel
+			id="2"> <ng-template ngbPanelTitle> <span>R&#233;servations
+			Ferm&#233;s</span> </ng-template> <ng-template ngbPanelContent>
+
+
+
+		<div class="cz-bg-image row">
 
 			<section id="simple">
 				<div class="row">
@@ -58,7 +108,7 @@
 		</div>
 
 
-		</ng-template> </ngb-panel> <ngb-panel id="2"> <ng-template ngbPanelTitle>
+		</ng-template> </ngb-panel> <ngb-panel id="3"> <ng-template ngbPanelTitle>
 		<span>&#201;v&#232;nements sp&#232;ciaux</span> </ng-template> <ng-template
 			ngbPanelContent>
 
@@ -149,10 +199,10 @@
 						<i class="ft-x"></i> Cancel
 					</button>
 					<button type="button" class="btn btn-raised btn-raised btn-primary" (click)="createNewEvent();"  [disabled]="!event.date || !event.title"  *ngIf="newEvent == true">
-						<i class="fa fa-check-square-o"></i> Save
+						<i class="fa fa-check-square-o"></i> Sauvegarder
 					</button>
 					<button type="button" class="btn btn-raised btn-raised btn-primary" (click)="editThisEvent();"  [disabled]="!event.date || !event.title"  *ngIf="editEvent == true">
-						<i class="fa fa-check-square-o"></i> Save
+						<i class="fa fa-check-square-o"></i> Sauvegarder
 					</button>
 				</div>
 			</form>

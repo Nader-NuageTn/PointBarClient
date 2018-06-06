@@ -168,6 +168,7 @@ export class ClientReservationComponent implements OnInit {
     // Custom Day View Ends  
     
     fileName: string="Envoyer..";
+    ReservationParams: number;
 
     constructor(private clientReservationService: ClientReservationService, private modalService: NgbModal, private auth: AuthService) {
 
@@ -344,7 +345,9 @@ export class ClientReservationComponent implements OnInit {
         }, { updateOn: 'blur' });
 
         var today = { year: now.getFullYear(), month: now.getMonth() + 1, day: now.getDate() };
-
+          this.clientReservationService.getReservationParams().subscribe(data => {
+            this.ReservationParams = +data;
+        });
         this.clientReservationService.getNextEvent(today).subscribe(data => {
             console.dir(data);
             if (data != null && data.hasPhoto == true) {
@@ -397,13 +400,24 @@ export class ClientReservationComponent implements OnInit {
             const modalRef = this.modalService.open(NgbdModalContentTimeInvalide);
             modalRef.componentInstance.reason = "Tranche horaire invalide";
 
-        } else if (this.reservation.date == this.disabledModel && this.reservation.timeFrom["hour"] < now.getHours() + 2) {
+        } else if (this.reservation.date == this.disabledModel && this.reservation.timeFrom["hour"] < now.getHours() + this.ReservationParams) {
             const modalRef = this.modalService.open(NgbdModalContentTimeInvalide);
-            modalRef.componentInstance.reason = "Votre r\u00e9servation doit \u00eatre au minimum 2 heure \u00e0 l'avance";
+            if (this.ReservationParams < 1) {
+                modalRef.componentInstance.reason = "Votre r\u00e9servation doit \u00eatre au minimum 30 minutes \u00e0 l'avance";
+            }else if (this.ReservationParams == 1) {
+                modalRef.componentInstance.reason = "Votre r\u00e9servation doit \u00eatre au minimum une heure \u00e0 l'avance";
+                
+            }else modalRef.componentInstance.reason = "Votre r\u00e9servation doit \u00eatre au minimum "+this.ReservationParams+" heures \u00e0 l'avance";
+            
 
-        } else if (this.reservation.date == this.disabledModel && this.reservation.timeFrom["hour"] == now.getHours() + 2 && this.reservation.timeFrom["minute"] <= now.getMinutes()) {
+        } else if (this.reservation.date == this.disabledModel && this.reservation.timeFrom["hour"] == now.getHours() + this.ReservationParams && this.reservation.timeFrom["minute"] <= now.getMinutes()) {
             const modalRef = this.modalService.open(NgbdModalContentTimeInvalide);
-            modalRef.componentInstance.reason = "Votre r\u00e9servation doit \u00eatre au minimum 2 heure \u00e0 l'avance";
+           if (this.ReservationParams < 1) {
+                modalRef.componentInstance.reason = "Votre r\u00e9servation doit \u00eatre au minimum 30 minutes \u00e0 l'avance";
+            }else if (this.ReservationParams == 1) {
+                modalRef.componentInstance.reason = "Votre r\u00e9servation doit \u00eatre au minimum une heure \u00e0 l'avance";
+                
+            }else modalRef.componentInstance.reason = "Votre r\u00e9servation doit \u00eatre au minimum "+this.ReservationParams+" heures \u00e0 l'avance";
 
         } else if (this.reservation.qtyMen == 0 && this.reservation.qtyMen == 0) {
             this.clientReservationService.requiredNumberOfPersonError();

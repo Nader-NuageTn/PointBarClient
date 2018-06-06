@@ -11,59 +11,114 @@
 			r&#233;servation</h4>
 		<hr>
 
-		<ngb-accordion [closeOthers]="true" activeIds="1"> 
-		
-		<ngb-panel
-			id="1"> <ng-template ngbPanelTitle> <span>Conditions des R&#233;servations</span> </ng-template> <ng-template ngbPanelContent>
+		<ngb-accordion [closeOthers]="true" activeIds="1"> <ngb-panel
+			id="1"> <ng-template ngbPanelTitle> <span>Param&#232;tre
+			des services</span> </ng-template> <ng-template ngbPanelContent>
 
 
 
-		<div class="cz-bg-image row" *ngIf="newEvent == false">
+		<div class="cz-bg-image row">
 
-			
-
-			<div class="form-group">
-				<label for="companyName">R&#233;servation &agrave; l&rsquo;avance</label>
-				<div class="input-group">
-					<select class="form-control"  name="ReservationParams"
-						[(ngModel)]="ReservationParams" 
-						 required>
-						 <option value="0.5">0.5</option>
-						 <option value="1">1</option>
-						 <option value="2">2</option>
-						 <option value="3">3</option>
-						 <option value="4">4</option>
-						 <option value="5">5</option>
-						 <option value="6">6</option>
-						 <option value="7">7</option>
-						 <option value="8">8</option>
-						 <option value="9">9</option>
-						 <option value="10">10</option>
-						 </select>
-					<div class="input-group-append">
-						<div class="input-group-text">
-							Heure(s)
+			<form class="form" #f="ngForm">
+				<h4 class="form-section">1er Service</h4>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="timesheetinput5"> Heure de d&#233;but</label>
+							<div class="position-relative has-icon-left">
+								<input type="time" class="form-control" [(ngModel)]="ReservationParams.firstServiceStart" 
+									name="firstServiceStart"
+									style="padding-right: 0px; padding-left: 30px;">
+								<div class="form-control-position">
+									<i class="ft-clock"></i>
+								</div>
+							</div>
 						</div>
 					</div>
-					<div class="input-group-append">
-
-						<div class="input-group-btn">
-							<button type="button" class="btn btn-raised btn-warning"
-								(click)="updateReservationParams()" aria-label="Copy">Sauvegarder</button>
-
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="timesheetinput6"> Heure de fin</label>
+							<div class="position-relative has-icon-left">
+								<input type="time" class="form-control" [(ngModel)]="ReservationParams.firstServiceEnd" 
+									name="firstServiceEnd" style="padding-right: 0px; padding-left: 28px;">
+								<div class="form-control-position">
+									<i class="ft-clock"></i>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
 
+				<div class="row">
+					<div class="col-md-12">
+						<div class="form-group">
+							<label for="timesheetinput6"> Arriv&#233;e avant</label>
+							<div class="position-relative has-icon-left">
+								<input type="time" class="form-control" [(ngModel)]="ReservationParams.firstServiceArrival" 
+									name="firstServiceArrival">
+								<div class="form-control-position">
+									<i class="ft-clock"></i>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<h4 class="form-section">2&#232;me Service</h4>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="timesheetinput5"> Heure de d&#233;but</label>
+							<div class="position-relative has-icon-left">
+								<input type="time" class="form-control" [(ngModel)]="ReservationParams.secondServiceStart" 
+									name="secondServiceStart"
+									style="padding-right: 0px; padding-left: 30px;">
+								<div class="form-control-position">
+									<i class="ft-clock"></i>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="timesheetinput6"> Heure de fin</label>
+							<div class="position-relative has-icon-left">
+								<input type="time" class="form-control" [(ngModel)]="ReservationParams.secondServiceEnd" 
+									name="secondServiceEnd" style="padding-right: 0px; padding-left: 28px;">
+								<div class="form-control-position">
+									<i class="ft-clock"></i>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="form-group">
+							<label for="timesheetinput6"> Arriv&#233;e avant</label>
+							<div class="position-relative has-icon-left">
+								<input type="time" class="form-control" [(ngModel)]="ReservationParams.secondServiceArrival" 
+									name="secondServiceArrival">
+								<div class="form-control-position">
+									<i class="ft-clock"></i>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="form-actions">
+					<button type="button" class="btn btn-raised btn-raised btn-primary" style="margin-bottom: 0;"
+						(click)="updeservationParams();" >
+						<i class="fa fa-check-square-o"></i> Sauvegarder
+					</button>
+				</div>
+			</form>
 		</div>
 
 
-		</ng-template> </ngb-panel>
-		
-		<ngb-panel
-			id="2"> <ng-template ngbPanelTitle> <span>R&#233;servations
-			Ferm&#233;s</span> </ng-template> <ng-template ngbPanelContent>
+		</ng-template> </ngb-panel> <ngb-panel id="2"> <ng-template ngbPanelTitle>
+		<span>R&#233;servations Ferm&#233;s</span> </ng-template> <ng-template
+			ngbPanelContent>
 
 
 
@@ -75,7 +130,8 @@
 						<div class="card">
 							<div class="card-body">
 								<div class="card-block" style="padding: 0px;">
-									<ng2-smart-table [settings]="settings1" [source]="source1" (custom)="onCustom($event)"></ng2-smart-table>
+									<ng2-smart-table [settings]="settings1" [source]="source1"
+										(custom)="onCustom($event)"></ng2-smart-table>
 								</div>
 							</div>
 						</div>
@@ -114,14 +170,16 @@
 
 
 
-		<div class="cz-bg-image row" *ngIf="newEvent == false && editEvent == false">
+		<div class="cz-bg-image row"
+			*ngIf="newEvent == false && editEvent == false">
 			<section id="simple">
 				<div class="row">
 					<div class="col-sm-12" style="padding: 0px;">
 						<div class="card">
 							<div class="card-body">
 								<div class="card-block" style="padding: 0px;">
-									<ng2-smart-table [settings]="settings" [source]="source" (custom)="onEdit($event)"  (deleteConfirm)="onDelete($event)"></ng2-smart-table>
+									<ng2-smart-table [settings]="settings" [source]="source"
+										(custom)="onEdit($event)" (deleteConfirm)="onDelete($event)"></ng2-smart-table>
 								</div>
 							</div>
 						</div>
@@ -138,8 +196,10 @@
 
 		<!--Sidebar Options Starts-->
 		<h6 class="text-center text-bold-500 mb-3 text-uppercase"
-			*ngIf="newEvent == true || editEvent == true">Nouvel &#233;v&#232;nement</h6>
-		<div class="cz-bg-image row" *ngIf="newEvent == true || editEvent == true">
+			*ngIf="newEvent == true || editEvent == true">Nouvel
+			&#233;v&#232;nement</h6>
+		<div class="cz-bg-image row"
+			*ngIf="newEvent == true || editEvent == true">
 			<form class="form">
 				<div class="form-body">
 
@@ -148,8 +208,9 @@
 							<label for="companyName">Date de l'&#233;v&#232;nement</label>
 							<div class="input-group">
 								<input class="form-control" placeholder="yyyy-mm-dd" name="dp"
-									 [(ngModel)]="event.date" ngbDatepicker [dayTemplate]="customDay"
-									[minDate]="disabledModel" #d3="ngbDatepicker">
+									[(ngModel)]="event.date" ngbDatepicker
+									[dayTemplate]="customDay" [minDate]="disabledModel"
+									#d3="ngbDatepicker">
 								<div class="input-group-append">
 									<div class="input-group-text" (click)="d3.toggle()">
 										<i class="fa fa-calendar" style="cursor: pointer;"></i>
@@ -162,7 +223,8 @@
 						<div class="form-group">
 							<label for="companyName">Titre de l'&#233;v&#232;nement</label>
 							<div class="input">
-								<input class="form-control" type="text" name="titre" [(ngModel)]="event.title">
+								<input class="form-control" type="text" name="titre"
+									[(ngModel)]="event.title">
 							</div>
 						</div>
 					</div>
@@ -170,7 +232,8 @@
 						<div class="form-group">
 							<label for="projectinput5">Description de
 								l'&#232;v&#232;nement</label>
-							<textarea rows="3" cols="6" class="form-control" name="fname" [(ngModel)]="event.description"></textarea>
+							<textarea rows="3" cols="6" class="form-control" name="fname"
+								[(ngModel)]="event.description"></textarea>
 						</div>
 					</div>
 					<div class="col-12">
@@ -182,9 +245,9 @@
 		                                      <span class="custom-file-control"></span>
 											</label> -->
 							<div class="custom-file center-block d-block">
-								<input type="file" class="custom-file-input" accept="image/*" (change)="onFileChange($event)" 
-									id="inputGroupFile01"> <label class="custom-file-label"
-									for="inputGroupFile01">{{FileName}}</label>
+								<input type="file" class="custom-file-input" accept="image/*"
+									(change)="onFileChange($event)" id="inputGroupFile01">
+								<label class="custom-file-label" for="inputGroupFile01">{{FileName}}</label>
 							</div>
 						</div>
 
@@ -198,10 +261,14 @@
 						class="btn btn-raised btn-raised btn-warning mr-1">
 						<i class="ft-x"></i> Cancel
 					</button>
-					<button type="button" class="btn btn-raised btn-raised btn-primary" (click)="createNewEvent();"  [disabled]="!event.date || !event.title"  *ngIf="newEvent == true">
+					<button type="button" class="btn btn-raised btn-raised btn-primary"
+						(click)="createNewEvent();"
+						[disabled]="!event.date || !event.title" *ngIf="newEvent == true">
 						<i class="fa fa-check-square-o"></i> Sauvegarder
 					</button>
-					<button type="button" class="btn btn-raised btn-raised btn-primary" (click)="editThisEvent();"  [disabled]="!event.date || !event.title"  *ngIf="editEvent == true">
+					<button type="button" class="btn btn-raised btn-raised btn-primary"
+						(click)="editThisEvent();"
+						[disabled]="!event.date || !event.title" *ngIf="editEvent == true">
 						<i class="fa fa-check-square-o"></i> Sauvegarder
 					</button>
 				</div>

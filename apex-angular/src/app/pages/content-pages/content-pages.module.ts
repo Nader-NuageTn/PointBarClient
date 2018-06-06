@@ -25,7 +25,13 @@ import { ConfirmReservationComponent } from './confirm-reservation/confirm-reser
 
 import { LoginSecuriteComponent } from './login-securite/login-securite.component';
 import { CancelReservationComponent } from './cancel-reservation/cancel-reservation.component';
+import { TranslateModule } from '@ngx-translate/core';
+
 @NgModule({
+    exports: [
+        NgbModule,
+        TranslateModule
+    ],
     imports: [
         CommonModule,
         ContentPagesRoutingModule,
@@ -33,7 +39,8 @@ import { CancelReservationComponent } from './cancel-reservation/cancel-reservat
         HttpModule,
         NgbModule,  
         Ng2SmartTableModule,
-        CustomFormsModule     
+        CustomFormsModule,
+        TranslateModule     
     ],
     declarations: [
         ComingSoonPageComponent,

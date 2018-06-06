@@ -5,6 +5,7 @@ import { ReservationComponent } from './reservation.component';
 import { ReservationManagementComponent } from "./reservation-management/reservation-management.component";
 import { ReservationSettingComponent } from "./reservation-setting/reservation-setting.component";
 import { AdminGuardService } from '../shared/auth/admin-guard.service';
+import { ManagerGuardService } from '../shared/auth/manager-guard.service';
 
 
 const routes: Routes = [
@@ -17,7 +18,7 @@ const routes: Routes = [
                 data: {
                   title: 'Gestion des Reservations'
                 },
-                canActivate: [AdminGuardService]
+                canActivate: [ManagerGuardService]
             }, {
                 path: 'ReservationSetteing',
                 component: ReservationSettingComponent,

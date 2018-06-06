@@ -29,6 +29,9 @@ import { CancelReservationService } from './cancel-reservation/cancel-reservatio
 
 
 @NgModule({
+    exports: [
+        NgbModule,
+    ],
     imports: [
         CommonModule,
         ContentPagesRoutingModule,
@@ -36,7 +39,7 @@ import { CancelReservationService } from './cancel-reservation/cancel-reservatio
         HttpModule,
         NgbModule,  
         Ng2SmartTableModule,
-        CustomFormsModule     
+        CustomFormsModule,
     ],
     declarations: [
         ComingSoonPageComponent,

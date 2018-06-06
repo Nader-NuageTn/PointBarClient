@@ -23,6 +23,7 @@ import { AuthService } from './shared/auth/auth.service';
 import { AuthGuard } from './shared/auth/auth-guard.service';
 import { SecuriteGuardService } from './shared/auth/securite-guard.service';
 import { AdminGuardService } from './shared/auth/admin-guard.service';
+import { ManagerGuardService } from './shared/auth/manager-guard.service';
 import { ConfirmReservationService } from './pages/content-pages/confirm-reservation/confirm-reservation.service';
 import * as $ from 'jquery';
 
@@ -65,7 +66,8 @@ export function createTranslateLoader(http: HttpClient) {
         AuthGuard,
         SecuriteGuardService,
         ConfirmReservationService,
-        AdminGuardService
+        AdminGuardService,
+        ManagerGuardService
     ],
     bootstrap: [AppComponent]
 })

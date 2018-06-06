@@ -228,10 +228,18 @@
 										class="btn btn-raised btn-raised btn-warning mr-1">
 										<i class="ft-x"></i> Cancel
 									</button>
-									<button type="submit"
-										class="btn btn-raised btn-raised btn-primary">
-										<i class="fa fa-check-square-o"></i> Save
-									</button>
+									
+											
+											<a class="position-relative has-icon-right">
+													<button type="submit"
+													class="btn btn-raised btn-raised btn-primary">
+													<i class="fa fa-check-square-o"></i> Save
+													<i class="ft-loader spinner" *ngIf="loadSpinner"></i>
+												</button>
+												
+											</a>
+									
+<!--                         <div class="mt-2"><i class="fa fa-cog spinner font-large-2"></i></div> -->
 									<div class="col-md-12 cancelReservation">
 										<a (click)="open(content)">Annuler ma r&#233;servation</a>
 									</div>

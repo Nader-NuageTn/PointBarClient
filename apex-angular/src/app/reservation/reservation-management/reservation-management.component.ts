@@ -83,12 +83,7 @@ export class ReservationManagementComponent implements OnInit {
         console.log(this.source);
         
         if (window.confirm('Are you sure you want to Confirm this reservation?')) {
-          const index = event.source.data.indexOf(event.data);
-        console.log(index);
-        if (index !== -1) {
-            event.source.data.splice(index, 1);
-            this.source = new LocalDataSource(event.source.data);
-            }
+        
         this.reservationManagementService.confirmerReservation(event.data.id).subscribe(data => {
                console.log(data);
                if(data == "success") {

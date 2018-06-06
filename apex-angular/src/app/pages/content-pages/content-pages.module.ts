@@ -25,12 +25,12 @@ import { ConfirmReservationComponent } from './confirm-reservation/confirm-reser
 
 import { LoginSecuriteComponent } from './login-securite/login-securite.component';
 import { CancelReservationComponent } from './cancel-reservation/cancel-reservation.component';
-import { TranslateModule } from '@ngx-translate/core';
+import { CancelReservationService } from './cancel-reservation/cancel-reservation.service';
+
 
 @NgModule({
     exports: [
         NgbModule,
-        TranslateModule
     ],
     imports: [
         CommonModule,
@@ -40,7 +40,6 @@ import { TranslateModule } from '@ngx-translate/core';
         NgbModule,  
         Ng2SmartTableModule,
         CustomFormsModule,
-        TranslateModule     
     ],
     declarations: [
         ComingSoonPageComponent,
@@ -60,7 +59,7 @@ import { TranslateModule } from '@ngx-translate/core';
         LoginSecuriteComponent,
         CancelReservationComponent,
     ],
-    providers: [SignupServiceService, LoginService, ClientReservationService,ReservationSettingService],
+    providers: [SignupServiceService, LoginService, ClientReservationService,ReservationSettingService,CancelReservationService],
     entryComponents: [NgbdModalContent,NgbdModalContentSetting,NgbdModalContentTimeInvalide,NgbdModalContentImageSetting ]
 })
 export class ContentPagesModule { }

@@ -102,6 +102,11 @@ export class ClientReservationService {
             .map((res: Response) => res)
             .catch(this.handleError);
     }
+     getReservationParams() {
+        return this.http.get('/reservationController/getReservationParams')
+            .map((data: Response) => data.text())
+            .catch(this.handleError);
+    }
     //For Uploading Profile Picture
     postData(formData: FormData) {
         return this.http.post('/reservationController/uploadProfilePicture', formData)

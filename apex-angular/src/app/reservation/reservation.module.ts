@@ -8,7 +8,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReservationRoutingModule } from "./reservation-routing.module";
 
 import { ReservationManagementComponent } from './reservation-management/reservation-management.component';
-import { ConfirmReservationComponent } from './confirm-reservation/confirm-reservation.component';
 import { ReservationComponent } from './reservation.component';
 import { ReservationSettingComponent, NgbdModalContentSetting  } from './reservation-setting/reservation-setting.component';
 import { ReservationManagementService } from './reservation-management/reservation-management.service';
@@ -27,7 +26,6 @@ import { DoBcomponentComponent } from './do-bcomponent/do-bcomponent.component';
     ],
     declarations: [
         ReservationManagementComponent,
-        ConfirmReservationComponent,
         ReservationComponent,
         ReservationSettingComponent,
         NgbdModalContentSetting,

@@ -12,6 +12,7 @@ import { ClientReservationComponent } from "./client-reservation/client-reservat
 import { ConfirmReservationComponent } from "./confirm-reservation/confirm-reservation.component";
 import { LoginSecuriteComponent } from "./login-securite/login-securite.component";
 import { SecuriteGuardService } from '../../shared/auth/securite-guard.service';
+import { CancelReservationComponent } from './cancel-reservation/cancel-reservation.component';
 
 const routes: Routes = [
     {
@@ -89,6 +90,14 @@ const routes: Routes = [
                     title: 'Login Success'
                 },
                 canActivate: [SecuriteGuardService]
+
+            }, {
+                path: 'cancel/:id',
+                component: CancelReservationComponent,
+                data: {
+                    title: 'cancel'
+                }
+            
 
             }
 

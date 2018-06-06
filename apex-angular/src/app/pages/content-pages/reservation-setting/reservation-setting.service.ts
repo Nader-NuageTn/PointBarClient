@@ -38,7 +38,9 @@ export class ReservationSettingService {
     dateActivated() {
         this.toastr.success("La date a \u00e9t\u00e9 activ\u00e9e avec succ\u00e9s.");
     }
-    
+    updateReservationParamsDone(){
+        this.toastr.success("La condition des r\u00e9servations  a \u00e9t\u00e9 modifi\u00e9e avec succ\u00e9s.");
+    }
     
 
 
@@ -91,6 +93,19 @@ export class ReservationSettingService {
         const headers = new Headers();
         headers.append('Content-Type', 'application/json');
         return this.http.post('/SpecialEventController/deleteEvent', eventID+"", { headers: headers })
+            .map((data: Response) => data.text())
+            .catch(this.handleError);
+    }
+    
+    getReservationParams() {
+        return this.http.get('/reservationController/getReservationParams')
+            .map((data: Response) => data.text())
+            .catch(this.handleError);
+    }
+    updateReservationParams(reservationParams) {
+        const headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        return this.http.post('/reservationController/updateReservationParams', reservationParams, { headers: headers })
             .map((data: Response) => data.text())
             .catch(this.handleError);
     }

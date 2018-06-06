@@ -69,11 +69,13 @@ export class AuthService {
                     if(data == "Administrator") {
                         localStorage.setItem('isAdmin', 'true');
                         localStorage.setItem('isSecurity', 'true');
+                        localStorage.setItem('isManager', 'true');
                         this.router.navigate(['reservations/ReservationManagement']); 
                         }
                     else if(data == "Securite") {
                         localStorage.setItem('isAdmin', 'false');
                         localStorage.setItem('isSecurity', 'true');
+                        localStorage.setItem('isManager', 'false');
                         console.log(localStorage.getItem('isScan'));
                             if(localStorage.getItem('isScan') == 'true') {
                                 this.router.navigate(['pages/confirmation', localStorage.getItem('idRes')]); 
@@ -88,21 +90,24 @@ export class AuthService {
                             }
                         }
                     else if(data == "Gerant") {
-                        this.router.navigate(['reservations/ReservationManagement']); 
                         localStorage.setItem('isAdmin', 'false');
                         localStorage.setItem('isSecurity', 'false');
+                        localStorage.setItem('isManager', 'true');
+                        this.router.navigate(['reservations/ReservationManagement']); 
                         }
                 }else if(data == "wait") {
                     this.typeErrorNotActive();
                     localStorage.setItem('loged', 'false');
                     localStorage.setItem('isAdmin', 'false');
                     localStorage.setItem('isSecurity', 'false');
+                    localStorage.setItem('isManager', 'false');
                 }
                 else if(data == "deleted") {
                 this.typeErrordeleted();
                     localStorage.setItem('loged', 'false');
                     localStorage.setItem('isAdmin', 'false');
                     localStorage.setItem('isSecurity', 'false');
+                    localStorage.setItem('isManager', 'false');
                 }
                 else {
                 console.log("Fail");
@@ -110,6 +115,7 @@ export class AuthService {
                     localStorage.setItem('loged', 'false');
                     localStorage.setItem('isAdmin', 'false');
                     localStorage.setItem('isSecurity', 'false');
+                    localStorage.setItem('isManager', 'false');
                 }
             });
             //this.loginForm.reset();
@@ -121,6 +127,7 @@ export class AuthService {
     localStorage.setItem('isAdmin', 'false');
     localStorage.setItem('isSecurity', 'false');
     localStorage.setItem('isScan', 'false');
+    localStorage.setItem('isManager', 'false');
       this.router.navigate(['pages/login']);
       console.log('succcess');
   }
@@ -144,7 +151,14 @@ export class AuthService {
           return false;
           }  
   }
-
+  
+  getIsManager() {
+      if(localStorage.getItem('isManager') == 'true') {
+          return true;
+          }else {
+          return false;
+          } 
+  }
 
   isAuthenticated() {
     // here you can check if user is authenticated or not through his token 

@@ -137,6 +137,8 @@ export class ClientReservationComponent implements OnInit {
 
     closeResult: string;
     reservationID: number;
+    
+    loadSpinner:boolean = false;
     // Using for Meridian
     toggleMeridian() {
         this.meridian = !this.meridian;
@@ -168,6 +170,7 @@ export class ClientReservationComponent implements OnInit {
     // Custom Day View Ends  
     
     fileName: string="Envoyer..";
+    ReservationParams: number;
 
     constructor(private clientReservationService: ClientReservationService, private modalService: NgbModal, private auth: AuthService) {
 
@@ -344,7 +347,9 @@ export class ClientReservationComponent implements OnInit {
         }, { updateOn: 'blur' });
 
         var today = { year: now.getFullYear(), month: now.getMonth() + 1, day: now.getDate() };
-
+          this.clientReservationService.getReservationParams().subscribe(data => {
+            this.ReservationParams = +data;
+        });
         this.clientReservationService.getNextEvent(today).subscribe(data => {
             console.dir(data);
             if (data != null && data.hasPhoto == true) {
@@ -384,40 +389,53 @@ export class ClientReservationComponent implements OnInit {
 
     }
     onSubmit() {
-
+        this.loadSpinner = true;
         console.dir(this.reservation.timeFrom);
         console.dir(this.reservation.timeTo);
         
-        if (this.reservation.firstName == null || this.reservation.lastName == null || this.reservation.email == null || this.reservation.phone == null
-            || this.reservation.date == null || this.reservation.timeFrom == null || this.reservation.timeTo == null || this.reservation.qtyMen == null || this.reservation.qtyMen == null
-            || this.reservation.firstName == "" || this.reservation.lastName == "" || this.reservation.email == "" || this.reservation.phone == "" || this.reservation.timeFrom == "" || this.reservation.timeTo == "") {
+        if (!this.registerForm.valid) {
             this.clientReservationService.requiredFieldError();
-
+            this.loadSpinner = false;
         } else if (this.reservation.timeFrom["hour"] > this.reservation.timeTo["hour"] || (this.reservation.timeFrom["hour"] == this.reservation.timeTo["hour"] && this.reservation.timeFrom["minute"] >= this.reservation.timeTo["minute"])) {
             const modalRef = this.modalService.open(NgbdModalContentTimeInvalide);
             modalRef.componentInstance.reason = "Tranche horaire invalide";
+            this.loadSpinner = false;
 
-        } else if (this.reservation.date == this.disabledModel && this.reservation.timeFrom["hour"] < now.getHours() + 2) {
+        } else if (this.reservation.date == this.disabledModel && this.reservation.timeFrom["hour"] < now.getHours() + this.ReservationParams) {
             const modalRef = this.modalService.open(NgbdModalContentTimeInvalide);
-            modalRef.componentInstance.reason = "Votre r\u00e9servation doit \u00eatre au minimum 2 heure \u00e0 l'avance";
+            if (this.ReservationParams < 1) {
+                modalRef.componentInstance.reason = "Votre r\u00e9servation doit \u00eatre au minimum 30 minutes \u00e0 l'avance";
+            }else if (this.ReservationParams == 1) {
+                modalRef.componentInstance.reason = "Votre r\u00e9servation doit \u00eatre au minimum une heure \u00e0 l'avance";
+                
+            }else modalRef.componentInstance.reason = "Votre r\u00e9servation doit \u00eatre au minimum "+this.ReservationParams+" heures \u00e0 l'avance";
+            this.loadSpinner = false;
 
-        } else if (this.reservation.date == this.disabledModel && this.reservation.timeFrom["hour"] == now.getHours() + 2 && this.reservation.timeFrom["minute"] <= now.getMinutes()) {
+        } else if (this.reservation.date == this.disabledModel && this.reservation.timeFrom["hour"] == now.getHours() + this.ReservationParams && this.reservation.timeFrom["minute"] <= now.getMinutes()) {
             const modalRef = this.modalService.open(NgbdModalContentTimeInvalide);
-            modalRef.componentInstance.reason = "Votre r\u00e9servation doit \u00eatre au minimum 2 heure \u00e0 l'avance";
+           if (this.ReservationParams < 1) {
+                modalRef.componentInstance.reason = "Votre r\u00e9servation doit \u00eatre au minimum 30 minutes \u00e0 l'avance";
+            }else if (this.ReservationParams == 1) {
+                modalRef.componentInstance.reason = "Votre r\u00e9servation doit \u00eatre au minimum une heure \u00e0 l'avance";
+                
+            }else modalRef.componentInstance.reason = "Votre r\u00e9servation doit \u00eatre au minimum "+this.ReservationParams+" heures \u00e0 l'avance";
+            this.loadSpinner = false;
 
         } else if (this.reservation.qtyMen == 0 && this.reservation.qtyMen == 0) {
             this.clientReservationService.requiredNumberOfPersonError();
-
+            this.loadSpinner = false;
 
         } else {
             this.clientReservationService.sendReservationRequest(this.reservation).subscribe(data => {
 
                 if (data == "fail") {
                     this.clientReservationService.reservationFail();
+                    this.loadSpinner=false;
 
                 } else if (data == "closed") {
                     const modalRef = this.modalService.open(NgbdModalContent);
                     modalRef.componentInstance.date = this.reservation.date.month + "-" + this.reservation.date.day + "-" + this.reservation.date.year;
+                    this.loadSpinner=false;
 
                 } else {
 
@@ -430,18 +448,16 @@ export class ClientReservationComponent implements OnInit {
                             formData.append('useriD', data);
                             formData.append('fileName', this.fileUp2.name);
                             this.clientReservationService.postData(formData).subscribe(data => {
-                                setTimeout(() => {
                                     this.clientReservationService.reservationSuccess();
-                                    this.reservation = new NewReservationModel("", "", "", "", "", this.disabledModel, "", "", 0, 0);
-                                    this.fileUp2 = null;
-                                    this.fileName = "Envoyer..";
-                                }, 1000);
+                                    this.loadSpinner = false;
+                                    this.registerForm.reset();
                             });
                         };
                         reader.readAsArrayBuffer(this.fileUp2);
                     } else {
                         this.clientReservationService.reservationSuccess();
-                        this.reservation = new NewReservationModel("", "", "", "", "", this.disabledModel, "", "", 0, 0);
+                        this.loadSpinner = false;
+                        this.registerForm.reset();
                     }
 
 

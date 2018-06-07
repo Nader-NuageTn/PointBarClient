@@ -4,13 +4,15 @@
 			<div class="col-12 align-items-center justify-content-center"
 				style="display: flex; margin: auto;">
 
-				<div class="grid-hover" *ngIf="displayEvent == true && eventExist == true">
+				<div class="grid-hover"
+					*ngIf="displayEvent == true && eventExist == true">
 
 					<div class="row">
 						<div class="col-md-6 col-12">
 							<figure class="effect-sarah" id="eventGrid"
 								[ngStyle]="{'min-width':minwidth  ? minwidth : '530px', 'max-height':maxheight  ? maxheight : '360px' }">
-								<img src="assets/img/gallery/13.jpg" alt="img13"  *ngIf="eventImage == false"/>
+								<img src="assets/img/gallery/Photo2-Serv2.jpg" alt="img13"
+									*ngIf="eventImage == false" />
 								<figcaption style="z-index: 999;">
 									<h2>
 										<span>{{eventTitle}}</span><small>{{eventDate}}</small>
@@ -25,16 +27,20 @@
 
 				<div class="card width-600">
 					<div class="card-header">
+						<img src="assets/img/logos/logo-point-bar.png"
+							style="max-width: 110px; float: right !important; position: absolute; right: 0; margin: -10px 25px;" />
 						<div class="col-sm-8">
 							<div class="card-title font-medium-5 pt-2 ml-2">R&#233;servation</div>
+
 						</div>
+
 					</div>
 					<div class="card-body">
 						<div class="px-3">
 							<form class="form" (ngSubmit)="onSubmit()" #f="ngForm">
 								<div class="form-body">
 									<h4 class="form-section">
-										<i class="ft-user"></i>Informations Personnel
+										<i class="ft-user"></i>Info Personnel
 									</h4>
 									<div class="row">
 										<div class="col-md-6">
@@ -118,15 +124,32 @@
 												</div>
 											</div>
 										</div>
-										<div class="col-md-6">
+
+
+									</div>
+									<div class="row">
+										<div class="col-md-12">
 											<div class="form-group">
-												<label for="projectinput5">Tranche horaire (24 heures)</label>
-												<div class="input-group-append">
-													<ngb-timepicker [(ngModel)]="reservation.timeFrom"
-														name="dpFrom" [spinners]="spinners" required></ngb-timepicker>
-													<span style="margin-top: 4%;">-</span>
-													<ngb-timepicker [(ngModel)]="reservation.timeTo"
-														name="dpTo" [spinners]="spinners" required></ngb-timepicker>
+												<label for="projectinput5">Service</label>
+												<div
+													class="custom-control custom-radio custom-control-inline">
+													<input type="radio" id="customRadioInline1"
+														name="customRadioInline1" class="custom-control-input">
+													<label class="custom-control-label"
+														style="text-transform: none;" for="customRadioInline1">1er
+														Service: de 12h &#224; 20h</label><label
+														style="font-size: x-small;"> (Arriv&#233;e avant
+														16h)</label>
+												</div>
+												<div
+													class="custom-control custom-radio custom-control-inline">
+													<input type="radio" id="customRadioInline2" checked
+														name="customRadioInline1" class="custom-control-input">
+													<label class="custom-control-label"
+														style="text-transform: none;" for="customRadioInline2">2&#232;me
+														Service: de 21h30 &#224; 03h</label><label
+														style="font-size: x-small;"> (Arriv&#233;e avant
+														00h)</label>
 												</div>
 
 											</div>
@@ -134,53 +157,64 @@
 
 
 									</div>
-
 									<div class="row">
 										<div class="col-md-6">
 
 											<div class="form-group">
-												<label for="companyName" style="color: #009DA0;">Nombre
-													de personne (homme)</label>
-												<div class="input-group">
-													<input type="number" min="0" class="form-control"
-														[(ngModel)]="reservation.qtyMen" name="nbHomme"
-														aria-label="Amount (to the nearest dollar)" required>
-													<div class="input-group-append">
-														<div class="input-group-btn">
-															<button type="button" class="btn btn-raised btn-warning"
-																(click)="reservationQtyMenPlus()" aria-label="Copy">
-																<i class="ft-user-plus"></i>
-															</button>
-															<button type="button" class="btn btn-raised btn-info"
-																(click)="reservationQtyMenMinus()" aria-label="Paste">
-																<i class="ft-user-minus"></i>
-															</button>
+
+												<fieldset>
+													<div class="input-group">
+														<div class="input-group-prepend">
+															<span class="input-group-text"><i
+																class="icon-symbol-male"
+																style="color: #157878; font-weight: 600;"></i></span>
+														</div>
+														<input type="number" min="0" class="form-control"
+															[(ngModel)]="reservation.qtyMen" name="nbHomme"
+															aria-label="Amount (to the nearest dollar)" required>
+														<div class="input-group-append">
+															<div class="input-group-btn">
+																<button type="button" class="btn btn-raised btn-warning"
+																	(click)="reservationQtyMenPlus()" aria-label="Copy">
+																	<i class="ft-user-plus"></i>
+																</button>
+																<button type="button" class="btn btn-raised btn-info"
+																	(click)="reservationQtyMenMinus()" aria-label="Paste">
+																	<i class="ft-user-minus"></i>
+																</button>
+															</div>
 														</div>
 													</div>
-												</div>
+												</fieldset>
+
 											</div>
 										</div>
 										<div class="col-md-6">
 											<div class="form-group">
-												<label for="projectinput5" style="color: #FF586B;">Nombre
-													de personne (femme)</label>
-												<div class="input-group">
-													<input type="number" min="0" class="form-control"
-														[(ngModel)]="reservation.qtyWomen" name="nbFemme"
-														aria-label="Amount (to the nearest dollar)" required>
-													<div class="input-group-append">
-														<div class="input-group-btn">
-															<button type="button" class="btn btn-raised btn-warning"
-																(click)="reservationQtyWomenPlus()" aria-label="Copy">
-																<i class="ft-user-plus"></i>
-															</button>
-															<button type="button" class="btn btn-raised btn-info"
-																(click)="reservationQtyWomenMinus()" aria-label="Paste">
-																<i class="ft-user-minus"></i>
-															</button>
+												<fieldset>
+													<div class="input-group">
+														<div class="input-group-prepend">
+															<span class="input-group-text"><i
+																class="icon-symbol-female"
+																style="color: #FF5722; font-weight: 600;"></i></span>
+														</div>
+														<input type="number" min="0" class="form-control"
+															[(ngModel)]="reservation.qtyWomen" name="nbFemme"
+															aria-label="Amount (to the nearest dollar)" required>
+														<div class="input-group-append">
+															<div class="input-group-btn">
+																<button type="button" class="btn btn-raised btn-warning"
+																	(click)="reservationQtyWomenPlus()" aria-label="Copy">
+																	<i class="ft-user-plus"></i>
+																</button>
+																<button type="button" class="btn btn-raised btn-info"
+																	(click)="reservationQtyWomenMinus()" aria-label="Paste">
+																	<i class="ft-user-minus"></i>
+																</button>
+															</div>
 														</div>
 													</div>
-												</div>
+												</fieldset>
 											</div>
 										</div>
 

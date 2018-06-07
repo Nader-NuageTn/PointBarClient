@@ -99,7 +99,7 @@ export class ReservationSettingService {
     
     getReservationParams() {
         return this.http.get('/reservationController/getReservationParams')
-            .map((data: Response) => data.text())
+            .map((data: Response) => data.json())
             .catch(this.handleError);
     }
     updateReservationParams(reservationParams) {

@@ -7,6 +7,7 @@ const now = new Date();
 @Component({
   selector: 'app-reservation-management',
   templateUrl: './reservation-management.component.html',
+  styleUrls: ['./reservation-management.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
 export class ReservationManagementComponent implements OnInit {
@@ -19,6 +20,7 @@ export class ReservationManagementComponent implements OnInit {
   trancheHorTo:any = {};
     
   allReservations:boolean = false;
+  loadSpinner:boolean = false;
 
   constructor(private reservationManagementService: ReservationManagementService) { 
         this.source = new LocalDataSource(tableData.data); // create the source
@@ -79,6 +81,7 @@ export class ReservationManagementComponent implements OnInit {
     }
     //  Confirm Reservation
     onCustom(event) {
+        this.loadSpinner = true;
         console.log(event);
         console.log(this.source);
         
@@ -89,6 +92,7 @@ export class ReservationManagementComponent implements OnInit {
                if(data == "success") {
                    this.getReservationsEnAttente(); 
                    this.reservationManagementService.activateSuccess();
+                   this.loadSpinner=false;
                     
                 }
             });

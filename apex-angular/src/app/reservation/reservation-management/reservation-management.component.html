@@ -1,5 +1,8 @@
 <!--Confirm Action Starts-->
 <section id="action">
+<div class="my-container" style="z-index:9999999999999999999;" *ngIf="loadSpinner">
+						    <i class="ft-loader spinner" ></i>
+						</div>
 	<div class="row">
 		<div class="col-sm-12">
 			<div class="card">
@@ -18,9 +21,11 @@
 								class="btn btn-raised gradient-purple-bliss white big-shadow">
 								Les R&#233;servations en attente</a>
 						</div>
+						
 						<ng2-smart-table [settings]="reservationsettings" style=" text-align:  center;"
 							[source]="alertSource" (deleteConfirm)="onDeleteConfirm($event)"
-							(editConfirm)="onSaveConfirm($event)" (custom)="onCustom($event)"></ng2-smart-table>
+							(editConfirm)="onSaveConfirm($event)" (custom)="onCustom($event)">
+							</ng2-smart-table>
 					</div>
 				</div>
 			</div>

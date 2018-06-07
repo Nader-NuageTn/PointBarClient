@@ -8,12 +8,11 @@ export class NewReservationModel{
     public phone:String;;
     public  facebook:String;
     public  date:ReservationDateModel;
-    public  timeFrom:String;
-    public  timeTo:String;
+    public  service:String;
     public  qtyMen:number;
     public  qtyWomen:number;
     
-    constructor(firstName:String, lastName:String, email:String, phone:String,facebook:String, date:ReservationDateModel, timeFrom:String, timeTo:String, qtyMen:number, qtyWomen:number) {
+    constructor(firstName:String, lastName:String, email:String, phone:String,facebook:String, date:ReservationDateModel, service:String, qtyMen:number, qtyWomen:number) {
    
         this.firstName = firstName;
         this.lastName = lastName;
@@ -21,8 +20,7 @@ export class NewReservationModel{
         this.phone = phone;
         this.facebook = facebook;
         this.date = date;
-        this.timeFrom = timeFrom;
-        this.timeTo = timeTo;
+        this.service = service;
         this.qtyMen = qtyMen;
         this.qtyWomen = qtyWomen;
        

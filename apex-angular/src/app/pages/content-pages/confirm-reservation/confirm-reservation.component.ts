@@ -16,7 +16,8 @@ export class ConfirmReservationComponent implements OnInit {
   reservationUsed:Boolean = false; 
   reservationInvalide:Boolean = true; 
   reservationDetails =[]; 
-  nbPersonne:number=0;
+  nbPersonneHomme:number=0;
+  nbPersonneFemme:number=0;
   reservationID:number;
     
   isScan: boolean = false;
@@ -59,10 +60,7 @@ export class ConfirmReservationComponent implements OnInit {
 
                     }
                         
-                        
                         this.reservationID = data.id;
-                        data.timeFrom = data.timeFrom.replace("-", ":");
-                        data.timeTo = data.timeTo.replace("-", ":");
                          this.reservationDetails = data;
                         
                         if(data.status == "CONFIRMED") {
@@ -108,7 +106,7 @@ export class ConfirmReservationComponent implements OnInit {
         
   }
     confirm(){
-          this.confirmReservationService.confirmReservation(this.reservationID,this.nbPersonne).subscribe(data => {
+          this.confirmReservationService.confirmReservation(this.reservationID,this.nbPersonneHomme,this.nbPersonneFemme).subscribe(data => {
               
               if(data="success"){
                   this.reservationCorrect= false;
@@ -116,5 +114,25 @@ export class ConfirmReservationComponent implements OnInit {
               }
               console.log(data)
           });
+    }
+    
+    reservationQtyMenPlus() {
+        this.nbPersonneHomme = this.nbPersonneHomme + 1;
+    }
+    reservationQtyMenMinus() {
+        console.log(this.nbPersonneHomme);
+        if(this.nbPersonneHomme > 0 ){
+            this.nbPersonneHomme = this.nbPersonneHomme - 1;
+        }
+        
+    }
+    reservationQtyWomenPlus() {
+        this.nbPersonneFemme = this.nbPersonneFemme + 1;
+    }
+    reservationQtyWomenMinus() {
+         if(this.nbPersonneFemme >0 ){
+             this.nbPersonneFemme = this.nbPersonneFemme - 1;
+         }
+        
     }
 }

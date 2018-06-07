@@ -26,7 +26,8 @@
 						<div class="form-group">
 							<label for="timesheetinput5"> Heure de d&#233;but</label>
 							<div class="position-relative has-icon-left">
-								<input type="time" class="form-control" [(ngModel)]="ReservationParams.firstServiceStart" 
+								<input type="time" class="form-control"
+									[(ngModel)]="ReservationParams.firstServiceStart"
 									name="firstServiceStart"
 									style="padding-right: 0px; padding-left: 30px;">
 								<div class="form-control-position">
@@ -39,8 +40,10 @@
 						<div class="form-group">
 							<label for="timesheetinput6"> Heure de fin</label>
 							<div class="position-relative has-icon-left">
-								<input type="time" class="form-control" [(ngModel)]="ReservationParams.firstServiceEnd" 
-									name="firstServiceEnd" style="padding-right: 0px; padding-left: 28px;">
+								<input type="time" class="form-control"
+									[(ngModel)]="ReservationParams.firstServiceEnd"
+									name="firstServiceEnd"
+									style="padding-right: 0px; padding-left: 28px;">
 								<div class="form-control-position">
 									<i class="ft-clock"></i>
 								</div>
@@ -50,12 +53,28 @@
 				</div>
 
 				<div class="row">
-					<div class="col-md-12">
+					<div class="col-md-6">
 						<div class="form-group">
 							<label for="timesheetinput6"> Arriv&#233;e avant</label>
 							<div class="position-relative has-icon-left">
-								<input type="time" class="form-control" [(ngModel)]="ReservationParams.firstServiceArrival" 
-									name="firstServiceArrival">
+								<input type="time" class="form-control"
+									[(ngModel)]="ReservationParams.firstServiceArrival"
+									name="firstServiceArrival"
+									style="padding-right: 0px; padding-left: 28px;">
+								<div class="form-control-position">
+									<i class="ft-clock"></i>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="companyName">R&#233;serv. avant</label>
+							<div class="position-relative has-icon-left">
+								<input type="time" class="form-control"
+									[(ngModel)]="ReservationParams.firstServiceBefore"
+									name="firstServiceBefore"
+									style="padding-right: 0px; padding-left: 28px;">
 								<div class="form-control-position">
 									<i class="ft-clock"></i>
 								</div>
@@ -70,7 +89,8 @@
 						<div class="form-group">
 							<label for="timesheetinput5"> Heure de d&#233;but</label>
 							<div class="position-relative has-icon-left">
-								<input type="time" class="form-control" [(ngModel)]="ReservationParams.secondServiceStart" 
+								<input type="time" class="form-control"
+									[(ngModel)]="ReservationParams.secondServiceStart"
 									name="secondServiceStart"
 									style="padding-right: 0px; padding-left: 30px;">
 								<div class="form-control-position">
@@ -83,8 +103,10 @@
 						<div class="form-group">
 							<label for="timesheetinput6"> Heure de fin</label>
 							<div class="position-relative has-icon-left">
-								<input type="time" class="form-control" [(ngModel)]="ReservationParams.secondServiceEnd" 
-									name="secondServiceEnd" style="padding-right: 0px; padding-left: 28px;">
+								<input type="time" class="form-control"
+									[(ngModel)]="ReservationParams.secondServiceEnd"
+									name="secondServiceEnd"
+									style="padding-right: 0px; padding-left: 28px;">
 								<div class="form-control-position">
 									<i class="ft-clock"></i>
 								</div>
@@ -93,12 +115,28 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-md-12">
+					<div class="col-md-6">
 						<div class="form-group">
 							<label for="timesheetinput6"> Arriv&#233;e avant</label>
 							<div class="position-relative has-icon-left">
-								<input type="time" class="form-control" [(ngModel)]="ReservationParams.secondServiceArrival" 
-									name="secondServiceArrival">
+								<input type="time" class="form-control"
+									[(ngModel)]="ReservationParams.secondServiceArrival"
+									name="secondServiceArrival"
+									style="padding-right: 0px; padding-left: 28px;">
+								<div class="form-control-position">
+									<i class="ft-clock"></i>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="companyName">R&#233;serv. avant</label>
+							<div class="position-relative has-icon-left">
+								<input type="time" class="form-control"
+									[(ngModel)]="ReservationParams.secondServiceBefore"
+									name="secondServiceBefore"
+									style="padding-right: 0px; padding-left: 28px;">
 								<div class="form-control-position">
 									<i class="ft-clock"></i>
 								</div>
@@ -107,8 +145,8 @@
 					</div>
 				</div>
 				<div class="form-actions">
-					<button type="button" class="btn btn-raised btn-raised btn-primary" style="margin-bottom: 0;"
-						(click)="updeservationParams();" >
+					<button type="button" class="btn btn-raised btn-raised btn-primary"
+						style="margin-bottom: 0;" (click)="updeservationParams();">
 						<i class="fa fa-check-square-o"></i> Sauvegarder
 					</button>
 				</div>

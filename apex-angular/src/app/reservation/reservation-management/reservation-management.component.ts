@@ -135,9 +135,6 @@ export class ReservationManagementComponent implements OnInit {
         let today = { year: now.getFullYear(), month: now.getMonth() + 1, day: now.getDate() };
         this.reservationManagementService.getAllWaitingReservation(today).subscribe(data => {
              console.log(data);
-            for(let x of data) {
-                x.timeFrom= x.timeFrom.hour+":"+x.timeFrom.minute+"-"+x.timeTo.hour+":"+x.timeTo.minute;
-                }
              this.alertSource =data;
             }); 
     }
@@ -147,9 +144,6 @@ export class ReservationManagementComponent implements OnInit {
         let today = { year: now.getFullYear(), month: now.getMonth() + 1, day: now.getDate() };
         this.reservationManagementService.getAllReservation(today).subscribe(data => {
              console.log(data);
-            for(let x of data) {
-                x.timeFrom= x.timeFrom.hour+":"+x.timeFrom.minute+"-"+x.timeTo.hour+":"+x.timeTo.minute;
-                }
              this.reservationsettings = tableData.reservationsettings;
              this.alertSource =data;
              

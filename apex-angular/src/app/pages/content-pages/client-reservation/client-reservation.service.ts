@@ -104,9 +104,18 @@ export class ClientReservationService {
     }
      getReservationParams() {
         return this.http.get('/reservationController/getReservationParams')
+            .map((data: Response) => data.json())
+            .catch(this.handleError);
+    }
+    
+     trackReservation(idReservation) {
+        const headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        return this.http.post('/reservationController/trackReservation', idReservation, { headers: headers })
             .map((data: Response) => data.text())
             .catch(this.handleError);
     }
+    
     //For Uploading Profile Picture
     postData(formData: FormData) {
         return this.http.post('/reservationController/uploadProfilePicture', formData)

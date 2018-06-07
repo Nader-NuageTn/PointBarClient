@@ -129,8 +129,6 @@ export class NgbdModalContentSetting {
 }
 
 
-
-
 @Component({
     selector: 'reservation-setting',
     templateUrl: './reservation-setting.component.html',
@@ -150,6 +148,7 @@ export class ReservationSettingComponent implements OnInit {
     closedDates = [];
     allEvents = [];
     event: NewEvenModel;
+    ReservationParams = [];
     ngOnInit() {
 
         var today = { year: now.getFullYear(), month: now.getMonth() + 1, day: now.getDate() };
@@ -162,6 +161,11 @@ export class ReservationSettingComponent implements OnInit {
         this.reservationSettingService.getAllEvents(today).subscribe(data => {
             this.allEvents = data;
             this.source = new LocalDataSource(this.allEvents);
+        });
+
+        this.reservationSettingService.getReservationParams().subscribe(data => {
+            this.ReservationParams = data;
+            console.log(this.ReservationParams);
         });
         // Customizer JS File
         $.getScript('./assets/js/customizer.js');
@@ -182,7 +186,7 @@ export class ReservationSettingComponent implements OnInit {
 
     fileUp2: any;
     FileName: string = "Envoyer..";
-
+    
     constructor(private reservationSettingService: ReservationSettingService, private modalService: NgbModal) {
         this.source = new LocalDataSource(this.allEvents); // create the source
         this.source1 = new LocalDataSource(this.closedDates); // create the source
@@ -342,13 +346,10 @@ export class ReservationSettingComponent implements OnInit {
         let reader = new FileReader();
         if (event.target.files && event.target.files.length > 0) {
             let file = event.target.files[0];
-
             if (file && file.size > 10000000) {
                 const modalRef = this.modalService.open(NgbdModalContentSetting);
             } else {
-
                 reader.readAsDataURL(file);
-                console.dir(file);
                 this.fileUp2 = file;
                 this.FileName = file.name;
             }
@@ -374,4 +375,15 @@ export class ReservationSettingComponent implements OnInit {
 
         }
     }
+    
+    updeservationParams() {
+    console.dir(this.ReservationParams);
+        this.reservationSettingService.updateReservationParams( this.ReservationParams).subscribe(data => {
+                        if (data == "success") {
+                            this.reservationSettingService.updateReservationParamsDone();
+                                  } else {
+                this.reservationSettingService.reservationFail();
+            }
+            });
 }
+    }    

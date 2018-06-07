@@ -5,41 +5,92 @@
 			<div class="col-12 d-flex align-items-center justify-content-center">
 				<div
 					class="card border-grey border-lighten-3 px-1 py-1 box-shadow-3">
-					<div class="card-img overlap" style="text-align:  center;" id="userProfile" *ngIf="reservationCorrect == true">
-						<img alt="element 06" class="mb-1" src="assets/img/portrait/avatars/avatar-08.png" width="190" *ngIf="reservationDetails.clientsEntity && reservationDetails.clientsEntity.hasPhoto == false">
+					<div class="card-img overlap" style="text-align: center;"
+						id="userProfile" *ngIf="reservationCorrect == true">
+						<img alt="element 06" class="mb-1"
+							src="assets/img/portrait/avatars/avatar-08.png" width="190"
+							*ngIf="reservationDetails.clientsEntity && reservationDetails.clientsEntity.hasPhoto == false">
 					</div>
 					<div class="card-block text-center"
 						*ngIf="reservationCorrect == true">
 						<h3>{{reservationDetails.clientsEntity.firstName}}
 							{{reservationDetails.clientsEntity.lastName}}</h3>
 						<p>
-							Date: {{reservationDetails.date}} <br>Tranche Horaire:
-							{{reservationDetails.timeFrom}}-{{reservationDetails.timeTo}} <br>Nombre
+							Date: {{reservationDetails.date}} <br>Service:
+							{{reservationDetails.service}} <br>Nombre
 							de personnes (Homme): {{reservationDetails.qtyMen}} <br>Nombre
 							de personnes (Femme): {{reservationDetails.qtyWomen}}<br>
 						</p>
 
-						<div class="col-md-12">
-							<div class="form-group">
-								<label for="projectinput5">Nombre de personne </label>
-								<div class="input-group">
-									<input type="number" min="0" class="form-control"
-										[(ngModel)]="nbPersonne" name="nbPersonne"
-										aria-label="Amount (to the nearest dollar)" required>
-									<div class="input-group-append">
-										<div class="input-group-btn">
-											<button type="button" class="btn btn-raised btn-warning"
-												(click)="nbPersonne = nbPersonne +1;" aria-label="Copy">
-												<i class="ft-user-plus"></i>
-											</button>
-											<button type="button" class="btn btn-raised btn-info"
-												(click)="nbPersonne = nbPersonne -1;" aria-label="Paste">
-												<i class="ft-user-minus"></i>
-											</button>
+
+						<div class="row">
+							<div class="col-md-12">
+
+								<div class="form-group">
+
+									<fieldset>
+										<div class="input-group">
+											<div class="input-group-prepend">
+												<span class="input-group-text"><i
+													class="icon-symbol-male"
+													style="color: #157878; font-weight: 600;"></i></span>
+											</div>
+											<input type="number" min="0" class="form-control"
+												[(ngModel)]="nbPersonneHomme" name="nbHomme"
+												aria-label="Amount (to the nearest dollar)" required>
+											<div class="input-group-append">
+												<div class="input-group-btn">
+													<button type="button" class="btn btn-raised btn-warning"
+														(click)="reservationQtyMenPlus()"
+														aria-label="Copy">
+														<i class="ft-user-plus"></i>
+													</button>
+													<button type="button" class="btn btn-raised btn-info"
+														(click)="reservationQtyMenMinus()"
+														aria-label="Paste">
+														<i class="ft-user-minus"></i>
+													</button>
+												</div>
+											</div>
 										</div>
-									</div>
+									</fieldset>
+
 								</div>
 							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<fieldset>
+										<div class="input-group">
+											<div class="input-group-prepend">
+												<span class="input-group-text"><i
+													class="icon-symbol-female"
+													style="color: #FF5722; font-weight: 600;"></i></span>
+											</div>
+											<input type="number" min="0" class="form-control"
+												[(ngModel)]="nbPersonneFemme" name="nbFemme"
+												aria-label="Amount (to the nearest dollar)" required>
+											<div class="input-group-append">
+												<div class="input-group-btn">
+													<button type="button" class="btn btn-raised btn-warning"
+														(click)="reservationQtyWomenPlus()"
+														aria-label="Copy">
+														<i class="ft-user-plus"></i>
+													</button>
+													<button type="button" class="btn btn-raised btn-info"
+														(click)="reservationQtyWomenMinus()"
+														aria-label="Paste">
+														<i class="ft-user-minus"></i>
+													</button>
+												</div>
+											</div>
+										</div>
+									</fieldset>
+								</div>
+							</div>
+
+
 						</div>
 					</div>
 					<div class="card-block text-center"
@@ -74,10 +125,11 @@
 
 					</div>
 
-					<hr>
+					<hr style="margin: 0px" *ngIf="reservationCorrect == true">
 					<p class="card-text text-center pt-2 pb-2"
 						*ngIf="reservationCorrect == true">
-						<button type="button" [disabled]="!nbPersonne || nbPersonne ==0"
+						<button type="button"
+							[disabled]="(!nbPersonneFemme || nbPersonneFemme ==0) && (!nbPersonneHomme || nbPersonneHomme ==0)"
 							(click)="confirm()"
 							class="btn btn-raised btn-raised btn-warning mr-1">
 							Confirm</button>

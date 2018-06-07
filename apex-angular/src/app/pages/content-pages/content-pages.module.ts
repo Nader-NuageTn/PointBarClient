@@ -18,14 +18,12 @@ import { SignupServiceService } from "./register/signup-service.service";
 import { LoginService } from "./login/login.service";
 import { HttpModule } from '@angular/http';
 import { ReservationSettingComponent, NgbdModalContentSetting } from './reservation-setting/reservation-setting.component';
-import { ClientReservationComponent, NgbdModalContent,NgbdModalContentTimeInvalide,NgbdModalContentImageSetting  } from './client-reservation/client-reservation.component';
+import { ClientReservationComponent, NgbdModalContent,NgbdModalContentTimeInvalide,NgbdModalContentImageSetting,NgbdModalTrackStatus  } from './client-reservation/client-reservation.component';
 import { ClientReservationService } from './client-reservation/client-reservation.service';
 import { ReservationSettingService } from './reservation-setting/reservation-setting.service';
 import { ConfirmReservationComponent } from './confirm-reservation/confirm-reservation.component';
 
 import { LoginSecuriteComponent } from './login-securite/login-securite.component';
-import { CancelReservationComponent } from './cancel-reservation/cancel-reservation.component';
-import { CancelReservationService } from './cancel-reservation/cancel-reservation.service';
 
 
 @NgModule({
@@ -56,10 +54,10 @@ import { CancelReservationService } from './cancel-reservation/cancel-reservatio
         NgbdModalContentTimeInvalide,
         NgbdModalContentImageSetting ,
         ConfirmReservationComponent,
+        NgbdModalTrackStatus,
         LoginSecuriteComponent,
-        CancelReservationComponent,
     ],
-    providers: [SignupServiceService, LoginService, ClientReservationService,ReservationSettingService,CancelReservationService],
-    entryComponents: [NgbdModalContent,NgbdModalContentSetting,NgbdModalContentTimeInvalide,NgbdModalContentImageSetting ]
+    providers: [SignupServiceService, LoginService, ClientReservationService,ReservationSettingService],
+    entryComponents: [NgbdModalContent,NgbdModalContentSetting,NgbdModalContentTimeInvalide,NgbdModalContentImageSetting,NgbdModalTrackStatus ]
 })
 export class ContentPagesModule { }

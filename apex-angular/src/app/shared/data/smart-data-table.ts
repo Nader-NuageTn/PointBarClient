@@ -349,8 +349,8 @@ export var reservationsettings = {
     addButtonContent: "",
   },
   edit: {
-    confirmSave: true,
-    editButtonContent: '<i class="ft-edit-2 info font-medium-1 mr-1"></i>'
+    confirmSave: false,
+    editButtonContent: ''
   },
   actions: {
   custom: [
@@ -387,30 +387,21 @@ export var reservationsettings = {
     },
     qtyPersonne: {
       title: 'Client Reserv',
+      type: 'html',
       editable: false,
     },
     qtyPersonneArrive: {
       title: 'Client Arriv\u00e9',
+      type: 'html',
       editable: false,
     },
     date: {
       title: 'Date',
       editable: false,
     },
-    timeFrom: {
-      title: 'Tranche Horaire',
-      //type: 'custom',
-      type: 'html',
-        editor: {
-          type: 'custom',
-          component: DoBcomponentComponent,
-        },
-//       renderComponent: DoBcomponentComponent,
-//        onComponentInitFunction(instance) {
-//          instance.save.subscribe(row => {
-//            alert(`${row.name} saved!`)
-//          });
-//        }
+    service: {
+      title: 'Service',
+      editable: false,
    }
   },
   attr: {

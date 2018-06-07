@@ -54,6 +54,30 @@ export class NgbdModalContentImageSetting {
     selector: 'ngbd-modal-content',
     template: `
     <div class="modal-header">
+      <h4 class="modal-title">ID R&#233;servation: </h4>
+      <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <ngb-alert type="light" [dismissible]="false"> 
+                                        {{reservationStatus}}</ngb-alert>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary btn-raised" (click)="activeModal.close('Close click')">Ok</button>
+    </div>
+  `
+})
+
+export class NgbdModalTrackStatus {
+    reservationStatus: string;
+    constructor(public activeModal: NgbActiveModal) { }
+}
+
+@Component({
+    selector: 'ngbd-modal-content',
+    template: `
+    <div class="modal-header">
       <h4 class="modal-title">Erreur!</h4>
       <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
         <span aria-hidden="true">&times;</span>
@@ -70,7 +94,7 @@ export class NgbdModalContentImageSetting {
 
 export class NgbdModalContentTimeInvalide {
     @Input() name;
-    reason:string;
+    reason: string;
     constructor(public activeModal: NgbActiveModal) { }
 }
 
@@ -137,8 +161,8 @@ export class ClientReservationComponent implements OnInit {
 
     closeResult: string;
     reservationID: number;
-    
-    loadSpinner:boolean = false;
+
+    loadSpinner: boolean = false;
     // Using for Meridian
     toggleMeridian() {
         this.meridian = !this.meridian;
@@ -168,9 +192,10 @@ export class ClientReservationComponent implements OnInit {
     isAuthantified: string;
     isAdmin: boolean;
     // Custom Day View Ends  
-    
-    fileName: string="Envoyer..";
-    ReservationParams: number;
+
+    fileName: string = "Envoyer..";
+    trackStatusMsg: string = "";
+    ReservationParams = [];
 
     constructor(private clientReservationService: ClientReservationService, private modalService: NgbModal, private auth: AuthService) {
 
@@ -336,7 +361,7 @@ export class ClientReservationComponent implements OnInit {
     }
     ngOnInit() {
         console.log(now);
-        this.reservation = new NewReservationModel("", "", "", "", "", this.disabledModel, "", "", 0, 0);
+        this.reservation = new NewReservationModel("", "", "", "", "", this.disabledModel, "", 0, 0);
 
         this.regularForm = new FormGroup({
             'email': new FormControl(null, [Validators.required, Validators.email]),
@@ -347,8 +372,25 @@ export class ClientReservationComponent implements OnInit {
         }, { updateOn: 'blur' });
 
         var today = { year: now.getFullYear(), month: now.getMonth() + 1, day: now.getDate() };
-          this.clientReservationService.getReservationParams().subscribe(data => {
-            this.ReservationParams = +data;
+        this.clientReservationService.getReservationParams().subscribe(data => {
+            this.ReservationParams = data;
+
+            this.ReservationParams["firstServiceStart"] = this.ReservationParams["firstServiceStart"].split(":")[1] == "00" ? this.ReservationParams["firstServiceStart"].split(":")[0] + ":" : this.ReservationParams["firstServiceStart"];
+            this.ReservationParams["firstServiceEnd"] = this.ReservationParams["firstServiceEnd"].split(":")[1] == "00" ? this.ReservationParams["firstServiceEnd"].split(":")[0] + ":" : this.ReservationParams["firstServiceEnd"];
+            this.ReservationParams["firstServiceArrival"] = this.ReservationParams["firstServiceArrival"].split(":")[1] == "00" ? this.ReservationParams["firstServiceArrival"].split(":")[0] + ":" : this.ReservationParams["firstServiceArrival"];
+            this.ReservationParams["secondServiceStart"] = this.ReservationParams["secondServiceStart"].split(":")[1] == "00" ? this.ReservationParams["secondServiceStart"].split(":")[0] + ":" : this.ReservationParams["secondServiceStart"];
+            this.ReservationParams["secondServiceEnd"] = this.ReservationParams["secondServiceEnd"].split(":")[1] == "00" ? this.ReservationParams["secondServiceEnd"].split(":")[0] + ":" : this.ReservationParams["secondServiceEnd"];
+            this.ReservationParams["secondServiceArrival"] = this.ReservationParams["secondServiceArrival"].split(":")[1] == "00" ? this.ReservationParams["secondServiceArrival"].split(":")[0] + ":" : this.ReservationParams["secondServiceArrival"];
+
+            this.ReservationParams["firstServiceStart"] = this.ReservationParams["firstServiceStart"].replace(":", "h");
+            this.ReservationParams["firstServiceEnd"] = this.ReservationParams["firstServiceEnd"].replace(":", "h");
+            this.ReservationParams["firstServiceArrival"] = this.ReservationParams["firstServiceArrival"].replace(":", "h");
+            this.ReservationParams["secondServiceStart"] = this.ReservationParams["secondServiceStart"].replace(":", "h");
+            this.ReservationParams["secondServiceEnd"] = this.ReservationParams["secondServiceEnd"].replace(":", "h");
+            this.ReservationParams["secondServiceArrival"] = this.ReservationParams["secondServiceArrival"].replace(":", "h");
+            console.log("this.ReservationParams");
+            console.dir(this.ReservationParams);
+
         });
         this.clientReservationService.getNextEvent(today).subscribe(data => {
             console.dir(data);
@@ -390,39 +432,38 @@ export class ClientReservationComponent implements OnInit {
     }
     onSubmit() {
         this.loadSpinner = true;
-        console.dir(this.reservation.timeFrom);
-        console.dir(this.reservation.timeTo);
-        
-        if (!this.registerForm.valid) {
+        console.dir(JSON.stringify(this.reservation.date));
+        console.dir(JSON.stringify(this.disabledModel));
+        console.log(JSON.stringify(this.reservation.date) === JSON.stringify(this.disabledModel));
+        console.log(this.reservation.service);
+        console.log(this.reservation.service.includes("1er Service avant"));
+        console.log(parseInt(this.ReservationParams["firstServiceBefore"].split(":")[0], 10) + " < " + now.getHours());
+        console.log(parseInt(this.ReservationParams["firstServiceBefore"].split(":")[0], 10) < now.getHours());
+
+
+
+        if (!this.registerForm.valid || this.reservation.date == null || JSON.stringify(this.reservation.date) === "") {
             this.clientReservationService.requiredFieldError();
             this.loadSpinner = false;
-        } else if (this.reservation.timeFrom["hour"] > this.reservation.timeTo["hour"] || (this.reservation.timeFrom["hour"] == this.reservation.timeTo["hour"] && this.reservation.timeFrom["minute"] >= this.reservation.timeTo["minute"])) {
-            const modalRef = this.modalService.open(NgbdModalContentTimeInvalide);
-            modalRef.componentInstance.reason = "Tranche horaire invalide";
-            this.loadSpinner = false;
-
-        } else if (this.reservation.date == this.disabledModel && this.reservation.timeFrom["hour"] < now.getHours() + this.ReservationParams) {
-            const modalRef = this.modalService.open(NgbdModalContentTimeInvalide);
-            if (this.ReservationParams < 1) {
-                modalRef.componentInstance.reason = "Votre r\u00e9servation doit \u00eatre au minimum 30 minutes \u00e0 l'avance";
-            }else if (this.ReservationParams == 1) {
-                modalRef.componentInstance.reason = "Votre r\u00e9servation doit \u00eatre au minimum une heure \u00e0 l'avance";
-                
-            }else modalRef.componentInstance.reason = "Votre r\u00e9servation doit \u00eatre au minimum "+this.ReservationParams+" heures \u00e0 l'avance";
-            this.loadSpinner = false;
-
-        } else if (this.reservation.date == this.disabledModel && this.reservation.timeFrom["hour"] == now.getHours() + this.ReservationParams && this.reservation.timeFrom["minute"] <= now.getMinutes()) {
-            const modalRef = this.modalService.open(NgbdModalContentTimeInvalide);
-           if (this.ReservationParams < 1) {
-                modalRef.componentInstance.reason = "Votre r\u00e9servation doit \u00eatre au minimum 30 minutes \u00e0 l'avance";
-            }else if (this.ReservationParams == 1) {
-                modalRef.componentInstance.reason = "Votre r\u00e9servation doit \u00eatre au minimum une heure \u00e0 l'avance";
-                
-            }else modalRef.componentInstance.reason = "Votre r\u00e9servation doit \u00eatre au minimum "+this.ReservationParams+" heures \u00e0 l'avance";
-            this.loadSpinner = false;
-
-        } else if (this.reservation.qtyMen == 0 && this.reservation.qtyMen == 0) {
+        } else if ((this.reservation.qtyMen == 0 || this.reservation.qtyMen == null || this.reservation.qtyMen == "") && (this.reservation.qtyWomen == 0 || this.reservation.qtyWomen == null || this.reservation.qtyWomen == "")) {
             this.clientReservationService.requiredNumberOfPersonError();
+            this.loadSpinner = false;
+        } else if (JSON.stringify(this.reservation.date) === JSON.stringify(this.disabledModel) && this.reservation.service.includes("1er Service avant")
+            && (parseInt(this.ReservationParams["firstServiceBefore"].split(":")[0], 10) < now.getHours() || (parseInt(this.ReservationParams["firstServiceBefore"].split(":")[0], 10) == now.getHours() && parseInt(this.ReservationParams["firstServiceBefore"].split(":")[1], 10) <= now.getMinutes()))) {
+            const modalRef = this.modalService.open(NgbdModalContentTimeInvalide);
+
+            var timeLimit = this.ReservationParams["firstServiceBefore"].split(":")[1] == "00" ? this.ReservationParams["firstServiceBefore"].split(":")[0] + ":" : this.ReservationParams["firstServiceBefore"];
+            timeLimit = timeLimit.replace(":", "h");
+            modalRef.componentInstance.reason = "Votre r\u00e9servation doit \u00eatre avant " + timeLimit;
+            this.loadSpinner = false;
+
+        } else if (this.reservation.date == this.disabledModel && this.reservation.service.includes("2&#232;me Service avant")
+            && (parseInt(this.ReservationParams["secondServiceBefore"].split(":")[0], 10) < now.getHours() || (parseInt(this.ReservationParams["secondServiceBefore"].split(":")[0], 10) == now.getHours() && parseInt(this.ReservationParams["secondServiceBefore"].split(":")[1], 10) <= now.getMinutes()))) {
+            const modalRef = this.modalService.open(NgbdModalContentTimeInvalide);
+
+            var timeLimit = this.ReservationParams["secondServiceBefore"].split(":")[1] == "00" ? this.ReservationParams["secondServiceBefore"].split(":")[0] + ":" : this.ReservationParams["secondServiceBefore"];
+            timeLimit = timeLimit.replace(":", "h");
+            modalRef.componentInstance.reason = "Votre r\u00e9servation doit \u00eatre avant " + timeLimit;
             this.loadSpinner = false;
 
         } else {
@@ -430,12 +471,12 @@ export class ClientReservationComponent implements OnInit {
 
                 if (data == "fail") {
                     this.clientReservationService.reservationFail();
-                    this.loadSpinner=false;
+                    this.loadSpinner = false;
 
                 } else if (data == "closed") {
                     const modalRef = this.modalService.open(NgbdModalContent);
                     modalRef.componentInstance.date = this.reservation.date.month + "-" + this.reservation.date.day + "-" + this.reservation.date.year;
-                    this.loadSpinner=false;
+                    this.loadSpinner = false;
 
                 } else {
 
@@ -448,9 +489,9 @@ export class ClientReservationComponent implements OnInit {
                             formData.append('useriD', data);
                             formData.append('fileName', this.fileUp2.name);
                             this.clientReservationService.postData(formData).subscribe(data => {
-                                    this.clientReservationService.reservationSuccess();
-                                    this.loadSpinner = false;
-                                    this.registerForm.reset();
+                                this.clientReservationService.reservationSuccess();
+                                this.loadSpinner = false;
+                                this.registerForm.reset();
                             });
                         };
                         reader.readAsArrayBuffer(this.fileUp2);
@@ -484,6 +525,35 @@ export class ClientReservationComponent implements OnInit {
         }, (reason) => { });
 
     }
+
+    openTracker(content) {
+        this.modalService.open(content).result.then((result) => {
+
+            this.clientReservationService.trackReservation(result).subscribe(data => {
+                if (data == "no exist") {
+                    this.clientReservationService.cancelFail();
+                } else {
+                    const modalRef = this.modalService.open(NgbdModalTrackStatus);
+
+                    if (data == "EN ATTENTE") {
+                        modalRef.componentInstance.reservationStatus = "Votre demande de r\u00e9servation est encore en attente";
+                    } else if (data == "ANNULER") {
+                        modalRef.componentInstance.reservationStatus = "Votre demande de r\u00e9servation a \u00e9t\u00e9 annul\u00e9e";
+                    } else if (data == "CONFIRMED") {
+                        modalRef.componentInstance.reservationStatus = "Votre demande de r\u00e9servation a \u00e9t\u00e9 accept\u00e9e";
+                    } else if (data == "ARRIVE") {
+                        modalRef.componentInstance.reservationStatus = "Votre r\u00e9servation n'est pas encore valide";
+                    } else {
+                        modalRef.componentInstance.reservationStatus = "ID invalide"
+                    }
+
+                }
+            });
+
+        }, (reason) => { });
+
+    }
+
     fileUp2: any;
     onFileChange(event) {
         let reader = new FileReader();
@@ -496,7 +566,7 @@ export class ClientReservationComponent implements OnInit {
                 this.fileUp2 = file;
                 this.fileName = file.name;
             }
-          
+
         }
     }
 
@@ -504,13 +574,19 @@ export class ClientReservationComponent implements OnInit {
         this.reservation.qtyMen = this.reservation.qtyMen + 1;
     }
     reservationQtyMenMinus() {
-        this.reservation.qtyMen = this.reservation.qtyMen - 1;
+        if (this.reservation.qtyMen > 0) {
+            this.reservation.qtyMen = this.reservation.qtyMen - 1;
+        }
+
     }
     reservationQtyWomenPlus() {
         this.reservation.qtyWomen = this.reservation.qtyWomen + 1;
     }
     reservationQtyWomenMinus() {
-        this.reservation.qtyWomen = this.reservation.qtyWomen - 1;
+        if (this.reservation.qtyWomen > 0) {
+            this.reservation.qtyWomen = this.reservation.qtyWomen - 1;
+        }
+
     }
 
 }

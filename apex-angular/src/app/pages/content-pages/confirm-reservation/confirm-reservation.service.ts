@@ -11,10 +11,10 @@ export class ConfirmReservationService {
     constructor(private http: Http) { }
 
 
-    confirmReservation(reservationID, nbPersonne) {
+    confirmReservation(reservationID, nbPersonneMen,nbPersonneWomen) {
         const headers = new Headers();
         headers.append('Content-Type', 'application/json');
-        const body = JSON.stringify([reservationID, nbPersonne]);
+        const body = JSON.stringify([reservationID, nbPersonneMen,nbPersonneWomen]);
         return this.http.post('/reservationController/confirmReservation', body, { headers: headers })
             .map((data: Response) => data.text())
             .catch(this.handleError);

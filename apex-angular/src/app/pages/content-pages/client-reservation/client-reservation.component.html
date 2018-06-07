@@ -45,14 +45,16 @@
 									<div class="row">
 										<div class="col-md-6">
 											<div class="form-group">
-												<label for="projectinput1">Nom</label> <input type="text"
+												<label for="projectinput1">Nom</label><sup><font
+													style="color: #F31414" size="2">*</font></sup> <input type="text"
 													[(ngModel)]="reservation.firstName" id="projectinput1"
 													class="form-control" name="fname" required>
 											</div>
 										</div>
 										<div class="col-md-6">
 											<div class="form-group">
-												<label for="projectinput2">Pr&#233;nom</label> <input
+												<label for="projectinput2">Pr&#233;nom</label><sup><font
+													style="color: #F31414" size="2">*</font></sup> <input
 													type="text" id="projectinput2" class="form-control"
 													[(ngModel)]="reservation.lastName" name="lname" required>
 											</div>
@@ -61,7 +63,8 @@
 									<div class="row">
 										<div class="col-md-6">
 											<div class="form-group">
-												<label for="projectinput3">E-mail</label> <input type="text"
+												<label for="projectinput3">E-mail</label><sup><font
+													style="color: #F31414" size="2">*</font></sup> <input type="text"
 													[(ngModel)]="reservation.email" id="projectinput3"
 													class="form-control" name="email" required email>
 											</div>
@@ -69,7 +72,8 @@
 										<div class="col-md-6">
 											<div class="form-group">
 												<label for="projectinput4">Num&#233;ro de
-													t&#233;l&#233;phone </label> <input type="text" id="projectinput4"
+													t&#233;l&#233;phone </label><sup><font
+													style="color: #F31414" size="2">*</font></sup> <input type="text" id="projectinput4"
 													[(ngModel)]="reservation.phone" class="form-control"
 													name="phone" required>
 											</div>
@@ -110,12 +114,14 @@
 										<div class="col-md-6">
 
 											<div class="form-group">
-												<label for="companyName">Date de r&#233;servation</label>
+												<label for="companyName">Date de r&#233;servation<sup><font
+													style="color: #F31414" size="2">*</font></sup> </label>
 												<div class="input-group">
 													<input class="form-control" placeholder="yyyy-mm-dd"
-														name="dp" [(ngModel)]="reservation.date" ngbDatepicker
-														[dayTemplate]="customDay" [minDate]="disabledModel"
-														#d3="ngbDatepicker" required>
+														name="dpDate" [(ngModel)]="reservation.date" ngbDatepicker
+														[minDate]="disabledModel" id="dpDate" #d3="ngbDatepicker"
+														required>
+
 													<div class="input-group-append">
 														<div class="input-group-text" (click)="d3.toggle()">
 															<i class="fa fa-calendar" style="cursor: pointer;"></i>
@@ -130,26 +136,34 @@
 									<div class="row">
 										<div class="col-md-12">
 											<div class="form-group">
-												<label for="projectinput5">Service</label>
+												<label for="projectinput5">Service<sup><font
+													style="color: #F31414" size="2">*</font></sup> </label>
 												<div
 													class="custom-control custom-radio custom-control-inline">
 													<input type="radio" id="customRadioInline1"
-														name="customRadioInline1" class="custom-control-input">
-													<label class="custom-control-label"
-														style="text-transform: none;" for="customRadioInline1">1er
-														Service: de 12h &#224; 20h</label><label
+														value="1er Service avant {{ReservationParams.firstServiceArrival}}"
+														[(ngModel)]="reservation.service"
+														name="customRadioInline1" class="custom-control-input"
+														checked required> <label
+														class="custom-control-label" style="text-transform: none;"
+														for="customRadioInline1">1er Service: de
+														{{ReservationParams.firstServiceStart}} &#224;
+														{{ReservationParams.firstServiceEnd}}</label><label
 														style="font-size: x-small;"> (Arriv&#233;e avant
-														16h)</label>
+														{{ReservationParams.firstServiceArrival}})</label>
 												</div>
 												<div
 													class="custom-control custom-radio custom-control-inline">
-													<input type="radio" id="customRadioInline2" checked
-														name="customRadioInline1" class="custom-control-input">
-													<label class="custom-control-label"
+													<input type="radio" id="customRadioInline2"
+														value="2&#232;me Service avant {{ReservationParams.secondServiceArrival}}"
+														[(ngModel)]="reservation.service"
+														name="customRadioInline1" class="custom-control-input"
+														required> <label class="custom-control-label"
 														style="text-transform: none;" for="customRadioInline2">2&#232;me
-														Service: de 21h30 &#224; 03h</label><label
+														Service: de {{ReservationParams.secondServiceStart}}
+														&#224; {{ReservationParams.secondServiceEnd}}</label><label
 														style="font-size: x-small;"> (Arriv&#233;e avant
-														00h)</label>
+														{{ReservationParams.secondServiceArrival}})</label>
 												</div>
 
 											</div>
@@ -228,20 +242,22 @@
 										class="btn btn-raised btn-raised btn-warning mr-1">
 										<i class="ft-x"></i> Cancel
 									</button>
-									
-											
-											<a class="position-relative has-icon-right">
-													<button type="submit"
-													class="btn btn-raised btn-raised btn-primary">
-													<i class="fa fa-check-square-o"></i> Save
-													<i class="ft-loader spinner" *ngIf="loadSpinner"></i>
-												</button>
-												
-											</a>
-									
-<!--                         <div class="mt-2"><i class="fa fa-cog spinner font-large-2"></i></div> -->
+
+
+									<a class="position-relative has-icon-right">
+										<button type="submit"
+											class="btn btn-raised btn-raised btn-primary">
+											<i class="fa fa-check-square-o"></i> Save <i
+												class="ft-loader spinner" *ngIf="loadSpinner"></i>
+										</button>
+
+									</a>
+
+									<!--                         <div class="mt-2"><i class="fa fa-cog spinner font-large-2"></i></div> -->
 									<div class="col-md-12 cancelReservation">
-										<a (click)="open(content)">Annuler ma r&#233;servation</a>
+										<a (click)="open(content)" style="margin-right: 25px;">Annuler
+											ma r&#233;servation</a> <a (click)="openTracker(contentStatus)">Etat
+											de la r&#233;servation</a>
 									</div>
 									<ng-template #content let-c="close" let-d="dismiss">
 									<div class="modal-header">
@@ -263,6 +279,29 @@
 									<div class="modal-footer">
 										<button type="button" class="btn btn-secondary btn-raised"
 											[disabled]="!reservationID" (click)="c(reservationID)">Annuler</button>
+									</div>
+									</ng-template>
+
+									<ng-template #contentStatus let-c="close" let-d="dismiss">
+									<div class="modal-header">
+										<h4 class="modal-title">Traquer ma r&#233;servation</h4>
+										<button type="button" class="close" aria-label="Close"
+											(click)="d('Cross click')">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="modal-body">
+										<div class="form-group">
+											<label for="digits">ID R&#233;servation</label> <input
+												type="text" class="form-control" [(ngModel)]="reservationID"
+												name="digits" #digits="ngModel" digits /> <small
+												class="form-text text-muted danger"
+												*ngIf="digits.errors?.digits">ID invalide</small>
+										</div>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary btn-raised"
+											[disabled]="!reservationID" (click)="c(reservationID)">v&#233;rifier</button>
 									</div>
 									</ng-template>
 								</div>

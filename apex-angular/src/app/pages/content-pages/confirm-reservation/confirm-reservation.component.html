@@ -5,12 +5,26 @@
 			<div class="col-12 d-flex align-items-center justify-content-center">
 				<div
 					class="card border-grey border-lighten-3 px-1 py-1 box-shadow-3">
+					 <div class="col-sm-12">
 					<div class="card-img overlap" style="text-align: center;"
 						id="userProfile" *ngIf="reservationCorrect == true">
 						<img alt="element 06" class="mb-1"
 							src="assets/img/portrait/avatars/avatar-08.png" width="190"
 							*ngIf="reservationDetails.clientsEntity && reservationDetails.clientsEntity.hasPhoto == false">
 					</div>
+					<div class="nav-item" ngbDropdown placement="bottom-left">
+		                        <a class="nav-link position-relative" id="dropdownBasic3" ngbDropdownToggle>
+		                            <i class="ft-user font-medium-3 blue-grey darken-4"></i>
+		                            <p class="d-none">User Settings</p>
+		                        </a>
+		                        <div ngbDropdownMenu aria-labelledby="dropdownBasic3">                           
+		                            <a class="dropdown-item" (click)="logout()">
+		                                <i class="ft-power mr-2"></i>
+		                                <span>Logout</span>
+		                            </a>
+		                        </div>
+                            </div>
+                    </div>
 					<div class="card-block text-center"
 						*ngIf="reservationCorrect == true">
 						<h3>{{reservationDetails.clientsEntity.firstName}}

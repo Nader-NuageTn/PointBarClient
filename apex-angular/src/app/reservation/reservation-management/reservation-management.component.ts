@@ -67,68 +67,87 @@ export class ReservationManagementComponent implements OnInit {
     //  For Cancel Reservation
     onDeleteConfirm(event) {
         console.log(event);
+        if(event.data.status == ' <span class="badge badge-warning">En Attente</span>' || event.data.status == ' <span class="badge badge-success">Confirm&#233;e</span>') {
         if (window.confirm('Are you sure you want to Cancel this reservation?')) {
-            event.confirm.resolve();
+            console.log(this.allReservations);
             this.reservationManagementService.annulerReservation(event.data.id).subscribe(data => {
                console.log(data); 
-                if(data == "success") {
+                if(data == "success" || data == "fail sms") {
                     this.reservationManagementService.deleteSuccess();
+                    if(this.allReservations == false) {
+                       event.confirm.resolve(); 
+                    }else {
+                        this.getAllReservations();
+                    }
                 }
             });
         } else {
             event.confirm.reject();
         }
+       }else if(event.data.status == '<span class="badge badge-info">Arriv&#233;e</span>') {
+            this.reservationManagementService.reservConfirmedStatus();
+       }if(event.data.status == ' <span class="badge badge-danger">Annul&#233;e</span>') {
+           this.reservationManagementService.reservAnnulerStatus();
+       }
     }
     //  Confirm Reservation
     onCustom(event) {
         this.loadSpinner = true;
         console.log(event);
         console.log(this.source);
-        
-        if (window.confirm('Are you sure you want to Confirm this reservation?')) {
-        
-        this.reservationManagementService.confirmerReservation(event.data.id).subscribe(data => {
-               console.log(data);
-               if(data == "success") {
-                   if(this.allReservations == true){
-                       this.getAllReservations()
-                   }else this.getReservationsEnAttente(); 
-                   
-                   this.reservationManagementService.activateSuccess();
-                   this.loadSpinner=false;
-                    
-                }else if(data == "problem linkQrCode") {
-                  if(this.allReservations == true){
-                       this.getAllReservations()
-                   }else this.getReservationsEnAttente(); 
-                   this.reservationManagementService.problemQRCode();
-                   this.loadSpinner=false;
-                    
-                }else if(data == "fail sms") {
-                   if(this.allReservations == true){
-                       this.getAllReservations()
-                   }else this.getReservationsEnAttente(); 
-                   this.reservationManagementService.problemSms();
-                   this.loadSpinner=false;
-                    
-                }else if(data == "problem sending email") {
-                   if(this.allReservations == true){
-                       this.getAllReservations()
-                   }else this.getReservationsEnAttente(); 
-                   this.reservationManagementService.problemEmail();
-                   this.loadSpinner=false;
-                    
-                }else if(data == "fail") {
-           
-                   this.reservationManagementService.activateFail();
-                   this.loadSpinner=false;
-                    
-                }
-            });
+        console.log(event.data)
+        if(event.data.status == ' <span class="badge badge-warning">En Attente</span>' || event.data.status == ' <span class="badge badge-danger">Annul&#233;e</span>') {
+            if (window.confirm('Are you sure you want to Confirm this reservation?')) {
             
-        }else {
-            event.confirm.reject();
-        }
+            this.reservationManagementService.confirmerReservation(event.data.id).subscribe(data => {
+                   console.log(data);
+                   if(data == "success") {
+                       if(this.allReservations == true){
+                           this.getAllReservations()
+                       }else this.getReservationsEnAttente(); 
+                       
+                       this.reservationManagementService.activateSuccess();
+                       this.loadSpinner=false;
+                        
+                    }else if(data == "problem linkQrCode") {
+                      if(this.allReservations == true){
+                           this.getAllReservations()
+                       }else this.getReservationsEnAttente(); 
+                       this.reservationManagementService.problemQRCode();
+                       this.loadSpinner=false;
+                        
+                    }else if(data == "fail sms") {
+                       if(this.allReservations == true){
+                           this.getAllReservations()
+                       }else this.getReservationsEnAttente(); 
+                       this.reservationManagementService.problemSms();
+                       this.loadSpinner=false;
+                        
+                    }else if(data == "problem sending email") {
+                       if(this.allReservations == true){
+                           this.getAllReservations()
+                       }else this.getReservationsEnAttente(); 
+                       this.reservationManagementService.problemEmail();
+                       this.loadSpinner=false;
+                        
+                    }else if(data == "fail") {
+               
+                       this.reservationManagementService.activateFail();
+                       this.loadSpinner=false;
+                        
+                    }
+                });
+                
+            }else {
+               this.loadSpinner=false;
+            }
+       }else if(event.data.status == '<span class="badge badge-info">Arriv&#233;e</span>') {
+            this.loadSpinner=false;
+            this.reservationManagementService.reservConfirmedStatus();
+       }else if(event.data.status == ' <span class="badge badge-success">Confirm&#233;e</span>') {
+            this.loadSpinner=false;
+           this.reservationManagementService.reservreconfirm();
+       }
     }
     isArray(a) {
     return (!!a) && (a.constructor === Array);

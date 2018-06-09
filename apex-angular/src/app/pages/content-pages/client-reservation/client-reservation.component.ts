@@ -434,15 +434,7 @@ export class ClientReservationComponent implements OnInit {
     }
     onSubmit() {
         this.loadSpinner = true;
-        console.dir(JSON.stringify(this.reservation.date));
-        console.dir(JSON.stringify(this.disabledModel));
-        console.log(JSON.stringify(this.reservation.date) === JSON.stringify(this.disabledModel));
-        console.log(this.reservation.service);
-        console.log(this.reservation.service.includes("1er Service avant"));
-        console.log(parseInt(this.ReservationParams["firstServiceBefore"].split(":")[0], 10) + " < " + now.getHours());
-        console.log(parseInt(this.ReservationParams["firstServiceBefore"].split(":")[0], 10) < now.getHours());
-
-
+       
 
         if (!this.registerForm.valid || this.reservation.date == null || JSON.stringify(this.reservation.date) === "") {
             this.clientReservationService.requiredFieldError();

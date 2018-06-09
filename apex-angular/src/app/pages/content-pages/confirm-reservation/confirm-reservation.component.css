@@ -5,3 +5,9 @@
 		display: none !important;
 	}
 }
+
+.nav-item {
+    right: 10px;
+    top: 0px;
+    position: absolute;
+}

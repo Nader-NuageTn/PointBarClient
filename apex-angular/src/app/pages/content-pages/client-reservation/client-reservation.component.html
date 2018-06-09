@@ -46,7 +46,7 @@
 										<div class="col-md-6">
 											<div class="form-group">
 												<label for="projectinput1">Nom</label><sup><font
-													style="color: #F31414" size="2">*</font></sup> <input type="text"
+													style="color: #F31414" size="2">*</font></sup> <input type="text" maxlength="50" [ngModelOptions]="{updateOn: 'blur'}"
 													[(ngModel)]="reservation.firstName" id="projectinput1"
 													class="form-control" name="fname" required>
 											</div>
@@ -55,7 +55,7 @@
 											<div class="form-group">
 												<label for="projectinput2">Pr&#233;nom</label><sup><font
 													style="color: #F31414" size="2">*</font></sup> <input
-													type="text" id="projectinput2" class="form-control"
+													type="text" id="projectinput2" class="form-control" maxlength="50" [ngModelOptions]="{updateOn: 'blur'}"
 													[(ngModel)]="reservation.lastName" name="lname" required>
 											</div>
 										</div>

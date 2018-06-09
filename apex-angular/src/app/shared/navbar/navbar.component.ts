@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component,OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from '../auth/auth.service';
+import { NavbarService } from './navbar.component.service';
 
 @Component({
     selector: 'app-navbar',
@@ -8,17 +9,66 @@ import { AuthService } from '../auth/auth.service';
     styleUrls: ['./navbar.component.scss']
 })
 
-export class NavbarComponent {
+export class NavbarComponent implements OnInit{
     currentLang = 'en';
     toggleClass = 'ft-maximize';
-    constructor(public translate: TranslateService, private auth: AuthService) {
+
+    AllNotification: boolean = false;
+    UnreadNotification: boolean = true;
+    listNotif =[];
+    listNotifLength = -1;
+    userAuthID:any;
+
+    
+    constructor(public translate: TranslateService, private auth: AuthService, private navbarService: NavbarService) {
         const browserLang: string = translate.getBrowserLang();
         translate.use(browserLang.match(/en|es|pt|de/) ? browserLang : 'en');
+        
+    }
+    
+    ngOnInit() {
+       this.userAuthID =  this.auth.getUserAuthID()
+       console.log(this.userAuthID);  
+       this.GetUnreadNotification(); 
+      
     }
 
-    ChangeLanguage(language: string) {
-        this.translate.use(language);
+    
+    GetAllNotification(){
+         this.navbarService.GetAllNotification(this.userAuthID).subscribe(data => {
+             var options = {
+                weekday: "long", year: "numeric", month: "short",
+                day: "numeric", hour: "2-digit", minute: "2-digit"
+            };
+             data.forEach(it => {
+                it.dateNotif = new Date(it.dateNotif).toLocaleTimeString("en-us", options)               
+            })
+             console.log(data);
+             
+             this.listNotif = data  
+             this.listNotifLength = data.length;
+             this.AllNotification = true;
+             this.UnreadNotification = false;     
+       });
     }
+    
+    GetUnreadNotification(){
+         this.navbarService.GetUnreadNotification(this.userAuthID).subscribe(data => {
+             var options = {
+                weekday: "long", year: "numeric", month: "short",
+                day: "numeric", hour: "2-digit", minute: "2-digit"
+            };
+             data.forEach(it => {
+                it.dateNotif = new Date(it.dateNotif).toLocaleTimeString("fr-tn", options)               
+            })
+             console.log(data);
+             this.listNotif = data 
+             this.listNotifLength = data.length;  
+             this.AllNotification = false;
+             this.UnreadNotification = true;  
+       });
+    }
+
 
     ToggleClass() {
         if (this.toggleClass === 'ft-maximize') {

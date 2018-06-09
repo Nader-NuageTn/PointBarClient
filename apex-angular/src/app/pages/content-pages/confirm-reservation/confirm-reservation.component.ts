@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ConfirmReservationService } from './confirm-reservation.service';
+import { Router } from "@angular/router";
 @Component({
   selector: 'app-confirm-reservation',
   templateUrl: './confirm-reservation.component.html',
@@ -22,7 +23,7 @@ export class ConfirmReservationComponent implements OnInit {
     
   isScan: boolean = false;
     
-  constructor(private confirmReservationService: ConfirmReservationService) { }
+  constructor(private confirmReservationService: ConfirmReservationService, private router: Router) { }
 
   ngOnInit() {
         var url = window.location.href;
@@ -135,4 +136,10 @@ export class ConfirmReservationComponent implements OnInit {
          }
         
     }
+    
+    logout() {
+        localStorage.setItem('isSecurity', 'false');
+        localStorage.setItem('loged', 'false');
+        this.router.navigate(['pages/login']);
+        }
 }

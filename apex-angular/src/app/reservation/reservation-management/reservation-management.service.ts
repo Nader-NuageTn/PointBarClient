@@ -35,6 +35,15 @@ export class ReservationManagementService {
     activateFail() {
       this.toastr.error("Il y avait un probl\u00e8me lors de la confirmation de la r\u00e9servation.");
    }
+   reservConfirmedStatus() {
+       this.toastr.warning('Vous ne pouvez pas confirmer ou bien annuler une r\u00e9servation Arrived!');
+   }
+   reservAnnulerStatus() {
+        this.toastr.warning('La r\u00e9servation est d\u00e9ja annul\u00e9e!');
+   }
+    reservreconfirm() {
+        this.toastr.warning('La r\u00e9servation est d\u00e9ja confirm\u00e9e!');
+    }
   //Annuler Reservation
   annulerReservation(idRes) {
         const headers = new Headers();

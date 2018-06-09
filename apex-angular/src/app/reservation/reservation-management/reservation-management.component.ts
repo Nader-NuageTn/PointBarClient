@@ -90,8 +90,37 @@ export class ReservationManagementComponent implements OnInit {
         this.reservationManagementService.confirmerReservation(event.data.id).subscribe(data => {
                console.log(data);
                if(data == "success") {
-                   this.getReservationsEnAttente(); 
+                   if(this.allReservations == true){
+                       this.getAllReservations()
+                   }else this.getReservationsEnAttente(); 
+                   
                    this.reservationManagementService.activateSuccess();
+                   this.loadSpinner=false;
+                    
+                }else if(data == "problem linkQrCode") {
+                  if(this.allReservations == true){
+                       this.getAllReservations()
+                   }else this.getReservationsEnAttente(); 
+                   this.reservationManagementService.problemQRCode();
+                   this.loadSpinner=false;
+                    
+                }else if(data == "fail sms") {
+                   if(this.allReservations == true){
+                       this.getAllReservations()
+                   }else this.getReservationsEnAttente(); 
+                   this.reservationManagementService.problemSms();
+                   this.loadSpinner=false;
+                    
+                }else if(data == "problem sending email") {
+                   if(this.allReservations == true){
+                       this.getAllReservations()
+                   }else this.getReservationsEnAttente(); 
+                   this.reservationManagementService.problemEmail();
+                   this.loadSpinner=false;
+                    
+                }else if(data == "fail") {
+           
+                   this.reservationManagementService.activateFail();
                    this.loadSpinner=false;
                     
                 }

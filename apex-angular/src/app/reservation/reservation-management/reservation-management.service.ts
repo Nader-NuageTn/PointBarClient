@@ -10,20 +10,31 @@ export class ReservationManagementService {
   constructor(private http:Http, public toastr: ToastsManager) { }
     
   typeSuccess() {
-      this.toastr.success("La tranche Horaire est modifi\u00e9e avec succ\u00e9s.");
+      this.toastr.success("La tranche Horaire a \u00e9t\u00e9 modifi\u00e9e avec succ\u00e9s.");
    }
     
   deleteSuccess() {
-        this.toastr.success("La reservation est annul\u00e9e avec succ\u00e9s.");
+        this.toastr.success("La r\u00e9servation a \u00e9t\u00e9 annul\u00e9e avec succ\u00e9s.");
     }
     
   activateSuccess() {
-        this.toastr.success("La reservation est confirm\u00e9e avec succ\u00e9s.");
+        this.toastr.success("La r\u00e9servation a \u00e9t\u00e9 confirm\u00e9e avec succ\u00e9s.");
     }
     TrancheHorNotif() {
         this.toastr.warning('Remplir la tranche horaire est obligatoire!');
     }
-    
+    problemEmail() {
+      this.toastr.error("La r\u00e9servation a \u00e9t\u00e9 confirm\u00e9e avec succ\u00e9s. Il y avait un probl\u00e8me lors de l'envoi de l'e-mail et du message.");
+   }
+    problemSms() {
+      this.toastr.error("La r\u00e9servation a \u00e9t\u00e9 confirm\u00e9e avec succ\u00e9s. Il y avait un probl\u00e8me lors de l'envoi du message.");
+   }
+   problemQRCode() {
+      this.toastr.error("La r\u00e9servation a \u00e9t\u00e9 confirm\u00e9e avec succ\u00e9s. Il y avait un probl\u00e8me lors de la cr\u00e9ation du QR code");
+   }
+    activateFail() {
+      this.toastr.error("Il y avait un probl\u00e8me lors de la confirmation de la r\u00e9servation.");
+   }
   //Annuler Reservation
   annulerReservation(idRes) {
         const headers = new Headers();

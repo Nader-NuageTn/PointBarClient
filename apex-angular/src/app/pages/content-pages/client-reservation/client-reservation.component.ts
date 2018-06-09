@@ -195,7 +195,9 @@ export class ClientReservationComponent implements OnInit {
 
     fileName: string = "Envoyer..";
     trackStatusMsg: string = "";
-    ReservationParams = [];
+    ReservationParams = {
+        firstServiceArrival:"", firstServiceBefore:"", firstServiceEnd:"", firstServiceStart:"",id:0,secondServiceArrival:"",secondServiceBefore:"",secondServiceEnd:"",secondServiceStart:""
+    };
 
     constructor(private clientReservationService: ClientReservationService, private modalService: NgbModal, private auth: AuthService) {
 
@@ -445,7 +447,7 @@ export class ClientReservationComponent implements OnInit {
         if (!this.registerForm.valid || this.reservation.date == null || JSON.stringify(this.reservation.date) === "") {
             this.clientReservationService.requiredFieldError();
             this.loadSpinner = false;
-        } else if ((this.reservation.qtyMen == 0 || this.reservation.qtyMen == null || this.reservation.qtyMen == "") && (this.reservation.qtyWomen == 0 || this.reservation.qtyWomen == null || this.reservation.qtyWomen == "")) {
+        } else if ((this.reservation.qtyMen == 0 || this.reservation.qtyMen == null || this.reservation.qtyMen+"" == "") && (this.reservation.qtyWomen == 0 || this.reservation.qtyWomen == null || this.reservation.qtyWomen+"" == "")) {
             this.clientReservationService.requiredNumberOfPersonError();
             this.loadSpinner = false;
         } else if (JSON.stringify(this.reservation.date) === JSON.stringify(this.disabledModel) && this.reservation.service.includes("1er Service avant")

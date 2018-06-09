@@ -57,13 +57,13 @@
                             <p class="d-none">Notifications</p>
                         </a>
                         <div ngbDropdownMenu aria-labelledby="dropdownBasic2" class="notification-dropdown" (click)="$event.stopPropagation()">
-                            <div class="noti-list" style="max-height: 290px;height: fit-content;">
-                                <a class="dropdown-item noti-container py-3 border-bottom border-bottom-blue-grey border-bottom-lighten-4" style="line-height: 25px;" *ngFor='let notification of listNotif'>
+                            <div class="noti-list" style="max-height: 300px;height: fit-content;">
+                                <a class="dropdown-item noti-container py-3 border-bottom border-bottom-blue-grey border-bottom-lighten-4" style="line-height: 25px;" *ngFor='let notification of listNotif' [ngStyle]="{'background-color':notification.isShowen == true  ? '#efefefb8' : '#ffffff'}" >
                                     <i class="ft-bell {{notification.typeNotif}} float-left d-block font-large-1 mt-1 mr-2" style="margin-bottom: 50px;"></i>
                                     <span class="noti-wrapper">
-                                        <span class="noti-title line-height-1 d-block text-bold-400 {{notification.typeNotif}}">{{notification.title}}</span>
-                                        <span class="noti-text" style="white-space: normal;">{{notification.message}}</span>
-                                        <span class="noti-text font-small-2 text-muted text-right text-{{notification.typeNotif}}">{{notification.dateNotif}}</span>
+                                        <span class="noti-title line-height-1 d-block text-bold-400 {{notification.typeNotif}}">{{notification.title}}  <a *ngIf="notification.isShowen == false" (click)="markAsRead(notification)" class="btn btn-outline-{{notification.typeNotif}} btn-sm" style="width: 22px;height: 22px;padding: 0;margin-bottom: 5px;float: right;" title="Marquer comme lu"><i class="fa fa-check"></i></a></span>
+                                        <span class="noti-text" style="white-space: normal;">{{notification.message}}</span><br>
+                                        <span class="noti-text font-small-2 text-muted text-right text-{{notification.typeNotif}}" style="    float: right;">{{notification.dateNotif}}</span>
                                     </span>
                                 </a>
                              

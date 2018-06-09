@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import * as tableData from '../../shared/data/smart-data-table';
 import { LocalDataSource } from 'ng2-smart-table';
 import { ReservationManagementService } from './reservation-management.service';
+import { AuthService } from '../../shared/auth/auth.service';
 
 const now = new Date();
 @Component({
@@ -21,8 +22,9 @@ export class ReservationManagementComponent implements OnInit {
     
   allReservations:boolean = false;
   loadSpinner:boolean = false;
-
-  constructor(private reservationManagementService: ReservationManagementService) { 
+  userAuthID:any;
+    
+  constructor(private reservationManagementService: ReservationManagementService, private auth: AuthService) { 
         this.source = new LocalDataSource(tableData.data); // create the source
         this.filterSource = new LocalDataSource(tableData.filerdata); // create the source
         //this.alertSource = new LocalDataSource(tableData.data); // create the source
@@ -30,7 +32,7 @@ export class ReservationManagementComponent implements OnInit {
       }
 
   ngOnInit() {
-      //delete this.reservationsettings.columns.status;
+      this.userAuthID =  this.auth.getUserAuthID()
   }
     settings = tableData.settings;
     filtersettings = tableData.filtersettings;
@@ -99,7 +101,7 @@ export class ReservationManagementComponent implements OnInit {
         if(event.data.status == ' <span class="badge badge-warning">En Attente</span>' || event.data.status == ' <span class="badge badge-danger">Annul&#233;e</span>') {
             if (window.confirm('Are you sure you want to Confirm this reservation?')) {
             
-            this.reservationManagementService.confirmerReservation(event.data.id).subscribe(data => {
+            this.reservationManagementService.confirmerReservation(event.data.id,this.userAuthID).subscribe(data => {
                    console.log(data);
                    if(data == "success") {
                        if(this.allReservations == true){

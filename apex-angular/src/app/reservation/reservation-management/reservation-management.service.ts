@@ -55,10 +55,11 @@ export class ReservationManagementService {
   }
     
     //Confirmer Reservation
-   confirmerReservation(idRes) {
+   confirmerReservation(idRes, idUser) {
         const headers = new Headers();
         headers.append('Content-Type', 'application/json');
-        return this.http.post('/ReservationManagementController/confirmReservation', idRes, {headers: headers})
+       const body = JSON.stringify([idRes, idUser]);
+        return this.http.post('/ReservationManagementController/confirmReservation', body, {headers: headers})
             .map((data: Response) => data.text())
             .catch(this.handleError);
   }

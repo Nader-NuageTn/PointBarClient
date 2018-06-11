@@ -120,12 +120,13 @@ deletedUsers:boolean =false;
     onSaveConfirm(event) {
         if (window.confirm('\xCAtes-vous s\xFBr de vouloir sauvegarder?')) {
             event.newData['name'] += ' + added in code';
-            event.confirm.resolve(event.newData);
+            
             console.log(event.newData);
             this.pbusersService.editUser(event.newData).subscribe(data => {
                console.log(data); 
                 if(data == "success") {
                     this.pbusersService.typeSuccess();
+                    event.confirm.resolve(event.newData);
                 }else if(data == "exist") {
                     this.pbusersService.emailExistNotif();
                 }

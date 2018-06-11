@@ -25,8 +25,7 @@
 										<div class="position-relative has-icon-left">
 											<input type="time" class="form-control"
 												[(ngModel)]="ReservationParams.firstServiceStart"
-												name="firstServiceStart"
-												style="padding-right: 0px; padding-left: 30px;">
+												name="firstServiceStart">
 											<div class="form-control-position">
 												<i class="ft-clock"></i>
 											</div>
@@ -39,8 +38,7 @@
 										<div class="position-relative has-icon-left">
 											<input type="time" class="form-control"
 												[(ngModel)]="ReservationParams.firstServiceEnd"
-												name="firstServiceEnd"
-												style="padding-right: 0px; padding-left: 28px;">
+												name="firstServiceEnd">
 											<div class="form-control-position">
 												<i class="ft-clock"></i>
 											</div>
@@ -56,8 +54,7 @@
 										<div class="position-relative has-icon-left">
 											<input type="time" class="form-control"
 												[(ngModel)]="ReservationParams.firstServiceArrival"
-												name="firstServiceArrival"
-												style="padding-right: 0px; padding-left: 28px;">
+												name="firstServiceArrival">
 											<div class="form-control-position">
 												<i class="ft-clock"></i>
 											</div>
@@ -70,8 +67,7 @@
 										<div class="position-relative has-icon-left">
 											<input type="time" class="form-control"
 												[(ngModel)]="ReservationParams.firstServiceBefore"
-												name="firstServiceBefore"
-												style="padding-right: 0px; padding-left: 28px;">
+												name="firstServiceBefore">
 											<div class="form-control-position">
 												<i class="ft-clock"></i>
 											</div>
@@ -88,8 +84,7 @@
 										<div class="position-relative has-icon-left">
 											<input type="time" class="form-control"
 												[(ngModel)]="ReservationParams.secondServiceStart"
-												name="secondServiceStart"
-												style="padding-right: 0px; padding-left: 30px;">
+												name="secondServiceStart">
 											<div class="form-control-position">
 												<i class="ft-clock"></i>
 											</div>
@@ -102,8 +97,7 @@
 										<div class="position-relative has-icon-left">
 											<input type="time" class="form-control"
 												[(ngModel)]="ReservationParams.secondServiceEnd"
-												name="secondServiceEnd"
-												style="padding-right: 0px; padding-left: 28px;">
+												name="secondServiceEnd">
 											<div class="form-control-position">
 												<i class="ft-clock"></i>
 											</div>
@@ -118,8 +112,7 @@
 										<div class="position-relative has-icon-left">
 											<input type="time" class="form-control"
 												[(ngModel)]="ReservationParams.secondServiceArrival"
-												name="secondServiceArrival"
-												style="padding-right: 0px; padding-left: 28px;">
+												name="secondServiceArrival">
 											<div class="form-control-position">
 												<i class="ft-clock"></i>
 											</div>
@@ -132,8 +125,7 @@
 										<div class="position-relative has-icon-left">
 											<input type="time" class="form-control"
 												[(ngModel)]="ReservationParams.secondServiceBefore"
-												name="secondServiceBefore"
-												style="padding-right: 0px; padding-left: 28px;">
+												name="secondServiceBefore">
 											<div class="form-control-position">
 												<i class="ft-clock"></i>
 											</div>
@@ -144,6 +136,8 @@
 							<div class="form-actions">
 								<button type="button"
 									class="btn btn-raised btn-raised btn-primary"
+									[disabled]="!ReservationParams.firstServiceStart || !ReservationParams.firstServiceEnd || !ReservationParams.firstServiceArrival || !ReservationParams.firstServiceBefore 
+									|| !ReservationParams.secondServiceStart || !ReservationParams.secondServiceEnd || !ReservationParams.secondServiceArrival || !ReservationParams.secondServiceBefore "
 									style="margin-bottom: 0;" (click)="updeservationParams();">
 									<i class="fa fa-check-square-o"></i> Sauvegarder
 								</button>

@@ -146,6 +146,8 @@
 				</div>
 				<div class="form-actions">
 					<button type="button" class="btn btn-raised btn-raised btn-primary"
+					[disabled]="!ReservationParams.firstServiceStart || !ReservationParams.firstServiceEnd || !ReservationParams.firstServiceArrival || !ReservationParams.firstServiceBefore 
+					|| !ReservationParams.secondServiceStart || !ReservationParams.secondServiceEnd || !ReservationParams.secondServiceArrival || !ReservationParams.secondServiceBefore "
 						style="margin-bottom: 0;" (click)="updeservationParams();">
 						<i class="fa fa-check-square-o"></i> Sauvegarder
 					</button>

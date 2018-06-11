@@ -36,7 +36,7 @@ export class ReservationManagementService {
       this.toastr.error("Il y avait un probl\u00e8me lors de la confirmation de la r\u00e9servation.");
    }
    reservConfirmedStatus() {
-       this.toastr.warning('Vous ne pouvez pas confirmer ou bien annuler une r\u00e9servation Arrived!');
+       this.toastr.warning('Vous ne pouvez pas confirmer ou bien annuler une r\u00e9servation Arriv\u00e9e!');
    }
    reservAnnulerStatus() {
         this.toastr.warning('La r\u00e9servation est d\u00e9ja annul\u00e9e!');

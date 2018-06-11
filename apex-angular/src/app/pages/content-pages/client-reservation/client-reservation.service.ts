@@ -31,7 +31,7 @@ export class ClientReservationService {
     }
 
     reservationSuccess() {
-        this.toastr.success("Votre demande a \u00e9t\u00e9 envoy\u00e9e avec succ\u00e9s.");
+        this.toastr.success("Votre r\u00e9servation a \u00e9t\u00e9 envoyer, un email sera envoyer avec le status de votre demande.");
     }
 
     cancelSuccess() {

@@ -94,11 +94,12 @@ export class ReservationManagementComponent implements OnInit {
     }
     //  Confirm Reservation
     onCustom(event) {
-        this.loadSpinner = true;
+        
         console.log(event);
         console.log(this.source);
         console.log(event.data)
         if(event.data.status == ' <span class="badge badge-warning">En Attente</span>' || event.data.status == ' <span class="badge badge-danger">Annul&#233;e</span>') {
+            this.loadSpinner = true;
             if (window.confirm('Are you sure you want to Confirm this reservation?')) {
             
             this.reservationManagementService.confirmerReservation(event.data.id,this.userAuthID).subscribe(data => {
@@ -143,7 +144,7 @@ export class ReservationManagementComponent implements OnInit {
             }else {
                this.loadSpinner=false;
             }
-       }else if(event.data.status == '<span class="badge badge-info">Arriv&#233;e</span>') {
+       }else if(event.data.status == ' <span class="badge badge-info">Arriv&#233;e</span>') {
             this.loadSpinner=false;
             this.reservationManagementService.reservConfirmedStatus();
        }else if(event.data.status == ' <span class="badge badge-success">Confirm&#233;e</span>') {

@@ -74,7 +74,9 @@ export class NavbarComponent implements OnInit {
         
         notif.isShowen = true;
         this.navbarService.setNotificationRead(notif.id).subscribe(data => {
-            console.log(data);
+            if(this.UnreadNotification == true){
+                this.listNotifLength = this.listNotifLength -1;
+            }
         });
     }
     

@@ -184,7 +184,7 @@
 				<div class="input-group">
 					<input class="form-control" placeholder="yyyy-mm-dd" name="dp"
 						[(ngModel)]="clasedDate" ngbDatepicker [minDate]="disabledModel"
-						#d3="ngbDatepicker" required>
+						#d3="ngbDatepicker" required readOnly>
 					<div class="input-group-append">
 						<div class="input-group-text" (click)="d3.toggle()">
 							<i class="fa fa-calendar" style="cursor: pointer;"></i>

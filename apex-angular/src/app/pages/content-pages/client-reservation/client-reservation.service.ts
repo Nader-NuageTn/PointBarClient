@@ -31,7 +31,7 @@ export class ClientReservationService {
     }
 
     reservationSuccess() {
-        this.toastr.success("Votre r\u00e9servation a \u00e9t\u00e9 envoyer, un email sera envoyer avec le status de votre demande.");
+        this.toastr.success("Votre r\u00e9servation a \u00e9t\u00e9 envoyer, un email sera envoyer avec le status de votre demande.", null, {toastLife: 10000});
     }
 
     cancelSuccess() {

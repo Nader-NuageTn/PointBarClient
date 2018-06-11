@@ -12,7 +12,6 @@ import { ReservationComponent } from './reservation.component';
 import { ReservationSettingComponent, NgbdModalContentSetting  } from './reservation-setting/reservation-setting.component';
 import { ReservationManagementService } from './reservation-management/reservation-management.service';
 import { ReservationSettingService } from './reservation-setting/reservation-setting.service';
-import { DoBcomponentComponent } from './do-bcomponent/do-bcomponent.component';
 
 
 @NgModule({
@@ -28,10 +27,9 @@ import { DoBcomponentComponent } from './do-bcomponent/do-bcomponent.component';
         ReservationManagementComponent,
         ReservationComponent,
         ReservationSettingComponent,
-        NgbdModalContentSetting,
-        DoBcomponentComponent],
+        NgbdModalContentSetting],
     
-    entryComponents: [DoBcomponentComponent,NgbdModalContentSetting],
+    entryComponents: [NgbdModalContentSetting],
     providers: [ ReservationManagementService,ReservationSettingService ]
 
 })

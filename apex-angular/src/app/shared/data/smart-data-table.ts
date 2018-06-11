@@ -1,4 +1,3 @@
-import { DoBcomponentComponent } from "../../reservation/do-bcomponent/do-bcomponent.component";
 // Smart DataTable
 export var settings = {
   columns: {

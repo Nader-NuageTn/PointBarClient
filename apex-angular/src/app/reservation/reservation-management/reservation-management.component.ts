@@ -70,7 +70,7 @@ export class ReservationManagementComponent implements OnInit {
     onDeleteConfirm(event) {
         console.log(event);
         if(event.data.status == ' <span class="badge badge-warning">En Attente</span>' || event.data.status == ' <span class="badge badge-success">Confirm&#233;e</span>') {
-        if (window.confirm('Are you sure you want to Cancel this reservation?')) {
+        if (window.confirm('\xCAtes-vous s\xFBr de vouloir annuler cette r\u00e9servation?')) {
             console.log(this.allReservations);
             this.reservationManagementService.annulerReservation(event.data.id).subscribe(data => {
                console.log(data); 
@@ -86,7 +86,7 @@ export class ReservationManagementComponent implements OnInit {
         } else {
             event.confirm.reject();
         }
-       }else if(event.data.status == '<span class="badge badge-info">Arriv&#233;e</span>') {
+       }else if(event.data.status == ' <span class="badge badge-info">Arriv&#233;e</span>') {
             this.reservationManagementService.reservConfirmedStatus();
        }if(event.data.status == ' <span class="badge badge-danger">Annul&#233;e</span>') {
            this.reservationManagementService.reservAnnulerStatus();
@@ -100,7 +100,7 @@ export class ReservationManagementComponent implements OnInit {
         console.log(event.data)
         if(event.data.status == ' <span class="badge badge-warning">En Attente</span>' || event.data.status == ' <span class="badge badge-danger">Annul&#233;e</span>') {
             this.loadSpinner = true;
-            if (window.confirm('Are you sure you want to Confirm this reservation?')) {
+            if (window.confirm('\xCAtes-vous s\xFBr de vouloir confirmer cette r\u00e9servation?')) {
             
             this.reservationManagementService.confirmerReservation(event.data.id,this.userAuthID).subscribe(data => {
                    console.log(data);
@@ -155,36 +155,7 @@ export class ReservationManagementComponent implements OnInit {
     isArray(a) {
     return (!!a) && (a.constructor === Array);
 };
-    //  Edit Tranche horaire
-    onSaveConfirm(event) {
-        console.log(event.newData.timeFrom);
-        if(event.newData.timeFrom[0] != null && event.newData.timeFrom[1] != null && event.newData.timeFrom[2] && event.newData.timeFrom[3] != null) {
-        if (window.confirm('Are you sure you want to save?')) {
-            this.trancheHorFrom['hour']=event.newData.timeFrom[0];
-            this.trancheHorFrom['minute']=event.newData.timeFrom[1];
-            this.trancheHorTo['hour']=event.newData.timeFrom[2];
-            this.trancheHorTo['minute']=event.newData.timeFrom[3];
-            console.log(event.newData.timeFrom);
-            console.log(event.newData);
-            if(this.isArray(event.newData.timeFrom)) {
-                event.newData.timeFrom = event.newData.timeFrom[0]+":"+event.newData.timeFrom[1]+"-"+event.newData.timeFrom[2]+":"+event.newData.timeFrom[3];
-            }else {
-                event.newData.timeFrom = event.newData.timeFrom.split("-")[0].split(":")[0]+":"+event.newData.timeFrom.split("-")[0].split(":")[1]+"-"+event.newData.timeFrom.split("-")[1].split(":")[0]+":"+event.newData.timeFrom.split("-")[1].split(":")[1];
-            }
-            
-            this.reservationManagementService.editTrancheHoraire(event.newData.id,event.newData.timeFrom).subscribe(data => {
-               console.log(data); 
-                if(data == "success") {
-                    this.reservationManagementService.typeSuccess();
-                }
-            });
-            event.confirm.resolve(event.newData);
-            }
-        } else {
-            event.confirm.reject();
-            this.reservationManagementService.TrancheHorNotif();
-        }
-    }
+
     getReservationsEnAttente(){
         this.allReservations = false;
         let today = { year: now.getFullYear(), month: now.getMonth() + 1, day: now.getDate() };

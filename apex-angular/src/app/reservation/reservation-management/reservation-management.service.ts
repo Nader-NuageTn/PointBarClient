@@ -14,29 +14,29 @@ export class ReservationManagementService {
    }
     
   deleteSuccess() {
-        this.toastr.success("La r\u00e9servation a \u00e9t\u00e9 annul\u00e9e avec succ\u00e9s.");
+        this.toastr.success("La r\u00e9servation a \u00e9t\u00e9 annul\u00e9e avec succ\u00e9s.", null, {toastLife: 10000});
     }
     
   activateSuccess() {
-        this.toastr.success("La r\u00e9servation a \u00e9t\u00e9 confirm\u00e9e avec succ\u00e9s.");
+        this.toastr.success("La r\u00e9servation a \u00e9t\u00e9 confirm\u00e9e avec succ\u00e9s.", null, {toastLife: 10000});
     }
     TrancheHorNotif() {
         this.toastr.warning('Remplir la tranche horaire est obligatoire!');
     }
     problemEmail() {
-      this.toastr.error("La r\u00e9servation a \u00e9t\u00e9 confirm\u00e9e avec succ\u00e9s. Il y avait un probl\u00e8me lors de l'envoi de l'e-mail et du message.");
+      this.toastr.error("La r\u00e9servation a \u00e9t\u00e9 confirm\u00e9e avec succ\u00e9s. Il y avait un probl\u00e8me lors de l'envoi de l'e-mail et du message.", null, {toastLife: 10000});
    }
     problemSms() {
-      this.toastr.error("La r\u00e9servation a \u00e9t\u00e9 confirm\u00e9e avec succ\u00e9s. Il y avait un probl\u00e8me lors de l'envoi du message.");
+      this.toastr.error("La r\u00e9servation a \u00e9t\u00e9 confirm\u00e9e avec succ\u00e9s. Il y avait un probl\u00e8me lors de l'envoi du message.", null, {toastLife: 10000});
    }
    problemQRCode() {
-      this.toastr.error("La r\u00e9servation a \u00e9t\u00e9 confirm\u00e9e avec succ\u00e9s. Il y avait un probl\u00e8me lors de la cr\u00e9ation du QR code");
+      this.toastr.error("La r\u00e9servation a \u00e9t\u00e9 confirm\u00e9e avec succ\u00e9s. Il y avait un probl\u00e8me lors de la cr\u00e9ation du QR code", null, {toastLife: 10000});
    }
     activateFail() {
-      this.toastr.error("Il y avait un probl\u00e8me lors de la confirmation de la r\u00e9servation.");
+      this.toastr.error("Il y avait un probl\u00e8me lors de la confirmation de la r\u00e9servation.", null, {toastLife: 10000});
    }
    reservConfirmedStatus() {
-       this.toastr.warning('Vous ne pouvez pas confirmer ou bien annuler une r\u00e9servation Arriv\u00e9e!');
+       this.toastr.warning('Vous ne pouvez pas confirmer ou bien annuler une r\u00e9servation Arriv\u00e9e!', null, {toastLife: 10000});
    }
    reservAnnulerStatus() {
         this.toastr.warning('La r\u00e9servation est d\u00e9ja annul\u00e9e!');

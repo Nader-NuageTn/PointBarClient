@@ -88,7 +88,7 @@ deletedUsers:boolean =false;
     onDeleteConfirm(event) {
         console.log(event);
         if(event.data.isDeleted == false) {
-        if (window.confirm('Are you sure you want to delete?')) {
+        if (window.confirm('\xCAtes-vous s\xFBr que vous voulez supprimer cet utilisateur?')) {
             event.confirm.resolve(event.data);
             console.log(event.data);
             this.pbusersService.deleteUser(event.data.id).subscribe(data => {
@@ -101,7 +101,7 @@ deletedUsers:boolean =false;
             event.confirm.reject();
         }
       }else {
-           if (window.confirm('Are you sure you want to Activate the user?')) {
+           if (window.confirm('\xCAtes-vous s\xFBr de vouloir activer cet utilisateur?')) {
                event.confirm.resolve(event.data);
             this.pbusersService.activateDeletedUser(event.data.id).subscribe(data => {
                console.log(data);
@@ -118,7 +118,7 @@ deletedUsers:boolean =false;
 
     //  For confirm action On Save
     onSaveConfirm(event) {
-        if (window.confirm('Are you sure you want to save?')) {
+        if (window.confirm('\xCAtes-vous s\xFBr de vouloir sauvegarder?')) {
             event.newData['name'] += ' + added in code';
             event.confirm.resolve(event.newData);
             console.log(event.newData);
@@ -126,6 +126,8 @@ deletedUsers:boolean =false;
                console.log(data); 
                 if(data == "success") {
                     this.pbusersService.typeSuccess();
+                }else if(data == "exist") {
+                    this.pbusersService.emailExistNotif();
                 }
             });
         } else {
@@ -134,27 +136,30 @@ deletedUsers:boolean =false;
     }
     
     onCustom(event) {
+      
         console.log(event);
             if(event.data.isConfirmed == false) {
-            this.pbusersService.activateUser(event.data.id).subscribe(data => {
-               console.log(data);
-               if(data == "succes") {
-                    this.pbusersService.activateSuccess();
-                   this.pbusersService.getpbUsers().subscribe(data => {
-             console.log(data);
-            for(let user of data) {
-                 user.role= user.role.description;
-              }
-            this.deletedUsers=false;
-             this.alertsettings = tableData.alertsettings;
-             this.alertSource =data;
-        });
-                }
-            });
+                if (window.confirm("\xCAtes-vous s\xFBr de vouloir activer cet utilisateur? Ne pas oublier de v\u00e9rifier le r\xF4le.")) {
+                    this.pbusersService.activateUser(event.data.id).subscribe(data => {
+                       console.log(data);
+                       if(data == "succes") {
+                            this.pbusersService.activateSuccess();
+                            this.pbusersService.getpbUsers().subscribe(data => {
+                             console.log(data);
+                            for(let user of data) {
+                                 user.role= user.role.description;
+                             }
+                            this.deletedUsers=false;
+                            this.alertsettings = tableData.alertsettings;
+                            this.alertSource =data;
+                        });
+                      }
+                   });
+               }
             }else {
             this.pbusersService.activateWarning();
             }
-        
+       
     }
     getDeletedUsers() {
         this.pbusersService.getdeletedUsers().subscribe(data => {

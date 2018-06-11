@@ -49,10 +49,12 @@ export class RegisterPageComponent {
                 console.log("success");
                 this.signupService.typeSuccess();
                 this.router.navigate(['login'], { relativeTo: this.route.parent });
-            }else {
+            }else if(data == "exist") {
+                this.signupService.mailExistNotif();
+            }
+            else{
                 console.log("Fail");
                 this.signupService.typeErrorThird();
-                
             }
         });
         this.registerForm.reset();

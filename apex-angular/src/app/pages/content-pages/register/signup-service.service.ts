@@ -11,12 +11,15 @@ export class SignupServiceService {
     
   // Success Type
     typeSuccess() {
-        this.toastr.success("Votre compte a \u00e9t\u00e9 cr\u00e9\u00e9 avec succ\u00e8s. L'activation peut prendre quelques minutes.");
+        this.toastr.success("Votre compte a \u00e9t\u00e9 cr\u00e9\u00e9 avec succ\u00e8s. L'activation peut prendre quelques minutes.", null, {toastLife: 10000});
     }
     
     typeErrorThird() {
-        this.toastr.error("Cet Utilisateur existe deja!");
-        }
+        this.toastr.error("Ce Compte existe deja!", null, {toastLife: 10000});
+    }
+    mailExistNotif() {
+        this.toastr.error("Un compte avec l'email que vous avez entr\u00e9 existe deja!", null, {toastLife: 10000});
+    }
     
  //Signup User   
   signupUser(newPBUser) {

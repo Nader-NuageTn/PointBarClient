@@ -24,6 +24,9 @@ export class PbusersService {
     activateWarning() {
         this.toastr.warning("L'utilisateur est d\u00e9ja active.");
      }
+    emailExistNotif() {
+        this.toastr.error("Un compte avec l'email que vous avez entr\u00e9 existe deja!", null, {toastLife: 10000});
+    }
     
   editUser(user) {
         const headers = new Headers();

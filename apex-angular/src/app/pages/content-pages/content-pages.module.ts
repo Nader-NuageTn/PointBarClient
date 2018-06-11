@@ -24,6 +24,7 @@ import { ReservationSettingService } from './reservation-setting/reservation-set
 import { ConfirmReservationComponent } from './confirm-reservation/confirm-reservation.component';
 
 import { LoginSecuriteComponent } from './login-securite/login-securite.component';
+import { NumberOnlyDirective } from './client-reservation/number-only.directive';
 
 
 @NgModule({
@@ -56,6 +57,7 @@ import { LoginSecuriteComponent } from './login-securite/login-securite.componen
         ConfirmReservationComponent,
         NgbdModalTrackStatus,
         LoginSecuriteComponent,
+        NumberOnlyDirective,
     ],
     providers: [SignupServiceService, LoginService, ClientReservationService,ReservationSettingService],
     entryComponents: [NgbdModalContent,NgbdModalContentSetting,NgbdModalContentTimeInvalide,NgbdModalContentImageSetting,NgbdModalTrackStatus ]

@@ -49,6 +49,10 @@ export class ClientReservationService {
     dateActivated() {
         this.toastr.success("La date a \u00e9t\u00e9 activ\u00e9e avec succ\u00e9s.");
     }
+    
+    dateReservationError() {
+        this.toastr.error("La date que vous avez entr\u00e9 est Incorrecte!");
+    }
 
     sendReservationRequest(reservation: NewReservationModel) {
         const headers = new Headers();

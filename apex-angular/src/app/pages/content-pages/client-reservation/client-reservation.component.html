@@ -48,7 +48,7 @@
 												<label for="projectinput1">Nom</label><sup><font
 													style="color: #F31414" size="2">*</font></sup> <input type="text" maxlength="50" [ngModelOptions]="{updateOn: 'blur'}"
 													[(ngModel)]="reservation.firstName" id="projectinput1"
-													class="form-control" name="fname" required>
+													class="form-control" name="fname" required >
 											</div>
 										</div>
 										<div class="col-md-6">
@@ -74,7 +74,7 @@
 												<label for="projectinput4">Num&#233;ro de
 													t&#233;l&#233;phone </label><sup><font
 													style="color: #F31414" size="2">*</font></sup> <input type="text" id="projectinput4"
-													[(ngModel)]="reservation.phone" class="form-control"
+													[(ngModel)]="reservation.phone" class="form-control" 
 													name="phone" required myNumberOnly>
 											</div>
 										</div>
@@ -82,9 +82,10 @@
 									<div class="row">
 										<div class="col-md-6">
 											<div class="form-group">
-												<label for="projectinput3">Facebook url</label> <input
-													type="text" id="projectinput3" class="form-control"
-													[(ngModel)]="reservation.facebook" name="facebook" url>
+												<label for="projectinput3">Facebook url</label><sup><font
+													style="color: #F31414" size="2">*</font></sup>  <input
+													type="text" id="projectinput3" class="form-control" placeholder="https://www.facebook.com/Votre-Profile"
+													[(ngModel)]="reservation.facebook" name="facebook" required url >
 											</div>
 										</div>
 										<div class="col-md-6">
@@ -171,6 +172,31 @@
 
 
 									</div>
+									
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<label for="timesheetinput6">L'heure d'arriv&#233;e<sup><font
+													style="color: #F31414" size="2">*</font></sup></label>
+												<div class="position-relative has-icon-left">
+													<input type="time" class="form-control" 
+														[(ngModel)]="reservation.timeArrival"
+														name="timeArrival" required>
+													<div class="form-control-position">
+														<i class="ft-clock"></i>
+													</div>
+												</div>
+											</div>
+										</div>
+										
+									</div>
+									<div class="row" style="margin-bottom: 5px;">
+										<div class="col-md-12">
+											<label style="font-size: x-small;" *ngIf="toleranceExist == true">Le client est tenu de se pr&#233;senter dans {{tolerance}}de l'heure s&#233;lectionn&#233;e.</label><span></span>
+										</div>
+										
+									</div>
+									
 									<div class="row">
 										<div class="col-md-6">
 

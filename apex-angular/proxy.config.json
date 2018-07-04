@@ -26,5 +26,9 @@
 	"/NotificationController": {
 		"target": "http://localhost:8080",
 		"secure": false
+	},
+	"/DashboardController": {
+		"target": "http://localhost:8080",
+		"secure": false
 	}
 }

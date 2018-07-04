@@ -11,8 +11,9 @@ export class NewReservationModel{
     public  service:String;
     public  qtyMen:number;
     public  qtyWomen:number;
+    public timeArrival:String;
     
-    constructor(firstName:String, lastName:String, email:String, phone:String,facebook:String, date:ReservationDateModel, service:String, qtyMen:number, qtyWomen:number) {
+    constructor(firstName:String, lastName:String, email:String, phone:String,facebook:String, date:ReservationDateModel, service:String, qtyMen:number, qtyWomen:number,timeArrival:String) {
    
         this.firstName = firstName;
         this.lastName = lastName;
@@ -23,6 +24,6 @@ export class NewReservationModel{
         this.service = service;
         this.qtyMen = qtyMen;
         this.qtyWomen = qtyWomen;
-       
+       this.timeArrival = timeArrival
     }
 }

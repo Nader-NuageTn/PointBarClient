@@ -32,9 +32,13 @@ export class ConfirmReservationComponent implements OnInit {
              console.log(url.split("/").pop());
                 this.confirmReservationService.getReservation(url.split("/").pop()).subscribe(data => {
                     if(data != null) {
-                         console.dir(data)
+                       
                         localStorage.setItem('isScan', 'true');
                         localStorage.setItem('idRes', url.split("/").pop());
+                        
+                        if(data.timeArrival == null || !data.timeArrival.includes(":")){
+                            data.timeArrival = "non d\u00e9fini";
+                        }
                          if (data != null && data.clientsEntity.hasPhoto == true) {
                         this.confirmReservationService.getProfilePicture(data.clientsEntity.photoPath).subscribe(data1 => {
                             console.log(data1);

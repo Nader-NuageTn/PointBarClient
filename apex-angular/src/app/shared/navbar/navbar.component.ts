@@ -28,7 +28,6 @@ export class NavbarComponent implements OnInit {
 
     ngOnInit() {
         this.userAuthID = this.auth.getUserAuthID()
-        console.log(this.userAuthID);
         this.GetUnreadNotification();
 
     }
@@ -43,7 +42,6 @@ export class NavbarComponent implements OnInit {
             data.forEach(it => {
                 it.dateNotif = new Date(it.dateNotif).toLocaleTimeString("fr-tn", options)
             })
-            console.log(data);
 
             this.listNotif = data
             this.listNotifLength = data.length;
@@ -61,7 +59,6 @@ export class NavbarComponent implements OnInit {
             data.forEach(it => {
                 it.dateNotif = new Date(it.dateNotif).toLocaleTimeString("fr-tn", options)
             })
-            console.log(data);
             this.listNotif = data
             this.listNotifLength = data.length;
             this.AllNotification = false;
@@ -70,7 +67,6 @@ export class NavbarComponent implements OnInit {
     }
 
     markAsRead(notif) {
-        console.log(notif);
         
         notif.isShowen = true;
         this.navbarService.setNotificationRead(notif.id).subscribe(data => {

@@ -1,0 +1,216 @@
+<!--Statistics cards Starts-->
+<div class="row">
+	<div class="col-xl-3 col-lg-6 col-md-6 col-12">
+		<div class="card gradient-blackberry">
+			<div class="card-body">
+				<div class="card-block pt-2 pb-0">
+					<div class="media">
+						<div class="media-body white text-left">
+							<h3 class="font-large-1 mb-0">{{qtyResrv}}</h3>
+							<span>Total R&#233;srv</span>
+						</div>
+						<div class="media-right white text-right">
+							<i class="icon-pie-chart font-large-1"></i>
+						</div>
+					</div>
+				</div>
+				<div id="Widget-line-chart"
+					class="height-75 WidgetlineChart WidgetlineChartshadow mb-2">
+					<x-chartist class="" [data]="WidgetlineChart.data"
+						[type]="WidgetlineChart.type" [options]="WidgetlineChart.options"
+						[responsiveOptions]="WidgetlineChart.responsiveOptions"
+						[events]="WidgetlineChart.events"> </x-chartist>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-xl-3 col-lg-6 col-md-6 col-12">
+		<div class="card gradient-ibiza-sunset">
+			<div class="card-body">
+				<div class="card-block pt-2 pb-0">
+					<div class="media">
+						<div class="media-body white text-left">
+							<h3 class="font-large-1 mb-0">{{qtyPersonneFemme}}</h3>
+							<span>Total R&#233;srv par Femme</span>
+						</div>
+						<div class="media-right white text-right">
+							<i class="icon-symbol-female font-large-1"></i>
+						</div>
+					</div>
+				</div>
+				<div id="Widget-line-chart"
+					class="height-75 WidgetlineChart WidgetlineChartshadow mb-2">
+					<x-chartist class="" [data]="WidgetlineChart.data"
+						[type]="WidgetlineChart.type" [options]="WidgetlineChart.options"
+						[responsiveOptions]="WidgetlineChart.responsiveOptions"
+						[events]="WidgetlineChart.events"> </x-chartist>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<div class="col-xl-3 col-lg-6 col-md-6 col-12">
+		<div class="card gradient-green-tea">
+			<div class="card-body">
+				<div class="card-block pt-2 pb-0">
+					<div class="media">
+						<div class="media-body white text-left">
+							<h3 class="font-large-1 mb-0">{{qtyPersonneHomme}}</h3>
+							<span>Total R&#233;srv par Homme</span>
+						</div>
+						<div class="media-right white text-right">
+							<i class="icon-symbol-male font-large-1"></i>
+						</div>
+					</div>
+				</div>
+				<div id="Widget-line-chart"
+					class="height-75 WidgetlineChart WidgetlineChartshadow mb-2">
+					<x-chartist class="" [data]="WidgetlineChart.data"
+						[type]="WidgetlineChart.type" [options]="WidgetlineChart.options"
+						[responsiveOptions]="WidgetlineChart.responsiveOptions"
+						[events]="WidgetlineChart.events"> </x-chartist>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-xl-3 col-lg-6 col-md-6 col-12">
+		<div class="card gradient-pomegranate">
+			<div class="card-body">
+				<div class="card-block pt-2 pb-0">
+					<div class="media">
+						<div class="media-body white text-left">
+							<h3 class="font-large-1 mb-0">{{qtyPersonneArrive}}</h3>
+							<span>Total R&#233;srv Arriv&#233;e</span>
+						</div>
+						<div class="media-right white text-right">
+							<i class="icon-wallet font-large-1"></i>
+						</div>
+					</div>
+				</div>
+				<div id="Widget-line-chart"
+					class="height-75 WidgetlineChart WidgetlineChartshadow mb-2">
+					<x-chartist class="" [data]="WidgetlineChart.data"
+						[type]="WidgetlineChart.type" [options]="WidgetlineChart.options"
+						[responsiveOptions]="WidgetlineChart.responsiveOptions"
+						[events]="WidgetlineChart.events"> </x-chartist>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!--Statistics cards Ends-->
+
+
+
+<div class="row" matchHeight="card">
+	<div class="col-xl-6 col-lg-6 col-12">
+		<div class="card">
+			<div class="card-header">
+				<h4 class="card-title">Statistics Par Statut</h4>
+				<span ngbDropdown class="pull-right">
+					<button class="btn btn-primary btn-raised mr-1"
+						id="dropdownRaised2" ngbDropdownToggle>{{ChartPerStatus}}</button>
+					<div ngbDropdownMenu class="dropdown-menu-right"
+						aria-labelledby="dropdownRaised2">
+						<button class="dropdown-item" (click)="getTotalChartPerStatusToday()">Aujourd'hui</button>
+						<button class="dropdown-item" (click)="getTotalChartPerStatusWeek()">Cette Semaine</button>
+						<button class="dropdown-item" (click)="getTotalChartPerStatusMonth()">Ce mois</button>
+						<button class="dropdown-item" (click)="getTotalChartPerStatusYear()">Cette Ann&#233;e</button>
+					</div>
+				</span>
+			</div>
+			<div class="card-body">
+
+				<div id="bar-chart" class="height-250 BarChartShadow BarChart">
+					<x-chartist class="" [data]="BarChart.data" [type]="BarChart.type"
+						[options]="BarChart.options"
+						[responsiveOptions]="BarChart.responsiveOptions"
+						[events]="BarChart.events"> </x-chartist>
+				</div>
+
+				<div class="card-block">
+					<div class="row">
+						<div class="col text-center">
+							<span
+								class="gradient-pomegranate d-block rounded-circle mx-auto mb-2"
+								style="width: 10px; height: 10px;"></span> <span
+								class="font-large-1 d-block mb-2">{{qtyTotalResrv}}</span> <span>Total</span>
+						</div>
+						<div class="col text-center">
+							<span
+								class="gradient-green-tea d-block rounded-circle mx-auto mb-2"
+								style="width: 10px; height: 10px;"></span> <span
+								class="font-large-1 d-block mb-2">{{qtyResrvWaiting}}</span> <span>En Attente</span>
+						</div>
+						<div class="col text-center">
+							<span
+								class="gradient-blackberry d-block rounded-circle mx-auto mb-2"
+								style="width: 10px; height: 10px;"></span> <span
+								class="font-large-1 d-block mb-2">{{qtyResrvConfirmed}}</span> <span>Confirm&#233;e</span>
+						</div>
+						<div class="col text-center">
+							<span
+								class="gradient-ibiza-sunset d-block rounded-circle mx-auto mb-2"
+								style="width: 10px; height: 10px;"></span> <span
+								class="font-large-1 d-block mb-2">{{qtyResrvCanceled}}</span> <span>Annul&#233;e</span>
+						</div>
+						<div class="col text-center">
+							<span
+								class="gradient-pomegranate d-block rounded-circle mx-auto mb-2"
+								style="width: 10px; height: 10px;"></span> <span
+								class="font-large-1 d-block mb-2">{{qtyResrvArrive}}</span> <span>Arriv&#233;e</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-xl-6 col-lg-6 col-12">
+		<div class="card">
+			<div class="card-header">
+				<h4 class="card-title">Statistics par Genre</h4>
+				<span ngbDropdown class="pull-right">
+					<button class="btn btn-primary btn-raised mr-1"
+						id="dropdownRaised2" ngbDropdownToggle>{{ChartPerGenre}}</button>
+					<div ngbDropdownMenu class="dropdown-menu-right"
+						aria-labelledby="dropdownRaised2">
+						<button class="dropdown-item" (click)="getTotalChartPerGenreToday()">Aujourd'hui</button>
+						<button class="dropdown-item" (click)="getTotalChartPerGenreWeek()">Cette Semaine</button>
+						<button class="dropdown-item" (click)="getTotalChartPerGenreMonth()">Ce mois</button>
+						<button class="dropdown-item" (click)="getTotalChartPerGenreYear()">Cette Ann&#233;e</button>
+					</div>
+				</span>
+			</div>
+			<div class="card-body">
+				<div class="card-block">
+					<div id="pie-chart2" class="height-400">
+						<ngx-charts-pie-chart [scheme]="pieChartColorScheme"
+							[results]="pieChartSingle" [legend]="pieChartShowLegend"
+							[explodeSlices]="pieChart1ExplodeSlices"
+							[labels]="pieChartShowLabels" [doughnut]="pieChart1Doughnut"
+							[gradient]="pieChartGradient" (select)="onSelect($event)">
+						</ngx-charts-pie-chart>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+<div class="row">
+
+	<div class="col-xl-12 col-lg-12 col-12">
+		<div class="card">
+			<div class="card-header">
+				<h4 class="card-title">Client Cart</h4>
+				<a class="btn btn-social btn-min-width mr-2 mb-2 btn-primary btn-raised pull-right" style="margin-top: -35px;" (click)="Exporter()"><span class="fa fa-file-excel-o" style="line-height: 2.3rem;"></span> Exporter</a>
+			</div>
+			<div class="card-body">
+				<ng2-smart-table [settings]="clientsettings" [source]="clientSource"></ng2-smart-table>
+			</div>
+		</div>
+	</div>
+</div>
+

@@ -29,6 +29,7 @@ import * as $ from 'jquery';
 
 
 
+
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
   }
@@ -38,7 +39,7 @@ export function createTranslateLoader(http: HttpClient) {
         AppComponent,
         FullLayoutComponent,
         HorizontalLayoutComponent,
-        ContentLayoutComponent,
+        ContentLayoutComponent
     ],
     imports: [
         BrowserAnimationsModule,

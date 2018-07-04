@@ -12,7 +12,7 @@
 		<hr>
 
 		<ngb-accordion [closeOthers]="true" activeIds="1"> <ngb-panel
-			id="1"> <ng-template ngbPanelTitle> <span>Param&#232;tre
+			id="1" > <ng-template ngbPanelTitle> <span>Param&#232;tre
 			des services</span> </ng-template> <ng-template ngbPanelContent>
 
 
@@ -143,11 +143,42 @@
 							</div>
 						</div>
 					</div>
+
+				</div>
+
+				<h4 class="form-section">Param&#232;tre de r&#233;servation</h4>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="form-group">
+							<label for="timesheetinput6">Tol&#233;rance d'arriver</label>
+							<nouislider [config]="someTimeConfig" [(ngModel)]="toleranceArrive" name="toleranceArrive" (change)="test('toleranceArrive')" style="margin-bottom: 1rem;margin-top: 3rem"></nouislider>
+							
+						</div>
+					</div>
+					
+
+				</div>
+				<div class="row">
+					
+					<div class="col-md-12">
+						<div class="form-group">
+							<label for="companyName">NB Personnes Minimum</label>
+							<div class="position-relative has-icon-left">
+								<input type="number" class="form-control" min="0"
+									[(ngModel)]="ReservationParams.nbMinPerson" name="nbMinPerson">
+								<div class="form-control-position">
+									<i class="ft-user"></i>
+								</div>
+							</div>
+						</div>
+					</div>
+
 				</div>
 				<div class="form-actions">
 					<button type="button" class="btn btn-raised btn-raised btn-primary"
-					[disabled]="!ReservationParams.firstServiceStart || !ReservationParams.firstServiceEnd || !ReservationParams.firstServiceArrival || !ReservationParams.firstServiceBefore 
-					|| !ReservationParams.secondServiceStart || !ReservationParams.secondServiceEnd || !ReservationParams.secondServiceArrival || !ReservationParams.secondServiceBefore "
+						[disabled]="!ReservationParams.firstServiceStart || !ReservationParams.firstServiceEnd || !ReservationParams.firstServiceArrival || !ReservationParams.firstServiceBefore 
+					|| !ReservationParams.secondServiceStart || !ReservationParams.secondServiceEnd || !ReservationParams.secondServiceArrival || !ReservationParams.secondServiceBefore 
+					|| !ReservationParams.toleranceArrive"
 						style="margin-bottom: 0;" (click)="updeservationParams();">
 						<i class="fa fa-check-square-o"></i> Sauvegarder
 					</button>

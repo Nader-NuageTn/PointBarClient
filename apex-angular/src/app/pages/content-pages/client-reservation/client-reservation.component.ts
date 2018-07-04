@@ -53,15 +53,8 @@ export class NgbdModalContentImageSetting {
 @Component({
     selector: 'ngbd-modal-content',
     template: `
-    <div class="modal-header">
-      <h4 class="modal-title">ID R&#233;servation: </h4>
-      <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
     <div class="modal-body">
-      <ngb-alert type="light" [dismissible]="false"> 
-                                        {{reservationStatus}}</ngb-alert>
+      <ngb-alert type="light" [dismissible]="false">  {{reservationStatus}}</ngb-alert>
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-secondary btn-raised" (click)="activeModal.close('Close click')">Ok</button>
@@ -193,10 +186,14 @@ export class ClientReservationComponent implements OnInit {
     isAdmin: boolean;
     // Custom Day View Ends  
 
+    // Phone Max Length
+    phoneMaxLength = 8;
+
+
     fileName: string = "Envoyer..";
     trackStatusMsg: string = "";
     ReservationParams = {
-        firstServiceArrival:"", firstServiceBefore:"", firstServiceEnd:"", firstServiceStart:"",id:0,secondServiceArrival:"",secondServiceBefore:"",secondServiceEnd:"",secondServiceStart:""
+        firstServiceArrival: "", firstServiceBefore: "", firstServiceEnd: "", firstServiceStart: "", id: 0, secondServiceArrival: "", secondServiceBefore: "", secondServiceEnd: "", secondServiceStart: ""
     };
 
     constructor(private clientReservationService: ClientReservationService, private modalService: NgbModal, private auth: AuthService) {
@@ -361,9 +358,11 @@ export class ClientReservationComponent implements OnInit {
         } else this.displayEvent = false;
 
     }
+    toleranceExist = false;
+    tolerance :string;
     ngOnInit() {
         console.log(now);
-        this.reservation = new NewReservationModel("", "", "", "", "", this.disabledModel, "", 0, 0);
+        this.reservation = new NewReservationModel("", "", "", "", "", this.disabledModel, "", 0, 0, "");
 
         this.regularForm = new FormGroup({
             'email': new FormControl(null, [Validators.required, Validators.email]),
@@ -390,8 +389,17 @@ export class ClientReservationComponent implements OnInit {
             this.ReservationParams["secondServiceStart"] = this.ReservationParams["secondServiceStart"].replace(":", "h");
             this.ReservationParams["secondServiceEnd"] = this.ReservationParams["secondServiceEnd"].replace(":", "h");
             this.ReservationParams["secondServiceArrival"] = this.ReservationParams["secondServiceArrival"].replace(":", "h");
-            console.log("this.ReservationParams");
-            console.dir(this.ReservationParams);
+            var heures = 0;
+            var minutes = 0;
+            if(data.toleranceArrive != null && data.toleranceArrive.includes(":") && (this.ReservationParams["toleranceArrive"].split(":")[0] != "00" || this.ReservationParams["toleranceArrive"].split(":")[1] != "00")){
+                this.toleranceExist = true;
+                heures = this.ReservationParams["toleranceArrive"].split(":")[0] == "00" ? 0 : +this.ReservationParams["toleranceArrive"].split(":")[0];
+                
+                minutes = this.ReservationParams["toleranceArrive"].split(":")[1] == "00" ? 0 : +this.ReservationParams["toleranceArrive"].split(":")[1];
+                this.tolerance = heures > 0 && minutes > 0 ? heures+" heure(s) et " : "";
+                this.tolerance = heures > 0 && minutes == 0 ? heures+" heure(s) " : this.tolerance;
+                this.tolerance = this.ReservationParams["toleranceArrive"].split(":")[1] != "00"  ?  this.tolerance+minutes+" minute(s) " : this.tolerance;
+            }
 
         });
         this.clientReservationService.getNextEvent(today).subscribe(data => {
@@ -434,12 +442,36 @@ export class ClientReservationComponent implements OnInit {
     }
     onSubmit() {
         this.loadSpinner = true;
-       
+        var minPersonneParam =0;
+   
+        if(this.ReservationParams["nbMinPerson"] != null){
+             var minPersonneParam =+this.ReservationParams["nbMinPerson"];
+        }
 
-        if (!this.registerForm.valid || this.reservation.date == null || JSON.stringify(this.reservation.date) === "") {
+        if (this.reservation.firstName == null || this.reservation.firstName.trim() == null || this.reservation.firstName.trim() == "" || this.reservation.lastName == null || this.reservation.lastName.trim() == null || this.reservation.lastName.trim() == "") {
+            
+            if (this.reservation.firstName == null || this.reservation.firstName.trim() == null || this.reservation.firstName.trim() == "") {
+                this.reservation.firstName = "";
+            }
+            if (this.reservation.lastName == null || this.reservation.lastName.trim() == null || this.reservation.lastName.trim() == "") {
+                this.reservation.lastName = "";
+            }
             this.clientReservationService.requiredFieldError();
             this.loadSpinner = false;
-        } else if ((this.reservation.qtyMen == 0 || this.reservation.qtyMen == null || this.reservation.qtyMen+"" == "") && (this.reservation.qtyWomen == 0 || this.reservation.qtyWomen == null || this.reservation.qtyWomen+"" == "")) {
+            
+        } else if (this.reservation.facebook == null || (this.reservation.facebook != null && !this.reservation.facebook.includes("www.facebook.com/") )) {
+            
+            this.reservation.facebook = "";
+            this.clientReservationService.requiredFieldError();
+            this.loadSpinner = false;
+            
+        } else if (!this.registerForm.valid || this.reservation.date == null || JSON.stringify(this.reservation.date) === "") {
+            this.clientReservationService.requiredFieldError();
+            this.loadSpinner = false;
+        } else if (minPersonneParam >0 && this.reservation.qtyMen+this.reservation.qtyWomen < minPersonneParam) {
+            this.clientReservationService.requiredMinOfPersonError(minPersonneParam);
+            this.loadSpinner = false;
+        }  else if ((this.reservation.qtyMen == 0 || this.reservation.qtyMen == null || this.reservation.qtyMen + "" == "") && (this.reservation.qtyWomen == 0 || this.reservation.qtyWomen == null || this.reservation.qtyWomen + "" == "")) {
             this.clientReservationService.requiredNumberOfPersonError();
             this.loadSpinner = false;
         } else if (JSON.stringify(this.reservation.date) === JSON.stringify(this.disabledModel) && this.reservation.service.includes("1er Service avant")
@@ -462,7 +494,7 @@ export class ClientReservationComponent implements OnInit {
 
         } else {
             this.clientReservationService.sendReservationRequest(this.reservation).subscribe(data => {
-
+                
                 if (data == "fail") {
                     this.clientReservationService.reservationFail();
                     this.loadSpinner = false;
@@ -472,6 +504,10 @@ export class ClientReservationComponent implements OnInit {
                     modalRef.componentInstance.date = this.reservation.date.month + "-" + this.reservation.date.day + "-" + this.reservation.date.year;
                     this.loadSpinner = false;
 
+                }  else if (data.includes("::")) {
+                    
+                    this.openTracker(this.content,data.split("::")[1]);
+                    this.loadSpinner = false;
                 } else {
 
                     if (this.fileUp2 != null) {
@@ -502,7 +538,7 @@ export class ClientReservationComponent implements OnInit {
         }
 
     }
-
+    content:any
     open(content) {
         this.modalService.open(content).result.then((result) => {
 
@@ -520,31 +556,18 @@ export class ClientReservationComponent implements OnInit {
 
     }
 
-    openTracker(content) {
-        this.modalService.open(content).result.then((result) => {
-
-            this.clientReservationService.trackReservation(result).subscribe(data => {
-                if (data == "no exist") {
-                    this.clientReservationService.cancelFail();
-                } else {
-                    const modalRef = this.modalService.open(NgbdModalTrackStatus);
-
-                    if (data == "EN ATTENTE") {
-                        modalRef.componentInstance.reservationStatus = "Votre demande de r\u00e9servation est encore en attente";
-                    } else if (data == "ANNULER") {
-                        modalRef.componentInstance.reservationStatus = "Votre demande de r\u00e9servation a \u00e9t\u00e9 annul\u00e9e";
-                    } else if (data == "CONFIRMED") {
-                        modalRef.componentInstance.reservationStatus = "Votre demande de r\u00e9servation a \u00e9t\u00e9 accept\u00e9e";
-                    } else if (data == "ARRIVE") {
-                        modalRef.componentInstance.reservationStatus = "Votre r\u00e9servation n'est pas encore valide";
-                    } else {
-                        modalRef.componentInstance.reservationStatus = "ID invalide"
-                    }
-
-                }
-            });
-
-        }, (reason) => { });
+    openTracker(content,status) {
+   console.log(status);
+        const modalRef = this.modalService.open(NgbdModalTrackStatus);
+        if (status == "EN ATTENTE") {
+            modalRef.componentInstance.reservationStatus = "Votre demande de r\u00e9servation est encore en attente";
+        } else if (status == "ANNULER") {
+            modalRef.componentInstance.reservationStatus = "Votre demande de r\u00e9servation a \u00e9t\u00e9 annul\u00e9e";
+        } else if (status == "CONFIRMED") {
+            modalRef.componentInstance.reservationStatus = "Votre demande de r\u00e9servation a \u00e9t\u00e9 accept\u00e9e";
+        } else if (status == "ARRIVE") {
+            modalRef.componentInstance.reservationStatus = "Votre r\u00e9servation n'est pas encore valide";
+        }
 
     }
 

@@ -5,6 +5,8 @@ import { SecuriteGuardService } from '../../shared/auth/securite-guard.service';
 export const ROUTES: RouteInfo[] = [
 
     {
+        path: '/dashboard/dashboard1', title: 'Analytic Dashboard', icon: 'ft-bar-chart-2', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []
+    },{
         path: '/users', title: 'Utilisateurs', icon: 'ft-users', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []
     },
     {

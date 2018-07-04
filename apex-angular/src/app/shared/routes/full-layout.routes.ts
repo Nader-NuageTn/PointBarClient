@@ -15,5 +15,9 @@ export const Full_ROUTES: Routes = [
   {
     path: 'pages',
     loadChildren: './pages/full-pages/full-pages.module#FullPagesModule'
+  },
+  {
+    path: 'dashboard',
+    loadChildren: './dashboard/dashboard.module#DashboardModule'
   }
 ];

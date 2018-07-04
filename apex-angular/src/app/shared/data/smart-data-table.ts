@@ -407,4 +407,166 @@ export var reservationsettings = {
     class: "table table-responsive"
   },
 };
+// Smart DataTable
+export var clientsettings = {
+    columns: {
+        fullName: {
+            title: 'Nom Complet',
+            filter: true,
+        },
+        email: {
+            title: 'Email',
+            filter: true,
+        },
+        phone: {
+            title: 'T\u00e9l\u00e9phone',
+            filter: true,
+        },
+        facebook: {
+            title: 'Facebook',
+            type: 'html',
+            filter: false,
+        },
+        qtyResrvConfirmed: {
+            title: 'Nb Resvr Confirm\u00e9e',
+            filter: false,
+        },
+        qtyResrvCanceled: {
+            title: 'Nb Resvr Annul\u00e9e',
+            filter: false,
+        },
+        qtyResrvArrive: {
+            title: 'Nb Resvr Arriv\u00e9e',
+            filter: false,
+        },
+        clientReserv: {
+            title: 'Client Reserv',
+            type: 'html',
+            filter: false,
+        },
+        clientReservArrival: {
+            title: 'Client Arriv\u00e9e',
+            type: 'html',
+            filter: false,
+        },
+    },
+    attr: {
+        class: "table table-responsive"
+    },
+     actions: false,
+};
+
+export var clientData = [
+  {
+  
+    name: 'Leanne Graham',
+    email: 'Shanna@melissa.tv',
+    numeroTel: '22 223 333',
+    facebook:'<a href="http://localhost:4200/users" target="_blank">Page Facebook</a>',
+    reservConfirmed: 2,
+    reservCanceled: 5,
+    reservArrived: 10,
+    nbPeopleResrv: '<div><span class="badge badge-pill badge-danger">18F</span> + <span class="badge badge-pill badge-info">12M</span></div>',
+    nbPeopleArrived: '<div><span class="badge badge-pill badge-danger">18F</span> + <span class="badge badge-pill badge-info">10M</span></div>'
+  },
+  {
+    name: 'Ervin Howell',
+    email: 'Shanna@melissa.tv',
+    numeroTel: '22 223 333',
+    facebook:'<a href="http://localhost:4200/users" target="_blank">Page Facebook</a>',
+    reservConfirmed: 5,
+    reservCanceled: 3,
+    reservArrived: 14,
+    nbPeopleResrv:  '<div><span class="badge badge-pill badge-danger">18F</span> + <span class="badge badge-pill badge-info">17M</span></div>',
+    nbPeopleArrived: '<div><span class="badge badge-pill badge-danger">17F</span> + <span class="badge badge-pill badge-info">12M</span></div>'
+  },
+  {
+    name: 'Clementine Bauch',
+    email: 'Nathan@yesenia.net',
+    numeroTel: '22 223 333',
+    facebook:'<a href="http://localhost:4200/users" target="_blank">Page Facebook</a>',
+    reservConfirmed: 1,
+    reservCanceled: 4,
+    reservArrived: 2,
+    nbPeopleResrv:  '<div><span class="badge badge-pill badge-danger">2F</span> + <span class="badge badge-pill badge-info">6M</span></div>',
+    nbPeopleArrived:'<div><span class="badge badge-pill badge-danger">2F</span> + <span class="badge badge-pill badge-info">6M</span></div>'
+  },
+  {
+    name: 'Patricia Lebsack',
+    email: 'Julianne.OConner@kory.org',
+    numeroTel: '22 223 333',
+    facebook:'<a href="http://localhost:4200/users" target="_blank">Page Facebook</a>',
+    reservConfirmed: 0,
+    reservCanceled: 1,
+    reservArrived: 10,
+    nbPeopleResrv:  '<div><span class="badge badge-pill badge-danger">18F</span> + <span class="badge badge-pill badge-info">4M</span></div>',
+    nbPeopleArrived: '<div><span class="badge badge-pill badge-danger">20F</span> + <span class="badge badge-pill badge-info">8M</span></div>'
+  },
+  {
+    name: 'Chelsey Dietrich',
+    email: 'Lucio_Hettinger@annie.ca',
+    numeroTel: '22 223 333',
+    facebook:'<a href="http://localhost:4200/users" target="_blank">Page Facebook</a>',
+    reservConfirmed: 4,
+    reservCanceled: 3,
+    reservArrived: 7,
+    nbPeopleResrv:  '<div><span class="badge badge-pill badge-danger">8F</span> + <span class="badge badge-pill badge-info">12M</span></div>',
+    nbPeopleArrived: '<div><span class="badge badge-pill badge-danger">10F</span> + <span class="badge badge-pill badge-info">12M</span></div>'
+  },
+  {
+    name: 'Mrs. Dennis Schulist',
+    email: 'Karley_Dach@jasper.info',
+    numeroTel: '22 223 333',
+    facebook:'<a href="http://localhost:4200/users" target="_blank">Page Facebook</a>',
+    reservConfirmed: 3,
+    reservCanceled: 4,
+    reservArrived: 7,
+    nbPeopleResrv: '<div><span class="badge badge-pill badge-danger">8F</span> + <span class="badge badge-pill badge-info">10M</span></div>',
+    nbPeopleArrived: '<div><span class="badge badge-pill badge-danger">6F</span> + <span class="badge badge-pill badge-info">12M</span></div>'
+  },
+  {
+    name: 'Kurtis Weissnat',
+    email: 'Telly.Hoeger@billy.biz',
+    numeroTel: '22 333 567',
+    facebook:'<a href="http://localhost:4200/users" target="_blank">Page Facebook</a>',
+    reservConfirmed: 3,
+    reservCanceled: 2,
+    reservArrived: 5,
+    nbPeopleResrv: '<div><span class="badge badge-pill badge-danger">5F</span> + <span class="badge badge-pill badge-info">20M</span></div>',
+    nbPeopleArrived: '<div><span class="badge badge-pill badge-danger">5F</span> + <span class="badge badge-pill badge-info">15M</span></div>'
+  },
+  {
+    name: 'Nicholas Runolfsdottir V',
+    email: 'Sherwood@rosamond.me',
+    numeroTel: '22 566 778',
+    facebook:'<a href="http://localhost:4200/users" target="_blank">Page Facebook</a>',
+    reservConfirmed: 0,
+    reservCanceled: 4,
+    reservArrived: 2,
+    nbPeopleResrv: '<div><span class="badge badge-pill badge-danger">4F</span> + <span class="badge badge-pill badge-info">8M</span></div>',
+    nbPeopleArrived: '<div><span class="badge badge-pill badge-danger">4F</span> + <span class="badge badge-pill badge-info">8M</span></div>'
+  },
+  {
+    name: 'Glenna Reichert',
+    email: 'Chaim_McDermott@dana.io',
+    numeroTel: '22 345 333',
+    facebook:'<a href="http://localhost:4200/users" target="_blank">Page Facebook</a>',
+    reservConfirmed: 1,
+    reservCanceled: 0,
+    reservArrived: 3,
+    nbPeopleResrv: '<div><span class="badge badge-pill badge-danger">6F</span> + <span class="badge badge-pill badge-info">6M</span></div>',
+    nbPeopleArrived: '<div><span class="badge badge-pill badge-danger">6F</span> + <span class="badge badge-pill badge-info">6M</span></div>'
+  },
+  {
+    name: 'Clementina DuBuque',
+    email: 'Rey.Padberg@karina.biz',
+    numeroTel: '22 665 333',
+    facebook:'<a href="http://localhost:4200/users" target="_blank">Page Facebook</a>',
+    reservConfirmed: 5,
+    reservCanceled: 1,
+    reservArrived: 6,
+    nbPeopleResrv: '<div><span class="badge badge-pill badge-danger">10F</span> + <span class="badge badge-pill badge-info">20M</span></div>',
+    nbPeopleArrived: '<div><span class="badge badge-pill badge-danger">9F</span> + <span class="badge badge-pill badge-info">16M</span></div>'
+  }
+];
 export var alertdata = [];

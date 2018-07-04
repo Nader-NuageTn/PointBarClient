@@ -21,3 +21,6 @@ form .form-actions {
 small, .small {
     font-size: 60%;
 }
+input::-webkit-input-placeholder {
+    font-size: 12px;
+}

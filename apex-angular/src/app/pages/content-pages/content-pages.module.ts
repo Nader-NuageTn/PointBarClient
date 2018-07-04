@@ -6,6 +6,7 @@ import { ContentPagesRoutingModule } from "./content-pages-routing.module";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { CustomFormsModule } from 'ng2-validation';
+import { NouisliderModule } from 'ng2-nouislider/src/nouislider';
 
 import { ComingSoonPageComponent } from "./coming-soon/coming-soon-page.component";
 import { ErrorPageComponent } from "./error/error-page.component";
@@ -39,6 +40,7 @@ import { NumberOnlyDirective } from './client-reservation/number-only.directive'
         NgbModule,  
         Ng2SmartTableModule,
         CustomFormsModule,
+        NouisliderModule
     ],
     declarations: [
         ComingSoonPageComponent,
@@ -57,7 +59,7 @@ import { NumberOnlyDirective } from './client-reservation/number-only.directive'
         ConfirmReservationComponent,
         NgbdModalTrackStatus,
         LoginSecuriteComponent,
-        NumberOnlyDirective,
+        NumberOnlyDirective
     ],
     providers: [SignupServiceService, LoginService, ClientReservationService,ReservationSettingService],
     entryComponents: [NgbdModalContent,NgbdModalContentSetting,NgbdModalContentTimeInvalide,NgbdModalContentImageSetting,NgbdModalTrackStatus ]

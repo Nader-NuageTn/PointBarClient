@@ -17,7 +17,9 @@ export class ClientReservationService {
     requiredNumberOfPersonError() {
         this.toastr.error("Vous devez ajouter au moins une personne");
     }
-
+    requiredMinOfPersonError(nbPersonne) {
+        this.toastr.error("Vous devez ajouter au moins "+nbPersonne+" personne(s)");
+    }
     requiredDateError() {
         this.toastr.error("Vous devez ajouter la date");
     }

@@ -891,17 +891,19 @@
   },
   "DashboardBar": {
     "labels": [
-      "Sport",
+      "Sports",
       "Music",
       "Travel",
-      "News"
+      "News",
+      "XXX"
     ],
     "series": [
       [
         53,
         23,
         40,
-        30
+        30,
+        15
       ]
     ]
   },

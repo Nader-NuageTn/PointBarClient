@@ -3,7 +3,42 @@ import { NgbModal, NgbActiveModal, NgbDateStruct, NgbDatepickerI18n, NgbCalendar
 import { LocalDataSource } from 'ng2-smart-table';
 import { ReservationSettingService } from './reservation-setting.service';
 import { NewEvenModel } from './newEventModel.model';
+import { FormGroup, FormBuilder } from "@angular/forms";
+import { NouiFormatter } from "ng2-nouislider/src/nouislider";
 
+
+var timeTo;
+export class TimeFormatter implements NouiFormatter {
+ 
+  to(value: number): string {
+    let h = Math.floor(value / 3600);
+    let m = Math.floor(value % 3600 / 60);
+    let s = value - 60 * m - 3600 * h;
+    let values = [h, m, s];
+    let timeString: string = '';
+    let i = 0;
+    for(let v of values) {
+      if(values[i] < 10)
+        timeString += '0';
+        timeString += values[i].toFixed(0);
+      if(i < 2) {
+        timeString += ':';
+      }
+      i++;
+    }
+    timeTo = timeString;
+    return timeString;
+  };
+
+  from(value: string): number {
+    let v = value.split(':').map(parseInt);
+    let time: number = 0;
+    time += v[0] * 3600;
+    time += v[1] * 60;
+    time += v[2];
+    return time;
+  }
+}
 
 var settings = {
     noDataMessage: 'No Events',
@@ -149,6 +184,7 @@ export class ReservationSettingComponent implements OnInit {
     allEvents = [];
     event: NewEvenModel;
     ReservationParams = [];
+    public toleranceArrive: number = 0;
     ngOnInit() {
 
         var today = { year: now.getFullYear(), month: now.getMonth() + 1, day: now.getDate() };
@@ -165,7 +201,22 @@ export class ReservationSettingComponent implements OnInit {
 
         this.reservationSettingService.getReservationParams().subscribe(data => {
             this.ReservationParams = data;
-            console.log(this.ReservationParams);
+           
+            var tolerance = 0;
+            var tolerance2 = 0;
+            if(data.toleranceArrive != null && data.toleranceArrive.includes(":")){
+                
+                if(+data.toleranceArrive.split(":")[0] > 0){
+                  tolerance = data.toleranceArrive.split(":")[0] * 3600
+                }
+                if(+data.toleranceArrive.split(":")[1] > 0){
+                   tolerance2 = + data.toleranceArrive.split(":")[1]*60;
+                   console.log(tolerance2);
+                }
+                this.toleranceArrive = tolerance + tolerance2;
+            }
+
+            
         });
         // Customizer JS File
         $.getScript('./assets/js/customizer.js');
@@ -186,6 +237,23 @@ export class ReservationSettingComponent implements OnInit {
 
     fileUp2: any;
     FileName: string = "Envoyer..";
+    public someTimeConfig: any = {
+        start: 0 ,
+        range: {
+          min: 0,
+          max: 7200
+        },
+        tooltips: new TimeFormatter(),
+        step: 1
+    };
+    
+
+    test(model){
+        
+       this.ReservationParams[model] =timeTo;
+
+    }
+    
     
     constructor(private reservationSettingService: ReservationSettingService, private modalService: NgbModal) {
         this.source = new LocalDataSource(this.allEvents); // create the source

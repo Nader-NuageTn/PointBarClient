@@ -7,6 +7,8 @@ import * as tableData from '../../shared/data/smart-data-table';
 import { LocalDataSource } from 'ng2-smart-table';
 import { DashboardService } from './dashboard.service';
 import { saveAs } from 'file-saver/FileSaver';
+import { AuthService } from '../../shared/auth/auth.service';
+
 const now = new Date();
 declare var require: any;
 
@@ -46,15 +48,14 @@ export class DashboardComponent implements OnInit {
     
     ChartPerStatus = "Aujourd'hui";
     ChartPerGenre = "Aujourd'hui";
-    
+    userID: any;
     pieChartData : any;
    
     ngOnInit() {}
     
-    constructor(private dashboardService: DashboardService) {
+    constructor(private dashboardService: DashboardService,private auth: AuthService) {
        
         this.dashboardService.getTotalChart().subscribe(data => {
-             console.dir(data);
              this.qtyPersonneArrive = data.qtyPersonneArrive;
              this.qtyPersonneFemme = data.qtyPersonneFemme;
              this.qtyPersonneHomme = data.qtyPersonneHomme;
@@ -65,10 +66,12 @@ export class DashboardComponent implements OnInit {
         this.getTotalChartPerGenreToday();
 
         this.dashboardService.getAllReservationByClient().subscribe(data => {
-             console.dir(data);
             this.clientSource =data;
             this.clientsettings = tableData.clientsettings;
         });
+        
+        this.userID = this.auth.getUserAuthID();
+        console.log(this.userID);
     }
     /**
      * START STATISTICS PAR STATUT
@@ -213,7 +216,12 @@ export class DashboardComponent implements OnInit {
         });
     }
        
-    
+    createClients(){
+     
+      this.dashboardService.createClients().subscribe(data => {
+          console.log(data);
+      });
+   }
        // ************** THIS WEEK ******************//
     getTotalChartPerGenreWeek(){
        this.ChartPerGenre="Cette Semaine";

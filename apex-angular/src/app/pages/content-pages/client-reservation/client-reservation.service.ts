@@ -29,7 +29,7 @@ export class ClientReservationService {
     }
 
     closeDateSuccess() {
-        this.toastr.success("La date a \u00e9t\u00e9 ferm\u00e9e avec succ\u00e9s.");
+        this.toastr.success("La date a \u00e9t\u00e9 ferm\u00e9e avec succ\u00e8s.");
     }
 
     reservationSuccess() {
@@ -37,7 +37,7 @@ export class ClientReservationService {
     }
 
     cancelSuccess() {
-        this.toastr.success("Votre r\u00e9tservation a \u00e9t\u00e9 annul\u00e9e avec succ\u00e9s");
+        this.toastr.success("Votre r\u00e9tservation a \u00e9t\u00e9 annul\u00e9e avec succ\u00e8s");
     }
     cancelFail() {
         this.toastr.error("ID Incorrecte");
@@ -47,7 +47,7 @@ export class ClientReservationService {
     }
 
     dateActivated() {
-        this.toastr.success("La date a \u00e9t\u00e9 activ\u00e9e avec succ\u00e9s.");
+        this.toastr.success("La date a \u00e9t\u00e9 activ\u00e9e avec succ\u00e8s.");
     }
     
     dateReservationError() {

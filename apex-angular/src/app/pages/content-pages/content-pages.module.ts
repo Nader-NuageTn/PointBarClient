@@ -26,7 +26,8 @@ import { ConfirmReservationComponent } from './confirm-reservation/confirm-reser
 
 import { LoginSecuriteComponent } from './login-securite/login-securite.component';
 import { NumberOnlyDirective } from './client-reservation/number-only.directive';
-
+import { ClientVipComponent ,NgbdModalImageSetting} from './client-vip/client-vip.component';
+import { ClientVipService } from './client-vip/client-vip.service';
 
 @NgModule({
     exports: [
@@ -59,9 +60,11 @@ import { NumberOnlyDirective } from './client-reservation/number-only.directive'
         ConfirmReservationComponent,
         NgbdModalTrackStatus,
         LoginSecuriteComponent,
-        NumberOnlyDirective
+        NumberOnlyDirective,
+        ClientVipComponent,
+        NgbdModalImageSetting
     ],
-    providers: [SignupServiceService, LoginService, ClientReservationService,ReservationSettingService],
+    providers: [SignupServiceService, LoginService, ClientReservationService,ReservationSettingService,ClientVipService],
     entryComponents: [NgbdModalContent,NgbdModalContentSetting,NgbdModalContentTimeInvalide,NgbdModalContentImageSetting,NgbdModalTrackStatus ]
 })
 export class ContentPagesModule { }

@@ -1,0 +1,242 @@
+<section id="client-client">
+	<div class="container-fluid gradient-crystal-clear">
+		<div class="row full-height-vh">
+			<div class="col-12 align-items-center justify-content-center"
+				style="display: flex; margin: auto;">
+				
+				<div class="card width-600">
+					<div class="card-img overlap" style="text-align: center;"
+						id="userProfile"  *ngIf="oldClient == true">
+						<div class="nav-item col-2" ngbDropdown placement="bottom-left" style="padding: 50px 0px;position: absolute;">
+		                        <a class="nav-link position-relative" id="dropdownBasic3" ngbDropdownToggle style="padding: 0px;">
+		                            <i class="ft-user font-medium-3 blue-grey darken-4"></i>
+		                            <p class="d-none">User Settings</p>
+		                        </a>
+		                        <div ngbDropdownMenu aria-labelledby="dropdownBasic3" style="top: 26px; left: 0px;">                           
+		                            <a class="dropdown-item" (click)="logout()">
+		                                <i class="ft-power mr-2"></i>
+		                                <span>Logout</span>
+		                            </a>
+		                        </div>
+                        </div>
+						<img alt="element 06" class="mb-1" 
+							*ngIf="clientDetails && clientDetails.hasPhoto != true"
+							src="assets/img/portrait/avatars/avatar-08.png" width="190">
+					</div>
+					<div class="card-header"  *ngIf="newClient == true">
+						<img src="assets/img/logos/logo-point-bar.png"
+							style="max-width: 110px; float: right !important; position: absolute; right: 0; margin: -10px 25px;" />
+						
+						<div class="col-sm-8" style="display:  inline-flex;padding: 0px;margin: 37px 0px -10px 4px;">
+						
+							<div class="nav-item col-2" ngbDropdown placement="bottom-left" style="padding: 0px;">
+		                        <a class="nav-link position-relative" id="dropdownBasic3" ngbDropdownToggle style="padding: 0px;">
+		                            <i class="ft-user font-medium-3 blue-grey darken-4"></i>
+		                            <p class="d-none">User Settings</p>
+		                        </a>
+		                        <div ngbDropdownMenu aria-labelledby="dropdownBasic3" style="top: 26px; left: 0px;">                           
+		                            <a class="dropdown-item" (click)="logout()">
+		                                <i class="ft-power mr-2"></i>
+		                                <span>Logout</span>
+		                            </a>
+		                        </div>
+                            </div>
+							<div class="card-title font-medium-5">Client VIP</div>
+
+						</div>
+
+					</div>
+					<div class="card-body" >
+						<div class="px-3">
+							<form class="form" (ngSubmit)="addNewClient()" #f="ngForm" *ngIf="newClient == true && isManager == true" >
+								<div class="form-body">
+									<h4 class="form-section">
+										<i class="ft-user"></i>Info Personnel
+									</h4>
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<label for="projectinput1">Nom</label><sup><font
+													style="color: #F31414" size="2">*</font></sup> <input type="text" maxlength="50" [ngModelOptions]="{updateOn: 'blur'}"
+													[(ngModel)]="client.firstName" id="projectinput1"
+													class="form-control" name="fname" required >
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label for="projectinput2">Pr&#233;nom</label><sup><font
+													style="color: #F31414" size="2">*</font></sup> <input
+													type="text" id="projectinput2" class="form-control" maxlength="50" [ngModelOptions]="{updateOn: 'blur'}"
+													[(ngModel)]="client.lastName" name="lname" required>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<label for="projectinput3">E-mail</label><sup><font
+													style="color: #F31414" size="2">*</font></sup> <input type="text"
+													[(ngModel)]="client.email" id="projectinput3"
+													class="form-control" name="email" required email>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+											
+												<label for="projectinput4">Num&#233;ro de
+													t&#233;l&#233;phone </label><sup><font
+													style="color: #F31414" size="2">*</font></sup> <input type="text" id="projectinput4"
+													[(ngModel)]="client.phone" class="form-control" 
+													name="phone" required myNumberOnly>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										
+										<div class="col-md-6">
+											<div class="form-group">
+											<label for="file">Photo</label>
+												<div class="custom-file center-block d-block">
+													<input type="file" class="custom-file-input" capture="camera"
+														accept="image/*;capture=camera" (change)="onFileChange($event)"
+														id="inputGroupFile01"> <label
+														class="custom-file-label" for="inputGroupFile01">{{fileName}}</label>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<h4 class="form-section">
+										<i class="ft-file-text"></i>Info R&#233;servation
+									</h4>
+
+									
+									<div class="row">
+										<div class="col-md-8">
+
+											<div class="form-group">
+												<label for="projectinput3">Nombre De Personnes Autoris&#233;es</label>
+												<fieldset>
+													<div class="input-group">
+														<input type="number" min="0" class="form-control"
+															[(ngModel)]="client.numberAuto" name="nbHomme"
+															aria-label="Amount (to the nearest dollar)" required>
+														<div class="input-group-append">
+															<div class="input-group-btn">
+																<button type="button" class="btn btn-raised btn-warning"
+																	(click)="QtyPlus()" aria-label="Copy">
+																	<i class="ft-user-plus"></i>
+																</button>
+																<button type="button" class="btn btn-raised btn-info"
+																	(click)="QtyMinus()" aria-label="Paste">
+																	<i class="ft-user-minus"></i>
+																</button>
+															</div>
+														</div>
+													</div>
+												</fieldset>
+
+											</div>
+										</div>
+										
+
+
+									</div>
+									<div class="row">
+										<div class="col-md-8">
+
+											<div class="form-group">
+												<label for="projectinput1">Commentaire</label>
+												<textarea rows="2" [(ngModel)]="client.comment" id="projectinput1"
+													class="form-control" name="commentaire"></textarea>
+													
+											</div>
+										
+										</div>
+										
+
+
+									</div>
+
+								</div>
+
+								<div class="form-actions">
+									<a class="position-relative has-icon-right">
+										<button type="submit"
+											class="btn btn-raised btn-raised btn-primary">
+											<i class="fa fa-check-square-o"></i> Confirme <i
+												class="ft-loader spinner" *ngIf="loadSpinner"></i>
+										</button>
+
+									</a>
+								</div>
+							</form>
+							
+							<!--  Client VIP Exist -->
+							
+							<div class="card-block text-center" *ngIf="oldClient == true && clientDetails && clientDetailsActive == true">
+							
+								<h3>{{clientDetails.firstName}}
+									{{clientDetails.lastName}}</h3>
+								<p>
+									<br>Nombre De Personnes Autoris&#233;es : {{clientDetails.numberAuto}} <br>
+								</p>
+								
+								<hr style="margin: 0px">
+									<p class="card-text text-center pt-2 pb-2">
+										<button type="button"
+											(click)="confirmClientVIP()"
+											class="btn btn-raised btn-raised btn-warning mr-1">
+											Confirme</button>
+				
+									</p>
+								
+								
+							</div>
+							<div class="card-block text-center" *ngIf="oldClient == false && newClient == false && invalidAccount ==true  "  style="padding: 15px 0px;">
+								<div class="nav-item col-2" ngbDropdown placement="bottom-left" style="padding: 5px 0px;">
+				                        <a class="nav-link position-relative" id="dropdownBasic3" ngbDropdownToggle style="padding: 0px;">
+				                            <i class="ft-user font-medium-3 blue-grey darken-4"></i>
+				                            <p class="d-none">User Settings</p>
+				                        </a>
+				                        <div ngbDropdownMenu aria-labelledby="dropdownBasic3" style="top: 26px; left: 0px;">                           
+				                            <a class="dropdown-item" (click)="logout()">
+				                                <i class="ft-power mr-2"></i>
+				                                <span>Logout</span>
+				                            </a>
+				                        </div>
+		                        </div>
+								<h3>Client Invalide</h3>	
+							</div>
+							<div class="card-block text-center" *ngIf="(oldClient == true && clientDetails && clientDetailsActive == false) || (newClient == true && isManager == false)"  style="padding: 15px 0px;">					
+								<h3>Acc&#232;s Refus&#233;</h3>	
+							</div>
+							<div class="card-block text-center" *ngIf="oldClient == false && newClient == false && thanksNotif == true" style="padding: 15px 0px;">
+								<div class="nav-item col-2" ngbDropdown placement="bottom-left">
+				                        <a class="nav-link position-relative" id="dropdownBasic3" ngbDropdownToggle style="padding: 0px;">
+				                            <i class="ft-user font-medium-3 blue-grey darken-4"></i>
+				                            <p class="d-none">User Settings</p>
+				                        </a>
+				                        <div ngbDropdownMenu aria-labelledby="dropdownBasic3" style="top: 26px; left: 0px;">                           
+				                            <a class="dropdown-item" (click)="logout()">
+				                                <i class="ft-power mr-2"></i>
+				                                <span>Logout</span>
+				                            </a>
+				                        </div>
+		                        </div>
+								
+								<div class="col-12">
+                                    <i class="ft-check-circle" style="font-size: 50PX;color: #a5dc86;"></i>
+                                </div>
+								<h3>Merci &#224; tr&#232;s Bient&#244;t</h3>	
+							</div>
+							
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+

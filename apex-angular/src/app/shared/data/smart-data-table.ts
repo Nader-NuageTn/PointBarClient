@@ -337,6 +337,127 @@ export var deletedUsersettings = {
     class: "table table-responsive"
   },
 };
+
+var isDesactive =`<i class="ft-toggle-right warning font-medium-1 mr-1"></i>`;
+export var clientVIPsettings = {
+    
+  delete: {
+    confirmDelete: true,
+    deleteButtonContent: '<i class="ft-x danger font-medium-1 mr-1"></i>'
+  },
+  add: {
+    confirmCreate: false,
+    addButtonContent: "",
+  },
+  edit: {
+    confirmSave: true,
+    editButtonContent: '<i class="ft-edit-2 info font-medium-1 mr-1"></i>'
+  },
+  actions: {
+  custom: [
+    { name: 'Desactivate', title: isDesactive}
+  ],
+
+},
+  columns: {
+    fullName: {
+      title: 'Nom Complet ',
+    },
+    email: {
+      title: 'Email',
+      type: 'html',
+      valuePrepareFunction: (value) => { 
+        return `<div class="text-center">`+value+`</div>`;
+      }
+    },
+    phone: {
+      title: 'T\u00e9l\u00e9phone',
+      type: 'html',
+      valuePrepareFunction: (value) => { 
+        return `<div class="text-center">`+value+`</div>`;
+      }
+    },
+    numberAuto: {
+      title: 'Nb Personnes Autoris\u00e9es',
+      type: 'html',
+      valuePrepareFunction: (value) => { 
+        return `<div class="text-center"><span class="badge badge-info">`+value+`</span></div>`;
+      }
+    },
+    comment: {
+      title: 'Commentaire',
+    },
+    visitNumber: {
+      title: 'Nb Arriv\u00e9e',
+      type: 'html',
+      editable: false,
+      valuePrepareFunction: (value) => { 
+        return `<div class="text-center"><span class="badge badge-success">`+value+`</span></div>`;
+      }
+    }
+  },
+  attr: {
+    class: "table table-responsive"
+  },
+};
+
+export var deletedClientsettings = {
+    
+  delete: {
+    confirmDelete: true,
+    deleteButtonContent: '<i class="ft-x danger font-medium-1 mr-1"></i>'
+  },
+  add: {
+    confirmCreate: false,
+    addButtonContent: "",
+  },
+  edit: {
+    confirmSave: false,
+    editButtonContent: ''
+  },
+  actions: {
+  custom: [
+    { name: 'Activate', title: isActive}
+  ],
+
+},
+  columns: {
+    fullName: {
+      title: 'Nom Complet ',
+      editable: false,
+    },
+    email: {
+      title: 'Email',
+      editable: false,
+    },
+    phone: {
+      title: 'Telephone',
+      editable: false,
+    },
+    numberAuto: {
+      title: 'Nb Personnes Autoris\u00e9es',
+      type: 'html',
+      valuePrepareFunction: (value) => { 
+        return `<div class="text-center"><span class="badge badge-info">`+value+`</span></div>`;
+      }
+    },
+    comment: {
+      title: 'Commentaire',
+      editable: false,
+    },
+    visitNumber: {
+      title: 'Nb Arriv\u00e9e',
+      type: 'html',
+      editable: false,
+      valuePrepareFunction: (value) => { 
+        return `<div class="text-center"><span class="badge badge-success">`+value+`</span></div>`;
+      }
+    }
+  },
+  attr: {
+    class: "table table-responsive"
+  },
+};
 export var reservationsettings = {
     
   delete: {
@@ -400,6 +521,10 @@ export var reservationsettings = {
     },
     service: {
       title: 'Service',
+      editable: false,
+   },
+    hour: {
+      title: 'Heur d\'Arriv\u00e9e',
       editable: false,
    }
   },

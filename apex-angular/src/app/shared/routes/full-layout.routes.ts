@@ -7,6 +7,9 @@ export const Full_ROUTES: Routes = [
   {
     path: 'users',
     loadChildren: './pbusers/pbusers.module#PbusersModule'
+  },{
+    path: 'clients',
+    loadChildren: './client-vip/clientvip.module#ClientvipModule'
   },
   {
     path: 'reservations',

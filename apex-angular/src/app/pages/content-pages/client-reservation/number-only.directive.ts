@@ -6,9 +6,16 @@ import { Directive, ElementRef, HostListener } from '@angular/core';
 export class NumberOnlyDirective {
     // Allow decimal numbers and negative values
     private regexNational: RegExp = new RegExp(/^-?([0-9]{0,8})$/g);
-    private regexGlobal1: RegExp = new RegExp(/^-?(\+[216]{0,1})+([0-9]{0,8})$/g);
-    private regexGlobal2: RegExp = new RegExp(/^-?(\+[1]{0,1})+([0-9]{0,10})$/g);
-    private regexGlobal3: RegExp = new RegExp(/^-?(\+[33]{0,1})+([0-9]{0,9})$/g);
+    private regexGlobal1: RegExp = new RegExp(/^-?(\+[216]{0,1})+([0-9]{0,9})$/g);
+    private regexGlobal2: RegExp = new RegExp(/^-?(\+[1]{0,1})+([0-9]{0,11})$/g);
+    private regexGlobal3: RegExp = new RegExp(/^-?(\+[33]{0,1})+([0-9]{0,10})$/g);
+    //blur
+    private regexNational0: RegExp = new RegExp(/^-?([0-9]{8})$/g);
+    private regexGlobal11: RegExp = new RegExp(/^-?(\+[216]{1})+([0-9]{9})$/g);
+    private regexGlobal22: RegExp = new RegExp(/^-?(\+[1]{1})+([0-9]{11})$/g);
+    private regexGlobal33: RegExp = new RegExp(/^-?(\+[33]{1})+([0-9]{10})$/g);
+    
+    
     // Allow key codes for special events. Reflect :
     // Backspace, tab, end, home
     private specialKeys: Array<string> = ['Backspace', 'Tab', 'End', 'Home', '-'];
@@ -36,7 +43,7 @@ export class NumberOnlyDirective {
             return;
         }
         let current: string = this.el.nativeElement.value;
-        if (current && !String(current).match(this.regexNational) && !String(current).match(this.regexGlobal1) && !String(current).match(this.regexGlobal2) && !String(current).match(this.regexGlobal3)) {
+        if (current && !String(current).match(this.regexNational0) && !String(current).match(this.regexGlobal11) && !String(current).match(this.regexGlobal22) && !String(current).match(this.regexGlobal33)) {
 
             console.log(this.el.nativeElement.value);
             this.el.nativeElement.value = null;

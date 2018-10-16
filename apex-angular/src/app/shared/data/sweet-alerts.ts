@@ -1,5 +1,8 @@
 import swal from 'sweetalert2';
 
+
+
+
 // Simple Alert
 export function basicAlert() {
     swal("Here's a message!");
@@ -25,7 +28,7 @@ export function typeQuestion() {
 
 // Success Type Alert
 export function typeSuccess() {
-    swal("Good job!", "You clicked the button!", "success");
+    swal("Fait!", "le compte client a \u00e9t\u00e9 ajout\u00e9 avec succ\u00e8s!", "success");
 }
 
 // Info Type Alert

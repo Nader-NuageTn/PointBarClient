@@ -12,6 +12,9 @@ import { ClientReservationComponent } from "./client-reservation/client-reservat
 import { ConfirmReservationComponent } from "./confirm-reservation/confirm-reservation.component";
 import { LoginSecuriteComponent } from "./login-securite/login-securite.component";
 import { SecuriteGuardService } from '../../shared/auth/securite-guard.service';
+import { ClientVipComponent } from "./client-vip/client-vip.component";
+import { ManagerGuardService } from '../../shared/auth/manager-guard.service';
+import { ConfirmVIPGuardService } from '../../shared/auth/confirm-vip-gard.service';
 
 const routes: Routes = [
     {
@@ -89,6 +92,14 @@ const routes: Routes = [
                     title: 'Login Success'
                 },
                 canActivate: [SecuriteGuardService]
+
+            }, {
+                path: 'newclient/:id',
+                component: ClientVipComponent,
+                data: {
+                    title: 'Client VIP'
+                },
+                canActivate: [ConfirmVIPGuardService]
 
             }
 

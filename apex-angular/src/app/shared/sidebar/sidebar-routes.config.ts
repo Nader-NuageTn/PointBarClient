@@ -7,7 +7,9 @@ export const ROUTES: RouteInfo[] = [
     {
         path: '/dashboard/dashboard1', title: 'Analytic Dashboard', icon: 'ft-bar-chart-2', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []
     },{
-        path: '/users', title: 'Utilisateurs', icon: 'ft-users', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []
+        path: '/users', title: 'Utilisateurs', icon: 'ft-user', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []
+    },{
+        path: '/clients', title: 'Clients VIP', icon: 'ft-users', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []
     },
     {
         path: '', title: 'Reservations', icon: 'ft-calendar', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false, submenu: [

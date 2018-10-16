@@ -136,5 +136,12 @@ export class DashboardService {
             })
     }
     
+    
+    createClients() {
+       return this.http.get('/DashboardController/createClients')
+            .map((data: Response) => data.text())
+            .catch(this.handleError);
+    }
+    
  private handleError(error: any) { return Observable.throw(error); }
 }

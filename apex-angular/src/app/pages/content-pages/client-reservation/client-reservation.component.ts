@@ -443,7 +443,7 @@ export class ClientReservationComponent implements OnInit {
     onSubmit() {
         this.loadSpinner = true;
         var minPersonneParam =0;
-   
+
         if(this.ReservationParams["nbMinPerson"] != null){
              var minPersonneParam =+this.ReservationParams["nbMinPerson"];
         }
@@ -474,11 +474,12 @@ export class ClientReservationComponent implements OnInit {
         }  else if ((this.reservation.qtyMen == 0 || this.reservation.qtyMen == null || this.reservation.qtyMen + "" == "") && (this.reservation.qtyWomen == 0 || this.reservation.qtyWomen == null || this.reservation.qtyWomen + "" == "")) {
             this.clientReservationService.requiredNumberOfPersonError();
             this.loadSpinner = false;
-        } else if(JSON.stringify(this.reservation.date) !== JSON.stringify(this.disabledModel)) {
-            console.log("testttttttttt");
-           this.clientReservationService.dateReservationError(); 
-           this.loadSpinner = false; 
-        }
+        } 
+//            else if(JSON.stringify(this.reservation.date) !== JSON.stringify(this.disabledModel)) {
+//            
+//           this.clientReservationService.dateReservationError(); 
+//           this.loadSpinner = false; 
+//        }
             else if (JSON.stringify(this.reservation.date) === JSON.stringify(this.disabledModel) && this.reservation.service.includes("1er Service avant")
             && (parseInt(this.ReservationParams["firstServiceBefore"].split(":")[0], 10) < now.getHours() || (parseInt(this.ReservationParams["firstServiceBefore"].split(":")[0], 10) == now.getHours() && parseInt(this.ReservationParams["firstServiceBefore"].split(":")[1], 10) <= now.getMinutes()))) {
             const modalRef = this.modalService.open(NgbdModalContentTimeInvalide);

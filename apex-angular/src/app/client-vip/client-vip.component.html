@@ -1,0 +1,29 @@
+<!--Confirm Action Starts-->
+<section id="action">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 *ngIf="!disactivatedClients" class="card-title">Clients VIP Activ&#233;s</h4>
+                    <h4 *ngIf="disactivatedClients" class="card-title">Clients VIP D&#233;sactiv&#233;s</h4>
+                </div>
+                <div class="card-body">
+                    <div class="card-block">
+                    <div>
+							<a *ngIf="disactivatedClients" (click)="getActivatedClients()"
+								class="btn btn-raised gradient-purple-bliss white big-shadow">
+								Clients Activ&#233;s</a>
+								
+					        <a *ngIf="!disactivatedClients" (click)="getDisactivatedClients()"
+								class="btn btn-raised gradient-purple-bliss white big-shadow">
+								Clients D&#233;sactiv&#233;s</a>			
+						</div>
+                        <ng2-smart-table [settings]="alertsettings" [source]="source" (deleteConfirm)="onDeleteConfirm($event)" (editConfirm)="onSaveConfirm($event)"
+                            (custom)="onCustom($event)"></ng2-smart-table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--Confirm Action Ends-->

@@ -1,0 +1,316 @@
+<!--Calendar Starts-->
+<section id="calendar">
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="content-header">Calendar</div>
+			<p class="content-sub-header">This is the most advanced example having various features. This
+				example lists all the events on the calendar with Add new event functionality.</p>
+		</div>
+	</div>
+	<ng-template #modalContent let-close="close" style="max-width: 80%;">
+		<div class="modal-header">
+<!-- 			<h5 class="modal-title">{{ modalData?.action }}</h5> -->
+			<h5 class="modal-title">Tables <span>85</span>16/10/2018: 1&#233;re service</h5>
+			<button type="button" class="close" (click)="close()">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		<div class="modal-body">
+			<form action="#" class="form form-horizontal">
+				<div class="form-body">
+					<div class="form-group">
+						<label>D&#233;tails de la table:</label>
+						<label style="margin-left:10px;">Num&#233;ro:</label>
+						<label style="margin-left:10px;">Nombre des places:</label>
+						<input type="text" name="event-title" class="form-control" [(ngModel)]="modalData?.event.title" (keyup)="refresh.next()">
+					</div>
+					<div class="form-group">
+						<label>D&#233;tails de la R&#233;servation:</label>
+						<label style="margin-left:10px;">Num&#233;ro:</label>
+						<label style="margin-left:10px;">Nombre des places:</label>
+						<input type="text" name="event-title" class="form-control" [(ngModel)]="modalData?.event.title" (keyup)="refresh.next()">
+					</div>
+<!-- 					<div class="row  grid-hover"> -->
+<!-- 						<div class="col-md-2 col-2"> -->
+<!-- 							<figure class="effect-sarah" id="eventGrid" style="min-width: 180px;"> -->
+<!-- 								<img src="assets/img/gallery/tableWood85.png" alt="img13"/> -->
+<!-- 								<figcaption style="z-index: 999;padding: 5px;"> -->
+<!-- 									<h2 style="font-size:20px;"> -->
+<!-- 										<span>Arij </span><small>Othman</small> -->
+<!-- 									</h2> -->
+<!-- 									<p>09/10/2018<br> L'heure D'arriv&#233;e: 11:30 AM</p> -->
+<!-- 								</figcaption> -->
+<!-- 							</figure> -->
+<!-- 						</div> -->
+<!-- 						<div class="col-md-2 col-2"> -->
+<!-- 							<figure class="effect-sarah" id="eventGrid" style="min-width: 180px;"> -->
+<!-- 								<img src="assets/img/gallery/tableWood83.png" alt="img13"/> -->
+<!-- 								<figcaption style="z-index: 999;padding: 5px;"> -->
+<!-- 									<h2 style="font-size:20px;"> -->
+<!-- 										<span>Arij </span><small>Othman</small> -->
+<!-- 									</h2> -->
+<!-- 									<p>09/10/2018<br> L'heure D'arriv&#233;e: 11:30 AM</p> -->
+<!-- 								</figcaption> -->
+<!-- 							</figure> -->
+<!-- 						</div> -->
+<!-- 						<div class="col-md-2 col-2"> -->
+<!-- 							<figure class="effect-sarah" id="eventGrid" style="min-width: 180px;"> -->
+<!-- 								<img src="assets/img/gallery/tableWood82.png" alt="img13"/> -->
+<!-- 								<figcaption style="z-index: 999;padding: 5px;"> -->
+<!-- 									<h2 style="font-size:20px;"> -->
+<!-- 										<span>Arij </span><small>Othman</small> -->
+<!-- 									</h2> -->
+<!-- 									<p>09/10/2018<br> L'heure D'arriv&#233;e: 11:30 AM</p> -->
+<!-- 								</figcaption> -->
+<!-- 							</figure> -->
+<!-- 						</div> -->
+<!-- 						<div class="col-md-2 col-2"> -->
+<!-- 							<figure class="effect-sarah" id="eventGrid" style="min-width: 180px;"> -->
+<!-- 								<img src="assets/img/gallery/tableWood81.png" alt="img13"/> -->
+<!-- 								<figcaption style="z-index: 999;padding: 5px;"> -->
+<!-- 									<h2 style="font-size:20px;"> -->
+<!-- 										<span>Pr&#233;nom </span><small> Nom</small> -->
+<!-- 									</h2> -->
+<!-- 									<p>09/10/2018<br> L'heure D'arriv&#233;e: 10:00 AM</p><br> -->
+<!-- 								</figcaption> -->
+<!-- 							</figure> -->
+<!-- 						</div> -->
+<!-- 						<div class="col-md-2 col-2"> -->
+<!-- 							<figure class="effect-sarah" id="eventGrid" style="min-width: 180px;"> -->
+<!-- 								<img src="assets/img/gallery/tableWood62.png" alt="img13"/> -->
+<!-- 								<figcaption style="z-index: 999;padding: 5px;"> -->
+<!-- 									<h2 style="font-size:20px;"> -->
+<!-- 										<span>Disponible</span> -->
+<!-- 									</h2> -->
+<!-- 									<p>09/10/2018<br> L'heure D'arriv&#233;e: 11:30 AM</p> -->
+<!-- 								</figcaption> -->
+<!-- 							</figure> -->
+<!-- 						</div> -->
+<!-- 						<div class="col-md-2 col-2"> -->
+<!-- 							<figure class="effect-sarah" id="eventGrid" style="min-width: 180px;"> -->
+<!-- 								<img src="assets/img/gallery/tableWood61.png" alt="img13"/> -->
+<!-- 								<figcaption style="z-index: 999;padding: 5px;"> -->
+<!-- 									<h2 style="font-size:20px;"> -->
+<!-- 										<span>Disponible</span> -->
+<!-- 									</h2> -->
+<!-- 									<p>09/10/2018<br> L'heure D'arriv&#233;e: 10:00 AM</p><br> -->
+<!-- 								</figcaption> -->
+<!-- 							</figure> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 					<div class="row  grid-hover"> -->
+<!-- 						<div class="col-md-2 col-2" style="margin-left: 85px;"> -->
+<!-- 							<figure class="effect-sarah" id="eventGrid" style="min-width: 180px;"> -->
+<!-- 								<img src="assets/img/gallery/tableWood48.png" alt="img13"/> -->
+<!-- 								<figcaption style="z-index: 999;padding: 5px;"> -->
+<!-- 									<h2 style="font-size:20px;"> -->
+<!-- 										<span>Arij </span><small>Othman</small> -->
+<!-- 									</h2> -->
+<!-- 									<p>09/10/2018<br> L'heure D'arriv&#233;e: 11:30 AM</p> -->
+<!-- 								</figcaption> -->
+<!-- 							</figure> -->
+<!-- 						</div> -->
+<!-- 						<div class="col-md-2 col-2" style="margin-right:222px;"> -->
+<!-- 							<figure class="effect-sarah" id="eventGrid" style="min-width: 180px;"> -->
+<!-- 								<img src="assets/img/gallery/tableWood46.png" alt="img13"/> -->
+<!-- 								<figcaption style="z-index: 999;padding: 5px;"> -->
+<!-- 									<h2 style="font-size:20px;"> -->
+<!-- 										<span>Pr&#233;nom </span><small> Nom</small> -->
+<!-- 									</h2> -->
+<!-- 									<p>09/10/2018<br> L'heure D'arriv&#233;e: 10:00 AM</p><br> -->
+<!-- 								</figcaption> -->
+<!-- 							</figure> -->
+<!-- 						</div> -->
+<!-- 						<div class="col-md-2 col-2"> -->
+<!-- 							<figure class="effect-sarah" id="eventGrid" style="min-width: 180px;"> -->
+<!-- 								<img src="assets/img/gallery/tableWood44.png" alt="img13"/> -->
+<!-- 								<figcaption style="z-index: 999;padding: 5px;"> -->
+<!-- 									<h2 style="font-size:20px;"> -->
+<!-- 										<span>Pr&#233;nom</span><small> Nom</small> -->
+<!-- 									</h2> -->
+<!-- 									<p>09/10/2018<br> L'heure D'arriv&#233;e: 11:30 AM</p> -->
+<!-- 								</figcaption> -->
+<!-- 							</figure> -->
+<!-- 						</div> -->
+<!-- 						<div class="col-md-2 col-2"> -->
+<!-- 							<figure class="effect-sarah" id="eventGrid" style="min-width: 180px;"> -->
+<!-- 								<img src="assets/img/gallery/tableWood42.png" alt="img13"/> -->
+<!-- 								<figcaption style="z-index: 999;padding: 5px;"> -->
+<!-- 									<h2 style="font-size:20px;"> -->
+<!-- 										<span>Disponible</span> -->
+<!-- 									</h2> -->
+<!-- 									<p>09/10/2018<br> L'heure D'arriv&#233;e: 10:00 AM</p><br> -->
+<!-- 								</figcaption> -->
+<!-- 							</figure> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 					<div class="row  grid-hover"> -->
+<!-- 						<div class="col-md-2 col-2" style="margin-left: 85px;"> -->
+<!-- 							<figure class="effect-sarah" id="eventGrid" style="min-width: 180px;"> -->
+<!-- 								<img src="assets/img/gallery/tableWood47.png" alt="img13"/> -->
+<!-- 								<figcaption style="z-index: 999;padding: 5px;"> -->
+<!-- 									<h2 style="font-size:20px;"> -->
+<!-- 										<span>Disponible</span> -->
+<!-- 									</h2> -->
+<!-- 									<p>09/10/2018<br> L'heure D'arriv&#233;e: 11:30 AM</p> -->
+<!-- 								</figcaption> -->
+<!-- 							</figure> -->
+<!-- 						</div> -->
+<!-- 						<div class="col-md-2 col-2" style="margin-right:222px;"> -->
+<!-- 							<figure class="effect-sarah" id="eventGrid" style="min-width: 180px;"> -->
+<!-- 								<img src="assets/img/gallery/tableWood45.png" alt="img13"/> -->
+<!-- 								<figcaption style="z-index: 999;padding: 5px;"> -->
+<!-- 									<h2 style="font-size:20px;"> -->
+<!-- 										<span>Disponible</span> -->
+<!-- 									</h2> -->
+<!-- 									<p>09/10/2018<br> L'heure D'arriv&#233;e: 10:00 AM</p><br> -->
+<!-- 								</figcaption> -->
+<!-- 							</figure> -->
+<!-- 						</div> -->
+<!-- 						<div class="col-md-2 col-2"> -->
+<!-- 							<figure class="effect-sarah" id="eventGrid" style="min-width: 180px;"> -->
+<!-- 								<img src="assets/img/gallery/tableWood43.png" alt="img13"/> -->
+<!-- 								<figcaption style="z-index: 999;padding: 5px;"> -->
+<!-- 									<h2 style="font-size:20px;"> -->
+<!-- 										<span>Pr&#233;nom</span><small> Nom</small> -->
+<!-- 									</h2> -->
+<!-- 									<p>09/10/2018<br> L'heure D'arriv&#233;e: 11:30 AM</p> -->
+<!-- 								</figcaption> -->
+<!-- 							</figure> -->
+<!-- 						</div> -->
+<!-- 						<div class="col-md-2 col-2"> -->
+<!-- 							<figure class="effect-sarah" id="eventGrid" style="min-width: 180px;"> -->
+<!-- 								<img src="assets/img/gallery/tableWood41.png" alt="img13"/> -->
+<!-- 								<figcaption style="z-index: 999;padding: 5px;"> -->
+<!-- 									<h2 style="font-size:20px;"> -->
+<!-- 										<span>Disponible</span> -->
+<!-- 									</h2> -->
+<!-- 									<p>09/10/2018<br> L'heure D'arriv&#233;e: 10:00 AM</p><br> -->
+<!-- 								</figcaption> -->
+<!-- 							</figure> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+					
+					
+					
+					
+					<div class="row">
+						<div class="col-md-6 col-12">
+							<div class="form-group">
+								<label>Primary Color:</label>
+								<input type="color" name="primary-color" [(ngModel)]="modalData?.event.color.primary" (change)="refresh.next()">
+							</div>	
+						</div>
+						<div class="col-md-6 col-12">
+							<div class="form-group">
+								<label>Secondary Color:</label>
+								<input type="color" name="secondary-color" [(ngModel)]="modalData?.event.color.secondary" (change)="refresh.next()">
+							</div>	
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6 col-12">
+							<div class="form-group">
+								<label>Starts At:</label>
+								<mwl-demo-utils-date-time-picker name="starts-at" [(ngModel)]="modalData?.event.start" (ngModelChange)="refresh.next()" placeholder="Not set">
+								</mwl-demo-utils-date-time-picker>
+							</div>
+						</div>
+						<div class="col-md-6 col-12">
+							<div class="form-group">
+								<label>Ends At:</label>
+								<mwl-demo-utils-date-time-picker name="ends-at" [(ngModel)]="modalData?.event.end" (ngModelChange)="refresh.next()" placeholder="Not set">
+								</mwl-demo-utils-date-time-picker>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>			
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-outline-secondary" (click)="close()">OK</button>
+		</div>
+	</ng-template>
+	
+	<div class="card">
+		<div class="card-body">
+			<div class="card-block">
+				<div class="d-flex flex-wrap justify-content-md-between mb-3 no-gutters">
+					<div class="col">
+						<div class="btn-group d-none d-sm-none d-md-none d-lg-block">
+							<a class="btn btn-raised btn-primary" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate">
+								Pr&#233;c&#233;dent
+							</a>
+							<a class="btn btn-raised btn-danger" mwlCalendarToday [(viewDate)]="viewDate">
+								{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}
+							</a>
+							<a class="btn btn-raised btn-primary" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate">
+								Suivant
+							</a>
+						</div>
+
+						<div class="btn-group d-block d-sm-block d-md-block d-lg-none">
+							<a class="btn btn-raised btn-primary ft-chevron-left" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate">
+								<i class="icon icon-arrows-left"></i>
+							</a>
+							<a class="btn btn-raised btn-danger ft-bookmark" mwlCalendarToday [(viewDate)]="viewDate">
+								<i class="icon icon-arrows-sign-down"></i>
+							</a>
+							<a class="btn btn-raised btn-primary ft-chevron-right" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate">
+								<i class="icon icon-arrows-right"></i>
+							</a>
+						</div>
+					</div>
+					<div class="col text-center align-self-center">
+						<h6 class="text-uppercase mb-0">{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h6>
+					</div>
+					<div class="col text-right">
+						<div class="btn-group d-none d-sm-none d-md-none d-lg-block">
+							<a class="btn btn-raised btn-primary" (click)="view = 'month'" [class.active]="view === 'month'">
+								Mois
+							</a>
+							<a class="btn btn-raised btn-primary" (click)="view = 'week'" [class.active]="view === 'week'">
+								Semaine
+							</a>
+							<a class="btn btn-raised btn-primary" (click)="view = 'day'" [class.active]="view === 'day'">
+								Jour
+							</a>
+						</div>
+
+						<div class="btn-group d-block d-sm-block d-md-block d-lg-none">
+							<a class="btn btn-raised btn-primary btn-icon-icon" (click)="view = 'month'" [class.active]="view === 'month'">
+								<i class="fa fa-th"></i>
+							</a>
+							<a class="btn btn-raised btn-primary btn-icon-icon" (click)="view = 'week'" [class.active]="view === 'week'">
+								<i class="fa fa-columns"></i>
+							</a>
+							<a class="btn btn-raised btn-primary btn-icon-icon" (click)="view = 'day'" [class.active]="view === 'day'">
+								<i class="fa fa-th-list"></i>
+							</a>
+						</div>
+
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-12">
+						<button class="btn btn-raised btn-primary pull-right" (click)="addEvent()">
+							Nouvelle R&#233;servation
+						</button>
+					</div>
+				</div>
+				
+				<div [ngSwitch]="view">
+					<mwl-calendar-month-view *ngSwitchCase="'month'" [viewDate]="viewDate" [events]="events" [refresh]="refresh" [activeDayIsOpen]="activeDayIsOpen"
+					 (dayClicked)="dayClicked($event.day)" (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)">
+					</mwl-calendar-month-view>
+					<mwl-calendar-week-view *ngSwitchCase="'week'" [viewDate]="viewDate" [events]="events" [refresh]="refresh" (eventClicked)="handleEvent('Clicked', $event.event)"
+					 (eventTimesChanged)="eventTimesChanged($event)">
+					</mwl-calendar-week-view>
+					<mwl-calendar-day-view *ngSwitchCase="'day'" [viewDate]="viewDate" [events]="events" [refresh]="refresh" (eventClicked)="handleEvent('Clicked', $event.event)"
+					 (eventTimesChanged)="eventTimesChanged($event)">
+					</mwl-calendar-day-view>
+				</div>
+			</div>
+		</div>
+	</div>
+	

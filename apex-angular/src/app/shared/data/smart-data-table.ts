@@ -483,12 +483,14 @@ export var reservationsettings = {
       perPage: 10,
     },
   columns: {
-    id: {
-      title: 'ID',
-      editable: false,
-    },
+    
     fullName: {
       title: 'Client',
+      editable: false,
+    },
+    exist: {
+      title: 'Client Existant',
+      type: 'html',
       editable: false,
     },
     status: {

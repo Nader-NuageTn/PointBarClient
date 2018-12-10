@@ -22,5 +22,9 @@ export const Full_ROUTES: Routes = [
   {
     path: 'dashboard',
     loadChildren: './dashboard/dashboard.module#DashboardModule'
+  },
+  {
+    path: 'Calendar',
+    loadChildren: './calendar/calendar.module#CalendarsModule'
   }
 ];

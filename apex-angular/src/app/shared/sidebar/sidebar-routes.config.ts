@@ -16,5 +16,7 @@ export const ROUTES: RouteInfo[] = [
             { path: '/reservations/ReservationManagement', title: 'Reservations', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
             { path: '/reservations/ReservationSetteing', title: 'Evenements', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
         ]
+    },{
+        path: '/Calendar', title: 'Calendrier', icon: 'ft-calendar', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: []
     }
 ];
